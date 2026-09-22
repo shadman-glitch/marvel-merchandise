@@ -546,8 +546,10 @@ h1, h2, h3, h4 {
 .gallery-main-display img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
+  padding: 12px;
+  box-sizing: border-box;
   transition: opacity 0.25s ease, transform 0.3s ease;
 }
 
@@ -1011,8 +1013,6 @@ h1, h2, h3, h4 {
   flex-direction: column;
   box-shadow: var(--shadow-sm);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  content-visibility: auto;
-  contain-intrinsic-size: 0 450px;
   transform: translateZ(0);
   opacity: 1;
 }
@@ -1035,32 +1035,35 @@ h1, h2, h3, h4 {
 
 .product-thumb {
   position: relative;
-  height: 270px;
-  background: #f4f0eb;
+  display: block;
+  width: 100%;
+  height: 280px;
+  background: #ffffff;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   user-select: none;
 }
 
 .card-slider-track {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  display: block;
 }
 
 .card-slide-img {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
+  background: #ffffff;
+  padding: 8px;
+  box-sizing: border-box;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.25s ease, transform 0.25s ease;
   transform: scale(0.98);
 }
 
@@ -1071,7 +1074,7 @@ h1, h2, h3, h4 {
 }
 
 .product-card:hover .card-slide-img.active {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 /* Card Slider Navigation Arrows */
@@ -1550,7 +1553,11 @@ h1, h2, h3, h4 {
 .qv-slider-container img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  padding: 12px;
+  box-sizing: border-box;
+  background: #ffffff;
   transition: opacity 0.25s ease;
 }
 
@@ -2219,8 +2226,8 @@ const MARVEL_PRODUCTS = [
   // =========================================================================
   {
     id: "kb20090",
-    sku: "KB20090",
-    name: "Iron Man MK5 Helmet w/ Bluetooth Speaker",
+    sku: "KB20090 / KB20090-1",
+    name: "Iron Man MK5 Helmet w/ Bluetooth Speaker Base",
     category: "wearable-helmets",
     categoryName: "1:1 Wearable Helmets",
     price: 399.00,
@@ -2231,33 +2238,11 @@ const MARVEL_PRODUCTS = [
       "assets/images/p_mk5_helmet_box.jpg"
     ],
     specs: {
-      model: "KB20090 (with speaker base)",
-      cartonQty: "4 PCS / CTN",
-      cartonSize: "84 &times; 43 &times; 69 CM",
-      barcode: "4895229500747",
+      model: "KB20090 (w/ Speaker Base) / KB20090-1 (Standard)",
+      cartonQty: "4 PCS / CTN (Speaker) &bull; 8 PCS / CTN (Std)",
+      cartonSize: "84 &times; 43 &times; 69 CM / 76 &times; 51 &times; 58 CM",
+      barcode: "4895229500747 / 4895229501881",
       features: "1:1 Wearable Helmet, Motorized Opening/Closing Faceplate, Voice Control, Bluetooth Speaker Base, LED Eye Lighting"
-    },
-    inStock: true
-  },
-  {
-    id: "kb20090-1",
-    sku: "KB20090-1",
-    name: "Iron Man MK5 Helmet (Helmet Only)",
-    category: "wearable-helmets",
-    categoryName: "1:1 Wearable Helmets",
-    price: 289.00,
-    image: "assets/images/p_mk5_helmet.jpg",
-    images: [
-      "assets/images/p_mk5_helmet.jpg",
-      "assets/images/p_mk5_helmet_wear.jpg",
-      "assets/images/p_mk5_helmet_box.jpg"
-    ],
-    specs: {
-      model: "KB20090-1 (without speaker base)",
-      cartonQty: "8 PCS / CTN",
-      cartonSize: "76 &times; 51 &times; 58 CM",
-      barcode: "4895229501881",
-      features: "1:1 Wearable Helmet, Motorized Faceplate, Touch & Voice Control, LED Eye Lights"
     },
     inStock: true
   },
@@ -2780,8 +2765,8 @@ class StoreMotionSystem {
         });
       },
       {
-        rootMargin: "0px 0px -40px 0px",
-        threshold: 0.04
+        rootMargin: "60px 0px 60px 0px",
+        threshold: 0.01
       }
     );
 
@@ -3262,7 +3247,7 @@ class MarvelStoreApp {
             <span class="product-sku-tag">${p.sku}</span>
             <div class="card-slider-track">
               ${images.map((imgSrc, i) => `
-                <img src="${imgSrc}" alt="${p.name}" class="card-slide-img ${i === 0 ? "active" : ""}" data-slide="${i}" loading="lazy" decoding="async" />
+                <img src="${imgSrc}" alt="${p.name}" class="card-slide-img ${i === 0 ? "active" : ""}" data-slide="${i}" decoding="async" />
               `).join("")}
             </div>
             ${images.length > 1 ? `
