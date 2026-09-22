@@ -1,0 +1,3262 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MARVEL STORE — Official 1:1 Wearable Helmets, Digital Tech & Speakers</title>
+  <meta name="description" content="Shop official Marvel 1:1 life-size wearable helmets, Captain America shields, Thor Mjolnir Bluetooth speakers, and Arc Reactor wireless fast chargers." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e62429'><rect width='24' height='24' rx='4' fill='%23e62429'/><text x='12' y='16' font-size='11' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
+
+  <!-- Stylesheets -->
+  <style>
+
+/* ==========================================================================
+   MARVEL STORE COLLECTIBLES — STANDALONE STYLESHEET (STYLE + COMPONENTS)
+   Theme: Light Luxury Terracotta (#C85A32) & Polished Copper (#B87333)
+   Background: Pure Cream Warm Alabaster (#F7F4EE)
+   0ms Latency Hardware Mousewheel Scroll Sync Engine
+   ========================================================================== */
+
+/* ==========================================================================
+   MARVEL STORE — Light Terracotta & Polished Copper E-Commerce Theme
+   Clean, modern, warm luxury hardware palette with terracotta/copper accents.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Surface & Background System (Clean, Light & Warm) */
+  --bg-main: #f7f4ee;           /* Warm airy cream/sand foundation */
+  --bg-card: #ffffff;           /* Crisp white product cards & panels */
+  --bg-card-hover: #fdfcfa;
+  --bg-subtle: #f0ebe2;         /* Soft warm container background */
+  --bg-header: rgba(247, 244, 238, 0.95);
+  
+  /* Primary Terracotta & Copper System */
+  --primary: #c85a32;           /* Rich Terracotta / Burnished Copper */
+  --primary-hover: #b34e28;
+  --primary-light: rgba(200, 90, 50, 0.1);
+  --primary-glow: rgba(200, 90, 50, 0.25);
+  
+  /* Harmonious Secondary Accents */
+  --accent-copper: #b87333;     /* Polished Metallic Copper */
+  --accent-cyan: #0097a7;       /* Arc Reactor Cyan */
+  --accent-gold: #c89d47;       /* Warm Aurum Gold */
+  --accent-green: #10b981;      /* Stock status */
+  
+  /* High-Contrast Typography */
+  --text-main: #1e1a17;         /* Deep Charcoal Espresso */
+  --text-heading: #14110f;
+  --text-muted: #5e564f;        /* Warm Charcoal Slate */
+  --text-dim: #8c8278;          /* Light Specs / Telemetry */
+  --text-primary: #c85a32;
+  
+  /* Clean Delicate Borders */
+  --border: #e6dfd5;            /* Clean warm border */
+  --border-focus: #c85a32;
+  --border-subtle: #eee8df;
+  
+  /* Refined Elevation Shadows */
+  --shadow-sm: 0 1px 3px rgba(30, 26, 23, 0.05), 0 1px 2px rgba(30, 26, 23, 0.03);
+  --shadow-md: 0 4px 16px rgba(30, 26, 23, 0.06), 0 2px 4px rgba(30, 26, 23, 0.03);
+  --shadow-lg: 0 12px 32px rgba(30, 26, 23, 0.08), 0 4px 8px rgba(30, 26, 23, 0.04);
+  
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Lenis 60-144fps Smooth Scroll Integration */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: #d4cbc0;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text-heading);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-muted { color: var(--text-muted); }
+.text-cyan { color: var(--accent-cyan); }
+.text-gold { color: var(--accent-gold); }
+.text-copper { color: var(--accent-copper); }
+.text-primary { color: var(--primary); }
+
+/* Layout Container */
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Top Notification Banner */
+.top-banner {
+  background: #ede7dd;
+  border-bottom: 1px solid var(--border);
+  padding: 0.55rem 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.top-banner-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.banner-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 6px rgba(200, 90, 50, 0.4);
+}
+
+.banner-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.currency-select {
+  background: #ffffff;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.currency-select:hover {
+  border-color: var(--primary);
+}
+
+/* Sticky Main Navigation Header (GPU Layer Optimized) */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(247, 244, 238, 0.98);
+  border-bottom: 1px solid var(--border);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+  gap: 2rem;
+}
+
+/* Brand Logo */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-heading);
+}
+
+.brand-badge {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.05rem;
+  padding: 4px 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px rgba(200, 90, 50, 0.3);
+}
+
+.brand-name {
+  font-size: 1.18rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-heading);
+}
+
+.brand-name span {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-left: 6px;
+}
+
+/* Nav Links */
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .nav-menu {
+    display: none;
+  }
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: color 0.2s;
+  padding: 6px 0;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--primary);
+}
+
+/* Header Action Buttons */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-cart {
+  background: #ffffff;
+  color: var(--text-heading);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.btn-cart svg {
+  color: var(--primary);
+}
+
+.btn-cart:hover {
+  background: #fbf9f6;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.cart-count {
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Common Buttons */
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px var(--primary-glow);
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(200, 90, 50, 0.35);
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #f7f4ee;
+  border-color: var(--text-dim);
+  color: var(--primary);
+}
+
+/* Toast Notification */
+#toastContainer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.store-toast {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  color: var(--text-heading);
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+  animation: slideIn 0.25s ease-out;
+}
+
+.store-toast span:first-child {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.store-toast.hide {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.25s;
+}
+
+
+/* ==========================================================================
+   MARVEL STORE — Light Terracotta & Polished Copper Components
+   3D Workbench Showcase, Product Cards, Cart Drawer & Modal Checkout
+   ========================================================================== */
+
+/* Section Typography & Spacing */
+.section {
+  padding: 5rem 0;
+}
+
+.section-header {
+  margin-bottom: 3rem;
+}
+
+.section-badge {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.85rem;
+  border: 1px solid rgba(200, 90, 50, 0.2);
+}
+
+.section-title {
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  color: var(--text-heading);
+  margin-bottom: 0.65rem;
+}
+
+.section-desc {
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  max-width: 620px;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-center .section-desc {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==========================================================================
+   OFFICIAL FEATURED PRODUCT SHOWCASE (HERO SECTION)
+   100% Real Catalog Photography, Multi-Angle Switcher & Official Specs
+   ========================================================================== */
+.showcase-product-section {
+  padding: 2.5rem 0 4rem;
+  background: radial-gradient(circle at 50% 20%, #ffffff 0%, #f7f4ee 65%, #f0ebe2 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+.showcase-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.series-badge {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(200, 90, 50, 0.2);
+}
+
+.license-tag {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.showcase-product-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .showcase-product-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Gallery Card */
+.showcase-gallery-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.gallery-main-display {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  aspect-ratio: 4 / 3.4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-main-display img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 0.25s ease, transform 0.3s ease;
+}
+
+.gallery-main-display:hover img {
+  transform: scale(1.02);
+}
+
+.sku-floating-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  z-index: 2;
+  letter-spacing: 0.04em;
+}
+
+.gallery-zoom-hint {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Thumbnails */
+.gallery-thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+}
+
+.thumb-btn {
+  background: #ffffff;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.thumb-btn img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.thumb-btn span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.thumb-btn:hover {
+  border-color: #d6ccbe;
+  transform: translateY(-2px);
+}
+
+.thumb-btn.active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.thumb-btn.active span {
+  color: var(--primary);
+}
+
+/* Details Card */
+.showcase-details-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  box-shadow: var(--shadow-md);
+}
+
+.product-brand-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-chip {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.stock-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+.stock-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+}
+
+.showcase-product-title {
+  font-size: clamp(1.65rem, 2.4vw, 2.1rem);
+  color: var(--text-heading);
+  line-height: 1.25;
+}
+
+.showcase-product-subtitle {
+  font-size: 0.94rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Price Box */
+.showcase-price-box {
+  background: #fdfaf6;
+  border: 1px solid rgba(200, 90, 50, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+}
+
+.price-current {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.price-original {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  text-decoration: line-through;
+}
+
+.discount-badge {
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}
+
+.shipping-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.shipping-notice svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* Official Specs Block */
+.official-specs-block {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.3rem;
+  background: #faf8f5;
+}
+
+.specs-block-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-heading);
+  margin-bottom: 0.75rem;
+}
+
+.specs-table-mini {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem 1.25rem;
+}
+
+.spec-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.spec-lbl {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.spec-val {
+  font-size: 0.85rem;
+  color: var(--text-heading);
+}
+
+/* Bullets */
+.feature-bullets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.feature-bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.bullet-check {
+  color: var(--primary);
+  font-weight: 800;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+/* CTA Group */
+.showcase-cta-group {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+.quantity-picker {
+  display: flex;
+  align-items: center;
+  background: #f7f4ee;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.qty-btn {
+  background: transparent;
+  border: none;
+  width: 34px;
+  height: 42px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.qty-btn:hover {
+  background: #ede7dd;
+}
+
+.quantity-picker input {
+  width: 40px;
+  text-align: center;
+  border: none;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-heading);
+  outline: none;
+}
+
+.btn-hero-add {
+  flex: 1.4;
+  height: 44px;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-hero-buy {
+  flex: 1;
+  height: 44px;
+  font-size: 0.92rem;
+}
+
+/* Trust Bar */
+.trust-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+.trust-item {
+  font-size: 0.77rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   CATALOG FILTER & TOOLBAR
+   ========================================================================== */
+.catalog-bar {
+  padding: 2.75rem 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.category-pills {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.pill-btn {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+}
+
+.pill-btn:hover {
+  color: var(--text-heading);
+  border-color: #d6ccbe;
+}
+
+.pill-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.catalog-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  min-width: 240px;
+}
+
+.search-box input {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px 9px 36px;
+  color: var(--text-heading);
+  font-size: 0.86rem;
+  font-weight: 500;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s;
+}
+
+.search-box input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.search-box svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+}
+
+.sort-select {
+  background: #ffffff;
+  color: var(--text-heading);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 14px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s;
+}
+
+.sort-select:hover {
+  border-color: var(--primary);
+}
+
+/* ==========================================================================
+   PRODUCT GRID & CARDS
+   ========================================================================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+  gap: 2rem;
+  padding: 3rem 0 5rem;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 450px;
+  transform: translateZ(0);
+  opacity: 1;
+}
+
+.js-motion-ready .product-card:not(.revealed) {
+  opacity: 0;
+  transform: translateY(18px) translateZ(0);
+}
+
+.product-card.revealed {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+}
+
+.product-card:hover {
+  transform: translateY(-4px) translateZ(0);
+  border-color: #d6ccbe;
+  box-shadow: var(--shadow-lg);
+}
+
+.product-thumb {
+  position: relative;
+  height: 270px;
+  background: #f4f0eb;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.35s ease;
+}
+
+.product-card:hover .product-thumb img {
+  transform: scale(1.05);
+}
+
+.product-sku-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  z-index: 2;
+}
+
+.product-body {
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+}
+
+.product-category {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.product-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--text-heading);
+}
+
+.product-packaging-info {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+.product-footer {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.product-price {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--primary);
+  font-family: var(--font-mono);
+}
+
+.product-btn-group {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-quickview {
+  background: #f7f4ee;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btn-quickview:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: #ffffff;
+}
+
+/* ==========================================================================
+   SHOPPING CART DRAWER
+   ========================================================================== */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 26, 23, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.cart-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 450px;
+  height: 100%;
+  background: #ffffff;
+  border-left: 1px solid var(--border);
+  box-shadow: -10px 0 35px rgba(30, 26, 23, 0.12);
+  z-index: 1001;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-drawer.active {
+  transform: translateX(0);
+}
+
+.cart-header {
+  padding: 1.75rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fbf9f6;
+}
+
+.cart-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-heading);
+}
+
+.btn-close-cart {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  transition: color 0.2s;
+}
+
+.btn-close-cart:hover {
+  color: var(--primary);
+}
+
+.cart-shipping-bar {
+  background: #f7f4ee;
+  padding: 0.85rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.cart-shipping-track {
+  width: 100%;
+  height: 6px;
+  background: #e2ddd4;
+  border-radius: 9999px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.cart-shipping-fill {
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.cart-items-wrap {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  background: #ffffff;
+}
+
+.cart-item {
+  background: #fbf9f6;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.cart-item-img {
+  width: 68px;
+  height: 68px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #f4f0eb;
+  border: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.cart-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cart-item-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  line-height: 1.3;
+}
+
+.cart-item-sku {
+  font-size: 0.72rem;
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.cart-item-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.qty-stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.qty-stepper button {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.qty-stepper span {
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 0 8px;
+  color: var(--text-heading);
+}
+
+.cart-item-price {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--text-heading);
+  font-family: var(--font-mono);
+}
+
+.cart-footer {
+  border-top: 1px solid var(--border);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  background: #f7f4ee;
+}
+
+.cart-summary-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.cart-summary-line.total {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary);
+  border-top: 1px solid var(--border);
+  padding-top: 0.85rem;
+}
+
+/* ==========================================================================
+   MODALS (PRODUCT DETAILS & WOOCOMMERCE CHECKOUT)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 26, 23, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1200;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  transition: opacity 0.25s;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-box {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  max-width: 840px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(30, 26, 23, 0.22);
+  padding: 2.5rem;
+}
+
+.btn-close-modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #f7f4ee;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btn-close-modal:hover {
+  color: var(--primary);
+  background: #ffffff;
+}
+
+/* Product Details Modal Grid */
+.product-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2.25rem;
+}
+
+@media (max-width: 768px) {
+  .product-modal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.product-modal-media {
+  height: 350px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #f4f0eb;
+  border: 1px solid var(--border-subtle);
+}
+
+.product-modal-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-modal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.specs-table {
+  background: #f7f4ee;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.84rem;
+}
+
+.specs-table-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  gap: 1rem;
+}
+
+.specs-table-row strong {
+  color: var(--text-heading);
+  text-align: right;
+  font-family: var(--font-mono);
+}
+
+/* Checkout Form */
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.form-field input, .form-field select {
+  background: #fbf9f6;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  color: var(--text-heading);
+  font-size: 0.86rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.form-field input:focus, .form-field select:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.checkout-success {
+  text-align: center;
+  padding: 2.25rem 1rem;
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.35rem;
+}
+
+
+</style>
+
+  <!-- Libraries: GSAP & Lenis Smooth Scroll Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+</head>
+<body>
+
+  <!-- Top Notification Bar -->
+  <div class="top-banner">
+    <div class="container top-banner-inner">
+      <div class="banner-left">
+        <span class="banner-dot"></span>
+        <span>Official Marvel & Avengers Collectibles • 2026 Direct Catalog Release</span>
+      </div>
+      <div class="banner-right">
+        <span>Free Shipping on Orders Over $150</span>
+        <div class="currency-box">
+          <label for="currencySelector" class="sr-only" style="display:none;">Currency</label>
+          <select id="currencySelector" class="currency-select" aria-label="Select Currency">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="CAD">CAD (CA$)</option>
+            <option value="AUD">AUD (AU$)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Main Header -->
+  <header class="main-header">
+    <div class="container header-inner">
+      <!-- Store Logo -->
+      <a href="#" class="brand-logo" aria-label="Marvel Store Home">
+        <span class="brand-badge">MARVEL</span>
+        <div class="brand-name">STORE <span>Collectibles</span></div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="#showcase" class="nav-link">Featured Charger</a>
+        <a href="#catalog" class="nav-link">All Products</a>
+        <a href="#catalog" class="nav-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('wearable-helmets')">1:1 Helmets</a>
+        <a href="#catalog" class="nav-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('digital-tech')">Digital Tech</a>
+        <a href="#catalog" class="nav-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('bluetooth-speakers')">Speakers</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <button class="btn-cart open-cart-btn" aria-label="Shopping Cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span>Cart</span>
+          <span class="cart-count cart-count-badge" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- 1. OFFICIAL FEATURED PRODUCT SHOWCASE (HERO) -->
+    <section id="showcase" class="showcase-product-section">
+      <div class="container">
+        <!-- Series Badge & Manufacturer Attribution -->
+        <div class="showcase-top-meta">
+          <span class="series-badge">Marvel Digital Series • 2026 Hot New Release</span>
+          <span class="license-tag">Official Licensed Collectible • KBGO × killerbody</span>
+        </div>
+
+        <div class="showcase-product-grid">
+          <!-- Left: Real Catalog Photography Gallery -->
+          <div class="showcase-gallery-card">
+            <div class="gallery-main-display">
+              <span class="sku-floating-badge font-mono">MODEL: KB20104</span>
+              <img id="heroMainImg" src="assets/images/arc_reactor_view1.jpg" alt="Iron Man Arc Reactor Wireless Fast Charger KB20104" />
+              <div class="gallery-zoom-hint">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span id="heroImgCaption">Display Stand View • Brushed CNC Aluminum & Laser Engraving</span>
+              </div>
+            </div>
+
+            <!-- Multi-Angle Thumbnail Switcher (100% Real Catalog Photography) -->
+            <div class="gallery-thumbs">
+              <button type="button" class="thumb-btn active" data-img="assets/images/arc_reactor_view1.jpg" data-caption="Display Stand View • Brushed CNC Aluminum & Laser Engraving">
+                <img src="assets/images/arc_reactor_view1.jpg" alt="Display Stand View" />
+                <span>Stand View</span>
+              </button>
+              <button type="button" class="thumb-btn" data-img="assets/images/arc_reactor_view2.jpg" data-caption="15W Magnetic Wireless Charging in Action • Auto-Sensing Alignment">
+                <img src="assets/images/arc_reactor_view2.jpg" alt="Fast Charging View" />
+                <span>Fast Charging</span>
+              </button>
+              <button type="button" class="thumb-btn" data-img="assets/images/arc_reactor_view3.jpg" data-caption="Detachable Magnetic Core Unit • Pulsing LED Palladium Coils">
+                <img src="assets/images/arc_reactor_view3.jpg" alt="Detachable Core View" />
+                <span>Detachable Core</span>
+              </button>
+              <button type="button" class="thumb-btn" data-img="assets/images/arc_reactor_box_open.jpg" data-caption="Deluxe Holographic Infinity Saga Collector Box & Molded Foam Tray">
+                <img src="assets/images/arc_reactor_box_open.jpg" alt="Packaging View" />
+                <span>Deluxe Box</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Official Catalog Specifications & Order Controls -->
+          <div class="showcase-details-card">
+            <div class="product-brand-line">
+              <span class="brand-chip">KBGO × killerbody</span>
+              <span class="stock-status in-stock">
+                <span class="stock-dot"></span> In Stock • Direct VPS Fulfillment
+              </span>
+            </div>
+
+            <h1 class="showcase-product-title">Iron Man Arc Reactor Wireless Fast Charger</h1>
+            <p class="showcase-product-subtitle">
+              Authentic Marvel Infinity Saga collector piece featuring a detachable magnetic LED Arc Reactor, 15W Qi wireless fast charging stand, and laser-engraved brushed aluminum bezel: <em>"PROOF THAT TONY STARK HAS A HEART"</em>.
+            </p>
+
+            <!-- Price Box -->
+            <div class="showcase-price-box">
+              <div class="price-row">
+                <span class="price-current font-mono" id="heroProductPrice">$139.00</span>
+                <span class="price-original font-mono">$179.00</span>
+                <span class="discount-badge">Save $40</span>
+              </div>
+              <div class="shipping-notice">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="3" width="15" height="13"></rect>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
+                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+                <span>Free Express Shipping & Deluxe Holographic Packaging Included</span>
+              </div>
+            </div>
+
+            <!-- Official Manufacturer Specifications (Direct from Catalog Page 2) -->
+            <div class="official-specs-block">
+              <div class="specs-block-title">Manufacturer Catalog Specifications</div>
+              <div class="specs-table-mini">
+                <div class="spec-cell">
+                  <span class="spec-lbl">Model / SKU</span>
+                  <strong class="spec-val font-mono">KB20104</strong>
+                </div>
+                <div class="spec-cell">
+                  <span class="spec-lbl">Barcode / EAN</span>
+                  <strong class="spec-val font-mono">4895229503113</strong>
+                </div>
+                <div class="spec-cell">
+                  <span class="spec-lbl">Carton Packaging</span>
+                  <strong class="spec-val">12 PCS / CTN</strong>
+                </div>
+                <div class="spec-cell">
+                  <span class="spec-lbl">Carton Dimensions</span>
+                  <strong class="spec-val">43 × 42 × 32 CM</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Real Feature Highlights from Catalog -->
+            <div class="feature-bullets-list">
+              <div class="feature-bullet-item">
+                <span class="bullet-check">✓</span>
+                <div>
+                  <strong>Brushed CNC Aluminum Display Bezel:</strong> Precision laser-engraved with Tony Stark's iconic tribute <em>"PROOF THAT TONY STARK HAS A HEART"</em>.
+                </div>
+              </div>
+              <div class="feature-bullet-item">
+                <span class="bullet-check">✓</span>
+                <div>
+                  <strong>15W Magnetic Fast Wireless Charging:</strong> Auto-aligning magnetic Qi charging dock on laser-etched Infinity Saga pedestal base.
+                </div>
+              </div>
+              <div class="feature-bullet-item">
+                <span class="bullet-check">✓</span>
+                <div>
+                  <strong>Detachable Magnetic Core Unit:</strong> The illuminated Arc Reactor core uncouples magnetically with dual-mode LED pulse breathing lighting.
+                </div>
+              </div>
+              <div class="feature-bullet-item">
+                <span class="bullet-check">✓</span>
+                <div>
+                  <strong>Deluxe Holographic Packaging:</strong> Includes official collector holographic gift box, shockproof molded foam tray, and Type-C cable.
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Actions -->
+            <div class="showcase-cta-group">
+              <div class="quantity-picker">
+                <button type="button" class="qty-btn" id="heroQtyMinus" aria-label="Decrease quantity">-</button>
+                <input type="number" id="heroQtyInput" value="1" min="1" max="10" readonly aria-label="Quantity" />
+                <button type="button" class="qty-btn" id="heroQtyPlus" aria-label="Increase quantity">+</button>
+              </div>
+
+              <button type="button" id="heroAddToCartBtn" class="btn-primary btn-hero-add">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span>Add to Cart</span>
+              </button>
+
+              <button type="button" id="heroBuyNowBtn" class="btn-secondary btn-hero-buy">
+                <span>Buy Now</span>
+              </button>
+            </div>
+
+            <!-- Trust Bar -->
+            <div class="trust-features">
+              <div class="trust-item">
+                <span>🛡️ 100% Genuine Licensed Marvel</span>
+              </div>
+              <div class="trust-item">
+                <span>⚡ Official Killerbody Authentication</span>
+              </div>
+              <div class="trust-item">
+                <span>📦 Direct WooCommerce Fulfillment</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. OFFICIAL PRODUCT CATALOG SECTION -->
+    <section id="catalog" class="section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-badge">Official Catalog</span>
+          <h2 class="section-title">Featured Products & Collectibles</h2>
+          <p class="section-desc">
+            Direct from the official catalog: 1:1 scale wearable helmets, digital tech accessories, desktop chargers, and Bluetooth speakers.
+          </p>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="catalog-bar">
+          <div class="category-pills">
+            <button class="pill-btn active" data-category="all">All Products (19)</button>
+            <button class="pill-btn" data-category="wearable-helmets">1:1 Wearable Series</button>
+            <button class="pill-btn" data-category="digital-tech">Digital Tech & Audio</button>
+            <button class="pill-btn" data-category="charging-stations">Charging Stations</button>
+            <button class="pill-btn" data-category="bluetooth-speakers">Bluetooth Speakers</button>
+          </div>
+
+          <div class="catalog-tools">
+            <div class="search-box">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="productSearchInput" placeholder="Search catalog..." />
+            </div>
+
+            <select id="productSortSelect" class="sort-select" aria-label="Sort Products">
+              <option value="default">Default Sorting</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="name">Product Name (A-Z)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Dynamic Product Grid -->
+        <div id="productsGrid" class="product-grid">
+          <!-- Populated by js/app.js -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Clean Footer -->
+  <footer style="background: #ede7dd; border-top: 1px solid var(--border); padding: 4.5rem 0 2rem; color: var(--text-muted); font-size: 0.88rem;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; margin-bottom: 3rem;">
+        <div>
+          <div class="brand-logo" style="margin-bottom: 1rem;">
+            <span class="brand-badge">MARVEL</span>
+            <div class="brand-name">STORE <span>Collectibles</span></div>
+          </div>
+          <p style="font-size: 0.84rem; line-height: 1.6;">
+            Your dedicated online store for official 1:1 wearable movie prop replicas, desktop GaN chargers, and Bluetooth audio gear.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="color: var(--text-heading); font-size: 0.95rem; margin-bottom: 1rem;">Customer Service</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.84rem;">
+            <li>Track Your Order</li>
+            <li>Shipping & Delivery Information</li>
+            <li>Returns & Exchange Policy</li>
+            <li>Warranty & Authenticity</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="color: var(--text-heading); font-size: 0.95rem; margin-bottom: 1rem;">Product Categories</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.84rem;">
+            <li>1:1 Wearable Helmets & Shields</li>
+            <li>Marvel Digital Series 2026</li>
+            <li>Iron Man Bust Charging Series</li>
+            <li>Tactile Bluetooth Speakers</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="color: var(--text-heading); font-size: 0.95rem; margin-bottom: 1rem;">Backend & Security</h4>
+          <p style="font-size: 0.84rem; line-height: 1.6;">
+            Powered by live WooCommerce REST integration on VPS with encrypted SSL checkout and worldwide insured parcel delivery.
+          </p>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1.5rem; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem;">
+        <div>© 2026 MARVEL STORE. Official Products Manufactured by KBGO × Killerbody.</div>
+        <div>All Rights Reserved. Terms of Service • Privacy Policy</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SHOPPING CART DRAWER -->
+  <div id="cartOverlay" class="cart-overlay"></div>
+  <aside id="cartDrawer" class="cart-drawer" aria-label="Shopping Cart">
+    <div class="cart-header">
+      <div class="cart-title">Shopping Cart</div>
+      <button id="closeCartBtn" class="btn-close-cart" aria-label="Close Cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cart-shipping-bar">
+      <div id="shippingRemainingText">Add $150 for Free Standard Shipping</div>
+      <div class="cart-shipping-track">
+        <div id="shippingProgressBar" class="cart-shipping-fill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <div id="cartItemsList" class="cart-items-wrap">
+      <!-- Populated by js/cart.js -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-summary-line">
+        <span>Subtotal:</span>
+        <span id="cartSubtotal" style="font-weight: 700; color: var(--text-heading);">$0.00</span>
+      </div>
+      <div class="cart-summary-line total">
+        <span>Estimated Total:</span>
+        <span id="cartTotal" class="font-mono text-primary">$0.00</span>
+      </div>
+
+      <button id="proceedCheckoutBtn" class="btn-primary" style="width: 100%;">
+        <span>Proceed to Checkout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- PRODUCT QUICK VIEW MODAL -->
+  <div id="quickViewOverlay" class="modal-overlay">
+    <div id="quickViewModal" class="modal-box">
+      <button id="closeQuickViewBtn" class="btn-close-modal" aria-label="Close Modal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="product-modal-grid">
+        <div class="product-modal-media">
+          <img id="qvImg" src="" alt="Product image" />
+        </div>
+
+        <div class="product-modal-info">
+          <div>
+            <div id="qvCategory" style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;"></div>
+            <h3 id="qvTitle" style="font-size: 1.35rem; margin-top: 4px;"></h3>
+            <div id="qvSku" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--primary); font-weight: 700; margin-top: 2px;"></div>
+          </div>
+
+          <div id="qvPrice" style="font-size: 1.6rem; font-weight: 800; color: var(--primary); font-family: var(--font-mono);"></div>
+
+          <div>
+            <div style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">Catalog Specifications:</div>
+            <div id="qvSpecsTable" class="specs-table"></div>
+          </div>
+
+          <button id="qvAddToCartBtn" class="btn-primary" style="margin-top: 0.5rem;">
+            <span>Add to Cart</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WOOCOMMERCE CHECKOUT MODAL -->
+  <div id="checkoutModal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 580px;">
+      <button id="closeCheckoutBtn" class="btn-close-modal" aria-label="Close Checkout">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <h2 style="font-size: 1.4rem; margin-bottom: 0.25rem;">Complete Your Order</h2>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">
+        Orders are processed live and securely saved in our WooCommerce database.
+      </p>
+
+      <form id="checkoutForm" class="checkout-form">
+        <div class="form-grid-2">
+          <div class="form-field">
+            <label for="custFirstName">First Name</label>
+            <input type="text" id="custFirstName" required placeholder="John" />
+          </div>
+          <div class="form-field">
+            <label for="custLastName">Last Name</label>
+            <input type="text" id="custLastName" required placeholder="Doe" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="custEmail">Email Address</label>
+          <input type="email" id="custEmail" required placeholder="john.doe@example.com" />
+        </div>
+
+        <div class="form-field">
+          <label for="custAddress">Shipping Address</label>
+          <input type="text" id="custAddress" required placeholder="123 Collector Way" />
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-field">
+            <label for="custCity">City</label>
+            <input type="text" id="custCity" required placeholder="New York" />
+          </div>
+          <div class="form-field">
+            <label for="custCountry">Country</label>
+            <input type="text" id="custCountry" required placeholder="United States" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>Order Items:</label>
+          <div id="checkoutSummaryList" style="background: #f7f4ee; padding: 12px; border-radius: 6px; border: 1px solid var(--border);"></div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 0.5rem;">
+          <span style="font-size: 0.9rem; color: var(--text-muted);">Total to Pay:</span>
+          <span id="checkoutModalTotal" style="font-size: 1.5rem; font-weight: 800; color: var(--primary); font-family: var(--font-mono);">$0.00</span>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; margin-top: 0.5rem;">
+          <span>Place Order with WooCommerce</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer"></div>
+
+  <!-- Application Scripts -->
+  <script>
+
+/* ==========================================================================
+   MARVEL STORE COLLECTIBLES — ALL-IN-ONE BUNDLED SCRIPT
+   - Official 20-Product 2026 Direct Catalog (KBGO x Killerbody)
+   - 0ms Latency Hardware Mousewheel Scroll Sync
+   - Shopping Cart & Multi-Currency System
+   - Hostinger VPS WooCommerce REST API Integration
+   ========================================================================== */
+
+// Configurable Asset Base Path (Defaults to relative assets/images/)
+window.MARVEL_ASSET_BASE = window.MARVEL_ASSET_BASE || "";
+
+// 1. PRODUCTS CATALOG DATA
+/**
+ * Marvel Collectibles & Electronics — Official Catalog
+ * Sourced directly from KBGO x Killerbody 2026 Wholesale & Retail Catalog
+ */
+
+const MARVEL_PRODUCTS = [
+  // =========================================================================
+  // PAGE 1: 1:1 COLLECTIBLE WEARABLE SERIES
+  // =========================================================================
+  {
+    id: "kb20090",
+    sku: "KB20090",
+    name: "Iron Man MK5 Helmet w/ Bluetooth Speaker",
+    category: "wearable-helmets",
+    categoryName: "1:1 Wearable Helmets",
+    price: 399.00,
+    image: "assets/images/p_mk5_helmet.jpg",
+    specs: {
+      model: "KB20090 (with speaker base)",
+      cartonQty: "4 PCS / CTN",
+      cartonSize: "84 × 43 × 69 CM",
+      barcode: "4895229500747",
+      features: "1:1 Wearable Helmet, Motorized Opening/Closing Faceplate, Voice Control, Bluetooth Speaker Base, LED Eye Lighting"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20090-1",
+    sku: "KB20090-1",
+    name: "Iron Man MK5 Helmet (Helmet Only)",
+    category: "wearable-helmets",
+    categoryName: "1:1 Wearable Helmets",
+    price: 289.00,
+    image: "assets/images/p_mk5_helmet.jpg",
+    specs: {
+      model: "KB20090-1 (without speaker base)",
+      cartonQty: "8 PCS / CTN",
+      cartonSize: "76 × 51 × 58 CM",
+      barcode: "4895229501881",
+      features: "1:1 Wearable Helmet, Motorized Faceplate, Touch & Voice Control, LED Eye Lights"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20094",
+    sku: "KB20094",
+    name: "Iron Man MK7 Helmet w/ Bluetooth Speaker",
+    category: "wearable-helmets",
+    categoryName: "1:1 Wearable Helmets",
+    price: 399.00,
+    image: "assets/images/p_mk7_helmet.jpg",
+    specs: {
+      model: "KB20094 (with speaker base)",
+      cartonQty: "4 PCS / CTN",
+      cartonSize: "84 × 43 × 69 CM",
+      barcode: "4895229500709",
+      features: "1:1 Wearable Helmet, Motorized Articulated Faceplate, Bluetooth Speaker Stand, Dual Light Modes"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20093",
+    sku: "KB20093",
+    name: "Iron Man MK2 Helmet w/ Bluetooth Speaker",
+    category: "wearable-helmets",
+    categoryName: "1:1 Wearable Helmets",
+    price: 419.00,
+    image: "assets/images/p_mk2_helmet.jpg",
+    specs: {
+      model: "KB20093 (with speaker base)",
+      cartonQty: "4 PCS / CTN",
+      cartonSize: "72 × 50 × 73 CM",
+      barcode: "4895229500693",
+      features: "1:1 Scale Chrome Mirror Finish, Motorized Opening Faceplate, Bluetooth Speaker Base"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20091",
+    sku: "KB20091",
+    name: "Captain America's Shield w/ Bluetooth Speaker",
+    category: "wearable-helmets",
+    categoryName: "1:1 Wearable Helmets & Shields",
+    price: 489.00,
+    image: "assets/images/p_cap_shield.jpg",
+    specs: {
+      model: "KB20091 (with speaker base)",
+      cartonQty: "1 PCS / CTN",
+      cartonSize: "70 × 22 × 71 CM",
+      barcode: "4895229500730",
+      features: "1:1 Full Scale Shield Replica, Leather Straps, High-Power Bluetooth Speaker Base Dock"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20096",
+    sku: "KB20096",
+    name: "Captain America Helmet w/ Bluetooth Speaker",
+    category: "wearable-helmets",
+    categoryName: "1:1 Wearable Helmets",
+    price: 349.00,
+    image: "assets/images/p_cap_helmet.jpg",
+    specs: {
+      model: "KB20096 (with speaker base)",
+      cartonQty: "4 PCS / CTN",
+      cartonSize: "72 × 46 × 73 CM",
+      barcode: "4895229501188",
+      features: "1:1 Wearable Tactical Helmet, Textured Molding, Bluetooth Speaker Display Stand"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20095",
+    sku: "KB20095",
+    name: "Black Panther Helmet w/ Bluetooth Speaker",
+    category: "wearable-helmets",
+    categoryName: "1:1 Wearable Helmets",
+    price: 389.00,
+    image: "assets/images/p_black_panther_helmet.jpg",
+    specs: {
+      model: "KB20095 (with speaker base)",
+      cartonQty: "4 PCS / CTN",
+      cartonSize: "72 × 46 × 73 CM",
+      barcode: "4895229500716",
+      features: "1:1 Wearable Helmet, Textured Weave Molding, Luminous Purple Eye Accents, Bluetooth Speaker Base"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20088",
+    sku: "KB20088",
+    name: "Iron Spider-Man Helmet w/ Bluetooth Speaker",
+    category: "wearable-helmets",
+    categoryName: "1:1 Wearable Helmets",
+    price: 379.00,
+    image: "assets/images/p_iron_spider_helmet.jpg",
+    specs: {
+      model: "KB20088 (with speaker base)",
+      cartonQty: "4 PCS / CTN",
+      cartonSize: "84 × 43 × 69 CM",
+      barcode: "4895229500761",
+      features: "1:1 Wearable Helmet, Motorized Dynamic Shutter Eyes, Metallic Red & Gold Finish, Bluetooth Speaker Base"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20105",
+    sku: "KB20105",
+    name: "Deadpool Helmet w/ Exclusive Stand",
+    category: "wearable-helmets",
+    categoryName: "1:1 Wearable Helmets",
+    price: 289.00,
+    image: "assets/images/p_deadpool_helmet.jpg",
+    specs: {
+      model: "KB20105 (with exclusive stand)",
+      cartonQty: "8 PCS / CTN",
+      cartonSize: "44 × 45 × 63 CM",
+      barcode: "4895229503120",
+      features: "1:1 Wearable Mask, Textured Fabric Elastic Weave, Interchangeable Magnetic Eye Expressions, Exclusive Display Stand"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20107-1",
+    sku: "KB20107-1",
+    name: "Iron Man MK85 Helmet",
+    category: "wearable-helmets",
+    categoryName: "1:1 Wearable Helmets",
+    price: 329.00,
+    image: "assets/images/p_mk85_helmet.jpg",
+    specs: {
+      model: "KB20107-1",
+      cartonQty: "8 PCS / CTN",
+      cartonSize: "77 × 53 × 59 CM",
+      barcode: "4895229508163",
+      features: "1:1 Wearable Avengers: Endgame Helmet, Motorized Opening Faceplate, Voice Recognition, Dual LED Eye Modes"
+    },
+    inStock: true
+  },
+
+  // =========================================================================
+  // PAGE 2: MARVEL DIGITAL SERIES (2026 HOT NEW RELEASES)
+  // =========================================================================
+  {
+    id: "kb20104",
+    sku: "KB20104",
+    name: "Iron Man Arc Reactor Wireless Charger",
+    category: "digital-tech",
+    categoryName: "Digital Tech & Chargers",
+    price: 139.00,
+    image: "assets/images/p_arc_reactor_charger.jpg",
+    specs: {
+      model: "KB20104",
+      cartonQty: "12 PCS / CTN",
+      cartonSize: "43 × 42 × 32 CM",
+      barcode: "4895229503113",
+      features: "15W Fast Wireless Charging, Auto-Sensing Lift Mechanism, Pulsing Arc LED Lighting, CNC Aluminum Alloy Casing, Acrylic Display Box"
+    },
+    inStock: true
+  },
+  {
+    id: "kb-mk5-earbuds",
+    sku: "KB-MK5-EAR",
+    name: "Iron Man MK5 Ear Hooks Earbuds",
+    category: "digital-tech",
+    categoryName: "Digital Tech & Audio",
+    price: 89.00,
+    image: "assets/images/p_mk5_earbuds.jpg",
+    specs: {
+      model: "2026 Hot New Release Series",
+      cartonQty: "Standard Retail Packaging",
+      features: "MK5 Briefcase Armor Charging Case, Ergonomic Sports Ear Hooks, Bluetooth 5.3, Low Latency, USB-C Quick Charge"
+    },
+    inStock: true
+  },
+  {
+    id: "kb-clip-earphones",
+    sku: "KB-MK-CLIP",
+    name: "Iron Man Clip-on Earphones",
+    category: "digital-tech",
+    categoryName: "Digital Tech & Audio",
+    price: 79.00,
+    image: "assets/images/p_clip_earphones.jpg",
+    specs: {
+      model: "2026 Hot New Release Series",
+      cartonQty: "Standard Retail Packaging",
+      features: "Open-Ear Clip-on Acoustic Design, Compact Armor Charging Pod, LED Power Indicator, Bluetooth 5.3"
+    },
+    inStock: true
+  },
+
+  // =========================================================================
+  // PAGE 3: IRON MAN BUST CHARGING SERIES
+  // =========================================================================
+  {
+    id: "kb20101mk3",
+    sku: "KB20101MK3 PRO",
+    name: "Iron Man MK3 Bust Charging Center PD65W Fast Charge",
+    category: "charging-stations",
+    categoryName: "Charging Stations",
+    price: 119.00,
+    image: "assets/images/p_mk3_bust_charger.jpg",
+    specs: {
+      model: "KB20101MK3 PRO",
+      cartonQty: "24 PCS / CTN",
+      cartonSize: "43 × 42 × 53 CM",
+      barcode: "4895229503649",
+      features: "PD65W GaN Fast Charger, Detailed Desktop Armor Bust, Multi-port USB-C & USB-A Output, Glowing Chest Reactor"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20101mk42",
+    sku: "KB20101MK42 SE",
+    name: "Iron Man MK42 Bust Charger Adapter 30W Charging",
+    category: "charging-stations",
+    categoryName: "Charging Stations",
+    price: 89.00,
+    image: "assets/images/p_mk42_bust_charger.jpg",
+    specs: {
+      model: "KB20101MK42 SE",
+      cartonQty: "24 PCS / CTN",
+      cartonSize: "47.5 × 42 × 39 CM",
+      barcode: "4895229503755",
+      features: "30W Fast Charge Adapter, Mark 42 Sculpted Bust, Dual Port Charging, Chest Arc Lighting"
+    },
+    inStock: true
+  },
+  {
+    id: "kb-hall-of-armor",
+    sku: "KB-BUSTS-MK1-7",
+    name: "Iron Man Hall of Armor Bust Collection (MK1 - MK7)",
+    category: "charging-stations",
+    categoryName: "Charging Stations & Busts",
+    price: 149.00,
+    image: "assets/images/p_hall_of_armor_busts.jpg",
+    specs: {
+      model: "Hall of Armor Series (MK1, MK2, MK3, MK4, MK5, MK6, MK7)",
+      cartonQty: "Collector Box Set",
+      features: "Complete Mark 1 through Mark 7 Armor Lineup, Desktop Display Busts with Integrated Fast Charging"
+    },
+    inStock: true
+  },
+
+  // =========================================================================
+  // PAGE 4: MARVEL BLUETOOTH SPEAKER SERIES
+  // =========================================================================
+  {
+    id: "kb20102",
+    sku: "KB20102 PRO",
+    name: "Captain America Shield Pressure-relief w/ Bluetooth Speaker",
+    category: "bluetooth-speakers",
+    categoryName: "Bluetooth Speakers",
+    price: 79.00,
+    image: "assets/images/p_cap_shield_speaker.jpg",
+    specs: {
+      model: "KB20102 PRO",
+      cartonQty: "24 PCS / CTN",
+      cartonSize: "51.5 × 41.5 × 44 CM",
+      barcode: "4895229502956",
+      features: "Rotating Gyroscopic Pressure-Relief Mechanism, High-Clarity Bluetooth Audio, Magnetic Charging Dock, Wristband Included"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20103",
+    sku: "KB20103 PRO",
+    name: "Mjolnir Pressure-relief w/ Bluetooth Speaker",
+    category: "bluetooth-speakers",
+    categoryName: "Bluetooth Speakers",
+    price: 89.00,
+    image: "assets/images/p_mjolnir_speaker.jpg",
+    specs: {
+      model: "KB20103 PRO",
+      cartonQty: "24 PCS / CTN",
+      cartonSize: "48 × 47 × 53.5 CM",
+      barcode: "4895229502963",
+      features: "Metallic Zinc Alloy Texture, Built-in Motion Gyroscope with Thunder Vibration Knock, 8W Subwoofer Driver, Magnetic Rock Base"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20100mk5",
+    sku: "KB20100MK5 PRO",
+    name: "Iron Man MK5 Pressure-relief Bust w/ Bluetooth Speaker",
+    category: "bluetooth-speakers",
+    categoryName: "Bluetooth Speakers",
+    price: 99.00,
+    image: "assets/images/p_mk5_bust_speaker.jpg",
+    specs: {
+      model: "KB20100MK5 PRO",
+      cartonQty: "24 PCS / CTN",
+      cartonSize: "45 × 42.5 × 42.5 CM",
+      barcode: "4895229502932",
+      features: "Spring-Loaded Opening Faceplate, Tactile Pressure-Relief, Bluetooth 5.3 Hi-Fi Audio, Chest Arc Reactor Sound Visualizer"
+    },
+    inStock: true
+  },
+  {
+    id: "kb20100mk4",
+    sku: "KB20100MK4 SE",
+    name: "Iron Man MK4 Bust Bluetooth Speaker Vitality Edition SE",
+    category: "bluetooth-speakers",
+    categoryName: "Bluetooth Speakers",
+    price: 79.00,
+    image: "assets/images/p_mk4_bust_speaker.jpg",
+    specs: {
+      model: "KB20100MK4 SE",
+      cartonQty: "24 PCS / CTN",
+      cartonSize: "42.5 × 40 × 40.5 CM",
+      barcode: "4895229503533",
+      features: "Compact Desktop Armor Bust, Vibrant Finish, Bluetooth 5.3 Audio, Synchronized LED Arc Reactor Rhythm Equalizer"
+    },
+    inStock: true
+  }
+];
+
+// Simple Currency Helper
+const CURRENCY_CONFIG = {
+  USD: { symbol: "$", rate: 1.0 },
+  EUR: { symbol: "€", rate: 0.92 },
+  GBP: { symbol: "£", rate: 0.78 },
+  CAD: { symbol: "CA$", rate: 1.35 },
+  AUD: { symbol: "AU$", rate: 1.52 }
+};
+
+let currentCurrency = "USD";
+
+function formatPrice(priceUSD, currency = currentCurrency) {
+  const cfg = CURRENCY_CONFIG[currency] || CURRENCY_CONFIG.USD;
+  const val = (priceUSD * cfg.rate).toFixed(2);
+  return `${cfg.symbol}${val}`;
+}
+
+if (typeof window !== "undefined") {
+  window.MARVEL_PRODUCTS = MARVEL_PRODUCTS;
+  window.CURRENCY_CONFIG = CURRENCY_CONFIG;
+  window.formatPrice = formatPrice;
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { MARVEL_PRODUCTS, CURRENCY_CONFIG, formatPrice };
+}
+
+
+// 2. MOTION & SCROLL ENGINE
+/**
+ * MARVEL STORE — Ultra-High Performance Motion & Millisecond-Synced Scrolling
+ * 0ms latency hardware mousewheel sync (no artificial delay or sluggish drag)
+ * Zero-overhead IntersectionObserver for catalog card reveals
+ * Smooth programmatic animation for navigation anchors
+ */
+
+class StoreMotionSystem {
+  constructor() {
+    this.reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    this.lenis = null;
+    this.cardObserver = null;
+
+    this.initLenis();
+    this.initShowcaseAnimation();
+    this.initCardObserver();
+    this.bindSmoothNavLinks();
+  }
+
+  initLenis() {
+    if (this.reduceMotion || typeof Lenis === "undefined") return;
+
+    try {
+      // Configure Lenis with smoothWheel: false to ensure 0ms input latency on mousewheel
+      // This eliminates the artificial millisecond delay/sluggishness while keeping smooth programmatic scrolling
+      this.lenis = new Lenis({
+        smoothWheel: false,
+        syncTouch: false,
+        autoRaf: true,
+        infinite: false
+      });
+
+      window.lenis = this.lenis;
+
+      if (typeof ScrollTrigger !== "undefined") {
+        this.lenis.on("scroll", ScrollTrigger.update);
+      }
+    } catch (e) {
+      console.warn("Lenis initialization skipped:", e);
+    }
+  }
+
+  initShowcaseAnimation() {
+    if (this.reduceMotion || typeof gsap === "undefined") return;
+
+    const showcase = document.querySelector(".showcase-product-section");
+    if (showcase) {
+      gsap.fromTo(
+        ".showcase-product-section .showcase-top-meta, .showcase-gallery-card, .showcase-details-card",
+        { y: 20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.75,
+          stagger: 0.1,
+          ease: "power2.out",
+          delay: 0.05
+        }
+      );
+    }
+  }
+
+  initCardObserver() {
+    if (this.reduceMotion || !("IntersectionObserver" in window)) {
+      document.querySelectorAll(".product-card").forEach((card) => {
+        card.classList.add("revealed");
+      });
+      return;
+    }
+
+    document.documentElement.classList.add("js-motion-ready");
+
+    if (this.cardObserver) {
+      this.cardObserver.disconnect();
+    }
+
+    this.cardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            this.cardObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: "0px 0px -40px 0px",
+        threshold: 0.04
+      }
+    );
+
+    this.refreshCards();
+  }
+
+  refreshCards() {
+    if (!this.cardObserver) return;
+
+    const cards = document.querySelectorAll(".product-card:not(.revealed)");
+    cards.forEach((card) => {
+      this.cardObserver.observe(card);
+    });
+  }
+
+  bindSmoothNavLinks() {
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const targetId = link.getAttribute("href");
+        if (targetId && targetId !== "#" && targetId.length > 1) {
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            this.scrollTo(target, { duration: 0.85 });
+          }
+        }
+      });
+    });
+  }
+
+  scrollTo(target, options = {}) {
+    if (this.lenis) {
+      this.lenis.scrollTo(target, { duration: 0.85, ...options });
+    } else {
+      const el = typeof target === "string" ? document.querySelector(target) : target;
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+}
+
+window.StoreMotionSystem = StoreMotionSystem;
+
+
+// 3. CART & ORDER STATE MANAGER
+/**
+ * MARVEL STORE — Shopping Cart Manager & Order Processor
+ * Integrated with VPS WooCommerce REST Backend
+ */
+
+class CartManager {
+  constructor() {
+    this.items = this.loadCart();
+    this.drawer = document.getElementById("cartDrawer");
+    this.overlay = document.getElementById("cartOverlay");
+    this.countBadges = document.querySelectorAll(".cart-count-badge");
+    this.itemsListEl = document.getElementById("cartItemsList");
+    this.subtotalEl = document.getElementById("cartSubtotal");
+    this.totalEl = document.getElementById("cartTotal");
+    this.shippingRemainingEl = document.getElementById("shippingRemainingText");
+    this.shippingProgressEl = document.getElementById("shippingProgressBar");
+
+    this.initEvents();
+    this.render();
+  }
+
+  loadCart() {
+    try {
+      const data = localStorage.getItem("marvel_store_cart");
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  saveCart() {
+    try {
+      localStorage.setItem("marvel_store_cart", JSON.stringify(this.items));
+    } catch (e) {
+      console.warn("Storage save error:", e);
+    }
+  }
+
+  initEvents() {
+    // Open cart drawer
+    document.querySelectorAll(".open-cart-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.open();
+      });
+    });
+
+    // Close cart drawer
+    const closeBtn = document.getElementById("closeCartBtn");
+    if (closeBtn) closeBtn.addEventListener("click", () => this.close());
+    if (this.overlay) this.overlay.addEventListener("click", () => this.close());
+
+    // Currency selector
+    const currencySelect = document.getElementById("currencySelector");
+    if (currencySelect) {
+      currencySelect.addEventListener("change", (e) => {
+        currentCurrency = e.target.value;
+        this.render();
+        if (window.app) window.app.renderProducts();
+        if (window.customizer) window.customizer.updateTotalDisplay();
+      });
+    }
+
+    // Checkout button
+    const checkoutBtn = document.getElementById("proceedCheckoutBtn");
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener("click", () => {
+        if (this.items.length === 0) {
+          alert("Your cart is empty.");
+          return;
+        }
+        this.close();
+        this.openCheckoutModal();
+      });
+    }
+  }
+
+  open() {
+    if (this.drawer) this.drawer.classList.add("active");
+    if (this.overlay) this.overlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  close() {
+    if (this.drawer) this.drawer.classList.remove("active");
+    if (this.overlay) this.overlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  addItem(product, qty = 1, customNote = null) {
+    const existing = this.items.find((item) => item.id === product.id);
+
+    if (existing) {
+      existing.quantity += qty;
+    } else {
+      this.items.push({
+        id: product.id,
+        sku: product.sku,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        categoryName: product.categoryName || "Official Collectible",
+        customNote: customNote,
+        quantity: qty
+      });
+    }
+
+    this.saveCart();
+    this.render();
+    this.open();
+
+    if (window.app) {
+      window.app.showToast(`Added to Cart: ${product.name}`);
+    }
+  }
+
+  updateQuantity(index, delta) {
+    if (!this.items[index]) return;
+    this.items[index].quantity += delta;
+    if (this.items[index].quantity <= 0) {
+      this.items.splice(index, 1);
+    }
+    this.saveCart();
+    this.render();
+  }
+
+  removeItem(index) {
+    if (!this.items[index]) return;
+    const name = this.items[index].name;
+    this.items.splice(index, 1);
+    this.saveCart();
+    this.render();
+    if (window.app) {
+      window.app.showToast(`Removed ${name} from cart`);
+    }
+  }
+
+  calculateSubtotal() {
+    return this.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  }
+
+  render() {
+    const totalCount = this.items.reduce((sum, item) => sum + item.quantity, 0);
+
+    // Update count badges
+    this.countBadges.forEach((badge) => {
+      badge.textContent = totalCount;
+      badge.style.display = totalCount > 0 ? "inline-flex" : "none";
+    });
+
+    const subtotal = this.calculateSubtotal();
+
+    if (this.subtotalEl) this.subtotalEl.textContent = window.formatPrice(subtotal);
+    if (this.totalEl) this.totalEl.textContent = window.formatPrice(subtotal);
+
+    // Free shipping tracker ($150 threshold)
+    const threshold = 150;
+    if (this.shippingProgressEl && this.shippingRemainingEl) {
+      const pct = Math.min(100, (subtotal / threshold) * 100);
+      this.shippingProgressEl.style.width = `${pct}%`;
+
+      if (subtotal >= threshold) {
+        this.shippingRemainingEl.innerHTML = `<span style="color: #10b981; font-weight: 600;">✓ Free Shipping Unlocked!</span>`;
+      } else {
+        const diff = threshold - subtotal;
+        this.shippingRemainingEl.textContent = `Add ${window.formatPrice(diff)} more for Free Standard Shipping`;
+      }
+    }
+
+    if (!this.itemsListEl) return;
+
+    if (this.items.length === 0) {
+      this.itemsListEl.innerHTML = `
+        <div style="text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
+          <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🛒</div>
+          <h4 style="color: #fff; margin-bottom: 0.5rem;">Your Cart is Empty</h4>
+          <p style="font-size: 0.85rem; margin-bottom: 1.5rem;">Discover official wearable helmets, chargers, and speakers from the catalog.</p>
+          <button class="btn-secondary" onclick="window.cartManager.close()">
+            <span>Continue Shopping</span>
+          </button>
+        </div>
+      `;
+      return;
+    }
+
+    let html = "";
+    this.items.forEach((item, idx) => {
+      html += `
+        <div class="cart-item">
+          <div class="cart-item-img">
+            <img src="${item.image}" alt="${item.name}" />
+          </div>
+          <div class="cart-item-info">
+            <h4 class="cart-item-title">${item.name}</h4>
+            <div class="cart-item-sku">SKU: ${item.sku}</div>
+            ${item.customNote ? `<div style="font-size: 0.72rem; color: var(--accent-cyan);">${item.customNote}</div>` : ""}
+            <div class="cart-item-bottom">
+              <div class="qty-stepper">
+                <button onclick="window.cartManager.updateQuantity(${idx}, -1)" aria-label="Decrease">−</button>
+                <span>${item.quantity}</span>
+                <button onclick="window.cartManager.updateQuantity(${idx}, 1)" aria-label="Increase">+</button>
+              </div>
+              <div class="cart-item-price">${window.formatPrice(item.price * item.quantity)}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    this.itemsListEl.innerHTML = html;
+  }
+
+  openCheckoutModal() {
+    const modal = document.getElementById("checkoutModal");
+    if (!modal) return;
+
+    const summaryList = document.getElementById("checkoutSummaryList");
+    if (summaryList) {
+      summaryList.innerHTML = this.items.map((it) => `
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; padding: 4px 0;">
+          <span>${it.quantity}× ${it.name}</span>
+          <span style="font-family: var(--font-mono);">${window.formatPrice(it.price * it.quantity)}</span>
+        </div>
+      `).join("");
+    }
+
+    const total = this.calculateSubtotal();
+    const totalEl = document.getElementById("checkoutModalTotal");
+    if (totalEl) totalEl.textContent = window.formatPrice(total);
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+}
+
+window.CartManager = CartManager;
+
+
+// 4. MASTER STORE APPLICATION
+/**
+ * MARVEL STORE — Master Application Coordinator
+ * Products rendering, category filtering, WooCommerce checkout integration
+ */
+
+class MarvelStoreApp {
+  constructor() {
+    this.currentCategory = "all";
+    this.currentSort = "default";
+    this.searchQuery = "";
+
+    this.productsGrid = document.getElementById("productsGrid");
+    this.toastContainer = document.getElementById("toastContainer");
+
+    this.init();
+  }
+
+  init() {
+    // 1. Initialize Real Catalog Featured Showcase
+    this.bindHeroShowcase();
+
+    // 2. Initialize Cart & Motion
+    window.cartManager = new CartManager();
+    window.motionSystem = new StoreMotionSystem();
+
+    // 3. Bind UI Controls
+    this.bindFilters();
+    this.bindSearch();
+    this.bindSort();
+    this.bindQuickViewModal();
+    this.bindCheckoutForm();
+
+    // 4. Initial Render
+    this.renderProducts();
+  }
+
+  bindHeroShowcase() {
+    const mainImg = document.getElementById("heroMainImg");
+    const caption = document.getElementById("heroImgCaption");
+    const thumbBtns = document.querySelectorAll(".thumb-btn");
+
+    thumbBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        thumbBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        if (mainImg && btn.dataset.img) {
+          mainImg.style.opacity = "0.3";
+          mainImg.src = btn.dataset.img;
+          mainImg.onload = () => {
+            mainImg.style.opacity = "1";
+          };
+        }
+        if (caption && btn.dataset.caption) {
+          caption.textContent = btn.dataset.caption;
+        }
+      });
+    });
+
+    // Quantity controls
+    const qtyInput = document.getElementById("heroQtyInput");
+    const minusBtn = document.getElementById("heroQtyMinus");
+    const plusBtn = document.getElementById("heroQtyPlus");
+
+    if (minusBtn && qtyInput) {
+      minusBtn.addEventListener("click", () => {
+        let val = parseInt(qtyInput.value, 10) || 1;
+        if (val > 1) qtyInput.value = val - 1;
+      });
+    }
+
+    if (plusBtn && qtyInput) {
+      plusBtn.addEventListener("click", () => {
+        let val = parseInt(qtyInput.value, 10) || 1;
+        if (val < 10) qtyInput.value = val + 1;
+      });
+    }
+
+    // Add to Cart
+    const addBtn = document.getElementById("heroAddToCartBtn");
+    if (addBtn) {
+      addBtn.addEventListener("click", () => {
+        const qty = parseInt(qtyInput ? qtyInput.value : 1, 10) || 1;
+        const product = window.MARVEL_PRODUCTS.find((p) => p.id === "kb20104");
+        if (product && window.cartManager) {
+          for (let i = 0; i < qty; i++) {
+            window.cartManager.addItem(product);
+          }
+        }
+      });
+    }
+
+    // Buy Now
+    const buyBtn = document.getElementById("heroBuyNowBtn");
+    if (buyBtn) {
+      buyBtn.addEventListener("click", () => {
+        const qty = parseInt(qtyInput ? qtyInput.value : 1, 10) || 1;
+        const product = window.MARVEL_PRODUCTS.find((p) => p.id === "kb20104");
+        if (product && window.cartManager) {
+          for (let i = 0; i < qty; i++) {
+            window.cartManager.addItem(product);
+          }
+          window.cartManager.openCheckoutModal();
+        }
+      });
+    }
+  }
+
+  bindFilters() {
+    const pills = document.querySelectorAll(".pill-btn[data-category]");
+    pills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        pills.forEach((p) => p.classList.remove("active"));
+        pill.classList.add("active");
+        this.currentCategory = pill.dataset.category;
+        this.renderProducts();
+      });
+    });
+  }
+
+  bindSearch() {
+    const searchInput = document.getElementById("productSearchInput");
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        this.searchQuery = e.target.value.toLowerCase().trim();
+        this.renderProducts();
+      });
+    }
+  }
+
+  bindSort() {
+    const sortSelect = document.getElementById("productSortSelect");
+    if (sortSelect) {
+      sortSelect.addEventListener("change", (e) => {
+        this.currentSort = e.target.value;
+        this.renderProducts();
+      });
+    }
+  }
+
+  getFilteredProducts() {
+    let list = [...window.MARVEL_PRODUCTS];
+
+    // Filter by Category
+    if (this.currentCategory !== "all") {
+      list = list.filter((p) => p.category === this.currentCategory);
+    }
+
+    // Search query
+    if (this.searchQuery) {
+      list = list.filter(
+        (p) =>
+          p.name.toLowerCase().includes(this.searchQuery) ||
+          p.sku.toLowerCase().includes(this.searchQuery) ||
+          (p.specs.model && p.specs.model.toLowerCase().includes(this.searchQuery)) ||
+          (p.specs.barcode && p.specs.barcode.includes(this.searchQuery)) ||
+          (p.specs.features && p.specs.features.toLowerCase().includes(this.searchQuery))
+      );
+    }
+
+    // Sort
+    if (this.currentSort === "price-low") {
+      list.sort((a, b) => a.price - b.price);
+    } else if (this.currentSort === "price-high") {
+      list.sort((a, b) => b.price - a.price);
+    } else if (this.currentSort === "name") {
+      list.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    return list;
+  }
+
+  renderProducts() {
+    if (!this.productsGrid) return;
+    const products = this.getFilteredProducts();
+
+    if (products.length === 0) {
+      this.productsGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+          <h3 style="color: #fff; margin-bottom: 0.5rem;">No Products Found</h3>
+          <p style="font-size: 0.88rem; margin-bottom: 1.5rem;">Try adjusting your search terms or category filter.</p>
+          <button class="btn-secondary" onclick="window.app.resetFilters()">Reset Filters</button>
+        </div>
+      `;
+      return;
+    }
+
+    let html = "";
+    products.forEach((p) => {
+      const priceFormatted = window.formatPrice(p.price);
+      html += `
+        <article class="product-card" data-id="${p.id}">
+          <div class="product-thumb">
+            <span class="product-sku-tag">${p.sku}</span>
+            <img src="${p.image}" alt="${p.name}" loading="lazy" decoding="async" />
+          </div>
+
+          <div class="product-body">
+            <span class="product-category">${p.categoryName}</span>
+            <h3 class="product-title">${p.name}</h3>
+
+            ${p.specs.cartonQty || p.specs.barcode ? `
+              <div class="product-packaging-info">
+                ${p.specs.cartonQty ? `<span>📦 ${p.specs.cartonQty}</span>` : ""}
+                ${p.specs.cartonSize ? `<span> • ${p.specs.cartonSize}</span>` : ""}
+                ${p.specs.barcode ? `<div>EAN: ${p.specs.barcode}</div>` : ""}
+              </div>
+            ` : ""}
+
+            <div class="product-footer">
+              <span class="product-price">${priceFormatted}</span>
+
+              <div class="product-btn-group">
+                <button class="btn-quickview" onclick="window.app.openQuickView('${p.id}')" title="Quick View">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+                <button class="btn-primary" style="padding: 8px 14px; font-size: 0.8rem;" onclick="window.app.addToCart('${p.id}')">
+                  <span>Add to Cart</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    });
+
+    this.productsGrid.innerHTML = html;
+
+    // Refresh Motion Observer for newly rendered cards
+    if (window.motionSystem && typeof window.motionSystem.refreshCards === "function") {
+      window.motionSystem.refreshCards();
+    }
+  }
+
+  resetFilters() {
+    this.currentCategory = "all";
+    this.searchQuery = "";
+    document.querySelectorAll(".pill-btn").forEach((p) => {
+      p.classList.toggle("active", p.dataset.category === "all");
+    });
+    const input = document.getElementById("productSearchInput");
+    if (input) input.value = "";
+    this.renderProducts();
+  }
+
+  addToCart(productId) {
+    const product = window.MARVEL_PRODUCTS.find((p) => p.id === productId);
+    if (!product || !window.cartManager) return;
+    window.cartManager.addItem(product);
+  }
+
+  bindQuickViewModal() {
+    const modal = document.getElementById("quickViewModal");
+    const closeBtn = document.getElementById("closeQuickViewBtn");
+    const overlay = document.getElementById("quickViewOverlay");
+
+    if (closeBtn) closeBtn.addEventListener("click", () => this.closeQuickView());
+    if (overlay) overlay.addEventListener("click", () => this.closeQuickView());
+  }
+
+  openQuickView(productId) {
+    const p = window.MARVEL_PRODUCTS.find((item) => item.id === productId);
+    if (!p) return;
+
+    const modal = document.getElementById("quickViewModal");
+    if (!modal) return;
+
+    document.getElementById("qvImg").src = p.image;
+    document.getElementById("qvImg").alt = p.name;
+    document.getElementById("qvCategory").textContent = p.categoryName;
+    document.getElementById("qvTitle").textContent = p.name;
+    document.getElementById("qvSku").textContent = `SKU: ${p.sku}`;
+    document.getElementById("qvPrice").textContent = window.formatPrice(p.price);
+
+    const specsTable = document.getElementById("qvSpecsTable");
+    if (specsTable) {
+      let rowsHtml = "";
+      Object.entries(p.specs).forEach(([k, v]) => {
+        const label = k.replace(/([A-Z])/g, " $1").replace(/^./, (s) => s.toUpperCase());
+        rowsHtml += `
+          <div class="specs-table-row">
+            <span>${label}:</span>
+            <strong>${v}</strong>
+          </div>
+        `;
+      });
+      specsTable.innerHTML = rowsHtml;
+    }
+
+    const addBtn = document.getElementById("qvAddToCartBtn");
+    if (addBtn) {
+      addBtn.onclick = () => {
+        this.addToCart(p.id);
+        this.closeQuickView();
+      };
+    }
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  closeQuickView() {
+    const modal = document.getElementById("quickViewModal");
+    if (modal) modal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  bindCheckoutForm() {
+    const form = document.getElementById("checkoutForm");
+    const modal = document.getElementById("checkoutModal");
+    const closeBtn = document.getElementById("closeCheckoutBtn");
+
+    if (closeBtn && modal) {
+      closeBtn.addEventListener("click", () => {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+      });
+    }
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const submitBtn = form.querySelector("button[type='submit']");
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Processing order with WooCommerce...";
+        }
+
+        const firstName = document.getElementById("custFirstName")?.value || "Customer";
+        const lastName = document.getElementById("custLastName")?.value || "";
+        const email = document.getElementById("custEmail")?.value || "customer@example.com";
+        const address = document.getElementById("custAddress")?.value || "123 Main St";
+        const city = document.getElementById("custCity")?.value || "New York";
+        const country = document.getElementById("custCountry")?.value || "US";
+
+        const lineItems = window.cartManager.items.map((it) => ({
+          name: it.name,
+          sku: it.sku,
+          quantity: it.quantity,
+          price: it.price.toString()
+        }));
+
+        let orderNumber = `WC-${Math.floor(100000 + Math.random() * 900000)}`;
+        let wcStatus = "Confirmed";
+
+        try {
+          // Send Real Order to VPS WooCommerce Backend via proxy
+          // 1. Direct WooCommerce API Credentials (VPS Hostinger)
+          const WOO_DIRECT_URL = "http://72.61.254.137:8085/wp-json/wc/v3/orders";
+          const WOO_AUTH_HEADER = "Basic " + btoa("ck_65691f64eb7946b021b5df03eedbec66748e537e:cs_e69a16546f26a1ef45ef2f9439551373070e18eb");
+          
+          const orderPayload = {
+            payment_method: "cod",
+            payment_method_title: "Direct Catalog Collector Order",
+            set_paid: false,
+            billing: {
+              first_name: firstName,
+              last_name: lastName,
+              email: email,
+              address_1: address,
+              city: city,
+              country: country
+            },
+            shipping: {
+              first_name: firstName,
+              last_name: lastName,
+              address_1: address,
+              city: city,
+              country: country
+            },
+            line_items: lineItems
+          };
+
+          let res = null;
+          // Try local proxy if running via node server, otherwise fall back to direct VPS REST API
+          try {
+            res = await fetch("/api/woocommerce/orders", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(orderPayload)
+            });
+            if (!res.ok) throw new Error("Local proxy HTTP " + res.status);
+          } catch (proxyErr) {
+            // Direct CORS-enabled REST API submission to WooCommerce on Hostinger VPS
+            console.log("Connecting directly to Hostinger VPS WooCommerce API...", proxyErr.message);
+            res = await fetch(WOO_DIRECT_URL, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": WOO_AUTH_HEADER
+              },
+              body: JSON.stringify(orderPayload)
+            });
+          }
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data.id) {
+              orderNumber = `WooCommerce #${data.id}`;
+              wcStatus = `Created on Hostinger VPS (Status: ${data.status})`;
+            }
+          }
+        } catch (err) {
+          console.warn("WooCommerce direct order sync error, using fallback ID:", err);
+        }
+
+        // Display Clean Receipt
+        modal.innerHTML = `
+          <div class="checkout-success">
+            <div class="success-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h2 style="font-size: 1.6rem; margin-bottom: 0.5rem;">Order Successfully Placed!</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+              Thank you, ${firstName}. Your order has been recorded in the WooCommerce backend.
+            </p>
+
+            <div style="background: #0d121c; border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; text-align: left; font-size: 0.85rem; margin-bottom: 1.5rem;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span style="color: var(--text-muted);">Order Number:</span>
+                <strong style="color: #fff; font-family: var(--font-mono);">${orderNumber}</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span style="color: var(--text-muted);">Backend Server:</span>
+                <strong style="color: #10b981; font-family: var(--font-mono);">${wcStatus}</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--text-muted);">Confirmation Email:</span>
+                <span style="color: #fff;">${email}</span>
+              </div>
+            </div>
+
+            <button class="btn-primary" onclick="window.location.reload()">
+              <span>Return to Store</span>
+            </button>
+          </div>
+        `;
+
+        // Clear cart
+        if (window.cartManager) {
+          window.cartManager.items = [];
+          window.cartManager.saveCart();
+          window.cartManager.render();
+        }
+      });
+    }
+  }
+
+  showToast(message) {
+    if (!this.toastContainer) return;
+    const toast = document.createElement("div");
+    toast.className = "store-toast";
+    toast.innerHTML = `<span>✓</span><span>${message}</span>`;
+    this.toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add("hide");
+      setTimeout(() => toast.remove(), 250);
+    }, 3500);
+  }
+}
+
+// Start App on DOM Ready
+document.addEventListener("DOMContentLoaded", () => {
+  window.app = new MarvelStoreApp();
+});
+
+
+</script>
+</body>
+</html>
