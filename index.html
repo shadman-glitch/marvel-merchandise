@@ -1734,10 +1734,11 @@ h1, h2, h3, h4 {
         <span>Official Marvel & Avengers Collectibles &bull; 2026 Direct Catalog Release</span>
       </div>
       <div class="banner-right">
-        <span>Free Shipping on Orders Over $150</span>
+        <span>Free Express Delivery Across India on Orders Over ₹5,000</span>
         <div class="currency-box">
           <label for="currencySelector" class="sr-only" style="display:none;">Currency</label>
           <select id="currencySelector" class="currency-select" aria-label="Select Currency">
+            <option value="INR" selected>INR (₹)</option>
             <option value="USD">USD ($)</option>
             <option value="EUR">EUR (€)</option>
             <option value="GBP">GBP (£)</option>
@@ -1847,9 +1848,9 @@ h1, h2, h3, h4 {
             <!-- Price Box -->
             <div class="showcase-price-box">
               <div class="price-row">
-                <span class="price-current font-mono" id="heroProductPrice">$139.00</span>
-                <span class="price-original font-mono">$179.00</span>
-                <span class="discount-badge">Save $40</span>
+                <span class="price-current font-mono" id="heroProductPrice">₹11,815</span>
+                <span class="price-original font-mono" id="heroProductOriginalPrice">₹15,215</span>
+                <span class="discount-badge" id="heroDiscountBadge">Save ₹3,400</span>
               </div>
               <div class="shipping-notice">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1858,7 +1859,7 @@ h1, h2, h3, h4 {
                   <circle cx="5.5" cy="18.5" r="2.5"></circle>
                   <circle cx="18.5" cy="18.5" r="2.5"></circle>
                 </svg>
-                <span>Free Express Shipping & Deluxe Holographic Packaging Included</span>
+                <span>Free Express Delivery Across India & Deluxe Packaging Included</span>
               </div>
             </div>
 
@@ -2175,11 +2176,11 @@ h1, h2, h3, h4 {
         <div class="form-grid-2">
           <div class="form-field">
             <label for="custCity">City</label>
-            <input type="text" id="custCity" required placeholder="New York" />
+            <input type="text" id="custCity" required placeholder="Mumbai" />
           </div>
           <div class="form-field">
             <label for="custCountry">Country</label>
-            <input type="text" id="custCountry" required placeholder="United States" />
+            <input type="text" id="custCountry" required placeholder="India" />
           </div>
         </div>
 
@@ -2190,7 +2191,7 @@ h1, h2, h3, h4 {
 
         <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 0.5rem;">
           <span style="font-size: 0.9rem; color: var(--text-muted);">Total to Pay:</span>
-          <span id="checkoutModalTotal" style="font-size: 1.5rem; font-weight: 800; color: var(--primary); font-family: var(--font-mono);">$0.00</span>
+          <span id="checkoutModalTotal" style="font-size: 1.5rem; font-weight: 800; color: var(--primary); font-family: var(--font-mono);">₹0</span>
         </div>
 
         <button type="submit" class="btn-primary" style="width: 100%; margin-top: 0.5rem;">
@@ -2650,32 +2651,38 @@ const MARVEL_PRODUCTS = [
   }
 ];
 
-// Simple Currency Helper
+// Currency Helper with Indian Rupee (INR) as Default
 const CURRENCY_CONFIG = {
-  USD: { symbol: "$", rate: 1.0 },
-  EUR: { symbol: "\u20AC", rate: 0.92 },
-  GBP: { symbol: "\u00A3", rate: 0.78 },
-  CAD: { symbol: "CA$", rate: 1.35 },
-  AUD: { symbol: "AU$", rate: 1.52 }
+  INR: { symbol: "₹", rate: 85.0, name: "INR (₹)" },
+  USD: { symbol: "$", rate: 1.0, name: "USD ($)" },
+  EUR: { symbol: "\u20AC", rate: 0.92, name: "EUR (€)" },
+  GBP: { symbol: "\u00A3", rate: 0.78, name: "GBP (£)" },
+  CAD: { symbol: "CA$", rate: 1.35, name: "CAD (CA$)" },
+  AUD: { symbol: "AU$", rate: 1.52, name: "AUD (AU$)" }
 };
 
-let currentCurrency = "USD";
+let currentCurrency = "INR";
 
 function formatPrice(priceUSD, currency = currentCurrency) {
-  const cfg = CURRENCY_CONFIG[currency] || CURRENCY_CONFIG.USD;
-  const val = (priceUSD * cfg.rate).toFixed(2);
-  return `${cfg.symbol}${val}`;
+  const cfg = CURRENCY_CONFIG[currency] || CURRENCY_CONFIG.INR;
+  const num = priceUSD * cfg.rate;
+  if (currency === "INR") {
+    return "₹" + Math.round(num).toLocaleString("en-IN");
+  }
+  return `${cfg.symbol}${num.toFixed(2)}`;
 }
 
 if (typeof window !== "undefined") {
   window.MARVEL_PRODUCTS = MARVEL_PRODUCTS;
   window.CURRENCY_CONFIG = CURRENCY_CONFIG;
+  window.currentCurrency = currentCurrency;
   window.formatPrice = formatPrice;
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { MARVEL_PRODUCTS, CURRENCY_CONFIG, formatPrice };
+  module.exports = { MARVEL_PRODUCTS, CURRENCY_CONFIG, formatPrice, currentCurrency };
 }
+
 
 
 // 2. MOTION & SCROLL ENGINE
@@ -2869,7 +2876,10 @@ class CartManager {
       currencySelect.addEventListener("change", (e) => {
         currentCurrency = e.target.value;
         this.render();
-        if (window.app) window.app.renderProducts();
+        if (window.app) {
+          window.app.renderProducts();
+          if (typeof window.app.updateHeroPrice === "function") window.app.updateHeroPrice();
+        }
         if (window.customizer) window.customizer.updateTotalDisplay();
       });
     }
@@ -3084,6 +3094,7 @@ class MarvelStoreApp {
 
     // 4. Initial Render
     this.renderProducts();
+    this.updateHeroPrice();
   }
 
   bindHeroShowcase() {
@@ -3155,6 +3166,22 @@ class MarvelStoreApp {
           window.cartManager.openCheckoutModal();
         }
       });
+    }
+  }
+
+  updateHeroPrice() {
+    const p = window.MARVEL_PRODUCTS.find((item) => item.id === "kb20104");
+    if (!p) return;
+    const currentEl = document.getElementById("heroProductPrice");
+    const origEl = document.getElementById("heroProductOriginalPrice");
+    const badgeEl = document.getElementById("heroDiscountBadge");
+    if (currentEl) currentEl.textContent = window.formatPrice(p.price);
+    if (origEl) origEl.textContent = window.formatPrice(p.price + 40);
+    if (badgeEl) {
+      const activeCurr = typeof currentCurrency !== "undefined" ? currentCurrency : "INR";
+      const cfg = window.CURRENCY_CONFIG[activeCurr] || window.CURRENCY_CONFIG.INR;
+      const saveVal = 40 * cfg.rate;
+      badgeEl.textContent = activeCurr === "INR" ? `Save ₹${Math.round(saveVal).toLocaleString("en-IN")}` : `Save ${cfg.symbol}${saveVal.toFixed(0)}`;
     }
   }
 
@@ -3520,15 +3547,18 @@ class MarvelStoreApp {
         const firstName = document.getElementById("custFirstName")?.value || "Customer";
         const lastName = document.getElementById("custLastName")?.value || "";
         const email = document.getElementById("custEmail")?.value || "customer@example.com";
-        const address = document.getElementById("custAddress")?.value || "123 Main St";
-        const city = document.getElementById("custCity")?.value || "New York";
-        const country = document.getElementById("custCountry")?.value || "US";
+        const address = document.getElementById("custAddress")?.value || "123 MG Road";
+        const city = document.getElementById("custCity")?.value || "Mumbai";
+        const country = document.getElementById("custCountry")?.value || "IN";
+
+        const activeCurr = typeof currentCurrency !== "undefined" ? currentCurrency : "INR";
+        const rate = (window.CURRENCY_CONFIG && window.CURRENCY_CONFIG[activeCurr]) ? window.CURRENCY_CONFIG[activeCurr].rate : 85.0;
 
         const lineItems = window.cartManager.items.map((it) => ({
           name: it.name,
           sku: it.sku,
           quantity: it.quantity,
-          price: it.price.toString()
+          price: Math.round(it.price * rate).toString()
         }));
 
         let orderNumber = `WC-${Math.floor(100000 + Math.random() * 900000)}`;
