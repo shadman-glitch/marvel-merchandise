@@ -1039,14 +1039,35 @@ h1, h2, h3, h4 {
 /* ==========================================================================
    CATALOG FILTER & TOOLBAR
    ========================================================================== */
+.catalog-section {
+  padding: 1.25rem 0 3.5rem;
+}
+
 .catalog-bar {
-  padding: 2.75rem 0 1.5rem;
+  padding: 0.75rem 0 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 1rem;
   border-bottom: 1px solid var(--border);
+}
+
+.catalog-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.catalog-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(200, 90, 50, 0.2);
 }
 
 .category-pills {
@@ -1153,9 +1174,9 @@ h1, h2, h3, h4 {
    ========================================================================== */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
-  gap: 2rem;
-  padding: 3rem 0 5rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  padding: 1.5rem 0 3.5rem;
 }
 
 .product-card {
@@ -1191,7 +1212,7 @@ h1, h2, h3, h4 {
   position: relative;
   display: block;
   width: 100%;
-  height: 280px;
+  height: 235px;
   background: #ffffff;
   overflow: hidden;
   user-select: none;
@@ -1347,11 +1368,11 @@ h1, h2, h3, h4 {
 }
 
 .product-body {
-  padding: 1.15rem 1.25rem 1.25rem;
+  padding: 0.9rem 1.05rem 1.05rem;
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 0.45rem;
+  gap: 0.35rem;
 }
 
 .product-meta-row {
@@ -1387,11 +1408,11 @@ h1, h2, h3, h4 {
 }
 
 .product-title {
-  font-size: 1.02rem;
+  font-size: 0.98rem;
   font-weight: 800;
-  line-height: 1.35;
+  line-height: 1.3;
   color: var(--text-heading);
-  min-height: 2.7em;
+  min-height: 2.6em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -1399,35 +1420,10 @@ h1, h2, h3, h4 {
   margin: 0;
 }
 
-/* Feature Highlights */
-.product-feature-highlights {
-  list-style: none;
-  padding: 0;
-  margin: 0.2rem 0 0.4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.product-feature-highlights li {
-  font-size: 0.75rem;
-  color: #4b5563;
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-  line-height: 1.35;
-}
-
-.product-feature-highlights li svg {
-  flex-shrink: 0;
-  color: var(--primary);
-  margin-top: 2px;
-}
-
 /* E-Commerce Pricing Block */
 .product-pricing-block {
   margin-top: auto;
-  padding-top: 0.85rem;
+  padding-top: 0.65rem;
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -1439,7 +1435,7 @@ h1, h2, h3, h4 {
 }
 
 .product-price {
-  font-size: 1.35rem;
+  font-size: 1.28rem;
   font-weight: 800;
   color: var(--primary);
   font-family: var(--font-mono);
@@ -1462,25 +1458,12 @@ h1, h2, h3, h4 {
   letter-spacing: 0.02em;
 }
 
-.product-perks {
-  margin-top: 3px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.perk-tag {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #059669;
-}
-
 /* E-Commerce Card Action Buttons */
 .product-card-actions {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 8px;
-  margin-top: 0.75rem;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 6px;
+  margin-top: 0.65rem;
 }
 
 .btn-add-card {
@@ -1488,9 +1471,9 @@ h1, h2, h3, h4 {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  padding: 10px 12px;
+  padding: 9px 10px;
   border-radius: var(--radius-sm);
   background: var(--primary);
   color: #ffffff;
@@ -1510,9 +1493,9 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 700;
-  padding: 10px 8px;
+  padding: 9px 8px;
   border-radius: var(--radius-sm);
   background: #ffffff;
   color: var(--text-heading);
@@ -2054,7 +2037,6 @@ h1, h2, h3, h4 {
 
       <!-- Navigation Links -->
       <nav class="nav-menu" aria-label="Main Navigation">
-        <a href="#showcase" class="nav-link">Featured Charger</a>
         <a href="#catalog" class="nav-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('all', true)">All Collectibles (19)</a>
         <a href="#catalog" class="nav-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('wearable-helmets', true)">1:1 Helmets (9)</a>
         <a href="#catalog" class="nav-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('bluetooth-speakers', true)">Speakers (4)</a>
@@ -2118,209 +2100,23 @@ h1, h2, h3, h4 {
   <!-- Main Content -->
   <main>
 
-    <!-- 1. OFFICIAL FEATURED PRODUCT SHOWCASE (HERO) -->
-    <section id="showcase" class="showcase-product-section">
+    <!-- OFFICIAL PRODUCT CATALOG -->
+    <section id="catalog" class="catalog-section">
       <div class="container">
-        <!-- Series Badge & Manufacturer Attribution -->
-        <div class="showcase-top-meta">
-          <span class="series-badge">Marvel Digital Series &bull; 2026 Hot New Release</span>
-          <span class="license-tag">Official Licensed Collectible &bull; KBGO &times; killerbody</span>
-        </div>
-
-        <div class="showcase-product-grid">
-          <!-- Left: Real Catalog Photography Gallery -->
-          <div class="showcase-gallery-card">
-            <div class="gallery-main-display">
-              <span class="sku-floating-badge font-mono">MODEL: KB20104</span>
-              <img id="heroMainImg" src="assets/images/arc_reactor_view1.jpg" alt="Iron Man Arc Reactor Wireless Fast Charger KB20104" />
-              <div class="gallery-zoom-hint">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                <span id="heroImgCaption">Display Stand View &bull; Brushed CNC Aluminum & Laser Engraving</span>
-              </div>
-            </div>
-
-            <!-- Multi-Angle Thumbnail Switcher (100% Real Catalog Photography) -->
-            <div class="gallery-thumbs">
-              <button type="button" class="thumb-btn active" data-img="assets/images/arc_reactor_view1.jpg" data-caption="Display Stand View &bull; Brushed CNC Aluminum & Laser Engraving">
-                <img src="assets/images/arc_reactor_view1.jpg" alt="Display Stand View" />
-                <span>Stand View</span>
-              </button>
-              <button type="button" class="thumb-btn" data-img="assets/images/arc_reactor_view2.jpg" data-caption="15W Magnetic Wireless Charging in Action &bull; Auto-Sensing Alignment">
-                <img src="assets/images/arc_reactor_view2.jpg" alt="Fast Charging View" />
-                <span>Fast Charging</span>
-              </button>
-              <button type="button" class="thumb-btn" data-img="assets/images/arc_reactor_view3.jpg" data-caption="Detachable Magnetic Core Unit &bull; Pulsing LED Palladium Coils">
-                <img src="assets/images/arc_reactor_view3.jpg" alt="Detachable Core View" />
-                <span>Detachable Core</span>
-              </button>
-              <button type="button" class="thumb-btn" data-img="assets/images/arc_reactor_box_open.jpg" data-caption="Deluxe Holographic Infinity Saga Collector Box & Molded Foam Tray">
-                <img src="assets/images/arc_reactor_box_open.jpg" alt="Packaging View" />
-                <span>Deluxe Box</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Right: Official Catalog Specifications & Order Controls -->
-          <div class="showcase-details-card">
-            <div class="product-brand-line">
-              <span class="brand-chip">KBGO &times; killerbody</span>
-              <span class="stock-status in-stock">
-                <span class="stock-dot"></span> In Stock &bull; Direct VPS Fulfillment
-              </span>
-            </div>
-
-            <h1 class="showcase-product-title">Iron Man Arc Reactor Wireless Fast Charger</h1>
-            <p class="showcase-product-subtitle">
-              Authentic Marvel Infinity Saga collector piece featuring a detachable magnetic LED Arc Reactor, 15W Qi wireless fast charging stand, and laser-engraved brushed aluminum bezel: <em>"PROOF THAT TONY STARK HAS A HEART"</em>.
-            </p>
-
-            <!-- Price Box -->
-            <div class="showcase-price-box">
-              <div class="price-row">
-                <span class="price-current font-mono" id="heroProductPrice">₹11,815</span>
-                <span class="price-original font-mono" id="heroProductOriginalPrice">₹15,215</span>
-                <span class="discount-badge" id="heroDiscountBadge">Save ₹3,400</span>
-              </div>
-              <div class="shipping-notice">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="1" y="3" width="15" height="13"></rect>
-                  <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
-                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                </svg>
-                <span>Free Express Delivery Across India & Deluxe Packaging Included</span>
-              </div>
-            </div>
-
-            <!-- Official Manufacturer Specifications (Direct from Catalog Page 2) -->
-            <div class="official-specs-block">
-              <div class="specs-block-title">Manufacturer Catalog Specifications</div>
-              <div class="specs-table-mini">
-                <div class="spec-cell">
-                  <span class="spec-lbl">Model / SKU</span>
-                  <strong class="spec-val font-mono">KB20104</strong>
-                </div>
-                <div class="spec-cell">
-                  <span class="spec-lbl">Barcode / EAN</span>
-                  <strong class="spec-val font-mono">4895229503113</strong>
-                </div>
-                <div class="spec-cell">
-                  <span class="spec-lbl">Carton Packaging</span>
-                  <strong class="spec-val">12 PCS / CTN</strong>
-                </div>
-                <div class="spec-cell">
-                  <span class="spec-lbl">Carton Dimensions</span>
-                  <strong class="spec-val">43 &times; 42 &times; 32 CM</strong>
-                </div>
-              </div>
-            </div>
-
-            <!-- Real Feature Highlights from Catalog -->
-            <div class="feature-bullets-list">
-              <div class="feature-bullet-item">
-                <span class="bullet-check">&#10003;</span>
-                <div>
-                  <strong>Brushed CNC Aluminum Display Bezel:</strong> Precision laser-engraved with Tony Stark's iconic tribute <em>"PROOF THAT TONY STARK HAS A HEART"</em>.
-                </div>
-              </div>
-              <div class="feature-bullet-item">
-                <span class="bullet-check">&#10003;</span>
-                <div>
-                  <strong>15W Magnetic Fast Wireless Charging:</strong> Auto-aligning magnetic Qi charging dock on laser-etched Infinity Saga pedestal base.
-                </div>
-              </div>
-              <div class="feature-bullet-item">
-                <span class="bullet-check">&#10003;</span>
-                <div>
-                  <strong>Detachable Magnetic Core Unit:</strong> The illuminated Arc Reactor core uncouples magnetically with dual-mode LED pulse breathing lighting.
-                </div>
-              </div>
-              <div class="feature-bullet-item">
-                <span class="bullet-check">&#10003;</span>
-                <div>
-                  <strong>Deluxe Holographic Packaging:</strong> Includes official collector holographic gift box, shockproof molded foam tray, and Type-C cable.
-                </div>
-              </div>
-            </div>
-
-            <!-- Order Actions -->
-            <div class="showcase-cta-group">
-              <div class="quantity-picker">
-                <button type="button" class="qty-btn" id="heroQtyMinus" aria-label="Decrease quantity">-</button>
-                <input type="number" id="heroQtyInput" value="1" min="1" max="10" readonly aria-label="Quantity" />
-                <button type="button" class="qty-btn" id="heroQtyPlus" aria-label="Increase quantity">+</button>
-              </div>
-
-              <button type="button" id="heroAddToCartBtn" class="btn-primary btn-hero-add">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="9" cy="21" r="1"></circle>
-                  <circle cx="20" cy="21" r="1"></circle>
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                </svg>
-                <span>Add to Cart</span>
-              </button>
-
-              <button type="button" id="heroBuyNowBtn" class="btn-secondary btn-hero-buy">
-                <span>Buy Now</span>
-              </button>
-            </div>
-
-            <!-- Direct Quick Jump to Catalog for Shoppers -->
-            <div class="showcase-catalog-explore">
-              <a href="#catalog" class="btn-explore-catalog-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('all', true)">
-                <span>Explore All 19 Collectibles in Official Catalog &darr;</span>
-              </a>
-            </div>
-
-            <!-- Trust Bar -->
-            <div class="trust-features">
-              <div class="trust-item">
-                <span>🛡️ 100% Genuine Licensed Marvel</span>
-              </div>
-              <div class="trust-item">
-                <span>⚡ Official Killerbody Authentication</span>
-              </div>
-              <div class="trust-item">
-                <span>📦 Direct WooCommerce Fulfillment</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. OFFICIAL PRODUCT CATALOG SECTION -->
-    <section id="catalog" class="section">
-      <div class="container">
-        <div class="section-header text-center">
-          <span class="section-badge">Direct Catalog</span>
-          <h2 class="section-title">All Marvel Collectibles & Electronics</h2>
-          <p class="section-desc">
-            Direct from the official catalog: 1:1 scale wearable helmets, digital tech accessories, desktop chargers, and Bluetooth speakers.
-          </p>
-        </div>
-
-        <!-- Filter & Search Toolbar -->
+        <!-- Compact Catalog Filter & Search Toolbar -->
         <div class="catalog-bar">
-          <div class="category-pills">
-            <button class="pill-btn active" data-category="all">All Collectibles (19)</button>
-            <button class="pill-btn" data-category="wearable-helmets">1:1 Wearable Helmets (9)</button>
-            <button class="pill-btn" data-category="bluetooth-speakers">Bluetooth Speakers (4)</button>
-            <button class="pill-btn" data-category="charging-stations">Charging Stations (3)</button>
-            <button class="pill-btn" data-category="digital-tech">Digital Tech & Audio (3)</button>
+          <div class="catalog-bar-left">
+            <span class="catalog-badge font-mono">DIRECT CATALOG</span>
+            <span id="catalogCount" class="catalog-items-count">19 Products</span>
           </div>
 
           <div class="catalog-tools">
-            <span id="catalogCount" class="catalog-items-count">19 Products</span>
             <div class="search-box">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <input type="text" id="productSearchInput" placeholder="Search helmets, chargers, speakers..." />
+              <input type="text" id="productSearchInput" placeholder="Search 19 collectibles..." />
             </div>
 
             <select id="productSortSelect" class="sort-select" aria-label="Sort Products">
@@ -3645,13 +3441,6 @@ class MarvelStoreApp {
       const images = p.images && p.images.length > 0 ? p.images : [p.image];
       const modelSku = p.sku.split('/')[0].trim();
 
-      // Extract top 2-3 feature highlights
-      const featureHighlights = (p.specs.features || "")
-        .split(",")
-        .map((f) => f.trim())
-        .filter(Boolean)
-        .slice(0, 3);
-
       html += `
         <article class="product-card" data-id="${p.id}">
           <div class="product-thumb" id="thumb-${p.id}" data-id="${p.id}" data-index="0" data-total="${images.length}">
@@ -3685,25 +3474,11 @@ class MarvelStoreApp {
 
             <h3 class="product-title" title="${p.name}">${p.name}</h3>
 
-            ${featureHighlights.length > 0 ? `
-              <ul class="product-feature-highlights">
-                ${featureHighlights.map((f) => `
-                  <li>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>${f}</span>
-                  </li>
-                `).join("")}
-              </ul>
-            ` : ""}
-
             <div class="product-pricing-block">
               <div class="product-price-line">
                 <span class="product-price">${priceFormatted}</span>
                 <del class="product-mrp">${mrpFormatted}</del>
                 <span class="product-discount-chip">15% OFF</span>
-              </div>
-              <div class="product-perks">
-                <span class="perk-tag">&#10003; Free Express Delivery Across India</span>
               </div>
             </div>
 
