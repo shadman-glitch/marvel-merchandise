@@ -1041,18 +1041,117 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: none;
 }
 
-.product-thumb img {
+.card-slider-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card-slide-img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.35s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.98);
 }
 
-.product-card:hover .product-thumb img {
-  transform: scale(1.05);
+.card-slide-img.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.product-card:hover .card-slide-img.active {
+  transform: scale(1.03);
+}
+
+/* Card Slider Navigation Arrows */
+.card-slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text-heading, #1f1b18);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 5;
+  backdrop-filter: blur(8px);
+}
+
+.card-slider-btn.prev {
+  left: 8px;
+}
+
+.card-slider-btn.next {
+  right: 8px;
+}
+
+.product-card:hover .card-slider-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.card-slider-btn:hover {
+  background: var(--primary, #C85A32);
+  color: #ffffff;
+  border-color: var(--primary, #C85A32);
+  transform: translateY(-50%) scale(1.1);
+}
+
+@media (hover: none) {
+  .card-slider-btn {
+    opacity: 0.85;
+    pointer-events: auto;
+  }
+}
+
+/* Dots */
+.card-slider-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 6;
+  background: rgba(0, 0, 0, 0.38);
+  padding: 3px 8px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+}
+
+.slider-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.slider-dot.active {
+  width: 14px;
+  border-radius: 4px;
+  background: #ffffff;
 }
 
 .product-sku-tag {
@@ -1431,14 +1530,90 @@ h1, h2, h3, h4 {
 }
 
 .product-modal-media {
-  height: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.qv-slider-container {
+  position: relative;
+  height: 330px;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: #f4f0eb;
   border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.product-modal-media img {
+.qv-slider-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.25s ease;
+}
+
+.qv-slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text-heading, #1f1b18);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 4;
+}
+
+.qv-slider-btn:hover {
+  background: var(--primary, #C85A32);
+  color: #ffffff;
+  border-color: var(--primary, #C85A32);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.qv-slider-btn.prev {
+  left: 10px;
+}
+
+.qv-slider-btn.next {
+  right: 10px;
+}
+
+.qv-thumbs-strip {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.qv-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  background: #f4f0eb;
+  opacity: 0.65;
+  transition: all 0.2s ease;
+}
+
+.qv-thumb:hover, .qv-thumb.active {
+  opacity: 1;
+  border-color: var(--primary, #C85A32);
+}
+
+.qv-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1919,7 +2094,16 @@ h1, h2, h3, h4 {
 
       <div class="product-modal-grid">
         <div class="product-modal-media">
-          <img id="qvImg" src="" alt="Product image" />
+          <div class="qv-slider-container">
+            <img id="qvImg" src="" alt="Product image" />
+            <button type="button" id="qvPrevBtn" class="qv-slider-btn prev" aria-label="Previous image">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button type="button" id="qvNextBtn" class="qv-slider-btn next" aria-label="Next image">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+          <div id="qvThumbs" class="qv-thumbs-strip"></div>
         </div>
 
         <div class="product-modal-info">
@@ -2041,6 +2225,11 @@ const MARVEL_PRODUCTS = [
     categoryName: "1:1 Wearable Helmets",
     price: 399.00,
     image: "assets/images/p_mk5_helmet.jpg",
+    images: [
+      "assets/images/p_mk5_helmet.jpg",
+      "assets/images/p_mk5_helmet_wear.jpg",
+      "assets/images/p_mk5_helmet_box.jpg"
+    ],
     specs: {
       model: "KB20090 (with speaker base)",
       cartonQty: "4 PCS / CTN",
@@ -2058,6 +2247,11 @@ const MARVEL_PRODUCTS = [
     categoryName: "1:1 Wearable Helmets",
     price: 289.00,
     image: "assets/images/p_mk5_helmet.jpg",
+    images: [
+      "assets/images/p_mk5_helmet.jpg",
+      "assets/images/p_mk5_helmet_wear.jpg",
+      "assets/images/p_mk5_helmet_box.jpg"
+    ],
     specs: {
       model: "KB20090-1 (without speaker base)",
       cartonQty: "8 PCS / CTN",
@@ -2075,6 +2269,11 @@ const MARVEL_PRODUCTS = [
     categoryName: "1:1 Wearable Helmets",
     price: 399.00,
     image: "assets/images/p_mk7_helmet.jpg",
+    images: [
+      "assets/images/p_mk7_helmet.jpg",
+      "assets/images/p_mk7_helmet_wear.jpg",
+      "assets/images/p_mk7_helmet_box.jpg"
+    ],
     specs: {
       model: "KB20094 (with speaker base)",
       cartonQty: "4 PCS / CTN",
@@ -2092,6 +2291,11 @@ const MARVEL_PRODUCTS = [
     categoryName: "1:1 Wearable Helmets",
     price: 419.00,
     image: "assets/images/p_mk2_helmet.jpg",
+    images: [
+      "assets/images/p_mk2_helmet.jpg",
+      "assets/images/p_mk2_helmet_wear.jpg",
+      "assets/images/p_mk2_helmet_box.jpg"
+    ],
     specs: {
       model: "KB20093 (with speaker base)",
       cartonQty: "4 PCS / CTN",
@@ -2109,6 +2313,11 @@ const MARVEL_PRODUCTS = [
     categoryName: "1:1 Wearable Helmets & Shields",
     price: 489.00,
     image: "assets/images/p_cap_shield.jpg",
+    images: [
+      "assets/images/p_cap_shield.jpg",
+      "assets/images/p_cap_shield_wear.jpg",
+      "assets/images/p_cap_shield_box.jpg"
+    ],
     specs: {
       model: "KB20091 (with speaker base)",
       cartonQty: "1 PCS / CTN",
@@ -2126,6 +2335,11 @@ const MARVEL_PRODUCTS = [
     categoryName: "1:1 Wearable Helmets",
     price: 349.00,
     image: "assets/images/p_cap_helmet.jpg",
+    images: [
+      "assets/images/p_cap_helmet.jpg",
+      "assets/images/p_cap_helmet_wear.jpg",
+      "assets/images/p_cap_helmet_box.jpg"
+    ],
     specs: {
       model: "KB20096 (with speaker base)",
       cartonQty: "4 PCS / CTN",
@@ -2143,6 +2357,11 @@ const MARVEL_PRODUCTS = [
     categoryName: "1:1 Wearable Helmets",
     price: 389.00,
     image: "assets/images/p_black_panther_helmet.jpg",
+    images: [
+      "assets/images/p_black_panther_helmet.jpg",
+      "assets/images/p_black_panther_helmet_wear.jpg",
+      "assets/images/p_black_panther_helmet_box.jpg"
+    ],
     specs: {
       model: "KB20095 (with speaker base)",
       cartonQty: "4 PCS / CTN",
@@ -2160,6 +2379,11 @@ const MARVEL_PRODUCTS = [
     categoryName: "1:1 Wearable Helmets",
     price: 379.00,
     image: "assets/images/p_iron_spider_helmet.jpg",
+    images: [
+      "assets/images/p_iron_spider_helmet.jpg",
+      "assets/images/p_iron_spider_helmet_wear.jpg",
+      "assets/images/p_iron_spider_helmet_box.jpg"
+    ],
     specs: {
       model: "KB20088 (with speaker base)",
       cartonQty: "4 PCS / CTN",
@@ -2177,6 +2401,11 @@ const MARVEL_PRODUCTS = [
     categoryName: "1:1 Wearable Helmets",
     price: 289.00,
     image: "assets/images/p_deadpool_helmet.jpg",
+    images: [
+      "assets/images/p_deadpool_helmet.jpg",
+      "assets/images/p_deadpool_helmet_wear.jpg",
+      "assets/images/p_deadpool_helmet_box.jpg"
+    ],
     specs: {
       model: "KB20105 (with exclusive stand)",
       cartonQty: "8 PCS / CTN",
@@ -2194,6 +2423,11 @@ const MARVEL_PRODUCTS = [
     categoryName: "1:1 Wearable Helmets",
     price: 329.00,
     image: "assets/images/p_mk85_helmet.jpg",
+    images: [
+      "assets/images/p_mk85_helmet.jpg",
+      "assets/images/p_mk85_helmet_wear.jpg",
+      "assets/images/p_mk85_helmet_box.jpg"
+    ],
     specs: {
       model: "KB20107-1",
       cartonQty: "8 PCS / CTN",
@@ -2215,6 +2449,12 @@ const MARVEL_PRODUCTS = [
     categoryName: "Digital Tech & Chargers",
     price: 139.00,
     image: "assets/images/p_arc_reactor_charger.jpg",
+    images: [
+      "assets/images/p_arc_reactor_charger.jpg",
+      "assets/images/p_arc_reactor_charging.jpg",
+      "assets/images/p_arc_reactor_box.jpg",
+      "assets/images/p_arc_reactor_box_open.jpg"
+    ],
     specs: {
       model: "KB20104",
       cartonQty: "12 PCS / CTN",
@@ -2232,6 +2472,10 @@ const MARVEL_PRODUCTS = [
     categoryName: "Digital Tech & Audio",
     price: 89.00,
     image: "assets/images/p_mk5_earbuds.jpg",
+    images: [
+      "assets/images/p_mk5_earbuds.jpg",
+      "assets/images/p_mk5_earbuds_wear.jpg"
+    ],
     specs: {
       model: "2026 Hot New Release Series",
       cartonQty: "Standard Retail Packaging",
@@ -2247,6 +2491,10 @@ const MARVEL_PRODUCTS = [
     categoryName: "Digital Tech & Audio",
     price: 79.00,
     image: "assets/images/p_clip_earphones.jpg",
+    images: [
+      "assets/images/p_clip_earphones.jpg",
+      "assets/images/p_clip_earphones_wear.jpg"
+    ],
     specs: {
       model: "2026 Hot New Release Series",
       cartonQty: "Standard Retail Packaging",
@@ -2266,6 +2514,12 @@ const MARVEL_PRODUCTS = [
     categoryName: "Charging Stations",
     price: 119.00,
     image: "assets/images/p_mk3_bust_charger.jpg",
+    images: [
+      "assets/images/p_mk3_bust_charger.jpg",
+      "assets/images/p_mk3_bust_charging.jpg",
+      "assets/images/p_mk3_bust_box.jpg",
+      "assets/images/p_mk3_bust_detail.jpg"
+    ],
     specs: {
       model: "KB20101MK3 PRO",
       cartonQty: "24 PCS / CTN",
@@ -2283,6 +2537,12 @@ const MARVEL_PRODUCTS = [
     categoryName: "Charging Stations",
     price: 89.00,
     image: "assets/images/p_mk42_bust_charger.jpg",
+    images: [
+      "assets/images/p_mk42_bust_charger.jpg",
+      "assets/images/p_mk42_bust_charging.jpg",
+      "assets/images/p_mk42_bust_box.jpg",
+      "assets/images/p_mk42_bust_detail.jpg"
+    ],
     specs: {
       model: "KB20101MK42 SE",
       cartonQty: "24 PCS / CTN",
@@ -2300,6 +2560,9 @@ const MARVEL_PRODUCTS = [
     categoryName: "Charging Stations & Busts",
     price: 149.00,
     image: "assets/images/p_hall_of_armor_busts.jpg",
+    images: [
+      "assets/images/p_hall_of_armor_busts.jpg"
+    ],
     specs: {
       model: "Hall of Armor Series (MK1, MK2, MK3, MK4, MK5, MK6, MK7)",
       cartonQty: "Collector Box Set",
@@ -2319,6 +2582,12 @@ const MARVEL_PRODUCTS = [
     categoryName: "Bluetooth Speakers",
     price: 79.00,
     image: "assets/images/p_cap_shield_speaker.jpg",
+    images: [
+      "assets/images/p_cap_shield_speaker.jpg",
+      "assets/images/p_cap_shield_speaker_wear.jpg",
+      "assets/images/p_cap_shield_speaker_box.jpg",
+      "assets/images/p_cap_shield_speaker_detail.jpg"
+    ],
     specs: {
       model: "KB20102 PRO",
       cartonQty: "24 PCS / CTN",
@@ -2336,6 +2605,12 @@ const MARVEL_PRODUCTS = [
     categoryName: "Bluetooth Speakers",
     price: 89.00,
     image: "assets/images/p_mjolnir_speaker.jpg",
+    images: [
+      "assets/images/p_mjolnir_speaker.jpg",
+      "assets/images/p_mjolnir_speaker_action.jpg",
+      "assets/images/p_mjolnir_speaker_box.jpg",
+      "assets/images/p_mjolnir_speaker_detail.jpg"
+    ],
     specs: {
       model: "KB20103 PRO",
       cartonQty: "24 PCS / CTN",
@@ -2353,6 +2628,11 @@ const MARVEL_PRODUCTS = [
     categoryName: "Bluetooth Speakers",
     price: 99.00,
     image: "assets/images/p_mk5_bust_speaker.jpg",
+    images: [
+      "assets/images/p_mk5_bust_speaker.jpg",
+      "assets/images/p_mk5_bust_speaker_action.jpg",
+      "assets/images/p_mk5_bust_speaker_box.jpg"
+    ],
     specs: {
       model: "KB20100MK5 PRO",
       cartonQty: "24 PCS / CTN",
@@ -2370,6 +2650,11 @@ const MARVEL_PRODUCTS = [
     categoryName: "Bluetooth Speakers",
     price: 79.00,
     image: "assets/images/p_mk4_bust_speaker.jpg",
+    images: [
+      "assets/images/p_mk4_bust_speaker.jpg",
+      "assets/images/p_mk4_bust_speaker_action.jpg",
+      "assets/images/p_mk4_bust_speaker_box.jpg"
+    ],
     specs: {
       model: "KB20100MK4 SE",
       cartonQty: "24 PCS / CTN",
@@ -2384,8 +2669,8 @@ const MARVEL_PRODUCTS = [
 // Simple Currency Helper
 const CURRENCY_CONFIG = {
   USD: { symbol: "$", rate: 1.0 },
-  EUR: { symbol: "€", rate: 0.92 },
-  GBP: { symbol: "£", rate: 0.78 },
+  EUR: { symbol: "\u20AC", rate: 0.92 },
+  GBP: { symbol: "\u00A3", rate: 0.78 },
   CAD: { symbol: "CA$", rate: 1.35 },
   AUD: { symbol: "AU$", rate: 1.52 }
 };
@@ -2971,11 +3256,29 @@ class MarvelStoreApp {
     let html = "";
     products.forEach((p) => {
       const priceFormatted = window.formatPrice(p.price);
+      const images = p.images && p.images.length > 0 ? p.images : [p.image];
       html += `
         <article class="product-card" data-id="${p.id}">
-          <div class="product-thumb">
+          <div class="product-thumb" id="thumb-${p.id}" data-id="${p.id}" data-index="0" data-total="${images.length}">
             <span class="product-sku-tag">${p.sku}</span>
-            <img src="${p.image}" alt="${p.name}" loading="lazy" decoding="async" />
+            <div class="card-slider-track">
+              ${images.map((imgSrc, i) => `
+                <img src="${imgSrc}" alt="${p.name}" class="card-slide-img ${i === 0 ? "active" : ""}" data-slide="${i}" loading="lazy" decoding="async" />
+              `).join("")}
+            </div>
+            ${images.length > 1 ? `
+              <button type="button" class="card-slider-btn prev" onclick="window.app.slideCardImage('${p.id}', -1, event)" aria-label="Previous photo">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <button type="button" class="card-slider-btn next" onclick="window.app.slideCardImage('${p.id}', 1, event)" aria-label="Next photo">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+              <div class="card-slider-dots">
+                ${images.map((_, i) => `
+                  <span class="slider-dot ${i === 0 ? "active" : ""}" data-dot="${i}" onclick="window.app.setCardImage('${p.id}', ${i}, event)"></span>
+                `).join("")}
+              </div>
+            ` : ""}
           </div>
 
           <div class="product-body">
@@ -3012,10 +3315,71 @@ class MarvelStoreApp {
 
     this.productsGrid.innerHTML = html;
 
+    // Bind swipe listeners
+    this.bindTouchSwipes();
+
     // Refresh Motion Observer for newly rendered cards
     if (window.motionSystem && typeof window.motionSystem.refreshCards === "function") {
       window.motionSystem.refreshCards();
     }
+  }
+
+  slideCardImage(productId, dir, event) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    const thumb = document.getElementById(`thumb-${productId}`);
+    if (!thumb) return;
+    const total = parseInt(thumb.dataset.total, 10) || 1;
+    let current = parseInt(thumb.dataset.index, 10) || 0;
+    let next = (current + dir + total) % total;
+    this.setCardImage(productId, next, event);
+  }
+
+  setCardImage(productId, targetIdx, event) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    const thumb = document.getElementById(`thumb-${productId}`);
+    if (!thumb) return;
+    thumb.dataset.index = targetIdx;
+
+    const slides = thumb.querySelectorAll(".card-slide-img");
+    slides.forEach((s, idx) => {
+      s.classList.toggle("active", idx === targetIdx);
+    });
+
+    const dots = thumb.querySelectorAll(".slider-dot");
+    dots.forEach((d, idx) => {
+      d.classList.toggle("active", idx === targetIdx);
+    });
+  }
+
+  bindTouchSwipes() {
+    const thumbs = document.querySelectorAll(".product-thumb");
+    thumbs.forEach((thumb) => {
+      let startX = 0;
+      let startY = 0;
+      thumb.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }, { passive: true });
+
+      thumb.addEventListener("touchend", (e) => {
+        const diffX = e.changedTouches[0].clientX - startX;
+        const diffY = e.changedTouches[0].clientY - startY;
+        if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+          const id = thumb.dataset.id;
+          if (diffX < 0) {
+            this.slideCardImage(id, 1, e);
+          } else {
+            this.slideCardImage(id, -1, e);
+          }
+        }
+      }, { passive: true });
+    });
   }
 
   resetFilters() {
@@ -3051,8 +3415,38 @@ class MarvelStoreApp {
     const modal = document.getElementById("quickViewModal");
     if (!modal) return;
 
-    document.getElementById("qvImg").src = p.image;
-    document.getElementById("qvImg").alt = p.name;
+    this.qvImages = p.images && p.images.length > 0 ? p.images : [p.image];
+    this.qvCurrentIndex = 0;
+
+    this.updateQuickViewSlide(0);
+
+    // Build thumbnails
+    const thumbsContainer = document.getElementById("qvThumbs");
+    if (thumbsContainer) {
+      if (this.qvImages.length > 1) {
+        thumbsContainer.style.display = "flex";
+        thumbsContainer.innerHTML = this.qvImages.map((src, i) => `
+          <div class="qv-thumb ${i === 0 ? "active" : ""}" data-idx="${i}" onclick="window.app.setQuickViewImage(${i})">
+            <img src="${src}" alt="Thumbnail ${i + 1}" />
+          </div>
+        `).join("");
+      } else {
+        thumbsContainer.style.display = "none";
+        thumbsContainer.innerHTML = "";
+      }
+    }
+
+    // Prev / Next button visibility
+    const prevBtn = document.getElementById("qvPrevBtn");
+    const nextBtn = document.getElementById("qvNextBtn");
+    if (prevBtn && nextBtn) {
+      const showArrows = this.qvImages.length > 1 ? "flex" : "none";
+      prevBtn.style.display = showArrows;
+      nextBtn.style.display = showArrows;
+      prevBtn.onclick = (e) => { e.stopPropagation(); this.slideQuickView(-1); };
+      nextBtn.onclick = (e) => { e.stopPropagation(); this.slideQuickView(1); };
+    }
+
     document.getElementById("qvCategory").textContent = p.categoryName;
     document.getElementById("qvTitle").textContent = p.name;
     document.getElementById("qvSku").textContent = `SKU: ${p.sku}`;
@@ -3083,6 +3477,33 @@ class MarvelStoreApp {
 
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
+  }
+
+  slideQuickView(dir) {
+    if (!this.qvImages || this.qvImages.length <= 1) return;
+    const total = this.qvImages.length;
+    this.qvCurrentIndex = (this.qvCurrentIndex + dir + total) % total;
+    this.updateQuickViewSlide(this.qvCurrentIndex);
+  }
+
+  setQuickViewImage(index) {
+    if (!this.qvImages || index < 0 || index >= this.qvImages.length) return;
+    this.qvCurrentIndex = index;
+    this.updateQuickViewSlide(index);
+  }
+
+  updateQuickViewSlide(index) {
+    const qvImg = document.getElementById("qvImg");
+    if (qvImg && this.qvImages && this.qvImages[index]) {
+      qvImg.style.opacity = "0.4";
+      qvImg.src = this.qvImages[index];
+      qvImg.onload = () => { qvImg.style.opacity = "1"; };
+    }
+
+    const thumbs = document.querySelectorAll(".qv-thumb");
+    thumbs.forEach((t, i) => {
+      t.classList.toggle("active", i === index);
+    });
   }
 
   closeQuickView() {
