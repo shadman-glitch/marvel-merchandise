@@ -3,6 +3,10 @@
     {
       "source": "/api/woocommerce/:path*",
       "destination": "http://72.61.254.137:8085/wp-json/wc/v3/:path*"
+    },
+    {
+      "source": "/wp-content/:path*",
+      "destination": "http://72.61.254.137:8085/wp-content/:path*"
     }
   ]
 }
