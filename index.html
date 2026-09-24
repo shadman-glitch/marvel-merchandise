@@ -20,48 +20,51 @@
    ========================================================================== */
 
 /* ==========================================================================
-   MARVEL STORE — Light Terracotta & Polished Copper E-Commerce Theme
-   Clean, modern, warm luxury hardware palette with terracotta/copper accents.
+   MARVEL STORE — Futuristic Stark Tech / Avengers Theme
+   - Animated Canvas Background: Deep Stealth Obsidian (#090b11) with Stark Arc Cyan (#00f0ff),
+     Stark Gold (#fbbf24), and Marvel Crimson (#e62429).
+   - High-Contrast Product Cards: Clean, ultra-crisp e-commerce presentation (Snitch/Flipkart style).
+   - 0ms Latency Hardware Mousewheel Scroll Sync Engine.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Surface & Background System (Clean, Light & Warm) */
-  --bg-main: #f7f4ee;           /* Warm airy cream/sand foundation */
-  --bg-card: #ffffff;           /* Crisp white product cards & panels */
-  --bg-card-hover: #fdfcfa;
-  --bg-subtle: #f0ebe2;         /* Soft warm container background */
-  --bg-header: rgba(247, 244, 238, 0.95);
+  /* Surface & Background System */
+  --bg-main: #090b11;           /* Deep cinematic Stark obsidian */
+  --bg-card: #ffffff;           /* Crisp pure white for 100% photo & text clarity */
+  --bg-card-hover: #ffffff;
+  --bg-subtle: #111624;         /* Futuristic container surface */
+  --bg-header: rgba(9, 11, 17, 0.94);
   
-  /* Primary Terracotta & Copper System */
-  --primary: #c85a32;           /* Rich Terracotta / Burnished Copper */
-  --primary-hover: #b34e28;
-  --primary-light: rgba(200, 90, 50, 0.1);
-  --primary-glow: rgba(200, 90, 50, 0.25);
+  /* Marvel & Stark Primary System */
+  --primary: #e62429;           /* Authentic Marvel Red */
+  --primary-hover: #cf191e;
+  --primary-light: rgba(230, 36, 41, 0.12);
+  --primary-glow: rgba(230, 36, 41, 0.35);
   
-  /* Harmonious Secondary Accents */
-  --accent-copper: #b87333;     /* Polished Metallic Copper */
-  --accent-cyan: #0097a7;       /* Arc Reactor Cyan */
-  --accent-gold: #c89d47;       /* Warm Aurum Gold */
+  /* High-Tech Secondary Accents */
+  --accent-cyan: #00f0ff;       /* Arc Reactor Cyan */
+  --accent-gold: #fbbf24;       /* Stark Armor Aurum Gold */
   --accent-green: #10b981;      /* Stock status */
   
-  /* High-Contrast Typography */
-  --text-main: #1e1a17;         /* Deep Charcoal Espresso */
-  --text-heading: #14110f;
-  --text-muted: #5e564f;        /* Warm Charcoal Slate */
-  --text-dim: #8c8278;          /* Light Specs / Telemetry */
-  --text-primary: #c85a32;
+  /* Typography Colors */
+  --text-main: #0f172a;         /* High-contrast dark charcoal on white cards */
+  --text-heading: #090d16;
+  --text-muted: #64748b;        /* Slate neutral */
+  --text-dim: #94a3b8;
+  --text-light: #f8fafc;        /* White text for dark sections/header */
   
-  /* Clean Delicate Borders */
-  --border: #e6dfd5;            /* Clean warm border */
-  --border-focus: #c85a32;
-  --border-subtle: #eee8df;
+  /* Borders */
+  --border: #e2e8f0;            /* Clean light border for cards */
+  --border-dark: rgba(255, 255, 255, 0.1);
+  --border-focus: #00f0ff;
   
-  /* Refined Elevation Shadows */
-  --shadow-sm: 0 1px 3px rgba(30, 26, 23, 0.05), 0 1px 2px rgba(30, 26, 23, 0.03);
-  --shadow-md: 0 4px 16px rgba(30, 26, 23, 0.06), 0 2px 4px rgba(30, 26, 23, 0.03);
-  --shadow-lg: 0 12px 32px rgba(30, 26, 23, 0.08), 0 4px 8px rgba(30, 26, 23, 0.04);
+  /* Elevation Shadows */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.28);
+  --shadow-glow: 0 0 25px rgba(0, 240, 255, 0.22);
   
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -79,7 +82,7 @@
 
 html {
   background-color: var(--bg-main);
-  color: var(--text-main);
+  color: var(--text-light);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.5;
@@ -102,9 +105,22 @@ html.lenis, html.lenis body {
 }
 
 body {
+  position: relative;
   overflow-x: hidden;
   background-color: var(--bg-main);
-  color: var(--text-main);
+  color: var(--text-light);
+  min-height: 100vh;
+}
+
+/* Fullscreen Marvel Holographic Background Canvas */
+.marvel-bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Custom Scrollbar */
@@ -115,7 +131,7 @@ body {
   background: var(--bg-main);
 }
 ::-webkit-scrollbar-thumb {
-  background: #d4cbc0;
+  background: #1e293b;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -126,7 +142,6 @@ body {
 h1, h2, h3, h4 {
   font-weight: 800;
   line-height: 1.2;
-  color: var(--text-heading);
 }
 
 .font-mono {
@@ -136,77 +151,26 @@ h1, h2, h3, h4 {
 .text-muted { color: var(--text-muted); }
 .text-cyan { color: var(--accent-cyan); }
 .text-gold { color: var(--accent-gold); }
-.text-copper { color: var(--accent-copper); }
 .text-primary { color: var(--primary); }
 
 /* Layout Container */
 .container {
   max-width: 1360px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1.25rem;
 }
 
-/* Top Notification Banner */
-.top-banner {
-  background: #ede7dd;
-  border-bottom: 1px solid var(--border);
-  padding: 0.55rem 1rem;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-.top-banner-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.banner-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 500;
-}
-
-.banner-dot {
-  width: 7px;
-  height: 7px;
-  background: var(--primary);
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: 0 0 6px rgba(200, 90, 50, 0.4);
-}
-
-.banner-right {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.currency-select {
-  background: #ffffff;
-  color: var(--text-main);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 3px 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.2s;
-}
-
-.currency-select:hover {
-  border-color: var(--primary);
-}
-
-/* Sticky Main Navigation Header (GPU Layer Optimized) */
+/* ==========================================================================
+   SLEEK MINIMALIST STICKY HEADER (Snitch / Souled Store E-Commerce Style)
+   ========================================================================== */
 .main-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(247, 244, 238, 0.98);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border-dark);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   transform: translateZ(0);
   will-change: transform;
 }
@@ -215,104 +179,131 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 76px;
-  gap: 2rem;
+  height: 56px;
+  gap: 1.25rem;
 }
 
 /* Brand Logo */
 .brand-logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-decoration: none;
-  color: var(--text-heading);
+  flex-shrink: 0;
 }
 
 .brand-badge {
   background: var(--primary);
-  color: #fff;
-  font-weight: 800;
-  font-size: 1.05rem;
-  padding: 4px 10px;
-  letter-spacing: 0.08em;
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 1.1rem;
+  padding: 3px 9px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   border-radius: var(--radius-sm);
-  box-shadow: 0 2px 8px rgba(200, 90, 50, 0.3);
+  box-shadow: 0 2px 10px rgba(230, 36, 41, 0.4);
 }
 
 .brand-name {
-  font-size: 1.18rem;
+  font-size: 1.12rem;
   font-weight: 800;
-  letter-spacing: -0.01em;
-  color: var(--text-heading);
+  letter-spacing: 0.04em;
+  color: #ffffff;
 }
 
-.brand-name span {
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 0.88rem;
-  margin-left: 6px;
-}
-
-/* Nav Links */
-.nav-menu {
+/* Header Instant Search Bar */
+.header-search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 520px;
   display: flex;
-  list-style: none;
-  gap: 1.75rem;
   align-items: center;
 }
 
-@media (max-width: 900px) {
-  .nav-menu {
-    display: none;
-  }
+.header-search-icon {
+  position: absolute;
+  left: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  pointer-events: none;
 }
 
-.nav-link {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.92rem;
-  font-weight: 600;
-  transition: color 0.2s;
-  padding: 6px 0;
+.header-search-wrap input {
+  width: 100%;
+  height: 38px;
+  padding: 0 34px 0 40px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 0.86rem;
+  font-family: var(--font-sans);
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nav-link:hover, .nav-link.active {
-  color: var(--primary);
+.header-search-wrap input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
 }
 
-/* Header Action Buttons */
+.header-search-wrap input:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.28);
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.search-clear-btn:hover {
+  color: #ffffff;
+}
+
+/* Header Action Buttons (Cart Only) */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+  flex-shrink: 0;
 }
 
 .btn-cart {
-  background: #ffffff;
-  color: var(--text-heading);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  padding: 8px 18px;
-  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 7px 15px;
+  border-radius: 20px;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 700;
   transition: all 0.2s;
-  position: relative;
 }
 
 .btn-cart svg {
   color: var(--primary);
+  transition: transform 0.2s;
 }
 
 .btn-cart:hover {
-  background: #fbf9f6;
+  background: var(--primary);
   border-color: var(--primary);
-  color: var(--primary);
+  box-shadow: 0 0 16px rgba(230, 36, 41, 0.45);
+}
+
+.btn-cart:hover svg {
+  color: #ffffff;
+  transform: scale(1.08);
 }
 
 .cart-count {
@@ -320,20 +311,62 @@ h1, h2, h3, h4 {
   color: #fff;
   font-size: 0.72rem;
   font-weight: 800;
-  padding: 2px 7px;
+  padding: 1px 7px;
   border-radius: 9999px;
-  min-width: 20px;
-  text-align: center;
+  min-width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Common Buttons */
+.btn-cart:hover .cart-count {
+  background: #ffffff;
+  color: var(--primary);
+}
+
+/* Responsive Header Tweaks */
+@media (max-width: 640px) {
+  .header-inner {
+    height: 52px;
+    gap: 0.65rem;
+  }
+  .brand-badge {
+    font-size: 0.95rem;
+    padding: 2px 7px;
+  }
+  .brand-name {
+    display: none;
+  }
+  .header-search-wrap input {
+    height: 34px;
+    font-size: 0.78rem;
+    padding-left: 32px;
+  }
+  .header-search-icon {
+    left: 10px;
+    width: 14px;
+    height: 14px;
+  }
+  .btn-cart {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  .cart-label {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   BUTTONS & COMMON UI
+   ========================================================================== */
 .btn-primary {
   background: var(--primary);
-  color: #fff;
+  color: #ffffff;
   border: none;
   padding: 10px 22px;
   border-radius: var(--radius-sm);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 700;
   cursor: pointer;
   display: inline-flex;
@@ -342,23 +375,22 @@ h1, h2, h3, h4 {
   gap: 8px;
   text-decoration: none;
   box-shadow: 0 4px 14px var(--primary-glow);
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-primary:hover {
   background: var(--primary-hover);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(200, 90, 50, 0.35);
+  box-shadow: 0 6px 18px rgba(230, 36, 41, 0.5);
 }
 
 .btn-secondary {
-  background: #ffffff;
-  color: var(--text-main);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 9px 18px;
   border-radius: var(--radius-sm);
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
@@ -370,12 +402,12 @@ h1, h2, h3, h4 {
 }
 
 .btn-secondary:hover {
-  background: #f7f4ee;
-  border-color: var(--text-dim);
-  color: var(--primary);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
 }
 
-/* Toast Notification */
+/* Toast Notifications */
 #toastContainer {
   position: fixed;
   bottom: 24px;
@@ -388,13 +420,13 @@ h1, h2, h3, h4 {
 }
 
 .store-toast {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  color: var(--text-heading);
-  padding: 14px 20px;
+  background: #131826;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: #ffffff;
+  padding: 12px 18px;
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  font-size: 0.88rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 255, 0.2);
+  font-size: 0.86rem;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -404,7 +436,7 @@ h1, h2, h3, h4 {
 }
 
 .store-toast span:first-child {
-  color: var(--primary);
+  color: var(--accent-cyan);
   font-weight: 800;
 }
 
@@ -417,6 +449,21 @@ h1, h2, h3, h4 {
   opacity: 0;
   transform: translateY(-10px);
   transition: all 0.25s;
+}
+
+/* Site Footer */
+.site-footer {
+  background: #05070c;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4rem 0 2rem;
+  color: #94a3b8;
+  font-size: 0.88rem;
+  position: relative;
+  z-index: 10;
+}
+
+.site-footer h4 {
+  color: #ffffff;
 }
 
 
@@ -473,19 +520,19 @@ h1, h2, h3, h4 {
    E-COMMERCE DEPARTMENT NAVIGATION STRIP
    ========================================================================== */
 .dept-nav-strip {
-  background: #ffffff;
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  background: rgba(12, 16, 26, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .dept-nav-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 1rem;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 .dept-pills-scroll {
@@ -506,12 +553,12 @@ h1, h2, h3, h4 {
 .dept-pill {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 7px 14px;
+  gap: 6px;
+  padding: 6px 14px;
   border-radius: 20px;
-  background: #f7f4ee;
-  border: 1px solid var(--border);
-  color: var(--text-heading);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
   font-size: 0.82rem;
   font-weight: 700;
   white-space: nowrap;
@@ -521,8 +568,9 @@ h1, h2, h3, h4 {
 }
 
 .dept-pill:hover {
-  background: #ede7dd;
-  border-color: #d6ccbe;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
@@ -530,25 +578,25 @@ h1, h2, h3, h4 {
   background: var(--primary);
   border-color: var(--primary);
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(200, 90, 50, 0.25);
+  box-shadow: 0 2px 12px rgba(230, 36, 41, 0.45);
 }
 
 .dept-icon {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   line-height: 1;
 }
 
 .dept-count {
   font-size: 0.72rem;
   font-weight: 800;
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.3);
   color: inherit;
   padding: 1px 7px;
   border-radius: 10px;
 }
 
 .dept-pill.active .dept-count {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.28);
   color: #ffffff;
 }
 
@@ -1171,23 +1219,59 @@ h1, h2, h3, h4 {
 
 /* ==========================================================================
    PRODUCT GRID & CARDS
-   ========================================================================== */
+.catalog-section {
+  position: relative;
+  z-index: 10;
+  padding: 1.5rem 0 4rem;
+}
+
+.catalog-bar {
+  background: rgba(14, 19, 31, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  gap: 1rem;
+}
+
+.catalog-badge {
+  background: rgba(0, 240, 255, 0.12);
+  color: #00f0ff;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.catalog-items-count {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.25rem;
-  padding: 1.5rem 0 3.5rem;
+  padding: 0.5rem 0 3.5rem;
 }
 
 .product-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   transform: translateZ(0);
   opacity: 1;
 }
@@ -1203,9 +1287,9 @@ h1, h2, h3, h4 {
 }
 
 .product-card:hover {
-  transform: translateY(-4px) translateZ(0);
-  border-color: #d6ccbe;
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px) translateZ(0);
+  border-color: rgba(0, 240, 255, 0.45);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0, 240, 255, 0.2);
 }
 
 .product-thumb {
@@ -1483,10 +1567,10 @@ h1, h2, h3, h4 {
 }
 
 .btn-add-card:hover {
-  background: #a83d18;
-  border-color: #a83d18;
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(200, 90, 50, 0.25);
+  box-shadow: 0 4px 12px rgba(230, 36, 41, 0.45);
 }
 
 .btn-specs-card {
@@ -1506,9 +1590,9 @@ h1, h2, h3, h4 {
 }
 
 .btn-specs-card:hover {
-  background: #f7f4ee;
-  border-color: var(--primary);
-  color: var(--primary);
+  background: #f8fafc;
+  border-color: var(--accent-cyan);
+  color: #0284c7;
   transform: translateY(-1px);
 }
 
@@ -1992,6 +2076,150 @@ h1, h2, h3, h4 {
   margin-bottom: 1.35rem;
 }
 
+/* ==========================================================================
+   MOBILE 2-COLUMN E-COMMERCE GRID (Snitch, Souled Store & Flipkart Standard)
+   ========================================================================== */
+@media (max-width: 640px) {
+  .catalog-bar {
+    padding: 8px 12px;
+    margin-bottom: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .catalog-badge {
+    font-size: 0.68rem;
+    padding: 2px 6px;
+  }
+
+  .catalog-items-count {
+    font-size: 0.78rem;
+  }
+
+  .sort-select {
+    padding: 4px 8px;
+    font-size: 0.76rem;
+  }
+
+  /* 2-Column Responsive Product Grid */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding: 0.4rem 0 2rem !important;
+  }
+
+  .product-card {
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  }
+
+  .product-thumb {
+    height: 160px;
+  }
+
+  .card-slide-img {
+    padding: 4px;
+  }
+
+  .product-sku-tag {
+    display: none;
+  }
+
+  .product-views-chip {
+    top: 6px;
+    right: 6px;
+    font-size: 0.6rem;
+    padding: 2px 5px;
+    gap: 2px;
+  }
+
+  .product-body {
+    padding: 0.6rem 0.65rem 0.75rem;
+    gap: 0.25rem;
+  }
+
+  .product-meta-row {
+    margin-bottom: 1px;
+  }
+
+  .product-category {
+    font-size: 0.62rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .product-stock-status {
+    display: none; /* Hide on tight 2-col to keep card compact */
+  }
+
+  .product-title {
+    font-size: 0.82rem;
+    line-height: 1.25;
+    min-height: 2.5em;
+    -webkit-line-clamp: 2;
+  }
+
+  .product-pricing-block {
+    padding-top: 0.35rem;
+  }
+
+  .product-price-line {
+    gap: 4px;
+    align-items: center;
+  }
+
+  .product-price {
+    font-size: 1.05rem;
+  }
+
+  .product-mrp {
+    font-size: 0.75rem;
+  }
+
+  .product-discount-chip {
+    font-size: 0.6rem;
+    padding: 1px 4px;
+  }
+
+  .product-card-actions {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    margin-top: 0.45rem;
+  }
+
+  .btn-add-card {
+    font-size: 0.74rem;
+    padding: 7px 6px;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .btn-add-card svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .btn-specs-card {
+    display: none; /* Mobile users tap the product card / photo to open full Quick View */
+  }
+
+  .card-slider-btn {
+    width: 26px;
+    height: 26px;
+    opacity: 0.85;
+    pointer-events: auto;
+  }
+
+  .card-slider-btn.prev {
+    left: 4px;
+  }
+
+  .card-slider-btn.next {
+    right: 4px;
+  }
+}
+
+
 
 </style>
 
@@ -2002,63 +2230,43 @@ h1, h2, h3, h4 {
 </head>
 <body>
 
-  <!-- Top Notification Bar -->
-  <div class="top-banner">
-    <div class="container top-banner-inner">
-      <div class="banner-left">
-        <span class="banner-dot"></span>
-        <span>Official Marvel & Avengers Collectibles &bull; 2026 Direct Catalog Release</span>
-      </div>
-      <div class="banner-right">
-        <span>Free Express Delivery Across India on Orders Over ₹5,000</span>
-        <div class="currency-box">
-          <label for="currencySelector" class="sr-only" style="display:none;">Currency</label>
-          <select id="currencySelector" class="currency-select" aria-label="Select Currency">
-            <option value="INR" selected>INR (₹)</option>
-            <option value="USD">USD ($)</option>
-            <option value="EUR">EUR (€)</option>
-            <option value="GBP">GBP (£)</option>
-            <option value="CAD">CAD (CA$)</option>
-            <option value="AUD">AUD (AU$)</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Fullscreen Marvel Avengers Holographic Background Canvas -->
+  <canvas id="marvelBgCanvas" class="marvel-bg-canvas"></canvas>
 
-  <!-- Sticky Main Header -->
+  <!-- Sleek Minimalist Top Header (Snitch / Souled Store E-Commerce Style) -->
   <header class="main-header">
     <div class="container header-inner">
-      <!-- Store Logo -->
+      <!-- Store Brand Badge -->
       <a href="#" class="brand-logo" aria-label="Marvel Store Home">
         <span class="brand-badge">MARVEL</span>
-        <div class="brand-name">STORE <span>Collectibles</span></div>
+        <span class="brand-name">STORE</span>
       </a>
 
-      <!-- Navigation Links -->
-      <nav class="nav-menu" aria-label="Main Navigation">
-        <a href="#catalog" class="nav-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('all', true)">All Collectibles (19)</a>
-        <a href="#catalog" class="nav-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('wearable-helmets', true)">1:1 Helmets (9)</a>
-        <a href="#catalog" class="nav-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('bluetooth-speakers', true)">Speakers (4)</a>
-        <a href="#catalog" class="nav-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('charging-stations', true)">Charging (3)</a>
-        <a href="#catalog" class="nav-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('digital-tech', true)">Tech & Audio (3)</a>
-      </nav>
+      <!-- Instant Search Bar -->
+      <div class="header-search-wrap">
+        <svg class="header-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="headerSearchInput" placeholder="Search 19 Marvel helmets, speakers, audio..." autocomplete="off" />
+        <button type="button" id="headerSearchClear" class="search-clear-btn" style="display:none;" aria-label="Clear Search">&times;</button>
+      </div>
 
-      <!-- Header Actions -->
+      <!-- Header Actions: Cart Only -->
       <div class="header-actions">
         <button class="btn-cart open-cart-btn" aria-label="Shopping Cart">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="9" cy="21" r="1"></circle>
             <circle cx="20" cy="21" r="1"></circle>
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
           </svg>
-          <span>Cart</span>
+          <span class="cart-label">Cart</span>
           <span class="cart-count cart-count-badge" style="display: none;">0</span>
         </button>
       </div>
     </div>
 
-    <!-- E-COMMERCE DEPARTMENT STRIP (One-tap category filtering & easily watchable collections) -->
+    <!-- E-COMMERCE DEPARTMENT STRIP (One-tap category filtering) -->
     <div class="dept-nav-strip">
       <div class="container dept-nav-inner">
         <div class="dept-pills-scroll" role="tablist" aria-label="Product Categories">
@@ -2069,29 +2277,24 @@ h1, h2, h3, h4 {
           </button>
           <button class="dept-pill" data-category="wearable-helmets" type="button">
             <span class="dept-icon">🪖</span>
-            <span class="dept-label">1:1 Wearable Helmets</span>
+            <span class="dept-label">1:1 Helmets</span>
             <span class="dept-count">9</span>
           </button>
           <button class="dept-pill" data-category="bluetooth-speakers" type="button">
             <span class="dept-icon">🔊</span>
-            <span class="dept-label">Bluetooth Speakers</span>
+            <span class="dept-label">Speakers</span>
             <span class="dept-count">4</span>
           </button>
           <button class="dept-pill" data-category="charging-stations" type="button">
             <span class="dept-icon">🔋</span>
-            <span class="dept-label">Charging Tech & Busts</span>
+            <span class="dept-label">Charging Tech</span>
             <span class="dept-count">3</span>
           </button>
           <button class="dept-pill" data-category="digital-tech" type="button">
             <span class="dept-icon">🎧</span>
-            <span class="dept-label">Digital Tech & Audio</span>
+            <span class="dept-label">Audio & Tech</span>
             <span class="dept-count">3</span>
           </button>
-        </div>
-        <div class="dept-right-hint">
-          <a href="#catalog" class="dept-browse-link" onclick="window.app && window.app.filterCategory && window.app.filterCategory('all', true)">
-            <span>Explore Catalog &darr;</span>
-          </a>
         </div>
       </div>
     </div>
@@ -2138,7 +2341,7 @@ h1, h2, h3, h4 {
   </main>
 
   <!-- Clean Footer -->
-  <footer style="background: #ede7dd; border-top: 1px solid var(--border); padding: 4.5rem 0 2rem; color: var(--text-muted); font-size: 0.88rem;">
+  <footer class="site-footer">
     <div class="container">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; margin-bottom: 3rem;">
         <div>
@@ -2200,7 +2403,7 @@ h1, h2, h3, h4 {
     </div>
 
     <div class="cart-shipping-bar">
-      <div id="shippingRemainingText">Add $150 for Free Standard Shipping</div>
+      <div id="shippingRemainingText">Add ₹5,000 for Free Express Delivery</div>
       <div class="cart-shipping-track">
         <div id="shippingProgressBar" class="cart-shipping-fill" style="width: 0%;"></div>
       </div>
@@ -2213,11 +2416,11 @@ h1, h2, h3, h4 {
     <div class="cart-footer">
       <div class="cart-summary-line">
         <span>Subtotal:</span>
-        <span id="cartSubtotal" style="font-weight: 700; color: var(--text-heading);">$0.00</span>
+        <span id="cartSubtotal" style="font-weight: 700; color: var(--text-heading);">₹0</span>
       </div>
       <div class="cart-summary-line total">
         <span>Estimated Total:</span>
-        <span id="cartTotal" class="font-mono text-primary">$0.00</span>
+        <span id="cartTotal" class="font-mono text-primary">₹0</span>
       </div>
 
       <button id="proceedCheckoutBtn" class="btn-primary" style="width: 100%;">
@@ -2823,30 +3026,552 @@ if (typeof module !== "undefined" && module.exports) {
 
 // 2. MOTION & SCROLL ENGINE
 /**
- * MARVEL STORE — Ultra-High Performance Motion & Millisecond-Synced Scrolling
- * 0ms latency hardware mousewheel sync (no artificial delay or sluggish drag)
- * Zero-overhead IntersectionObserver for catalog card reveals
- * Smooth programmatic animation for navigation anchors
+ * MARVEL STORE — Ultra-High Performance Motion & Background Animation Engine
+ * 1. MarvelBackgroundEngine: GPU-accelerated holographic Stark Arc Reactor HUD,
+ *    Avengers quantum nanotech particle lattice, scroll velocity warp, and touch deflection.
+ * 2. StoreMotionSystem: 0ms latency hardware scroll sync & zero-overhead card reveals.
  */
 
+class MarvelBackgroundEngine {
+  constructor(canvasId = "marvelBgCanvas") {
+    this.canvas = document.getElementById(canvasId);
+    if (!this.canvas) return;
+
+    this.ctx = this.canvas.getContext("2d", { alpha: true });
+    if (!this.ctx) return;
+
+    this.reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    this.isMobile = window.innerWidth <= 768;
+    this.width = 0;
+    this.height = 0;
+    this.dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+
+    // Physics & Scroll Velocity State
+    this.lastScrollY = window.scrollY || window.pageYOffset || 0;
+    this.scrollVelocity = 0;
+    this.targetVelocity = 0;
+    this.reactorAngle = 0;
+    this.counterAngle = 0;
+    this.pulsePhase = 0;
+
+    // Pointer Interaction
+    this.pointer = { x: -1000, y: -1000, active: false };
+    this.ripples = [];
+
+    // Particle Swarm
+    this.particles = [];
+    this.particleCount = this.isMobile ? 24 : 52;
+    this.maxConnectDist = this.isMobile ? 85 : 120;
+
+    // Animation loop state
+    this.isActive = true;
+    this.animationFrameId = null;
+
+    this.init();
+  }
+
+  init() {
+    this.resize();
+    this.initParticles();
+    this.bindEvents();
+    this.loop();
+  }
+
+  resize() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    this.isMobile = this.width <= 768;
+    this.dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+
+    this.canvas.width = Math.floor(this.width * this.dpr);
+    this.canvas.height = Math.floor(this.height * this.dpr);
+    this.canvas.style.width = `${this.width}px`;
+    this.canvas.style.height = `${this.height}px`;
+
+    this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+    this.ctx.scale(this.dpr, this.dpr);
+
+    const newCount = this.isMobile ? 24 : 52;
+    if (this.particles.length !== newCount) {
+      this.particleCount = newCount;
+      this.initParticles();
+    }
+  }
+
+  initParticles() {
+    this.particles = [];
+    const colors = [
+      { r: 0, g: 240, b: 255 },  // Arc Cyan
+      { r: 251, g: 191, b: 36 }, // Stark Gold
+      { r: 239, g: 68, b: 68 }   // Avengers Red
+    ];
+
+    for (let i = 0; i < this.particleCount; i++) {
+      const color = colors[i % colors.length];
+      this.particles.push({
+        x: Math.random() * this.width,
+        y: Math.random() * this.height,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        radius: Math.random() * 1.8 + 1.2,
+        z: Math.random() * 1.2 + 0.6,
+        color: color,
+        alpha: Math.random() * 0.45 + 0.35,
+        pulseSpeed: Math.random() * 0.02 + 0.01
+      });
+    }
+  }
+
+  bindEvents() {
+    // Throttled Resize
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => this.resize(), 120);
+    }, { passive: true });
+
+    // Scroll Velocity Tracker
+    window.addEventListener("scroll", () => {
+      const currentY = window.scrollY || window.pageYOffset || 0;
+      const delta = currentY - this.lastScrollY;
+      this.scrollVelocity = Math.max(-45, Math.min(45, delta));
+      this.lastScrollY = currentY;
+    }, { passive: true });
+
+    // Pointer Interaction (Desktop & Touch)
+    window.addEventListener("mousemove", (e) => {
+      this.pointer.x = e.clientX;
+      this.pointer.y = e.clientY;
+      this.pointer.active = true;
+    }, { passive: true });
+
+    window.addEventListener("mouseleave", () => {
+      this.pointer.active = false;
+      this.pointer.x = -1000;
+      this.pointer.y = -1000;
+    }, { passive: true });
+
+    window.addEventListener("touchstart", (e) => {
+      if (e.touches.length > 0) {
+        this.pointer.x = e.touches[0].clientX;
+        this.pointer.y = e.touches[0].clientY;
+        this.pointer.active = true;
+        this.addRipple(this.pointer.x, this.pointer.y);
+      }
+    }, { passive: true });
+
+    window.addEventListener("touchmove", (e) => {
+      if (e.touches.length > 0) {
+        this.pointer.x = e.touches[0].clientX;
+        this.pointer.y = e.touches[0].clientY;
+        this.pointer.active = true;
+      }
+    }, { passive: true });
+
+    window.addEventListener("touchend", () => {
+      this.pointer.active = false;
+    }, { passive: true });
+
+    // Click Shockwave Ripple
+    window.addEventListener("click", (e) => {
+      this.addRipple(e.clientX, e.clientY);
+    }, { passive: true });
+
+    // Tab Visibility Safeguard (Preserves 100% CPU/Battery when tab inactive)
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        this.isActive = false;
+        if (this.animationFrameId) cancelAnimationFrame(this.animationFrameId);
+      } else {
+        this.isActive = true;
+        this.lastScrollY = window.scrollY || 0;
+        this.loop();
+      }
+    });
+  }
+
+  addRipple(x, y) {
+    if (this.ripples.length > 5) this.ripples.shift();
+    this.ripples.push({
+      x: x,
+      y: y,
+      radius: 12,
+      maxRadius: this.isMobile ? 120 : 180,
+      alpha: 0.55,
+      speed: this.isMobile ? 3.5 : 5
+    });
+  }
+
+  update() {
+    // Exponential decay of scroll velocity towards 0
+    this.scrollVelocity *= 0.92;
+
+    // Advance rotation angles based on ambient drift + scroll velocity
+    const vBoost = this.scrollVelocity * 0.0025;
+    this.reactorAngle += 0.0035 + vBoost;
+    this.counterAngle -= 0.0025 + vBoost * 0.8;
+    this.pulsePhase += 0.035;
+
+    // Update Particles
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+
+      // Ambient drift + vertical stream proportional to scroll velocity
+      p.x += p.vx;
+      p.y += p.vy - this.scrollVelocity * p.z * 0.18;
+
+      // Pointer Deflection
+      if (this.pointer.active) {
+        const dx = p.x - this.pointer.x;
+        const dy = p.y - this.pointer.y;
+        const distSq = dx * dx + dy * dy;
+        const pushRadius = 120;
+        if (distSq < pushRadius * pushRadius && distSq > 0) {
+          const dist = Math.sqrt(distSq);
+          const force = (1 - dist / pushRadius) * 2.5;
+          p.x += (dx / dist) * force;
+          p.y += (dy / dist) * force;
+        }
+      }
+
+      // Edge wrap
+      if (p.x < -20) p.x = this.width + 20;
+      if (p.x > this.width + 20) p.x = -20;
+      if (p.y < -20) p.y = this.height + 20;
+      if (p.y > this.height + 20) p.y = -20;
+    }
+
+    // Update Shockwave Ripples
+    for (let i = this.ripples.length - 1; i >= 0; i--) {
+      const r = this.ripples[i];
+      r.radius += r.speed;
+      r.alpha = (1 - r.radius / r.maxRadius) * 0.55;
+      if (r.radius >= r.maxRadius) {
+        this.ripples.splice(i, 1);
+      }
+    }
+  }
+
+  draw() {
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.width, this.height);
+
+    // 1. Draw Holographic Stark Arc Reactor HUD
+    this.drawArcReactor(ctx);
+
+    // 2. Draw Geometric Avengers Emblem Watermark
+    this.drawAvengersWatermark(ctx);
+
+    // 3. Draw Quantum Proximity Constellation Lines
+    this.drawConstellationLines(ctx);
+
+    // 4. Draw Floating Quantum Nanotech Particles
+    this.drawParticles(ctx);
+
+    // 5. Draw Shockwave Energy Ripples
+    this.drawRipples(ctx);
+  }
+
+  drawArcReactor(ctx) {
+    // Center positioning: Upper right on desktop, upper center on mobile
+    const cx = this.isMobile ? this.width * 0.5 : this.width * 0.82;
+    const cy = this.isMobile ? this.height * 0.30 : this.height * 0.44;
+    const baseRadius = this.isMobile
+      ? Math.min(this.width, this.height) * 0.38
+      : Math.min(this.width, this.height) * 0.34;
+
+    const pulse = 1 + Math.sin(this.pulsePhase) * 0.05;
+
+    ctx.save();
+    ctx.translate(cx, cy);
+
+    // --- Core Repulsor Radial Glow ---
+    const coreGlow = ctx.createRadialGradient(0, 0, 5, 0, 0, baseRadius * 1.1);
+    coreGlow.addColorStop(0, "rgba(0, 240, 255, 0.16)");
+    coreGlow.addColorStop(0.35, "rgba(0, 180, 255, 0.06)");
+    coreGlow.addColorStop(0.7, "rgba(200, 90, 50, 0.03)");
+    coreGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
+    ctx.fillStyle = coreGlow;
+    ctx.beginPath();
+    ctx.arc(0, 0, baseRadius * 1.1, 0, Math.PI * 2);
+    ctx.fill();
+
+    // --- Ring 1: Outer Telemetry Compass Ring (Clockwise) ---
+    ctx.save();
+    ctx.rotate(this.reactorAngle * 0.8);
+    ctx.strokeStyle = "rgba(0, 240, 255, 0.22)";
+    ctx.lineWidth = 1;
+
+    // Segmented Outer Track
+    ctx.beginPath();
+    ctx.arc(0, 0, baseRadius, 0, Math.PI * 1.85);
+    ctx.stroke();
+
+    // 48 Radial Hash Ticks
+    const tickCount = 48;
+    for (let i = 0; i < tickCount; i++) {
+      const angle = (i * Math.PI * 2) / tickCount;
+      const isMajor = i % 4 === 0;
+      const inner = isMajor ? baseRadius - 10 : baseRadius - 5;
+      ctx.strokeStyle = isMajor ? "rgba(0, 240, 255, 0.38)" : "rgba(0, 240, 255, 0.15)";
+      ctx.lineWidth = isMajor ? 1.5 : 1;
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(angle) * inner, Math.sin(angle) * inner);
+      ctx.lineTo(Math.cos(angle) * baseRadius, Math.sin(angle) * baseRadius);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // --- Ring 2: Counter-Rotating Telemetry Gauge Ring ---
+    ctx.save();
+    ctx.rotate(this.counterAngle);
+    ctx.strokeStyle = "rgba(251, 191, 36, 0.20)"; // Stark Gold accent
+    ctx.lineWidth = 1.2;
+    ctx.setLineDash([12, 16, 4, 16]);
+    ctx.beginPath();
+    ctx.arc(0, 0, baseRadius * 0.86, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+
+    // --- Ring 3: Mark 85 10-Coil Stator Housing ---
+    ctx.save();
+    ctx.rotate(this.reactorAngle * 1.2);
+    const coilCount = 10;
+    const rCoilInner = baseRadius * 0.58;
+    const rCoilOuter = baseRadius * 0.74;
+
+    for (let i = 0; i < coilCount; i++) {
+      const startA = (i * Math.PI * 2) / coilCount;
+      const coilWidth = 0.32;
+      const a1 = startA - coilWidth / 2;
+      const a2 = startA + coilWidth / 2;
+
+      // Coil bounding polygon
+      ctx.beginPath();
+      ctx.arc(0, 0, rCoilOuter, a1, a2);
+      ctx.lineTo(Math.cos(a2) * rCoilInner, Math.sin(a2) * rCoilInner);
+      ctx.arc(0, 0, rCoilInner, a2, a1, true);
+      ctx.closePath();
+
+      ctx.fillStyle = "rgba(0, 240, 255, 0.05)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(0, 240, 255, 0.35)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Coil copper core winding
+      ctx.strokeStyle = "rgba(251, 191, 36, 0.38)";
+      ctx.beginPath();
+      ctx.arc(0, 0, (rCoilInner + rCoilOuter) / 2, a1 + 0.05, a2 - 0.05);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // --- Ring 4: Inner Core Flux Ring ---
+    ctx.save();
+    ctx.rotate(this.counterAngle * 1.5);
+    ctx.strokeStyle = "rgba(0, 240, 255, 0.45)";
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([8, 8]);
+    ctx.beginPath();
+    ctx.arc(0, 0, baseRadius * 0.42 * pulse, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+
+    // --- Center Repulsor Diode & Crosshair HUD ---
+    ctx.fillStyle = "rgba(0, 240, 255, 0.75)";
+    ctx.beginPath();
+    ctx.arc(0, 0, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Luminous center halo
+    ctx.strokeStyle = "rgba(0, 240, 255, 0.55)";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(0, 0, 16 * pulse, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Reticle Crosshairs
+    const armLen = baseRadius * 0.36;
+    ctx.strokeStyle = "rgba(0, 240, 255, 0.25)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(-armLen, 0); ctx.lineTo(-20, 0);
+    ctx.moveTo(20, 0); ctx.lineTo(armLen, 0);
+    ctx.moveTo(0, -armLen); ctx.lineTo(0, -20);
+    ctx.moveTo(0, 20); ctx.lineTo(0, armLen);
+    ctx.stroke();
+
+    // Telemetry Text HUD
+    if (!this.isMobile) {
+      ctx.font = "8px 'JetBrains Mono', monospace";
+      ctx.fillStyle = "rgba(0, 240, 255, 0.45)";
+      ctx.fillText("ARC MK-85 // TELEMETRY", baseRadius * 0.32, -baseRadius * 0.65);
+      ctx.fillText("OUTPUT 100% NOMINAL", baseRadius * 0.32, -baseRadius * 0.65 + 12);
+      ctx.fillText("SYS.DIAG // JARVIS ONLINE", -baseRadius * 0.95, baseRadius * 0.82);
+    }
+
+    ctx.restore();
+  }
+
+  drawAvengersWatermark(ctx) {
+    // Subtle geometric Avengers chevron emblem on lower-left background
+    const cx = this.isMobile ? this.width * 0.25 : this.width * 0.16;
+    const cy = this.isMobile ? this.height * 0.82 : this.height * 0.76;
+    const r = this.isMobile ? 75 : 125;
+
+    ctx.save();
+    ctx.translate(cx, cy);
+
+    // Parallax tilt based on scroll velocity
+    ctx.rotate(this.scrollVelocity * 0.001);
+
+    // Outer circle
+    ctx.strokeStyle = "rgba(239, 68, 68, 0.12)"; // Avengers Crimson
+    ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    // Leave gap at bottom right where the "A" leg breaks through
+    ctx.arc(0, 0, r, 0.35, Math.PI * 1.85);
+    ctx.stroke();
+
+    // Inner subtle guide ring
+    ctx.strokeStyle = "rgba(0, 240, 255, 0.08)";
+    ctx.lineWidth = 1;
+    ctx.setLineDash([6, 8]);
+    ctx.beginPath();
+    ctx.arc(0, 0, r * 0.78, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Avengers "A" stylized vector
+    ctx.strokeStyle = "rgba(239, 68, 68, 0.16)";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    // Left diagonal leg
+    ctx.moveTo(-r * 0.55, r * 0.82);
+    ctx.lineTo(r * 0.05, -r * 0.95);
+    // Right diagonal arrow leg extending outside circle
+    ctx.lineTo(r * 0.65, r * 0.95);
+    ctx.stroke();
+
+    // Crossbar with northeast forward notch
+    ctx.beginPath();
+    ctx.moveTo(-r * 0.35, r * 0.15);
+    ctx.lineTo(r * 0.35, r * 0.15);
+    ctx.lineTo(r * 0.55, -r * 0.05); // Arrowhead spur
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  drawConstellationLines(ctx) {
+    const p = this.particles;
+    const maxDist = this.maxConnectDist;
+    const maxDistSq = maxDist * maxDist;
+
+    ctx.lineWidth = 0.75;
+    for (let i = 0; i < p.length; i++) {
+      for (let j = i + 1; j < p.length; j++) {
+        const dx = p[i].x - p[j].x;
+        const dy = p[i].y - p[j].y;
+        const distSq = dx * dx + dy * dy;
+
+        if (distSq < maxDistSq) {
+          const alpha = (1 - Math.sqrt(distSq) / maxDist) * 0.22;
+          ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
+          ctx.beginPath();
+          ctx.moveTo(p[i].x, p[i].y);
+          ctx.lineTo(p[j].x, p[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  drawParticles(ctx) {
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+      const pulse = 1 + Math.sin(this.pulsePhase * 2 + i) * 0.2;
+
+      ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.alpha})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius * pulse, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Outer soft glow for larger particles
+      if (p.radius > 2.0) {
+        ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.alpha * 0.25})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius * 2.8, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+  }
+
+  drawRipples(ctx) {
+    for (let i = 0; i < this.ripples.length; i++) {
+      const r = this.ripples[i];
+      ctx.strokeStyle = `rgba(0, 240, 255, ${r.alpha})`;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Inner faint secondary ring
+      if (r.radius > 25) {
+        ctx.strokeStyle = `rgba(251, 191, 36, ${r.alpha * 0.6})`;
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, r.radius * 0.7, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+  }
+
+  loop() {
+    if (!this.isActive) return;
+    this.update();
+    this.draw();
+    this.animationFrameId = requestAnimationFrame(() => this.loop());
+  }
+}
+
+/**
+ * MARVEL STORE — Motion & Scroll Coordination System
+ */
 class StoreMotionSystem {
   constructor() {
     this.reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     this.lenis = null;
     this.cardObserver = null;
+    this.bgEngine = null;
 
+    // 1. Initialize Marvel Background Canvas Engine
+    this.initBackgroundEngine();
+
+    // 2. Initialize Hardware-Synced Scroll
     this.initLenis();
-    this.initShowcaseAnimation();
+
+    // 3. Initialize Card Scroll Observer
     this.initCardObserver();
     this.bindSmoothNavLinks();
+  }
+
+  initBackgroundEngine() {
+    try {
+      this.bgEngine = new MarvelBackgroundEngine("marvelBgCanvas");
+      window.marvelBg = this.bgEngine;
+    } catch (e) {
+      console.warn("Marvel background engine initialization skipped:", e);
+    }
   }
 
   initLenis() {
     if (this.reduceMotion || typeof Lenis === "undefined") return;
 
     try {
-      // Configure Lenis with smoothWheel: false to ensure 0ms input latency on mousewheel
-      // This eliminates the artificial millisecond delay/sluggishness while keeping smooth programmatic scrolling
+      // 0ms input latency on mousewheel (no artificial lag or sluggish drag)
       this.lenis = new Lenis({
         smoothWheel: false,
         syncTouch: false,
@@ -2861,26 +3586,6 @@ class StoreMotionSystem {
       }
     } catch (e) {
       console.warn("Lenis initialization skipped:", e);
-    }
-  }
-
-  initShowcaseAnimation() {
-    if (this.reduceMotion || typeof gsap === "undefined") return;
-
-    const showcase = document.querySelector(".showcase-product-section");
-    if (showcase) {
-      gsap.fromTo(
-        ".showcase-product-section .showcase-top-meta, .showcase-gallery-card, .showcase-details-card",
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.75,
-          stagger: 0.1,
-          ease: "power2.out",
-          delay: 0.05
-        }
-      );
     }
   }
 
@@ -2950,6 +3655,7 @@ class StoreMotionSystem {
   }
 }
 
+window.MarvelBackgroundEngine = MarvelBackgroundEngine;
 window.StoreMotionSystem = StoreMotionSystem;
 
 
@@ -3112,17 +3818,17 @@ class CartManager {
     if (this.subtotalEl) this.subtotalEl.textContent = window.formatPrice(subtotal);
     if (this.totalEl) this.totalEl.textContent = window.formatPrice(subtotal);
 
-    // Free shipping tracker ($150 threshold)
-    const threshold = 150;
+    // Free delivery tracker (~₹5,000 INR / $60 USD threshold)
+    const threshold = 60;
     if (this.shippingProgressEl && this.shippingRemainingEl) {
       const pct = Math.min(100, (subtotal / threshold) * 100);
       this.shippingProgressEl.style.width = `${pct}%`;
 
       if (subtotal >= threshold) {
-        this.shippingRemainingEl.innerHTML = `<span style="color: #10b981; font-weight: 600;">✓ Free Shipping Unlocked!</span>`;
+        this.shippingRemainingEl.innerHTML = `<span style="color: #10b981; font-weight: 700;">✓ Free Express Delivery Unlocked!</span>`;
       } else {
         const diff = threshold - subtotal;
-        this.shippingRemainingEl.textContent = `Add ${window.formatPrice(diff)} more for Free Standard Shipping`;
+        this.shippingRemainingEl.textContent = `Add ${window.formatPrice(diff)} more for Free Express Delivery`;
       }
     }
 
@@ -3354,19 +4060,42 @@ class MarvelStoreApp {
     this.currentCategory = "all";
     this.searchQuery = "";
     this.currentSort = "default";
-    const searchInput = document.getElementById("productSearchInput");
-    if (searchInput) searchInput.value = "";
+    const pSearch = document.getElementById("productSearchInput");
+    if (pSearch) pSearch.value = "";
+    const hSearch = document.getElementById("headerSearchInput");
+    if (hSearch) hSearch.value = "";
+    const clearBtn = document.getElementById("headerSearchClear");
+    if (clearBtn) clearBtn.style.display = "none";
     const sortSelect = document.getElementById("productSortSelect");
     if (sortSelect) sortSelect.value = "default";
     this.filterCategory("all");
   }
 
   bindSearch() {
-    const searchInput = document.getElementById("productSearchInput");
-    if (searchInput) {
-      searchInput.addEventListener("input", (e) => {
-        this.searchQuery = e.target.value.toLowerCase().trim();
-        this.renderProducts();
+    const productSearchInput = document.getElementById("productSearchInput");
+    const headerSearchInput = document.getElementById("headerSearchInput");
+    const clearBtn = document.getElementById("headerSearchClear");
+
+    const onSearch = (value, source) => {
+      this.searchQuery = value.toLowerCase().trim();
+      if (source !== "header" && headerSearchInput) headerSearchInput.value = value;
+      if (source !== "product" && productSearchInput) productSearchInput.value = value;
+      if (clearBtn) clearBtn.style.display = value ? "inline-flex" : "none";
+      this.renderProducts();
+    };
+
+    if (productSearchInput) {
+      productSearchInput.addEventListener("input", (e) => onSearch(e.target.value, "product"));
+    }
+
+    if (headerSearchInput) {
+      headerSearchInput.addEventListener("input", (e) => onSearch(e.target.value, "header"));
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        onSearch("", "clear");
+        if (headerSearchInput) headerSearchInput.focus();
       });
     }
   }
@@ -3472,7 +4201,7 @@ class MarvelStoreApp {
               <span class="product-stock-status"><span class="dot-green"></span> In Stock</span>
             </div>
 
-            <h3 class="product-title" title="${p.name}">${p.name}</h3>
+            <h3 class="product-title" title="${p.name}" onclick="window.app.openQuickView('${p.id}')" style="cursor: pointer;">${p.name}</h3>
 
             <div class="product-pricing-block">
               <div class="product-price-line">
