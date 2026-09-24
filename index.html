@@ -23,7 +23,7 @@
    ========================================================================== */
 
 :root {
-  --bg-body: #f8fafc;
+  --bg-body: transparent;
   --bg-surface: #ffffff;
   --bg-sidebar: #ffffff;
   --bg-card: #ffffff;
@@ -57,7 +57,7 @@
 }
 
 body {
-  background-color: var(--bg-body);
+  background-color: transparent;
   color: var(--text-dark);
   font-family: var(--font-sans);
   font-size: 14px;
@@ -99,7 +99,7 @@ body {
 }
 
 .marvel-video-player-wrapper.active {
-  opacity: 0.34; /* Balanced cinematic clarity while keeping products pristine */
+  opacity: 0.85; /* High opacity, immersive background video */
 }
 
 .marvel-video-player-wrapper iframe {
@@ -107,168 +107,14 @@ body {
   height: 100% !important;
   border: 0;
   pointer-events: none;
-  filter: saturate(1.2) contrast(1.15) brightness(0.85);
+  filter: saturate(1.25) contrast(1.15) brightness(0.95);
 }
 
 .marvel-video-vignette {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, rgba(9, 10, 15, 0.25) 0%, rgba(9, 10, 15, 0.7) 65%, rgba(9, 10, 15, 0.95) 100%);
-}
-
-.marvel-interactive-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.45;
-  transition: opacity 0.5s ease;
-}
-
-/* Stark Satellite Live Feed HUD Card */
-.stark-feed-hud {
-  position: fixed;
-  bottom: 22px;
-  left: 22px;
-  z-index: 95;
-  background: rgba(11, 15, 23, 0.88);
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.65), 0 0 16px rgba(56, 189, 248, 0.18);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 12px;
-  padding: 11px 15px;
-  width: 320px;
-  color: #f1f5f9;
-  font-family: var(--font-sans);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  pointer-events: auto;
-  user-select: none;
-}
-
-.stark-feed-hud:hover {
-  border-color: rgba(56, 189, 248, 0.8);
-  box-shadow: 0 12px 38px rgba(0, 0, 0, 0.75), 0 0 24px rgba(56, 189, 248, 0.3);
-}
-
-.stark-feed-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-
-.stark-pulse-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #38bdf8;
-  box-shadow: 0 0 8px #38bdf8;
-  animation: starkPulseAnim 1.4s infinite;
-}
-
-@keyframes starkPulseAnim {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.35; transform: scale(0.8); }
-}
-
-.stark-feed-title {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: #38bdf8;
-  text-transform: uppercase;
-}
-
-.stark-feed-timer {
-  margin-left: auto;
-  font-size: 10.5px;
-  font-family: var(--font-mono);
-  color: #94a3b8;
-}
-
-.stark-feed-clip-hero {
-  font-size: 9.5px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: #facc15;
-  text-transform: uppercase;
-  margin-bottom: 2px;
-}
-
-.stark-feed-clip-name {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.stark-feed-clip-desc {
-  font-size: 11px;
-  color: #94a3b8;
-  line-height: 1.35;
-  margin-top: 3px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.stark-feed-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 10px;
-  padding-top: 9px;
-  border-top: 1px solid rgba(255, 255, 255, 0.09);
-}
-
-.stark-hud-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: #f8fafc;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  padding: 5px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s ease;
-  font-family: var(--font-sans);
-}
-
-.stark-hud-btn:hover {
-  background: rgba(56, 189, 248, 0.22);
-  border-color: rgba(56, 189, 248, 0.7);
-  color: #ffffff;
-}
-
-.stark-hud-badge {
-  margin-left: auto;
-  font-size: 9.5px;
-  font-family: var(--font-mono);
-  color: #64748b;
-  font-weight: 600;
-}
-
-@media (max-width: 768px) {
-  .stark-feed-hud {
-    bottom: 12px;
-    left: 12px;
-    width: calc(100vw - 24px);
-    max-width: 310px;
-    padding: 8px 12px;
-  }
+  background: radial-gradient(circle at 50% 50%, rgba(9, 10, 15, 0.08) 0%, rgba(9, 10, 15, 0.4) 70%, rgba(9, 10, 15, 0.75) 100%);
 }
 
 /* Announcement Top Strip */
@@ -491,9 +337,14 @@ body {
   z-index: 10;
 }
 
-/* Breadcrumbs & Title Bar */
 .catalog-head-bar {
   margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
 }
 .breadcrumbs {
   font-size: 12px;
@@ -1240,33 +1091,6 @@ body {
     <div class="marvel-video-vignette"></div>
   </div>
 
-  <!-- Fullscreen Interactive Marvel Avengers Cinematic Background Canvas -->
-  <canvas id="marvelInteractiveCanvas" class="marvel-interactive-canvas"></canvas>
-
-  <!-- Futuristic Stark Comm-Link HUD Control (Non-intrusive Live Status) -->
-  <aside id="starkFeedHud" class="stark-feed-hud" aria-label="Cinematic Feed HUD">
-    <div class="stark-feed-header">
-      <span class="stark-pulse-dot"></span>
-      <span class="stark-feed-title">STARK COMM-LINK // SIGNATURE REPLAY</span>
-      <span id="starkFeedTimer" class="stark-feed-timer">00:00</span>
-    </div>
-    <div class="stark-feed-meta">
-      <div id="starkFeedClipHero" class="stark-feed-clip-hero">CAPTAIN AMERICA</div>
-      <div id="starkFeedClipName" class="stark-feed-clip-name">WIELDS MJOLNIR</div>
-      <div id="starkFeedClipDesc" class="stark-feed-clip-desc">Steve Rogers catches Mjolnir and strikes Thanos with divine thunder</div>
-    </div>
-    <div class="stark-feed-actions">
-      <button id="starkNextClipBtn" class="stark-hud-btn" type="button" title="Continue to next signature move">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4l10 8-10 8V4zm12 0h2v16h-2V4z"/></svg>
-        <span>NEXT MOVE</span>
-      </button>
-      <button id="starkMuteToggleBtn" class="stark-hud-btn" type="button" title="Toggle cinematic audio">
-        <span id="starkMuteIcon">🔇</span>
-        <span id="starkMuteText">MUTED</span>
-      </button>
-      <span id="starkFeedIndex" class="stark-hud-badge">01 / 05</span>
-    </div>
-  </aside>
 
   <!-- Top Announcement Strip -->
   <div class="top-notice-strip">
@@ -2974,12 +2798,7 @@ class MarvelSignatureSequenceEngine {
   }
 
   updateHud() {
-    const cur = MARVEL_SIGNATURE_QUEUE[this.currentIndex];
-    if (!cur) return;
-    if (this.hudHero) this.hudHero.textContent = cur.hero;
-    if (this.hudName) this.hudName.textContent = cur.title;
-    if (this.hudDesc) this.hudDesc.textContent = cur.desc;
-    if (this.hudIndex) this.hudIndex.textContent = `0${this.currentIndex + 1} / 0${MARVEL_SIGNATURE_QUEUE.length}`;
+    // HUD removed per user request
   }
 
   toggleSound() {
@@ -2989,26 +2808,17 @@ class MarvelSignatureSequenceEngine {
         this.player.unMute();
         this.player.setVolume(75);
         this.isMuted = false;
-        if (this.muteIcon) this.muteIcon.textContent = "🔊";
-        if (this.muteText) this.muteText.textContent = "ACTIVE";
         showToast("Cinematic Audio: ACTIVE");
       } else {
         this.player.mute();
         this.isMuted = true;
-        if (this.muteIcon) this.muteIcon.textContent = "🔇";
-        if (this.muteText) this.muteText.textContent = "MUTED";
         showToast("Cinematic Audio: MUTED");
       }
     } catch (err) {}
   }
 
   initControls() {
-    this.btnNext?.addEventListener("click", () => {
-      this.advanceToNextClip();
-    });
-    this.btnMute?.addEventListener("click", () => {
-      this.toggleSound();
-    });
+    // Controls handled automatically via scroll & sequence timer
   }
 
   initScrollListener() {
@@ -3048,10 +2858,7 @@ class MarvelSignatureSequenceEngine {
 
 // Boot
 document.addEventListener("DOMContentLoaded", () => {
-  // Start Advanced Background Animation Engine
-  window.marvelBgEngine = new MarvelBackgroundAnimationEngine("marvelInteractiveCanvas");
-
-  // Start Marvel Cinematic Signature Sequence Engine (Non-looping Video Queue)
+  // Start Marvel Cinematic Signature Sequence Engine (High Opacity, Non-looping Video Queue)
   window.marvelSequenceEngine = new MarvelSignatureSequenceEngine();
 
   // Search
