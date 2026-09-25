@@ -24,30 +24,39 @@
 
 :root {
   --bg-body: transparent;
-  --bg-surface: #ffffff;
-  --bg-sidebar: #ffffff;
-  --bg-card: #ffffff;
-  --bg-input: #f4f4f5;
+  --bg-surface: rgba(248, 250, 253, 0.88);
+  --bg-sidebar: rgba(248, 250, 253, 0.88);
+  --bg-card: rgba(248, 250, 253, 0.86);
+  --bg-card-hover: rgba(255, 255, 255, 0.96);
+  --bg-input: rgba(241, 245, 249, 0.85);
 
-  --tss-red: #e11b23;          /* Signature Souled Store Red */
-  --tss-red-hover: #c41219;
-  --text-dark: #18181b;        /* Main dark text */
-  --text-body: #3f3f46;
-  --text-muted: #71717a;       /* Slate muted */
-  --text-dim: #a1a1aa;
-  --border-light: #e4e4e7;     /* Clean border */
-  --border-subtle: #f4f4f5;
+  /* Authentic Pastel Marvel Cinematic Palette (No harsh neon!) */
+  --marvel-crimson: #e86169;        /* Soft Heritage Cap Shield Rose-Red */
+  --marvel-crimson-hover: #d34c54;
+  --marvel-crimson-soft: rgba(232, 97, 105, 0.12);
+  --marvel-gold: #f59e0b;           /* Warm Stark Champagne Gold */
+  --marvel-gold-soft: rgba(245, 158, 11, 0.14);
+  --marvel-blue: #60a5fa;           /* Pastel Asgardian Sky Blue */
+  --marvel-blue-soft: rgba(96, 165, 250, 0.14);
+  
+  --text-dark: #0f172a;             /* Titanium Slate (ultra-crisp contrast) */
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  --border-light: rgba(255, 255, 255, 0.65);
+  --border-card: rgba(226, 232, 240, 0.8);
+  
+  --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.14), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 16px 36px -4px rgba(0, 0, 0, 0.22), 0 8px 16px -6px rgba(0, 0, 0, 0.12);
 
-  --shadow-card: 0 2px 6px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
-  --shadow-hover: 0 12px 28px -4px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.05);
-
+  --glass-blur: blur(16px);
+  --radius-card: 10px;
+  --radius-pill: 9999px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-pill: 9999px;
-  --transition: all 0.22s ease-in-out;
 }
 
 *, *::before, *::after {
@@ -69,8 +78,7 @@ body {
 }
 
 /* ==========================================================================
-   MARVEL CINEMATIC SIGNATURE SEQUENCE VIDEO LAYER + CANVAS ENGINE
-   Runs strictly in the background without affecting store usability
+   MARVEL CINEMATIC SIGNATURE SEQUENCE VIDEO LAYER (High Opacity + Mobile Calibrated)
    ========================================================================== */
 .marvel-video-bg-container {
   position: fixed;
@@ -92,14 +100,14 @@ body {
   height: 56.25vw; /* 16:9 aspect ratio */
   min-height: 100vh;
   min-width: 177.78vh;
-  transform: translate(-50%, -50%) scale(1.18); /* Crops YouTube UI & watermarks */
+  transform: translate(-50%, -50%) scale(1.18);
   pointer-events: none;
   opacity: 0;
   transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .marvel-video-player-wrapper.active {
-  opacity: 0.85; /* High opacity, immersive background video */
+  opacity: 0.88; /* Highly visible cinematic Marvel action */
 }
 
 .marvel-video-player-wrapper iframe {
@@ -107,20 +115,29 @@ body {
   height: 100% !important;
   border: 0;
   pointer-events: none;
-  filter: saturate(1.25) contrast(1.15) brightness(0.95);
+  filter: saturate(1.22) contrast(1.14) brightness(0.96);
 }
 
 .marvel-video-vignette {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, rgba(9, 10, 15, 0.08) 0%, rgba(9, 10, 15, 0.4) 70%, rgba(9, 10, 15, 0.75) 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(9, 10, 15, 0.05) 0%, rgba(9, 10, 15, 0.32) 70%, rgba(9, 10, 15, 0.72) 100%);
+}
+
+/* Mobile specific video framing (Hero centered on smartphone portrait screens) */
+@media (max-width: 768px) {
+  .marvel-video-player-wrapper {
+    transform: translate(-50%, -46%) scale(1.42); /* Centers Cap & Mjolnir in portrait view */
+  }
 }
 
 /* Announcement Top Strip */
 .top-notice-strip {
-  background: #18181b;
-  color: #f4f4f5;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #f1f5f9;
   font-size: 11.5px;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -132,17 +149,19 @@ body {
   gap: 12px;
   position: relative;
   z-index: 20;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .top-notice-strip span.highlight {
-  color: #facc15;
+  color: var(--marvel-gold);
 }
 .live-badge {
-  background: #10b981;
+  background: var(--marvel-crimson);
   color: #fff;
-  padding: 1px 6px;
+  padding: 2px 7px;
   border-radius: 4px;
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 800;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -151,10 +170,10 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-light);
+  background: rgba(248, 250, 253, 0.9);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--border-card);
 }
 
 .header-container {
@@ -180,6 +199,7 @@ body {
   border: none;
   cursor: pointer;
   padding: 4px;
+  color: var(--text-dark);
 }
 .nav-category-tabs {
   display: flex;
@@ -190,7 +210,7 @@ body {
   display: inline-flex;
   align-items: center;
   font-weight: 700;
-  font-size: 13.5px;
+  font-size: 13px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--text-dark);
@@ -201,11 +221,11 @@ body {
   transition: var(--transition);
 }
 .nav-tab:hover {
-  color: var(--tss-red);
+  color: var(--marvel-crimson);
 }
 .nav-tab.active {
-  color: var(--tss-red);
-  border-bottom-color: var(--tss-red);
+  color: var(--marvel-crimson);
+  border-bottom-color: var(--marvel-crimson);
 }
 
 /* Center Logo */
@@ -227,27 +247,30 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--tss-red);
+  background: var(--marvel-crimson);
   color: #fff;
   font-weight: 900;
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
   font-size: 14px;
-  box-shadow: 0 2px 6px rgba(225, 27, 35, 0.35);
+  box-shadow: 0 2px 8px rgba(232, 97, 105, 0.4);
 }
 .logo-title {
-  color: var(--tss-red);
+  color: #0f172a;
   font-weight: 900;
-  font-size: 20px;
+  font-size: 19px;
   letter-spacing: -0.02em;
   line-height: 1;
 }
+.logo-title span {
+  color: var(--marvel-crimson);
+}
 .logo-tagline {
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #52525b;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
   text-transform: uppercase;
   margin-top: 1px;
 }
@@ -260,12 +283,12 @@ body {
 }
 .search-pill-box {
   position: relative;
-  width: 280px;
+  width: 270px;
 }
 .search-pill-input {
   width: 100%;
-  background: #f4f4f5;
-  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(203, 213, 225, 0.7);
   padding: 8px 36px 8px 16px;
   border-radius: var(--radius-pill);
   font-size: 13px;
@@ -276,11 +299,11 @@ body {
 }
 .search-pill-input:focus {
   background: #ffffff;
-  border-color: #d4d4d8;
-  box-shadow: 0 0 0 3px rgba(0,0,0,0.04);
+  border-color: var(--marvel-crimson);
+  box-shadow: 0 0 0 3px var(--marvel-crimson-soft);
 }
 .search-pill-input::placeholder {
-  color: #a1a1aa;
+  color: #94a3b8;
 }
 .search-icon-btn {
   position: absolute;
@@ -289,9 +312,10 @@ body {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #71717a;
+  color: #64748b;
   cursor: pointer;
   display: flex;
+  align-items: center;
 }
 
 /* Action Icons */
@@ -304,19 +328,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  padding: 7px;
   border-radius: 50%;
   transition: var(--transition);
 }
 .header-icon-btn:hover {
-  color: var(--tss-red);
-  background: #f4f4f5;
+  color: var(--marvel-crimson);
+  background: var(--marvel-crimson-soft);
 }
 .cart-badge-count {
   position: absolute;
-  top: 0;
+  top: -2px;
   right: -2px;
-  background: var(--tss-red);
+  background: var(--marvel-crimson);
   color: #fff;
   font-size: 10px;
   font-weight: 800;
@@ -326,23 +350,66 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 6px rgba(232, 97, 105, 0.4);
 }
 
-/* Main Layout: Breadcrumb + Sidebar Filter + 4-Column Grid */
+/* Mobile Horizontal Category Swipe Slider */
+.mobile-category-slider {
+  display: none;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px 14px;
+  gap: 8px;
+  background: rgba(248, 250, 253, 0.92);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--border-card);
+  position: sticky;
+  top: 68px;
+  z-index: 85;
+  scrollbar-width: none;
+}
+.mobile-category-slider::-webkit-scrollbar {
+  display: none;
+}
+.mobile-cat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.mobile-cat-chip.active {
+  background: var(--marvel-crimson);
+  color: #ffffff;
+  border-color: var(--marvel-crimson);
+  box-shadow: 0 2px 10px rgba(232, 97, 105, 0.4);
+}
+
+/* Main Layout: Breadcrumb + Sidebar Filter + Grid */
 .main-wrapper {
-  max-width: 1440px;
+  max-width: 1380px;
   margin: 0 auto;
-  padding: 1.25rem 1.5rem 4rem 1.5rem;
+  padding: 1.5rem 2rem 4rem 2rem;
   position: relative;
   z-index: 10;
 }
 
 .catalog-head-bar {
   margin-bottom: 1.5rem;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(8px);
-  padding: 12px 16px;
-  border-radius: var(--radius-sm);
+  background: rgba(248, 250, 253, 0.88);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-card);
 }
@@ -356,7 +423,7 @@ body {
   text-decoration: none;
 }
 .breadcrumbs a:hover {
-  color: var(--tss-red);
+  color: var(--marvel-crimson);
 }
 .catalog-title-row {
   display: flex;
@@ -367,7 +434,7 @@ body {
 }
 .catalog-heading {
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-dark);
   display: flex;
   align-items: baseline;
@@ -386,8 +453,8 @@ body {
   gap: 8px;
 }
 .sort-dropdown {
-  background: #fff;
-  border: 1px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-sm);
   padding: 6px 12px;
   font-size: 13px;
@@ -398,21 +465,22 @@ body {
   outline: none;
 }
 .sort-dropdown:focus {
-  border-color: var(--tss-red);
+  border-color: var(--marvel-crimson);
 }
 
 /* Content Layout (Sidebar + Grid) */
 .catalog-layout {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 230px 1fr;
   gap: 2rem;
   align-items: start;
 }
 
 /* Sidebar Filters */
 .filter-sidebar {
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(8px);
+  background: var(--bg-sidebar);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: 1.25rem;
@@ -505,13 +573,13 @@ body {
   gap: 4px;
 }
 .size-chip-btn:hover {
-  border-color: var(--tss-red);
-  color: var(--tss-red);
+  border-color: var(--marvel-crimson);
+  color: var(--marvel-crimson);
 }
 .size-chip-btn.active {
-  border-color: var(--tss-red);
-  background: rgba(225, 27, 35, 0.04);
-  color: var(--tss-red);
+  border-color: var(--marvel-crimson);
+  background: var(--marvel-crimson-soft);
+  color: var(--marvel-crimson);
   font-weight: 700;
 }
 .size-chip-btn .chip-count {
@@ -532,14 +600,16 @@ body {
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
-/* Product Card */
+/* Product Card (Vibranium Pearl Glass) */
 .product-card {
-  background: #fff;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-light);
-  border-radius: 6px;
+  border-radius: var(--radius-card);
   overflow: hidden;
   position: relative;
   display: flex;
@@ -549,8 +619,10 @@ body {
   box-shadow: var(--shadow-card);
 }
 .product-card:hover {
+  background: var(--bg-card-hover);
   box-shadow: var(--shadow-hover);
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.95);
 }
 
 /* The Souled Store Hover Animation Image Container */
@@ -558,7 +630,7 @@ body {
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 4;
-  background: #f4f4f5;
+  background: rgba(241, 245, 249, 0.7);
   overflow: hidden;
 }
 .media-img-primary,
@@ -590,15 +662,15 @@ body {
   transform: scale(1.04);
 }
 
-/* Floating Wishlist Heart Icon */
+/* Floating Wishlist Icon (Cap Star) */
 .btn-wishlist {
   position: absolute;
   top: 10px;
   right: 10px;
   z-index: 5;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(4px);
-  border: none;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -606,23 +678,26 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #71717a;
+  color: #64748b;
   transition: var(--transition);
 }
 .btn-wishlist:hover, .btn-wishlist.active {
-  color: var(--tss-red);
+  color: var(--marvel-crimson);
+  border-color: var(--marvel-crimson);
   background: #ffffff;
+  transform: scale(1.08);
 }
 
-/* Bottom Black Strip */
+/* Bottom Marvel Strip */
 .media-bottom-strip {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(24, 24, 27, 0.94);
-  color: #ffffff;
-  font-size: 10px;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(4px);
+  color: #f8fafc;
+  font-size: 9.5px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -634,14 +709,14 @@ body {
 /* Circular Badge overlay */
 .circle-tech-badge {
   position: absolute;
-  bottom: 34px;
+  bottom: 32px;
   right: 10px;
   z-index: 4;
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.95);
-  border: 1.5px solid #18181b;
+  border: 1.5px solid var(--text-dark);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -649,22 +724,22 @@ body {
   text-align: center;
   font-size: 7.5px;
   font-weight: 900;
-  color: #18181b;
+  color: var(--text-dark);
   line-height: 1;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 /* Product Info */
 .product-details {
-  padding: 12px 10px 10px 10px;
+  padding: 12px 12px 12px 12px;
   display: flex;
   flex-direction: column;
   flex: 1;
-  background: #fff;
+  background: transparent;
 }
 .product-title {
   font-size: 13.5px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-dark);
   line-height: 1.35;
   margin-bottom: 2px;
@@ -673,7 +748,7 @@ body {
   text-overflow: ellipsis;
 }
 .product-subtitle {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-muted);
   margin-bottom: 8px;
   white-space: nowrap;
@@ -687,7 +762,7 @@ body {
   margin-top: auto;
 }
 .product-price {
-  font-size: 15px;
+  font-size: 15.5px;
   font-weight: 800;
   color: var(--text-dark);
 }
@@ -699,16 +774,16 @@ body {
 
 /* Quick Add Button */
 .card-quick-add-btn {
-  background: var(--tss-red);
+  background: var(--marvel-crimson);
   color: #fff;
   border: none;
   font-family: inherit;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   margin-top: 10px;
   cursor: pointer;
   transition: var(--transition);
@@ -718,7 +793,8 @@ body {
   gap: 6px;
 }
 .card-quick-add-btn:hover {
-  background: var(--tss-red-hover);
+  background: var(--marvel-crimson-hover);
+  box-shadow: 0 4px 14px rgba(232, 97, 105, 0.45);
 }
 
 /* Quick View Modal */
@@ -1125,37 +1201,42 @@ body {
       <a href="#" class="brand-center-logo" aria-label="The Marvel Store Home">
         <div class="logo-box">
           <div class="logo-ghost">M</div>
-          <div class="logo-title">MARVEL STORE</div>
+          <div class="logo-title">MARVEL <span>STUDIOS</span></div>
         </div>
-        <span class="logo-tagline">Official Collectibles</span>
+        <span class="logo-tagline">Avengers Official Props & Gear</span>
       </a>
 
-      <!-- Right Search & Icons -->
+      <!-- Right Search & Marvel Action Icons -->
       <div class="header-right">
-        <!-- Rounded Search Bar -->
+        <!-- Rounded Search Bar with Jarvis HUD Reticle -->
         <div class="search-pill-box">
-          <input type="text" id="globalSearch" class="search-pill-input" placeholder="What are you looking for?" autocomplete="off" />
-          <button class="search-icon-btn" aria-label="Search">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <input type="text" id="globalSearch" class="search-pill-input" placeholder="Search Marvel Props, Helmets..." autocomplete="off" />
+          <button class="search-icon-btn" aria-label="Search" title="Jarvis Tactical Scan">
+            <!-- Stark Jarvis Tactical HUD Reticle SVG -->
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <circle cx="12" cy="12" r="3"/>
+              <line x1="12" y1="1" x2="12" y2="5"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="1" y1="12" x2="5" y2="12"/>
+              <line x1="19" y1="12" x2="23" y2="12"/>
             </svg>
           </button>
         </div>
 
-        <!-- Wishlist Icon -->
-        <button class="header-icon-btn" aria-label="Wishlist" onclick="showToast('Wishlist feature active')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        <!-- Wishlist Icon (Captain America Star) -->
+        <button class="header-icon-btn" aria-label="Wishlist" title="Avengers Favorites" onclick="showToast('Cap Shield Favorites Active')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
           </svg>
         </button>
 
-        <!-- Cart Bag Icon with Counter -->
-        <button class="header-icon-btn" aria-label="Cart" onclick="openCartDrawer()">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
+        <!-- Cart Bag Icon (Stark Arc Reactor Core) -->
+        <button class="header-icon-btn" aria-label="Cart" title="Stark Armory Cart" onclick="openCartDrawer()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9.5"/>
+            <polygon points="12 5.5 17.5 15.5 6.5 15.5 12 5.5"/>
+            <circle cx="12" cy="12" r="2.2" fill="currentColor"/>
           </svg>
           <span id="cartCountBadge" class="cart-badge-count">0</span>
         </button>
@@ -1163,21 +1244,45 @@ body {
     </div>
   </header>
 
+  <!-- Mobile Horizontal Category Swipe Bar (Saves vertical space on phone screens) -->
+  <div class="mobile-category-slider">
+    <button class="mobile-cat-chip active" data-cat="all" onclick="selectTopCategory('all', this)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 22h4.5l2-4.5h7l2 4.5H22L12 2zm0 6l2.3 5.5H9.7L12 8z"/></svg>
+      <span>ALL</span>
+    </button>
+    <button class="mobile-cat-chip" data-cat="wearable-helmets" onclick="selectTopCategory('wearable-helmets', this)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a9 9 0 0 0-9 9v4a5 5 0 0 0 4 4.9V22h10v-2.1A5 5 0 0 0 21 15v-4a9 9 0 0 0-9-9z"/><line x1="7" y1="12" x2="10" y2="12"/><line x1="14" y1="12" x2="17" y2="12"/></svg>
+      <span>HELMETS</span>
+    </button>
+    <button class="mobile-cat-chip" data-cat="bluetooth-speakers" onclick="selectTopCategory('bluetooth-speakers', this)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <span>SPEAKERS</span>
+    </button>
+    <button class="mobile-cat-chip" data-cat="charging-stations" onclick="selectTopCategory('charging-stations', this)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="6 3 18 3 22 9 12 22 2 9"/></svg>
+      <span>CHARGERS</span>
+    </button>
+    <button class="mobile-cat-chip" data-cat="digital-tech" onclick="selectTopCategory('digital-tech', this)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 8v8"/><path d="M8 12h8"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+      <span>TECH GEAR</span>
+    </button>
+  </div>
+
   <!-- Main Content Layout -->
   <main class="main-wrapper">
     <!-- Breadcrumbs and Heading -->
     <div class="catalog-head-bar">
       <div class="breadcrumbs">
-        <a href="#">Home</a> / <a href="#">Marvel Official Merchandise</a> / <span id="breadcrumbCategory">All Collectibles</span>
+        <a href="#">Home</a> / <a href="#">Marvel Cinematic Merchandise</a> / <span id="breadcrumbCategory">All Collectibles</span>
       </div>
 
       <div class="catalog-title-row">
         <h1 class="catalog-heading">
-          <span id="catalogTitleText">Marvel Collectibles</span>
+          <span id="catalogTitleText">Marvel Avengers Collectibles</span>
           <span class="catalog-items-count">&mdash; <span id="catalogCount">20</span> items</span>
         </h1>
 
-        <!-- Sort by Relevance (Souled Store style) -->
+        <!-- Sort by Relevance -->
         <div class="sort-box">
           <select id="sortSelect" class="sort-dropdown" aria-label="Sort by">
             <option value="relevance">Relevance</option>
@@ -1202,35 +1307,35 @@ body {
             <label class="filter-checkbox-label">
               <span class="filter-item-name">
                 <input type="radio" name="catFilter" value="all" checked onchange="filterCategory('all')" />
-                All Collectibles
+                🅰️ All Collectibles
               </span>
               <span class="filter-item-count" id="countAll">20</span>
             </label>
             <label class="filter-checkbox-label">
               <span class="filter-item-name">
                 <input type="radio" name="catFilter" value="wearable-helmets" onchange="filterCategory('wearable-helmets')" />
-                1:1 Wearable Helmets
+                🪖 1:1 Wearable Helmets
               </span>
               <span class="filter-item-count" id="countHelmets">9</span>
             </label>
             <label class="filter-checkbox-label">
               <span class="filter-item-name">
                 <input type="radio" name="catFilter" value="bluetooth-speakers" onchange="filterCategory('bluetooth-speakers')" />
-                Bluetooth Speakers
+                ⚡ Bluetooth Speakers
               </span>
               <span class="filter-item-count" id="countSpeakers">4</span>
             </label>
             <label class="filter-checkbox-label">
               <span class="filter-item-name">
                 <input type="radio" name="catFilter" value="charging-stations" onchange="filterCategory('charging-stations')" />
-                GaN Chargers & Busts
+                💎 GaN Fast Chargers
               </span>
               <span class="filter-item-count" id="countChargers">4</span>
             </label>
             <label class="filter-checkbox-label">
               <span class="filter-item-name">
                 <input type="radio" name="catFilter" value="digital-tech" onchange="filterCategory('digital-tech')" />
-                Audio & Tech Gear
+                🔋 Audio & Tech Gear
               </span>
               <span class="filter-item-count" id="countAudio">3</span>
             </label>
@@ -2229,9 +2334,9 @@ function renderCatalog() {
       <div class="product-card" onclick="openQuickView(${p.id})">
         <!-- Media with Hover Swap Animation -->
         <div class="product-media">
-          <button class="btn-wishlist" onclick="toggleWishlist(event, this)" aria-label="Add to wishlist">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          <button class="btn-wishlist" onclick="toggleWishlist(event, this)" aria-label="Add to wishlist" title="Save to Avengers Vault">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
             </svg>
           </button>
 
@@ -2241,10 +2346,10 @@ function renderCatalog() {
           <!-- Secondary Image (Smoothly fades in when cursor hovers on the picture) -->
           <img class="media-img-secondary" src="${secImg}" alt="${p.name}" loading="lazy" onerror="this.src='assets/images/p_mk5_helmet_wear.jpg'" />
 
-          <!-- Bottom Black Banner (Matching 'SUPER BAGGY FIT' from screenshot) -->
+          <!-- Bottom Marvel Strip -->
           <div class="media-bottom-strip">${p.banner}</div>
 
-          <!-- Circular Badge (Matching '30 WASHES NO FADE') -->
+          <!-- Circular Badge -->
           <div class="circle-tech-badge">${p.techBadge}</div>
         </div>
 
@@ -2267,8 +2372,14 @@ function renderCatalog() {
 
 // 3. FILTER ACTIONS
 window.selectTopCategory = function(cat, tabEl) {
-  document.querySelectorAll(".nav-tab").forEach(t => t.classList.remove("active"));
-  if (tabEl) tabEl.classList.add("active");
+  document.querySelectorAll(".nav-tab").forEach(t => {
+    if (t.getAttribute("data-cat") === cat) t.classList.add("active");
+    else t.classList.remove("active");
+  });
+  document.querySelectorAll(".mobile-cat-chip").forEach(c => {
+    if (c.getAttribute("data-cat") === cat) c.classList.add("active");
+    else c.classList.remove("active");
+  });
   filterCategory(cat);
   const radio = document.querySelector(`input[name="catFilter"][value="${cat}"]`);
   if (radio) radio.checked = true;
