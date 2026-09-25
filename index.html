@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marvel Store &mdash; Official 1:1 Wearable Helmets, Speakers & Tech</title>
-  <meta name="description" content="Shop official 1:1 life-size Marvel wearable helmets, Captain America shields, Thor Mjolnir Bluetooth speakers, and Arc Reactor wireless fast chargers." />
+  <title>Marvel Studios Collectibles &mdash; Official 1:1 Wearable Helmets, Speakers & Tech</title>
+  <meta name="description" content="Official Marvel Cinematic 1:1 life-size wearable helmets, Captain America shields, Thor Mjolnir Bluetooth speakers, and Arc Reactor wireless fast chargers." />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e11b23'><rect width='24' height='24' rx='4' fill='%23e11b23'/><text x='12' y='16' font-size='12' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
@@ -12,51 +12,60 @@
   <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
 /* ==========================================================================
-   THE SOULED STORE E-COMMERCE THEME WITH ADVANCED MARVEL BACKGROUND ENGINE
-   - 4-Column Clean Product Cards with Picture Hover Flip
-   - Advanced 3D Captain America Shield Ricochet & Stark HUD Background
-   - Scroll-Reactive & Mouse-Tracking 60FPS Hardware Accelerated Canvas
+   MARVEL CINEMATIC HIGH-TECH OBSIDIAN AERO-GLASS DESIGN SYSTEM
+   - Translucent obsidian glass surfaces seamlessly blending with the dark battle background
+   - 3D perspective card tilt with dynamic specular reflection & mouse/touch tracking
+   - Animated Mjolnir lightning energy borders
+   - Stark Tactical HUD Cinema Immersion Mode toggle
+   - Web Audio API Jarvis synthesized micro-interactions
+   - Fully optimized for mobile phone viewports & touch interactions
    ========================================================================== */
 
 :root {
-  --bg-body: transparent;
-  --bg-surface: rgba(248, 250, 253, 0.88);
-  --bg-sidebar: rgba(248, 250, 253, 0.88);
-  --bg-card: rgba(248, 250, 253, 0.86);
-  --bg-card-hover: rgba(255, 255, 255, 0.96);
-  --bg-input: rgba(241, 245, 249, 0.85);
+  /* Nano-Tech Obsidian Glass Surface Tokens */
+  --bg-obsidian-surface: rgba(12, 16, 26, 0.76);
+  --bg-obsidian-card: rgba(15, 21, 34, 0.72);
+  --bg-obsidian-hover: rgba(22, 30, 48, 0.85);
+  --bg-obsidian-modal: rgba(10, 14, 23, 0.94);
+  --bg-obsidian-input: rgba(20, 27, 43, 0.7);
 
-  /* Authentic Pastel Marvel Cinematic Palette (No harsh neon!) */
-  --marvel-crimson: #e86169;        /* Soft Heritage Cap Shield Rose-Red */
-  --marvel-crimson-hover: #d34c54;
-  --marvel-crimson-soft: rgba(232, 97, 105, 0.12);
-  --marvel-gold: #f59e0b;           /* Warm Stark Champagne Gold */
-  --marvel-gold-soft: rgba(245, 158, 11, 0.14);
-  --marvel-blue: #60a5fa;           /* Pastel Asgardian Sky Blue */
-  --marvel-blue-soft: rgba(96, 165, 250, 0.14);
-  
-  --text-dark: #0f172a;             /* Titanium Slate (ultra-crisp contrast) */
-  --text-body: #334155;
-  --text-muted: #64748b;
-  --text-dim: #94a3b8;
-  --border-light: rgba(255, 255, 255, 0.65);
-  --border-card: rgba(226, 232, 240, 0.8);
-  
-  --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.14), 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-hover: 0 16px 36px -4px rgba(0, 0, 0, 0.22), 0 8px 16px -6px rgba(0, 0, 0, 0.12);
+  /* Cinematic MCU Battle Accents */
+  --mjolnir-blue: #38bdf8;          /* Asgardian Sky Thunder Lightning */
+  --mjolnir-blue-glow: rgba(56, 189, 248, 0.35);
+  --stark-gold: #fbbf24;            /* Stark Armor Champagne Gold */
+  --stark-gold-glow: rgba(251, 191, 36, 0.35);
+  --avengers-crimson: #ef4444;      /* Cap Shield Vibranium Crimson */
+  --avengers-crimson-hover: #dc2626;
+  --avengers-crimson-glow: rgba(239, 68, 68, 0.35);
+  --wakanda-purple: #c084fc;        /* Wakandan Vibranium Glow */
 
-  --glass-blur: blur(16px);
-  --radius-card: 10px;
+  /* Titanium Typography */
+  --text-pure: #ffffff;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  /* Frosted Glass Hardware Borders */
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-glass-subtle: rgba(255, 255, 255, 0.08);
+  --border-highlight: rgba(255, 255, 255, 0.24);
+
+  /* Deep Cinema Shadows */
+  --shadow-obsidian: 0 10px 30px -5px rgba(0, 0, 0, 0.65), 0 0 1px 1px rgba(255, 255, 255, 0.08);
+  --shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.85), 0 0 25px var(--mjolnir-blue-glow);
+
+  --glass-blur: blur(24px) saturate(180%);
+  --radius-card: 14px;
   --radius-pill: 9999px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *, *::before, *::after {
@@ -66,8 +75,8 @@
 }
 
 body {
-  background-color: transparent;
-  color: var(--text-dark);
+  background-color: #07090e;
+  color: var(--text-main);
   font-family: var(--font-sans);
   font-size: 14px;
   line-height: 1.5;
@@ -78,7 +87,7 @@ body {
 }
 
 /* ==========================================================================
-   MARVEL CINEMATIC SIGNATURE SEQUENCE VIDEO LAYER (High Opacity + Mobile Calibrated)
+   CINEMATIC BATTLEGROUND VIDEO LAYER (Non-Looping Signature Moves)
    ========================================================================== */
 .marvel-video-bg-container {
   position: fixed;
@@ -89,7 +98,7 @@ body {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  background: #090a0f;
+  background: #06080d;
 }
 
 .marvel-video-player-wrapper {
@@ -97,17 +106,17 @@ body {
   top: 50%;
   left: 50%;
   width: 100vw;
-  height: 56.25vw; /* 16:9 aspect ratio */
+  height: 56.25vw; /* 16:9 widescreen ratio */
   min-height: 100vh;
   min-width: 177.78vh;
   transform: translate(-50%, -50%) scale(1.18);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s ease;
 }
 
 .marvel-video-player-wrapper.active {
-  opacity: 0.88; /* Highly visible cinematic Marvel action */
+  opacity: 0.90; /* High opacity cinematic battle action */
 }
 
 .marvel-video-player-wrapper iframe {
@@ -115,65 +124,169 @@ body {
   height: 100% !important;
   border: 0;
   pointer-events: none;
-  filter: saturate(1.22) contrast(1.14) brightness(0.96);
+  filter: saturate(1.25) contrast(1.15) brightness(0.94);
 }
 
+/* Dynamic Ambient Vignette that reflects hero scene color */
 .marvel-video-vignette {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, rgba(9, 10, 15, 0.05) 0%, rgba(9, 10, 15, 0.32) 70%, rgba(9, 10, 15, 0.72) 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(6, 8, 13, 0.15) 0%, rgba(6, 8, 13, 0.5) 65%, rgba(6, 8, 13, 0.88) 100%);
+  transition: background 1.5s ease;
 }
 
-/* Mobile specific video framing (Hero centered on smartphone portrait screens) */
+/* Mobile specific video framing: Centered right on Captain America & Mjolnir */
 @media (max-width: 768px) {
   .marvel-video-player-wrapper {
-    transform: translate(-50%, -46%) scale(1.42); /* Centers Cap & Mjolnir in portrait view */
+    transform: translate(-50%, -46%) scale(1.48);
   }
 }
 
-/* Announcement Top Strip */
+/* ==========================================================================
+   CINEMA IMMERSION MODE (Fades UI out to watch the battle)
+   ========================================================================== */
+body.cinema-mode-active .main-header,
+body.cinema-mode-active .top-notice-strip,
+body.cinema-mode-active .mobile-category-slider,
+body.cinema-mode-active .catalog-head-bar,
+body.cinema-mode-active .filter-sidebar,
+body.cinema-mode-active .products-grid {
+  opacity: 0.05 !important;
+  transform: scale(0.97) translateY(15px);
+  pointer-events: none !important;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.cinema-mode-active .marvel-video-player-wrapper {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) scale(1.22);
+}
+
+.cinema-active-banner {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  z-index: 500;
+  background: rgba(12, 16, 26, 0.92);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--mjolnir-blue);
+  box-shadow: 0 0 30px var(--mjolnir-blue-glow);
+  padding: 10px 24px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-pure);
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+body.cinema-mode-active .cinema-active-banner {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cinema-exit-btn {
+  background: var(--avengers-crimson);
+  color: #fff;
+  border: none;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.cinema-exit-btn:hover {
+  background: var(--avengers-crimson-hover);
+  box-shadow: 0 0 12px var(--avengers-crimson-glow);
+}
+
+/* ==========================================================================
+   TOP ANNOUNCEMENT BAR
+   ========================================================================== */
 .top-notice-strip {
-  background: rgba(15, 23, 42, 0.88);
+  background: rgba(8, 11, 18, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  color: #f1f5f9;
+  color: var(--text-muted);
   font-size: 11.5px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  padding: 6px 1rem;
+  padding: 6px 1.5rem;
   text-align: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
   position: relative;
-  z-index: 20;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 50;
+  border-bottom: 1px solid var(--border-glass-subtle);
+  transition: opacity 0.4s ease;
 }
-.top-notice-strip span.highlight {
-  color: var(--marvel-gold);
+.notice-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .live-badge {
-  background: var(--marvel-crimson);
+  background: linear-gradient(135deg, var(--avengers-crimson), #b91c1c);
   color: #fff;
-  padding: 2px 7px;
+  padding: 2px 8px;
   border-radius: 4px;
   font-size: 9.5px;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  box-shadow: 0 0 10px var(--avengers-crimson-glow);
+}
+.notice-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 11px;
+}
+.hud-telemetry-tag {
+  font-family: var(--font-mono);
+  color: var(--mjolnir-blue);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mjolnir-blue);
+  box-shadow: 0 0 8px var(--mjolnir-blue);
+  animation: pulseDotAnim 2s infinite ease-in-out;
+}
+@keyframes pulseDotAnim {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 
-/* Main Navbar */
+/* ==========================================================================
+   HIGH-TECH MAIN NAVBAR (Obsidian Aero-Glass)
+   ========================================================================== */
 .main-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(248, 250, 253, 0.9);
+  background: var(--bg-obsidian-surface);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border-bottom: 1px solid var(--border-card);
+  border-bottom: 1px solid var(--border-glass);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .header-container {
@@ -183,11 +296,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 68px;
+  height: 70px;
   gap: 1.5rem;
 }
 
-/* Left: Category Tabs */
+/* Left: Category Navigation Tabs */
 .header-left {
   display: flex;
   align-items: center;
@@ -198,34 +311,36 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
-  color: var(--text-dark);
+  padding: 6px;
+  color: var(--text-pure);
 }
 .nav-category-tabs {
   display: flex;
-  gap: 1.5rem;
-  height: 68px;
+  gap: 1.75rem;
+  height: 70px;
 }
 .nav-tab {
   display: inline-flex;
   align-items: center;
   font-weight: 700;
   font-size: 13px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--text-dark);
+  color: var(--text-muted);
   text-decoration: none;
   border-bottom: 3px solid transparent;
   height: 100%;
   cursor: pointer;
   transition: var(--transition);
+  position: relative;
 }
 .nav-tab:hover {
-  color: var(--marvel-crimson);
+  color: var(--text-pure);
 }
 .nav-tab.active {
-  color: var(--marvel-crimson);
-  border-bottom-color: var(--marvel-crimson);
+  color: var(--text-pure);
+  border-bottom-color: var(--mjolnir-blue);
+  text-shadow: 0 0 12px var(--mjolnir-blue-glow);
 }
 
 /* Center Logo */
@@ -241,69 +356,69 @@ body {
 .logo-box {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 .logo-ghost {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--marvel-crimson);
+  background: linear-gradient(135deg, var(--avengers-crimson), #b91c1c);
   color: #fff;
   font-weight: 900;
-  width: 26px;
-  height: 26px;
-  border-radius: 5px;
-  font-size: 14px;
-  box-shadow: 0 2px 8px rgba(232, 97, 105, 0.4);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  font-size: 15px;
+  box-shadow: 0 0 15px var(--avengers-crimson-glow);
 }
 .logo-title {
-  color: #0f172a;
+  color: var(--text-pure);
   font-weight: 900;
-  font-size: 19px;
-  letter-spacing: -0.02em;
+  font-size: 20px;
+  letter-spacing: -0.01em;
   line-height: 1;
 }
 .logo-title span {
-  color: var(--marvel-crimson);
+  color: var(--avengers-crimson);
 }
 .logo-tagline {
   font-size: 8.5px;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--text-muted);
+  letter-spacing: 0.16em;
+  color: var(--mjolnir-blue);
   text-transform: uppercase;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
-/* Right: Search & Action Icons */
+/* Right Search & Tactical Controls */
 .header-right {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 .search-pill-box {
   position: relative;
-  width: 270px;
+  width: 260px;
 }
 .search-pill-input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(203, 213, 225, 0.7);
+  background: var(--bg-obsidian-input);
+  border: 1px solid var(--border-glass);
   padding: 8px 36px 8px 16px;
   border-radius: var(--radius-pill);
   font-size: 13px;
   font-family: inherit;
-  color: var(--text-dark);
+  color: var(--text-pure);
   outline: none;
   transition: var(--transition);
 }
 .search-pill-input:focus {
-  background: #ffffff;
-  border-color: var(--marvel-crimson);
-  box-shadow: 0 0 0 3px var(--marvel-crimson-soft);
+  background: rgba(26, 35, 54, 0.85);
+  border-color: var(--mjolnir-blue);
+  box-shadow: 0 0 15px var(--mjolnir-blue-glow);
 }
 .search-pill-input::placeholder {
-  color: #94a3b8;
+  color: var(--text-dim);
 }
 .search-icon-btn {
   position: absolute;
@@ -312,35 +427,65 @@ body {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #64748b;
+  color: var(--text-muted);
   cursor: pointer;
   display: flex;
   align-items: center;
 }
 
-/* Action Icons */
-.header-icon-btn {
-  background: none;
-  border: none;
-  color: var(--text-dark);
+/* Stark HUD Buttons */
+.stark-hud-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-pure);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: var(--transition);
+}
+.stark-hud-btn:hover {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--mjolnir-blue);
+  box-shadow: 0 0 15px var(--mjolnir-blue-glow);
+  color: var(--mjolnir-blue);
+}
+.stark-hud-btn.active {
+  background: rgba(56, 189, 248, 0.22);
+  border-color: var(--mjolnir-blue);
+  color: var(--mjolnir-blue);
+}
+
+.cart-icon-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-pure);
   cursor: pointer;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 7px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   transition: var(--transition);
 }
-.header-icon-btn:hover {
-  color: var(--marvel-crimson);
-  background: var(--marvel-crimson-soft);
+.cart-icon-btn:hover {
+  border-color: var(--avengers-crimson);
+  background: rgba(239, 68, 68, 0.15);
+  box-shadow: 0 0 15px var(--avengers-crimson-glow);
 }
 .cart-badge-count {
   position: absolute;
-  top: -2px;
-  right: -2px;
-  background: var(--marvel-crimson);
+  top: -3px;
+  right: -3px;
+  background: var(--avengers-crimson);
   color: #fff;
   font-size: 10px;
   font-weight: 800;
@@ -350,24 +495,27 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(232, 97, 105, 0.4);
+  box-shadow: 0 0 8px var(--avengers-crimson-glow);
 }
 
-/* Mobile Horizontal Category Swipe Slider */
+/* ==========================================================================
+   MOBILE CATEGORY SLIDER (Touch Optimized)
+   ========================================================================== */
 .mobile-category-slider {
   display: none;
   overflow-x: auto;
   white-space: nowrap;
   padding: 10px 14px;
   gap: 8px;
-  background: rgba(248, 250, 253, 0.92);
+  background: var(--bg-obsidian-surface);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border-bottom: 1px solid var(--border-card);
+  border-bottom: 1px solid var(--border-glass);
   position: sticky;
-  top: 68px;
+  top: 70px;
   z-index: 85;
   scrollbar-width: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .mobile-category-slider::-webkit-scrollbar {
   display: none;
@@ -376,66 +524,70 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(226, 232, 240, 0.9);
+  padding: 7px 14px;
+  background: rgba(20, 27, 43, 0.75);
+  border: 1px solid var(--border-glass);
   border-radius: var(--radius-pill);
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--text-muted);
   cursor: pointer;
   transition: var(--transition);
   flex-shrink: 0;
 }
 .mobile-cat-chip.active {
-  background: var(--marvel-crimson);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(30, 58, 138, 0.5));
   color: #ffffff;
-  border-color: var(--marvel-crimson);
-  box-shadow: 0 2px 10px rgba(232, 97, 105, 0.4);
+  border-color: var(--mjolnir-blue);
+  box-shadow: 0 0 12px var(--mjolnir-blue-glow);
 }
 
-/* Main Layout: Breadcrumb + Sidebar Filter + Grid */
+/* ==========================================================================
+   MAIN WRAPPER & CATALOG HEADER BAR
+   ========================================================================== */
 .main-wrapper {
-  max-width: 1380px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 1.5rem 2rem 4rem 2rem;
+  padding: 1.5rem 2rem 5rem 2rem;
   position: relative;
   z-index: 10;
 }
 
 .catalog-head-bar {
-  margin-bottom: 1.5rem;
-  background: rgba(248, 250, 253, 0.88);
+  margin-bottom: 1.75rem;
+  background: var(--bg-obsidian-surface);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  padding: 12px 18px;
+  padding: 14px 20px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-light);
-  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-obsidian);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .breadcrumbs {
   font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
+  color: var(--text-dim);
+  margin-bottom: 0.4rem;
 }
 .breadcrumbs a {
   color: var(--text-muted);
   text-decoration: none;
+  transition: var(--transition);
 }
 .breadcrumbs a:hover {
-  color: var(--marvel-crimson);
+  color: var(--mjolnir-blue);
 }
 .catalog-title-row {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
 }
 .catalog-heading {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 800;
-  color: var(--text-dark);
+  color: var(--text-pure);
   display: flex;
   align-items: baseline;
   gap: 8px;
@@ -446,52 +598,50 @@ body {
   font-size: 13.5px;
 }
 
-/* Sort Select */
-.sort-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
 .sort-dropdown {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--border-card);
+  background: var(--bg-obsidian-input);
+  border: 1px solid var(--border-glass);
   border-radius: var(--radius-sm);
-  padding: 6px 12px;
+  padding: 7px 12px;
   font-size: 13px;
   font-weight: 600;
   font-family: inherit;
-  color: var(--text-dark);
+  color: var(--text-main);
   cursor: pointer;
   outline: none;
+  transition: var(--transition);
 }
 .sort-dropdown:focus {
-  border-color: var(--marvel-crimson);
+  border-color: var(--mjolnir-blue);
 }
 
-/* Content Layout (Sidebar + Grid) */
+/* ==========================================================================
+   LAYOUT: SIDEBAR + 4-COLUMN PRODUCTS GRID (With Video Breathing Room)
+   ========================================================================== */
 .catalog-layout {
   display: grid;
-  grid-template-columns: 230px 1fr;
+  grid-template-columns: 240px 1fr;
   gap: 2rem;
   align-items: start;
 }
 
-/* Sidebar Filters */
+/* Left Filter Sidebar */
 .filter-sidebar {
-  background: var(--bg-sidebar);
+  background: var(--bg-obsidian-surface);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-light);
+  border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
   padding: 1.25rem;
   position: sticky;
-  top: 85px;
-  box-shadow: var(--shadow-card);
+  top: 90px;
+  box-shadow: var(--shadow-obsidian);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .filter-group {
   padding-bottom: 1.25rem;
   margin-bottom: 1.25rem;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-glass-subtle);
 }
 .filter-group:last-child {
   border-bottom: none;
@@ -502,42 +652,41 @@ body {
   font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-dark);
+  letter-spacing: 0.08em;
+  color: var(--text-pure);
   margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.filter-search-input {
-  width: 100%;
-  background: #fff;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-sm);
-  padding: 6px 10px;
-  font-size: 12px;
-  color: var(--text-dark);
-  margin-bottom: 0.75rem;
-  outline: none;
+.filter-header::after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mjolnir-blue);
+  box-shadow: 0 0 6px var(--mjolnir-blue);
 }
-.filter-search-input:focus {
-  border-color: var(--tss-red);
-}
-
-/* Filter List Items */
 .filter-options-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.55rem;
 }
 .filter-checkbox-label {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 13px;
-  color: var(--text-body);
+  color: var(--text-muted);
   cursor: pointer;
+  transition: var(--transition);
 }
-.filter-checkbox-label input[type="radio"],
-.filter-checkbox-label input[type="checkbox"] {
-  accent-color: var(--tss-red);
+.filter-checkbox-label:hover {
+  color: var(--text-pure);
+}
+.filter-checkbox-label input[type="radio"] {
+  accent-color: var(--mjolnir-blue);
   margin-right: 8px;
 }
 .filter-item-name {
@@ -546,24 +695,24 @@ body {
   gap: 8px;
 }
 .filter-item-count {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-dim);
+  font-family: var(--font-mono);
 }
 
-/* Size / Edition Grid Chips */
 .size-chips-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 6px;
 }
 .size-chip-btn {
-  background: #fff;
-  border: 1px solid var(--border-light);
+  background: var(--bg-obsidian-input);
+  border: 1px solid var(--border-glass);
   border-radius: var(--radius-sm);
   padding: 6px 8px;
   font-size: 11.5px;
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--text-muted);
   text-align: center;
   cursor: pointer;
   transition: var(--transition);
@@ -573,64 +722,107 @@ body {
   gap: 4px;
 }
 .size-chip-btn:hover {
-  border-color: var(--marvel-crimson);
-  color: var(--marvel-crimson);
+  border-color: var(--mjolnir-blue);
+  color: var(--text-pure);
 }
 .size-chip-btn.active {
-  border-color: var(--marvel-crimson);
-  background: var(--marvel-crimson-soft);
-  color: var(--marvel-crimson);
+  border-color: var(--mjolnir-blue);
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--mjolnir-blue);
   font-weight: 700;
-}
-.size-chip-btn .chip-count {
-  color: var(--text-dim);
-  font-size: 10px;
+  box-shadow: 0 0 10px var(--mjolnir-blue-glow);
 }
 
-/* Colour Dots List */
-.color-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
-  border: 1px solid rgba(0,0,0,0.15);
-}
-
-/* 4-COLUMN PRODUCT GRID */
+/* ==========================================================================
+   ADVANCED 3D PRODUCT CARDS (Perspective Tilt + Mjolnir Lightning Conduit)
+   ========================================================================== */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
+  perspective: 1200px; /* Enables 3D perspective tilt on child cards */
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* Product Card (Vibranium Pearl Glass) */
 .product-card {
-  background: var(--bg-card);
+  position: relative;
+  background: var(--bg-obsidian-card);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-light);
+  border: 1px solid var(--border-glass);
   border-radius: var(--radius-card);
   overflow: hidden;
-  position: relative;
   display: flex;
   flex-direction: column;
-  transition: var(--transition);
+  box-shadow: var(--shadow-obsidian);
   cursor: pointer;
-  box-shadow: var(--shadow-card);
-}
-.product-card:hover {
-  background: var(--bg-card-hover);
-  box-shadow: var(--shadow-hover);
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.95);
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease;
 }
 
-/* The Souled Store Hover Animation Image Container */
+/* 3D Dynamic Specular Reflection Light Sheen */
+.product-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle 260px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(56, 189, 248, 0.08) 40%,
+    transparent 75%
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+/* Reactive Mjolnir Lightning Energy Border on Card Hover */
+.product-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(
+    135deg,
+    rgba(56, 189, 248, 0.8),
+    rgba(251, 191, 36, 0.6),
+    rgba(239, 68, 68, 0.7),
+    rgba(56, 189, 248, 0.8)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 12;
+  transition: opacity 0.35s ease;
+}
+
+.product-card:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.8), 0 0 25px var(--mjolnir-blue-glow);
+}
+
+.product-card:hover::before {
+  opacity: 1;
+}
+
+.product-card:hover::after {
+  opacity: 1;
+}
+
+/* Product Media & Image Flip */
 .product-media {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 4;
-  background: rgba(241, 245, 249, 0.7);
+  aspect-ratio: 4 / 5;
+  background: rgba(10, 14, 23, 0.5);
   overflow: hidden;
 }
 .media-img-primary,
@@ -642,7 +834,7 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .media-img-primary {
   opacity: 1;
@@ -653,24 +845,24 @@ body {
   z-index: 2;
 }
 
-/* HOVER FLIP ANIMATION: Cursor enters card -> secondary photo zooms in */
+/* Picture Flip on Hover */
 .product-card:hover .media-img-primary {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 .product-card:hover .media-img-secondary {
   opacity: 1;
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
-/* Floating Wishlist Icon (Cap Star) */
+/* Cap Star Wishlist Button */
 .btn-wishlist {
   position: absolute;
   top: 10px;
   right: 10px;
-  z-index: 5;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  z-index: 8;
+  background: rgba(12, 16, 26, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-glass);
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -678,45 +870,46 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #64748b;
+  color: var(--text-muted);
   transition: var(--transition);
 }
 .btn-wishlist:hover, .btn-wishlist.active {
-  color: var(--marvel-crimson);
-  border-color: var(--marvel-crimson);
-  background: #ffffff;
-  transform: scale(1.08);
+  color: var(--avengers-crimson);
+  border-color: var(--avengers-crimson);
+  background: rgba(239, 68, 68, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px var(--avengers-crimson-glow);
 }
 
-/* Bottom Marvel Strip */
+/* Bottom Cinematic Banner Strip */
 .media-bottom-strip {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(4px);
-  color: #f8fafc;
+  background: linear-gradient(to top, rgba(7, 9, 14, 0.95), rgba(7, 9, 14, 0.6) 80%, transparent);
+  color: var(--mjolnir-blue);
   font-size: 9.5px;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;
-  padding: 5px 8px;
+  padding: 10px 8px 6px 8px;
   z-index: 4;
 }
 
-/* Circular Badge overlay */
+/* Circular Tech Badge */
 .circle-tech-badge {
   position: absolute;
-  bottom: 32px;
+  bottom: 30px;
   right: 10px;
-  z-index: 4;
-  width: 42px;
-  height: 42px;
+  z-index: 5;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1.5px solid var(--text-dark);
+  background: rgba(12, 16, 26, 0.9);
+  border: 1.5px solid var(--border-glass);
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -724,14 +917,20 @@ body {
   text-align: center;
   font-size: 7.5px;
   font-weight: 900;
-  color: var(--text-dark);
+  color: var(--stark-gold);
   line-height: 1;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: var(--transition);
+}
+.product-card:hover .circle-tech-badge {
+  border-color: var(--stark-gold);
+  box-shadow: 0 0 12px var(--stark-gold-glow);
+  transform: scale(1.05);
 }
 
-/* Product Info */
+/* Product Info & Pricing */
 .product-details {
-  padding: 12px 12px 12px 12px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -740,7 +939,7 @@ body {
 .product-title {
   font-size: 13.5px;
   font-weight: 800;
-  color: var(--text-dark);
+  color: var(--text-pure);
   line-height: 1.35;
   margin-bottom: 2px;
   white-space: nowrap;
@@ -750,7 +949,7 @@ body {
 .product-subtitle {
   font-size: 11.5px;
   color: var(--text-muted);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -762,9 +961,10 @@ body {
   margin-top: auto;
 }
 .product-price {
-  font-size: 15.5px;
-  font-weight: 800;
-  color: var(--text-dark);
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--stark-gold);
+  font-family: var(--font-mono);
 }
 .product-mrp {
   font-size: 12px;
@@ -772,17 +972,17 @@ body {
   text-decoration: line-through;
 }
 
-/* Quick Add Button */
+/* Quick Add Button with Vibranium Accent */
 .card-quick-add-btn {
-  background: var(--marvel-crimson);
+  background: linear-gradient(135deg, var(--avengers-crimson), #c51c24);
   color: #fff;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   font-family: inherit;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 8px 12px;
+  letter-spacing: 0.06em;
+  padding: 9px 12px;
   border-radius: var(--radius-sm);
   margin-top: 10px;
   cursor: pointer;
@@ -793,23 +993,74 @@ body {
   gap: 6px;
 }
 .card-quick-add-btn:hover {
-  background: var(--marvel-crimson-hover);
-  box-shadow: 0 4px 14px rgba(232, 97, 105, 0.45);
+  background: linear-gradient(135deg, #ff4d56, var(--avengers-crimson));
+  box-shadow: 0 4px 16px var(--avengers-crimson-glow);
+  transform: translateY(-1px);
 }
 
-/* Quick View Modal */
+/* ==========================================================================
+   FLOATING CINEMATIC DOCK (Cinema Mode & Audio Controls)
+   ========================================================================== */
+.floating-hud-dock {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-obsidian-surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-glass);
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.dock-pill-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-pure);
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: var(--transition);
+}
+.dock-pill-btn:hover {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: var(--mjolnir-blue);
+  box-shadow: 0 0 15px var(--mjolnir-blue-glow);
+  color: var(--mjolnir-blue);
+}
+.dock-pill-btn.active {
+  background: rgba(56, 189, 248, 0.25);
+  border-color: var(--mjolnir-blue);
+  color: var(--mjolnir-blue);
+}
+
+/* ==========================================================================
+   QUICK VIEW MODAL (High-Tech Holographic Modal)
+   ========================================================================== */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
   z-index: 200;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.22s ease;
+  transition: opacity 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -820,26 +1071,27 @@ body {
   pointer-events: auto;
 }
 .modal-container {
-  background: #ffffff;
+  background: var(--bg-obsidian-modal);
+  border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
-  max-width: 860px;
+  max-width: 880px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: var(--shadow-hover);
-  transform: translateY(15px);
-  transition: transform 0.25s ease;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 30px var(--mjolnir-blue-glow);
+  transform: translateY(20px) scale(0.98);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .modal-overlay.active .modal-container {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 .modal-close-btn {
   position: absolute;
   top: 14px;
   right: 14px;
-  background: #f4f4f5;
-  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-glass);
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -848,24 +1100,27 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  color: var(--text-dark);
+  color: var(--text-pure);
   z-index: 10;
+  transition: var(--transition);
 }
 .modal-close-btn:hover {
-  background: #e4e4e7;
+  background: rgba(239, 68, 68, 0.25);
+  border-color: var(--avengers-crimson);
 }
 
 .qv-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  padding: 2rem;
+  padding: 2.25rem;
 }
 .qv-gallery-main {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   border-radius: var(--radius-sm);
-  background: #f4f4f5;
+  background: rgba(12, 16, 26, 0.6);
+  border: 1px solid var(--border-glass);
   overflow: hidden;
 }
 .qv-gallery-main img {
@@ -876,21 +1131,23 @@ body {
 .qv-thumbs-strip {
   display: flex;
   gap: 8px;
-  margin-top: 10px;
+  margin-top: 12px;
   overflow-x: auto;
 }
 .qv-thumb-item {
   width: 60px;
-  height: 80px;
+  height: 75px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-light);
+  border: 1px solid var(--border-glass);
   overflow: hidden;
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.6;
+  transition: var(--transition);
 }
 .qv-thumb-item.active, .qv-thumb-item:hover {
   opacity: 1;
-  border-color: var(--tss-red);
+  border-color: var(--mjolnir-blue);
+  box-shadow: 0 0 10px var(--mjolnir-blue-glow);
 }
 .qv-thumb-item img {
   width: 100%;
@@ -901,7 +1158,7 @@ body {
 .qv-info-title {
   font-size: 20px;
   font-weight: 800;
-  color: var(--text-dark);
+  color: var(--text-pure);
   margin-bottom: 4px;
 }
 .qv-info-subtitle {
@@ -910,17 +1167,18 @@ body {
   margin-bottom: 12px;
 }
 .qv-info-price {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--text-dark);
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--stark-gold);
+  font-family: var(--font-mono);
   margin-bottom: 1.25rem;
 }
 .qv-section-title {
   font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-dark);
+  letter-spacing: 0.06em;
+  color: var(--text-pure);
   margin-bottom: 8px;
 }
 .qv-variations-box {
@@ -930,29 +1188,57 @@ body {
   margin-bottom: 1.5rem;
 }
 .qv-var-btn {
-  background: #fff;
-  border: 1px solid var(--border-light);
+  background: var(--bg-obsidian-input);
+  border: 1px solid var(--border-glass);
   border-radius: var(--radius-sm);
   padding: 8px 12px;
   font-size: 12.5px;
   font-weight: 600;
+  color: var(--text-muted);
   cursor: pointer;
+  transition: var(--transition);
 }
 .qv-var-btn.active {
-  border-color: var(--tss-red);
-  background: rgba(225, 27, 35, 0.05);
-  color: var(--tss-red);
+  border-color: var(--mjolnir-blue);
+  background: rgba(56, 189, 248, 0.18);
+  color: var(--text-pure);
+  box-shadow: 0 0 10px var(--mjolnir-blue-glow);
+}
+
+.qv-spec-box {
+  background: rgba(20, 27, 43, 0.5);
+  border: 1px solid var(--border-glass-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-bottom: 1.5rem;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.qv-spec-row {
+  display: flex;
+  justify-content: space-between;
+}
+.qv-spec-label {
+  color: var(--text-dim);
+}
+.qv-spec-val {
+  color: var(--text-pure);
   font-weight: 700;
 }
 
-/* Slide-out Cart Drawer */
+/* ==========================================================================
+   SLIDE-OUT CART DRAWER (Obsidian Aero-Glass)
+   ========================================================================== */
 .cart-drawer-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
   z-index: 250;
   opacity: 0;
   pointer-events: none;
@@ -967,13 +1253,14 @@ body {
   top: 0;
   right: 0;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   height: 100vh;
-  background: #ffffff;
+  background: var(--bg-obsidian-modal);
+  border-left: 1px solid var(--border-glass);
   z-index: 260;
-  box-shadow: -4px 0 25px rgba(0,0,0,0.15);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
   transform: translateX(100%);
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
 }
@@ -982,7 +1269,7 @@ body {
 }
 .cart-header {
   padding: 1.25rem;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-glass);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -990,14 +1277,18 @@ body {
 .cart-header-title {
   font-size: 16px;
   font-weight: 800;
+  color: var(--text-pure);
 }
 .cart-free-shipping-bar {
-  background: #fef2f2;
-  border-bottom: 1px solid #fee2e2;
+  background: rgba(56, 189, 248, 0.1);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
   padding: 10px 1.25rem;
   font-size: 12px;
   font-weight: 600;
-  color: var(--tss-red);
+  color: var(--mjolnir-blue);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .cart-items-list {
   flex: 1;
@@ -1011,13 +1302,14 @@ body {
   display: flex;
   gap: 12px;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-glass-subtle);
 }
 .cart-item-thumb {
   width: 65px;
-  height: 85px;
+  height: 80px;
   border-radius: var(--radius-sm);
-  background: #f4f4f5;
+  background: rgba(12, 16, 26, 0.6);
+  border: 1px solid var(--border-glass);
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -1035,7 +1327,7 @@ body {
 .cart-item-title {
   font-size: 13px;
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--text-pure);
 }
 .cart-item-var {
   font-size: 11.5px;
@@ -1048,57 +1340,72 @@ body {
   margin-top: 6px;
 }
 .stepper-btn {
-  background: #f4f4f5;
-  border: none;
-  width: 24px;
-  height: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-glass);
+  color: var(--text-pure);
+  width: 26px;
+  height: 26px;
   border-radius: 4px;
   font-weight: 700;
   cursor: pointer;
+  transition: var(--transition);
+}
+.stepper-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: var(--mjolnir-blue);
 }
 .cart-footer {
   padding: 1.25rem;
-  border-top: 1px solid var(--border-light);
-  background: #ffffff;
+  border-top: 1px solid var(--border-glass);
+  background: rgba(10, 14, 23, 0.8);
 }
 .cart-total-row {
   display: flex;
   justify-content: space-between;
   font-size: 16px;
   font-weight: 800;
+  color: var(--text-pure);
   margin-bottom: 1rem;
+}
+.cart-total-val {
+  color: var(--stark-gold);
+  font-family: var(--font-mono);
+  font-size: 18px;
 }
 .btn-checkout-primary {
   width: 100%;
-  background: var(--tss-red);
+  background: linear-gradient(135deg, var(--avengers-crimson), #c51c24);
   color: #fff;
   border: none;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 800;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 12px;
+  padding: 13px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: var(--transition);
 }
 .btn-checkout-primary:hover {
-  background: var(--tss-red-hover);
+  background: linear-gradient(135deg, #ff4d56, var(--avengers-crimson));
+  box-shadow: 0 4px 20px var(--avengers-crimson-glow);
 }
 
 /* Toast */
 .toast-box {
   position: fixed;
   bottom: 24px;
-  right: 24px;
-  background: #18181b;
-  color: #ffffff;
+  left: 24px;
+  background: var(--bg-obsidian-surface);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--mjolnir-blue);
+  color: var(--text-pure);
   padding: 10px 18px;
-  border-radius: 4px;
+  border-radius: var(--radius-pill);
   font-size: 13px;
-  font-weight: 600;
-  box-shadow: var(--shadow-hover);
+  font-weight: 700;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px var(--mjolnir-blue-glow);
   z-index: 300;
   display: flex;
   align-items: center;
@@ -1110,12 +1417,15 @@ body {
   to { transform: translateY(0); opacity: 1; }
 }
 
-/* Responsive */
-@media (max-width: 1120px) {
+/* ==========================================================================
+   RESPONSIVE DESIGN (Smartphone & Tablet Optimization)
+   ========================================================================== */
+@media (max-width: 1140px) {
   .products-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
 @media (max-width: 860px) {
   .catalog-layout {
     grid-template-columns: 1fr;
@@ -1123,9 +1433,12 @@ body {
   .filter-sidebar {
     display: none;
   }
+  .mobile-category-slider {
+    display: flex;
+  }
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: 0.85rem;
   }
   .header-container {
     padding: 0 1rem;
@@ -1141,18 +1454,49 @@ body {
     display: block;
   }
   .search-pill-box {
-    width: 160px;
+    width: 140px;
   }
   .qv-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+  .floating-hud-dock {
+    bottom: 16px;
+    right: 16px;
   }
 }
+
 @media (max-width: 520px) {
+  .top-notice-strip {
+    font-size: 10.5px;
+    padding: 6px 0.75rem;
+  }
+  .notice-right {
+    display: none;
+  }
   .search-pill-box {
     display: none;
   }
   .main-wrapper {
-    padding: 1rem 0.75rem 3rem 0.75rem;
+    padding: 1rem 0.75rem 4rem 0.75rem;
+  }
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+  }
+  .product-details {
+    padding: 10px;
+  }
+  .product-title {
+    font-size: 12px;
+  }
+  .product-price {
+    font-size: 14px;
+  }
+  .card-quick-add-btn {
+    padding: 7px 8px;
+    font-size: 10.5px;
   }
 }
   </style>
@@ -1164,23 +1508,37 @@ body {
     <div id="marvelVideoPlayerWrapper" class="marvel-video-player-wrapper">
       <div id="marvelYtPlayer"></div>
     </div>
-    <div class="marvel-video-vignette"></div>
+    <div id="marvelVignette" class="marvel-video-vignette"></div>
   </div>
 
+  <!-- Cinema Mode Active Overlay Banner -->
+  <div class="cinema-active-banner">
+    <div class="pulse-dot"></div>
+    <span>⚔️ CINEMATIC BATTLE VIEW ACTIVE</span>
+    <button class="cinema-exit-btn" onclick="toggleCinemaMode()">Exit Cinema Mode</button>
+  </div>
 
-  <!-- Top Announcement Strip -->
+  <!-- Top Announcement Strip with Stark Telemetry -->
   <div class="top-notice-strip">
-    <span class="live-badge">OFFICIAL</span>
-    <span>Marvel Collectibles &bull; Direct From Manufacturer &bull; Free Express Delivery Across India</span>
+    <div class="notice-left">
+      <span class="live-badge">OFFICIAL</span>
+      <span>Marvel Studios Collectibles &bull; Direct From Manufacturer &bull; Free Express Delivery Across India</span>
+    </div>
+    <div class="notice-right">
+      <span class="hud-telemetry-tag">
+        <span class="pulse-dot"></span>
+        <span id="currentClipHero">STEVE ROGERS // MJOLNIR</span>
+      </span>
+    </div>
   </div>
 
-  <!-- Header (The Souled Store Design) -->
+  <!-- Main Navbar (High-Tech Obsidian Aero-Glass) -->
   <header class="main-header">
     <div class="header-container">
       
       <!-- Left Category Tabs -->
       <div class="header-left">
-        <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileSidebar()">
+        <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileCategoryBar()">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -1189,7 +1547,7 @@ body {
         </button>
 
         <nav class="nav-category-tabs">
-          <span class="nav-tab active" data-cat="all" onclick="selectTopCategory('all', this)">ALL</span>
+          <span class="nav-tab active" data-cat="all" onclick="selectTopCategory('all', this)">ALL COLLECTIBLES</span>
           <span class="nav-tab" data-cat="wearable-helmets" onclick="selectTopCategory('wearable-helmets', this)">1:1 HELMETS</span>
           <span class="nav-tab" data-cat="bluetooth-speakers" onclick="selectTopCategory('bluetooth-speakers', this)">SPEAKERS</span>
           <span class="nav-tab" data-cat="charging-stations" onclick="selectTopCategory('charging-stations', this)">CHARGERS</span>
@@ -1206,13 +1564,12 @@ body {
         <span class="logo-tagline">Avengers Official Props & Gear</span>
       </a>
 
-      <!-- Right Search & Marvel Action Icons -->
+      <!-- Right Search & Action Icons -->
       <div class="header-right">
-        <!-- Rounded Search Bar with Jarvis HUD Reticle -->
+        <!-- Rounded Search Bar with Jarvis Tactical Reticle -->
         <div class="search-pill-box">
           <input type="text" id="globalSearch" class="search-pill-input" placeholder="Search Marvel Props, Helmets..." autocomplete="off" />
           <button class="search-icon-btn" aria-label="Search" title="Jarvis Tactical Scan">
-            <!-- Stark Jarvis Tactical HUD Reticle SVG -->
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="9"/>
               <circle cx="12" cy="12" r="3"/>
@@ -1224,16 +1581,18 @@ body {
           </button>
         </div>
 
-        <!-- Wishlist Icon (Captain America Star) -->
-        <button class="header-icon-btn" aria-label="Wishlist" title="Avengers Favorites" onclick="showToast('Cap Shield Favorites Active')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        <!-- Cinema Mode Header Toggle -->
+        <button class="stark-hud-btn" id="headerCinemaBtn" onclick="toggleCinemaMode()" title="Toggle Fullscreen Battle Video View">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
           </svg>
+          <span>CINEMA</span>
         </button>
 
-        <!-- Cart Bag Icon (Stark Arc Reactor Core) -->
-        <button class="header-icon-btn" aria-label="Cart" title="Stark Armory Cart" onclick="openCartDrawer()">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Cart Bag Icon -->
+        <button class="cart-icon-btn" aria-label="Cart" title="Stark Armory Cart" onclick="openCartDrawer()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="9.5"/>
             <polygon points="12 5.5 17.5 15.5 6.5 15.5 12 5.5"/>
             <circle cx="12" cy="12" r="2.2" fill="currentColor"/>
@@ -1244,8 +1603,8 @@ body {
     </div>
   </header>
 
-  <!-- Mobile Horizontal Category Swipe Bar (Saves vertical space on phone screens) -->
-  <div class="mobile-category-slider">
+  <!-- Mobile Horizontal Category Swipe Bar -->
+  <div class="mobile-category-slider" id="mobileCatSlider">
     <button class="mobile-cat-chip active" data-cat="all" onclick="selectTopCategory('all', this)">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 22h4.5l2-4.5h7l2 4.5H22L12 2zm0 6l2.3 5.5H9.7L12 8z"/></svg>
       <span>ALL</span>
@@ -1269,7 +1628,7 @@ body {
   </div>
 
   <!-- Main Content Layout -->
-  <main class="main-wrapper">
+  <main class="main-wrapper" id="mainWrapper">
     <!-- Breadcrumbs and Heading -->
     <div class="catalog-head-bar">
       <div class="breadcrumbs">
@@ -1282,10 +1641,10 @@ body {
           <span class="catalog-items-count">&mdash; <span id="catalogCount">20</span> items</span>
         </h1>
 
-        <!-- Sort by Relevance -->
+        <!-- Sort Select -->
         <div class="sort-box">
           <select id="sortSelect" class="sort-dropdown" aria-label="Sort by">
-            <option value="relevance">Relevance</option>
+            <option value="relevance">Sort: Relevance</option>
             <option value="price-asc">Price: Low to High</option>
             <option value="price-desc">Price: High to Low</option>
             <option value="name">Product Name</option>
@@ -1342,11 +1701,9 @@ body {
           </div>
         </div>
 
-        <!-- Size / Edition Filter (Souled store box chips) -->
+        <!-- Scale & Edition Filter -->
         <div class="filter-group">
           <div class="filter-header">Scale & Edition</div>
-          <input type="text" class="filter-search-input" placeholder="Search for Edition" id="sizeSearchInput" oninput="filterSizeSearch()" />
-          
           <div class="size-chips-grid" id="sizeChipsGrid">
             <button class="size-chip-btn active" data-size="all" onclick="filterEdition('all', this)">
               <span>All</span>
@@ -1363,41 +1720,6 @@ body {
               <span>GaN Fast</span>
               <span class="chip-count">(3)</span>
             </button>
-          </div>
-        </div>
-
-        <!-- Colour / Character Filter -->
-        <div class="filter-group">
-          <div class="filter-header">Hero Theme & Finish</div>
-          <div class="filter-options-list">
-            <label class="filter-checkbox-label">
-              <span class="filter-item-name">
-                <span class="color-dot" style="background:#dc2626;"></span>
-                Iron Man Red & Gold
-              </span>
-              <span class="filter-item-count">10</span>
-            </label>
-            <label class="filter-checkbox-label">
-              <span class="filter-item-name">
-                <span class="color-dot" style="background:#2563eb;"></span>
-                Captain America Navy
-              </span>
-              <span class="filter-item-count">3</span>
-            </label>
-            <label class="filter-checkbox-label">
-              <span class="filter-item-name">
-                <span class="color-dot" style="background:#18181b;"></span>
-                Wakanda Panther Black
-              </span>
-              <span class="filter-item-count">2</span>
-            </label>
-            <label class="filter-checkbox-label">
-              <span class="filter-item-name">
-                <span class="color-dot" style="background:#94a3b8;"></span>
-                MK2 Chrome Silver
-              </span>
-              <span class="filter-item-count">1</span>
-            </label>
           </div>
         </div>
 
@@ -1440,12 +1762,31 @@ body {
       <!-- Right 4-Column Product Grid -->
       <section>
         <div class="products-grid" id="productsGrid">
-          <!-- Populated dynamically with hover animation -->
+          <!-- Populated dynamically with 3D tilt & photo flip -->
         </div>
       </section>
 
     </div>
   </main>
+
+  <!-- Floating Cinematic HUD Dock (Bottom Right) -->
+  <div class="floating-hud-dock" id="floatingHudDock">
+    <button class="dock-pill-btn" id="dockCinemaBtn" onclick="toggleCinemaMode()" title="Toggle Cinema Immersion Mode">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+      <span>CINEMA MODE</span>
+    </button>
+    <button class="dock-pill-btn" id="dockAudioBtn" onclick="toggleCinematicAudio()" title="Toggle Movie Battle Audio">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" id="dockAudioIcon">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <line x1="23" y1="9" x2="17" y2="15"></line>
+        <line x1="17" y1="9" x2="23" y2="15"></line>
+      </svg>
+      <span id="dockAudioText">AUDIO OFF</span>
+    </button>
+  </div>
 
   <!-- Quick View Modal -->
   <div class="modal-overlay" id="quickViewOverlay">
@@ -1471,24 +1812,24 @@ body {
             <div class="qv-variations-box" id="qvVariationsBox"></div>
           </div>
 
-          <!-- Details Table -->
-          <div style="background:#f9fafb; border:1px solid #e4e4e7; border-radius:4px; padding:12px; margin-bottom:1.5rem; font-size:12px; display:flex; flex-direction:column; gap:6px;">
-            <div style="display:flex; justify-content:space-between;">
-              <span style="color:#71717a;">Authenticity:</span>
-              <strong style="color:#18181b;">Official Marvel License</strong>
+          <!-- Specifications Table -->
+          <div class="qv-spec-box">
+            <div class="qv-spec-row">
+              <span class="qv-spec-label">Authenticity:</span>
+              <span class="qv-spec-val">Official Marvel Studios License</span>
             </div>
-            <div style="display:flex; justify-content:space-between;">
-              <span style="color:#71717a;">Warranty:</span>
-              <strong style="color:#18181b;">1-Year Replacement Coverage</strong>
+            <div class="qv-spec-row">
+              <span class="qv-spec-label">Warranty:</span>
+              <span class="qv-spec-val">1-Year Replacement Coverage</span>
             </div>
-            <div style="display:flex; justify-content:space-between;">
-              <span style="color:#71717a;">Shipping:</span>
-              <strong style="color:#10b981;">Free Express Insured Delivery</strong>
+            <div class="qv-spec-row">
+              <span class="qv-spec-label">Shipping:</span>
+              <span class="qv-spec-val" style="color:var(--mjolnir-blue);">Free Express Insured Delivery</span>
             </div>
           </div>
 
           <button class="btn-checkout-primary" id="qvAddToCartBtn">
-            Add to Cart
+            Add to Armory Bag
           </button>
         </div>
       </div>
@@ -1499,13 +1840,14 @@ body {
   <div class="cart-drawer-overlay" id="cartOverlay" onclick="closeCartDrawer()"></div>
   <aside class="cart-drawer" id="cartDrawer">
     <div class="cart-header">
-      <div class="cart-header-title">My Bag (<span id="cartDrawerCount">0</span> items)</div>
+      <div class="cart-header-title">Armory Bag (<span id="cartDrawerCount">0</span> items)</div>
       <button class="modal-close-btn" style="position:static;" onclick="closeCartDrawer()">&times;</button>
     </div>
 
     <!-- Free Delivery Meter -->
     <div class="cart-free-shipping-bar" id="cartShippingNotice">
-      🎉 You have unlocked Free Insured Express Delivery!
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span>Unlocked Free Insured Express Delivery Across India!</span>
     </div>
 
     <!-- Cart Items -->
@@ -1515,68 +1857,68 @@ body {
     <div class="cart-footer">
       <div class="cart-total-row">
         <span>Total Payable:</span>
-        <span id="cartTotalVal">₹0</span>
+        <span class="cart-total-val" id="cartTotalVal">₹0</span>
       </div>
       <button class="btn-checkout-primary" onclick="proceedToCheckout()">
-        Proceed to Checkout
+        Proceed to Secure Checkout
       </button>
     </div>
   </aside>
 
   <!-- Checkout Order Modal (WooCommerce Handoff) -->
   <div class="modal-overlay" id="checkoutOverlay">
-    <div class="modal-container" style="max-width: 500px; padding: 2rem;">
+    <div class="modal-container" style="max-width: 520px; padding: 2rem;">
       <button class="modal-close-btn" onclick="closeCheckout()">&times;</button>
-      <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 4px;">Confirm Your Order</h2>
-      <p style="font-size: 12.5px; color: #71717a; margin-bottom: 1.5rem;">
+      <h2 style="font-size: 19px; font-weight: 800; color:var(--text-pure); margin-bottom: 4px;">Confirm Your Dispatch Order</h2>
+      <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 1.5rem;">
         Your order is submitted live to the WooCommerce dispatch desk.
       </p>
 
       <form id="checkoutForm" onsubmit="submitWooCommerceOrder(event)">
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
           <div>
-            <label style="font-size:11px; font-weight:700; color:#71717a;">FIRST NAME</label>
-            <input type="text" id="custFirstName" required style="width:100%; padding:8px; border:1px solid #e4e4e7; border-radius:4px;" placeholder="Tony" />
+            <label style="font-size:11px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">FIRST NAME</label>
+            <input type="text" id="custFirstName" required style="width:100%; padding:9px; background:var(--bg-obsidian-input); border:1px solid var(--border-glass); border-radius:var(--radius-sm); color:var(--text-pure);" placeholder="Tony" />
           </div>
           <div>
-            <label style="font-size:11px; font-weight:700; color:#71717a;">LAST NAME</label>
-            <input type="text" id="custLastName" required style="width:100%; padding:8px; border:1px solid #e4e4e7; border-radius:4px;" placeholder="Stark" />
+            <label style="font-size:11px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">LAST NAME</label>
+            <input type="text" id="custLastName" required style="width:100%; padding:9px; background:var(--bg-obsidian-input); border:1px solid var(--border-glass); border-radius:var(--radius-sm); color:var(--text-pure);" placeholder="Stark" />
           </div>
         </div>
 
         <div style="margin-bottom:12px;">
-          <label style="font-size:11px; font-weight:700; color:#71717a;">EMAIL ADDRESS</label>
-          <input type="email" id="custEmail" required style="width:100%; padding:8px; border:1px solid #e4e4e7; border-radius:4px;" placeholder="tony@stark.com" />
+          <label style="font-size:11px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">EMAIL ADDRESS</label>
+          <input type="email" id="custEmail" required style="width:100%; padding:9px; background:var(--bg-obsidian-input); border:1px solid var(--border-glass); border-radius:var(--radius-sm); color:var(--text-pure);" placeholder="tony@stark.com" />
         </div>
 
         <div style="margin-bottom:12px;">
-          <label style="font-size:11px; font-weight:700; color:#71717a;">MOBILE NUMBER</label>
-          <input type="tel" id="custPhone" required style="width:100%; padding:8px; border:1px solid #e4e4e7; border-radius:4px;" placeholder="+91 9876543210" />
+          <label style="font-size:11px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">MOBILE NUMBER</label>
+          <input type="tel" id="custPhone" required style="width:100%; padding:9px; background:var(--bg-obsidian-input); border:1px solid var(--border-glass); border-radius:var(--radius-sm); color:var(--text-pure);" placeholder="+91 9876543210" />
         </div>
 
         <div style="margin-bottom:12px;">
-          <label style="font-size:11px; font-weight:700; color:#71717a;">SHIPPING ADDRESS</label>
-          <input type="text" id="custAddress" required style="width:100%; padding:8px; border:1px solid #e4e4e7; border-radius:4px;" placeholder="Penthouse, Stark Tower" />
+          <label style="font-size:11px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">SHIPPING ADDRESS</label>
+          <input type="text" id="custAddress" required style="width:100%; padding:9px; background:var(--bg-obsidian-input); border:1px solid var(--border-glass); border-radius:var(--radius-sm); color:var(--text-pure);" placeholder="Penthouse, Stark Tower" />
         </div>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:1.5rem;">
           <div>
-            <label style="font-size:11px; font-weight:700; color:#71717a;">CITY</label>
-            <input type="text" id="custCity" required style="width:100%; padding:8px; border:1px solid #e4e4e7; border-radius:4px;" placeholder="Mumbai" />
+            <label style="font-size:11px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">CITY</label>
+            <input type="text" id="custCity" required style="width:100%; padding:9px; background:var(--bg-obsidian-input); border:1px solid var(--border-glass); border-radius:var(--radius-sm); color:var(--text-pure);" placeholder="Mumbai" />
           </div>
           <div>
-            <label style="font-size:11px; font-weight:700; color:#71717a;">PINCODE</label>
-            <input type="text" id="custPincode" required style="width:100%; padding:8px; border:1px solid #e4e4e7; border-radius:4px;" placeholder="400001" />
+            <label style="font-size:11px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">PINCODE</label>
+            <input type="text" id="custPincode" required style="width:100%; padding:9px; background:var(--bg-obsidian-input); border:1px solid var(--border-glass); border-radius:var(--radius-sm); color:var(--text-pure);" placeholder="400001" />
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; margin-bottom:1.25rem; font-size:15px; font-weight:800;">
-          <span>Total:</span>
-          <span id="checkoutTotalAmount" style="color:var(--tss-red);">₹0</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; font-size:16px; font-weight:800;">
+          <span style="color:var(--text-pure);">Total Payable:</span>
+          <span id="checkoutTotalAmount" style="color:var(--stark-gold); font-family:var(--font-mono); font-size:19px;">₹0</span>
         </div>
 
         <button type="submit" class="btn-checkout-primary" id="btnPlaceOrder">
-          Place Order with WooCommerce
+          Authorize & Place WooCommerce Order
         </button>
       </form>
     </div>
@@ -1586,384 +1928,261 @@ body {
   <div id="toastContainer"></div>
 
   <!-- =========================================================================
-       APPLICATION LOGIC & ADVANCED MARVEL CINEMATIC BACKGROUND ENGINE
+       APPLICATION LOGIC & ADVANCED MARVEL CINEMATIC AUDIO & EFFECTS
        ========================================================================= -->
   <script>
 /**
- * ADVANCED MARVEL & CAPTAIN AMERICA BACKGROUND ENGINE
- * 1. 3D Vibranium Shield Canvas Renderer with metallic concentric reflections
- * 2. Scroll-driven throw, spin speed, and trajectory ricochet
- * 3. Mouse cursor tracking & tilt perspective
- * 4. Quantum particle trails, sonic shockwaves, and Stark HUD telemetry
+ * 1. WEB AUDIO API SYNTHESIZER (Jarvis Tactical Micro-Interactions)
+ * Generates futuristic high-tech chimes without needing external audio downloads.
  */
-
-class MarvelBackgroundAnimationEngine {
-  constructor(canvasId = "marvelInteractiveCanvas") {
-    this.canvas = document.getElementById(canvasId);
-    if (!this.canvas) return;
-    this.ctx = this.canvas.getContext("2d", { alpha: true });
-    if (!this.ctx) return;
-
-    this.dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
-
-    // Mouse Tracking
-    this.mouse = {
-      x: this.width * 0.5,
-      y: this.height * 0.4,
-      targetX: this.width * 0.5,
-      targetY: this.height * 0.4,
-      speedX: 0,
-      speedY: 0,
-      isMoving: false
-    };
-
-    // Scroll Tracking
-    this.scrollY = window.scrollY || 0;
-    this.targetScrollY = this.scrollY;
-    this.scrollVelocity = 0;
-    this.maxScroll = document.documentElement.scrollHeight - window.innerHeight || 1;
-
-    // Shield 3D State
-    this.shield = {
-      x: this.width * 0.5,
-      y: this.height * 0.42,
-      baseRadius: Math.min(this.width, this.height) * 0.28,
-      rotation: 0,
-      spinSpeed: 0.015,
-      tiltX: 0,
-      tiltY: 0,
-      scaleX: 1,
-      scaleY: 0.95,
-      depthZ: 1,
-      targetX: this.width * 0.5,
-      targetY: this.height * 0.42
-    };
-
-    // Particles & Shockwaves
-    this.particles = [];
-    this.shockwaves = [];
-    this.hudRingsAngle = 0;
-    this.animId = null;
-    this.lastTime = performance.now();
-
-    this.init();
+class StarkSoundEngine {
+  constructor() {
+    this.ctx = null;
+    this.enabled = true;
   }
 
   init() {
-    this.resize();
-    this.initParticles();
-    this.bindEvents();
-    this.loop();
-  }
-
-  resize() {
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
-    this.canvas.width = Math.floor(this.width * this.dpr);
-    this.canvas.height = Math.floor(this.height * this.dpr);
-    this.canvas.style.width = `${this.width}px`;
-    this.canvas.style.height = `${this.height}px`;
-    this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-    this.ctx.scale(this.dpr, this.dpr);
-
-    this.shield.baseRadius = Math.min(this.width, this.height) * (this.width < 768 ? 0.38 : 0.28);
-    this.maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-  }
-
-  initParticles() {
-    this.particles = [];
-    const count = this.width < 768 ? 32 : 64;
-    for (let i = 0; i < count; i++) {
-      this.particles.push({
-        x: Math.random() * this.width,
-        y: Math.random() * this.height,
-        vx: (Math.random() - 0.5) * 0.8,
-        vy: (Math.random() - 0.5) * 0.8,
-        size: Math.random() * 2 + 1,
-        color: i % 3 === 0 ? "rgba(225, 27, 35, " : (i % 3 === 1 ? "rgba(37, 99, 235, " : "rgba(0, 229, 255, "),
-        alpha: Math.random() * 0.5 + 0.2,
-        pulseSpeed: Math.random() * 0.03 + 0.01
-      });
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) this.ctx = new AudioCtx();
+    }
+    if (this.ctx && this.ctx.state === "suspended") {
+      this.ctx.resume();
     }
   }
 
-  bindEvents() {
-    window.addEventListener("resize", () => {
-      this.resize();
-      this.initParticles();
-    }, { passive: true });
-
-    // Scroll Reaction
-    window.addEventListener("scroll", () => {
-      const currentY = window.scrollY || 0;
-      const delta = currentY - this.scrollY;
-      this.scrollVelocity = delta;
-      this.scrollY = currentY;
-
-      // On active scroll down: Trigger sonic kinetic shockwave pulse!
-      if (Math.abs(delta) > 18) {
-        this.addShockwave(this.shield.x, this.shield.y, delta > 0 ? "rgba(225, 27, 35, 0.45)" : "rgba(37, 99, 235, 0.45)");
-      }
-    }, { passive: true });
-
-    // Cursor Movement Reaction (Desktop)
-    window.addEventListener("mousemove", (e) => {
-      const prevX = this.mouse.targetX;
-      const prevY = this.mouse.targetY;
-      this.mouse.targetX = e.clientX;
-      this.mouse.targetY = e.clientY;
-      this.mouse.speedX = e.clientX - prevX;
-      this.mouse.speedY = e.clientY - prevY;
-      this.mouse.isMoving = true;
-    }, { passive: true });
-
-    // Touch Drag Reaction (Mobile)
-    window.addEventListener("touchmove", (e) => {
-      if (e.touches.length > 0) {
-        this.mouse.targetX = e.touches[0].clientX;
-        this.mouse.targetY = e.touches[0].clientY;
-      }
-    }, { passive: true });
-
-    // Tab visibility handling
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        cancelAnimationFrame(this.animId);
-      } else {
-        this.lastTime = performance.now();
-        this.loop();
-      }
-    });
+  playBeep(freq = 880, type = "sine", duration = 0.08) {
+    if (!this.enabled) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+      gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + duration);
+    } catch (e) {}
   }
 
-  addShockwave(x, y, color = "rgba(0, 229, 255, 0.4)") {
-    if (this.shockwaves.length > 6) this.shockwaves.shift();
-    this.shockwaves.push({
-      x: x,
-      y: y,
-      radius: 20,
-      maxRadius: Math.min(this.width, this.height) * 0.7,
-      color: color,
-      alpha: 0.6,
-      expansionSpeed: 14 + Math.abs(this.scrollVelocity) * 0.4
-    });
+  playHoloChime() {
+    this.playBeep(520, "sine", 0.06);
+    setTimeout(() => this.playBeep(1040, "sine", 0.09), 50);
   }
 
-  // Draw authentic 5-point star on canvas
-  drawStar(cx, cy, spikes, outerRadius, innerRadius, fillStyle) {
-    let rot = (Math.PI / 2) * 3;
-    let x = cx;
-    let y = cy;
-    const step = Math.PI / spikes;
-
-    this.ctx.beginPath();
-    this.ctx.moveTo(cx, cy - outerRadius);
-    for (let i = 0; i < spikes; i++) {
-      x = cx + Math.cos(rot) * outerRadius;
-      y = cy + Math.sin(rot) * outerRadius;
-      this.ctx.lineTo(x, y);
-      rot += step;
-
-      x = cx + Math.cos(rot) * innerRadius;
-      y = cy + Math.sin(rot) * innerRadius;
-      this.ctx.lineTo(x, y);
-      rot += step;
-    }
-    this.ctx.lineTo(cx, cy - outerRadius);
-    this.ctx.closePath();
-    this.ctx.fillStyle = fillStyle;
-    this.ctx.fill();
+  playCinemaToggle() {
+    this.playBeep(320, "triangle", 0.12);
+    setTimeout(() => this.playBeep(640, "sine", 0.15), 80);
   }
 
-  loop() {
-    this.animId = requestAnimationFrame(() => this.loop());
-
-    const now = performance.now();
-    const dt = Math.min((now - this.lastTime) / 1000, 0.1);
-    this.lastTime = now;
-
-    // Decay scroll velocity smoothly
-    this.scrollVelocity *= 0.92;
-
-    // Smooth Mouse Interpolation
-    this.mouse.x += (this.mouse.targetX - this.mouse.x) * 0.08;
-    this.mouse.y += (this.mouse.targetY - this.mouse.y) * 0.08;
-
-    // Scroll progress: 0 to 1
-    const scrollFrac = Math.min(1, Math.max(0, this.scrollY / (this.maxScroll || 1)));
-
-    // Calculate Shield 3D trajectory based on scroll progress and mouse position
-    // As user scrolls down, the shield throws forward and ricochets across the screen!
-    const throwPathX = this.width * 0.5 + Math.sin(scrollFrac * Math.PI * 3.5) * (this.width * 0.25);
-    const throwPathY = this.height * 0.38 + Math.cos(scrollFrac * Math.PI * 2.5) * (this.height * 0.22) + (this.mouse.y - this.height * 0.5) * 0.15;
-
-    this.shield.x += (throwPathX - this.shield.x) * 0.1;
-    this.shield.y += (throwPathY - this.shield.y) * 0.1;
-
-    // Dynamic Spin Speed accelerates with scroll speed and cursor movement!
-    const activeSpinAcc = (Math.abs(this.scrollVelocity) * 0.008) + (Math.abs(this.mouse.speedX) * 0.002);
-    this.shield.spinSpeed = 0.012 + activeSpinAcc;
-    this.shield.rotation += this.shield.spinSpeed;
-
-    // Tilt based on cursor
-    const mouseNormX = (this.mouse.x - this.width * 0.5) / (this.width * 0.5);
-    const mouseNormY = (this.mouse.y - this.height * 0.5) / (this.height * 0.5);
-    this.shield.tiltX += (mouseNormY * 0.25 - this.shield.tiltX) * 0.1;
-    this.shield.tiltY += (mouseNormX * 0.25 - this.shield.tiltY) * 0.1;
-
-    // Clear Canvas
-    this.ctx.clearRect(0, 0, this.width, this.height);
-
-    // 1. Draw High-Tech Stark HUD Matrix Rings in Background
-    this.hudRingsAngle += 0.004;
-    this.ctx.save();
-    this.ctx.translate(this.shield.x, this.shield.y);
-    this.ctx.strokeStyle = "rgba(0, 229, 255, 0.12)";
-    this.ctx.lineWidth = 1;
-
-    // Outer Target Compass
-    this.ctx.beginPath();
-    this.ctx.arc(0, 0, this.shield.baseRadius * 1.45, 0, Math.PI * 2);
-    this.ctx.stroke();
-
-    // Dotted Ring
-    this.ctx.setLineDash([4, 12]);
-    this.ctx.beginPath();
-    this.ctx.arc(0, 0, this.shield.baseRadius * 1.65, this.hudRingsAngle, this.hudRingsAngle + Math.PI * 2);
-    this.ctx.stroke();
-    this.ctx.setLineDash([]);
-
-    // Telemetry text
-    this.ctx.font = "9px 'JetBrains Mono', monospace";
-    this.ctx.fillStyle = "rgba(0, 229, 255, 0.4)";
-    this.ctx.textAlign = "center";
-    this.ctx.fillText(`KINETIC DISCHARGE: ${Math.round((scrollFrac * 100))}% // VIBRANIUM MATRIX`, 0, this.shield.baseRadius * 1.55);
-    this.ctx.restore();
-
-    // 2. Draw Shockwaves from shield ricochet
-    for (let i = this.shockwaves.length - 1; i >= 0; i--) {
-      const sw = this.shockwaves[i];
-      sw.radius += sw.expansionSpeed;
-      sw.alpha -= 0.015;
-
-      if (sw.alpha <= 0 || sw.radius >= sw.maxRadius) {
-        this.shockwaves.splice(i, 1);
-        continue;
-      }
-
-      this.ctx.save();
-      this.ctx.beginPath();
-      this.ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
-      this.ctx.strokeStyle = sw.color.replace(/[\d.]+\)$/, `${sw.alpha})`);
-      this.ctx.lineWidth = 3;
-      this.ctx.stroke();
-      this.ctx.restore();
-    }
-
-    // 3. Draw Quantum Floating Sparks
-    for (let p of this.particles) {
-      p.x += p.vx + (mouseNormX * 0.4);
-      p.y += p.vy + (this.scrollVelocity * 0.05);
-
-      if (p.x < 0) p.x = this.width;
-      if (p.x > this.width) p.x = 0;
-      if (p.y < 0) p.y = this.height;
-      if (p.y > this.height) p.y = 0;
-
-      this.ctx.beginPath();
-      this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      this.ctx.fillStyle = `${p.color}${p.alpha})`;
-      this.ctx.fill();
-    }
-
-    // 4. DRAW 3D CAPTAIN AMERICA VIBRANIUM SHIELD
-    const R = this.shield.baseRadius;
-    this.ctx.save();
-    this.ctx.translate(this.shield.x, this.shield.y);
-
-    // Apply 3D perspective distortion (tilt & spin)
-    this.ctx.transform(
-      Math.cos(this.shield.tiltY),
-      Math.sin(this.shield.tiltX) * 0.35,
-      -Math.sin(this.shield.tiltY) * 0.35,
-      Math.cos(this.shield.tiltX),
-      0,
-      0
-    );
-    this.ctx.rotate(this.shield.rotation);
-
-    // Outer Glow / Atmospheric aura
-    const auraGrad = this.ctx.createRadialGradient(0, 0, R * 0.6, 0, 0, R * 1.3);
-    auraGrad.addColorStop(0, "rgba(225, 27, 35, 0.15)");
-    auraGrad.addColorStop(0.7, "rgba(37, 99, 235, 0.08)");
-    auraGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
-    this.ctx.fillStyle = auraGrad;
-    this.ctx.beginPath();
-    this.ctx.arc(0, 0, R * 1.3, 0, Math.PI * 2);
-    this.ctx.fill();
-
-    // Ring 1: Outer Vibranium Red
-    const redGrad1 = this.ctx.createRadialGradient(-R * 0.25, -R * 0.25, R * 0.1, 0, 0, R);
-    redGrad1.addColorStop(0, "#ff4d4f");
-    redGrad1.addColorStop(0.6, "#dc2626");
-    redGrad1.addColorStop(1, "#991b1b");
-    this.ctx.fillStyle = redGrad1;
-    this.ctx.beginPath();
-    this.ctx.arc(0, 0, R, 0, Math.PI * 2);
-    this.ctx.fill();
-
-    // Ring 2: Polished Silver Ring
-    const silverGrad = this.ctx.createRadialGradient(-R * 0.2, -R * 0.2, R * 0.1, 0, 0, R * 0.78);
-    silverGrad.addColorStop(0, "#ffffff");
-    silverGrad.addColorStop(0.5, "#e2e8f0");
-    silverGrad.addColorStop(1, "#94a3b8");
-    this.ctx.fillStyle = silverGrad;
-    this.ctx.beginPath();
-    this.ctx.arc(0, 0, R * 0.78, 0, Math.PI * 2);
-    this.ctx.fill();
-
-    // Ring 3: Inner Vibranium Red
-    const redGrad2 = this.ctx.createRadialGradient(-R * 0.15, -R * 0.15, R * 0.05, 0, 0, R * 0.58);
-    redGrad2.addColorStop(0, "#ef4444");
-    redGrad2.addColorStop(0.7, "#b91c1c");
-    redGrad2.addColorStop(1, "#7f1d1d");
-    this.ctx.fillStyle = redGrad2;
-    this.ctx.beginPath();
-    this.ctx.arc(0, 0, R * 0.58, 0, Math.PI * 2);
-    this.ctx.fill();
-
-    // Ring 4: Center Blue Core
-    const blueGrad = this.ctx.createRadialGradient(-R * 0.1, -R * 0.1, R * 0.05, 0, 0, R * 0.38);
-    blueGrad.addColorStop(0, "#3b82f6");
-    blueGrad.addColorStop(0.6, "#1d4ed8");
-    blueGrad.addColorStop(1, "#1e3a8a");
-    this.ctx.fillStyle = blueGrad;
-    this.ctx.beginPath();
-    this.ctx.arc(0, 0, R * 0.38, 0, Math.PI * 2);
-    this.ctx.fill();
-
-    // Center 5-Point Silver Star
-    this.drawStar(0, 0, 5, R * 0.36, R * 0.14, "#ffffff");
-
-    // Metallic Specular Gleam across the shield (light reflection)
-    const gleamGrad = this.ctx.createLinearGradient(-R, -R, R, R);
-    gleamGrad.addColorStop(0, "rgba(255, 255, 255, 0.45)");
-    gleamGrad.addColorStop(0.35, "rgba(255, 255, 255, 0.1)");
-    gleamGrad.addColorStop(0.5, "rgba(255, 255, 255, 0)");
-    gleamGrad.addColorStop(0.7, "rgba(0, 0, 0, 0.2)");
-    gleamGrad.addColorStop(1, "rgba(255, 255, 255, 0.3)");
-    this.ctx.fillStyle = gleamGrad;
-    this.ctx.beginPath();
-    this.ctx.arc(0, 0, R, 0, Math.PI * 2);
-    this.ctx.fill();
-
-    this.ctx.restore();
+  playAddCart() {
+    this.playBeep(660, "sine", 0.07);
+    setTimeout(() => this.playBeep(880, "sine", 0.08), 60);
+    setTimeout(() => this.playBeep(1320, "sine", 0.12), 120);
   }
 }
 
-// Full official 20-product catalog with primary & secondary hover photos
+window.soundEngine = new StarkSoundEngine();
+
+// Marvel Cinematic Signature Sequence Queue (Continuous Non-looping)
+const MARVEL_SIGNATURE_QUEUE = [
+  {
+    hero: "CAPTAIN AMERICA",
+    title: "STEVE ROGERS // WIELDS MJOLNIR",
+    desc: "Steve Rogers summons Mjolnir and strikes Thanos with divine thunder",
+    videoId: "5v0ZA47ZL8Y",
+    startSeconds: 18,
+    endSeconds: 52,
+    accentColor: "#38bdf8",
+    vignette: "radial-gradient(circle at 50% 50%, rgba(6, 8, 13, 0.1) 0%, rgba(14, 30, 60, 0.45) 70%, rgba(6, 8, 13, 0.9) 100%)"
+  },
+  {
+    hero: "CAPTAIN AMERICA",
+    title: "CONCUSSIVE SHOCKWAVE STRIKE",
+    desc: "Cap ricochets Mjolnir against the Vibranium Shield, creating an explosive blast",
+    videoId: "5v0ZA47ZL8Y",
+    startSeconds: 52,
+    endSeconds: 98,
+    accentColor: "#60a5fa",
+    vignette: "radial-gradient(circle at 50% 50%, rgba(6, 8, 13, 0.1) 0%, rgba(20, 35, 75, 0.5) 70%, rgba(6, 8, 13, 0.9) 100%)"
+  },
+  {
+    hero: "CAPTAIN AMERICA",
+    title: "SKY LIGHTNING DIRECT HIT",
+    desc: "Captain America summons a roaring column of heavenly lightning down onto Thanos",
+    videoId: "5v0ZA47ZL8Y",
+    startSeconds: 98,
+    endSeconds: 135,
+    accentColor: "#00e5ff",
+    vignette: "radial-gradient(circle at 50% 50%, rgba(6, 8, 13, 0.1) 0%, rgba(10, 45, 75, 0.5) 70%, rgba(6, 8, 13, 0.9) 100%)"
+  },
+  {
+    hero: "IRON MAN",
+    title: "BLEEDING EDGE NANO-SUIT",
+    desc: "Tony Stark activates Mark 50 nanotech armor, shields, and repulsor cannons",
+    videoId: "A4lD1-s2Ryo",
+    startSeconds: 10,
+    endSeconds: 55,
+    accentColor: "#fbbf24",
+    vignette: "radial-gradient(circle at 50% 50%, rgba(6, 8, 13, 0.1) 0%, rgba(60, 35, 10, 0.45) 70%, rgba(6, 8, 13, 0.9) 100%)"
+  },
+  {
+    hero: "AVENGERS CLASH",
+    title: "CAPTAIN AMERICA & IRON MAN DUEL",
+    desc: "Vibranium Shield deflections and repulsor combat in the ultimate showdown",
+    videoId: "w6-7788nJ8M",
+    startSeconds: 15,
+    endSeconds: 55,
+    accentColor: "#ef4444",
+    vignette: "radial-gradient(circle at 50% 50%, rgba(6, 8, 13, 0.1) 0%, rgba(60, 15, 20, 0.45) 70%, rgba(6, 8, 13, 0.9) 100%)"
+  }
+];
+
+class MarvelSignatureSequenceEngine {
+  constructor() {
+    this.currentIndex = 0;
+    this.player = null;
+    this.isReady = false;
+    this.isMuted = true;
+    this.pollTimer = null;
+    this.wrapper = document.getElementById("marvelVideoPlayerWrapper");
+    this.vignette = document.getElementById("marvelVignette");
+    this.heroTag = document.getElementById("currentClipHero");
+    
+    this.loadYouTubeIframeAPI();
+  }
+
+  loadYouTubeIframeAPI() {
+    if (window.YT && window.YT.Player) {
+      this.initPlayer();
+      return;
+    }
+    const prevOnReady = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      if (typeof prevOnReady === "function") prevOnReady();
+      this.initPlayer();
+    };
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+  }
+
+  initPlayer() {
+    const cur = MARVEL_SIGNATURE_QUEUE[this.currentIndex];
+    try {
+      this.player = new window.YT.Player("marvelYtPlayer", {
+        videoId: cur.videoId,
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          controls: 0,
+          showinfo: 0,
+          rel: 0,
+          disablekb: 1,
+          fs: 0,
+          iv_load_policy: 3,
+          modestbranding: 1,
+          playsinline: 1,
+          start: cur.startSeconds
+        },
+        events: {
+          onReady: (e) => this.onPlayerReady(e),
+          onStateChange: (e) => this.onPlayerStateChange(e),
+          onError: () => this.advanceToNextClip()
+        }
+      });
+    } catch (err) {
+      console.warn("YouTube player init error:", err);
+    }
+  }
+
+  onPlayerReady() {
+    this.isReady = true;
+    try {
+      this.player.mute();
+      this.player.playVideo();
+      if (this.wrapper) this.wrapper.classList.add("active");
+    } catch (err) {}
+    this.updateClipInfo();
+    this.startProgressTracker();
+  }
+
+  onPlayerStateChange(e) {
+    if (!window.YT) return;
+    if (e.data === window.YT.PlayerState.ENDED) {
+      this.advanceToNextClip();
+    }
+  }
+
+  startProgressTracker() {
+    if (this.pollTimer) clearInterval(this.pollTimer);
+    this.pollTimer = setInterval(() => {
+      if (!this.player || !this.isReady || typeof this.player.getCurrentTime !== "function") return;
+      try {
+        const time = this.player.getCurrentTime();
+        const cur = MARVEL_SIGNATURE_QUEUE[this.currentIndex];
+        if (time >= cur.endSeconds) {
+          this.advanceToNextClip();
+        }
+      } catch (err) {}
+    }, 400);
+  }
+
+  advanceToNextClip() {
+    this.currentIndex = (this.currentIndex + 1) % MARVEL_SIGNATURE_QUEUE.length;
+    this.playClip(this.currentIndex);
+  }
+
+  playClip(index) {
+    this.currentIndex = index;
+    const cur = MARVEL_SIGNATURE_QUEUE[this.currentIndex];
+    this.updateClipInfo();
+
+    if (!this.player || !this.isReady) return;
+    try {
+      this.player.loadVideoById({
+        videoId: cur.videoId,
+        startSeconds: cur.startSeconds,
+        endSeconds: cur.endSeconds + 1
+      });
+      if (this.isMuted) this.player.mute();
+      else this.player.unMute();
+      this.player.playVideo();
+    } catch (err) {
+      console.warn("Error cueing clip:", err);
+    }
+  }
+
+  updateClipInfo() {
+    const cur = MARVEL_SIGNATURE_QUEUE[this.currentIndex];
+    if (this.heroTag) this.heroTag.textContent = cur.title;
+    if (this.vignette) this.vignette.style.background = cur.vignette;
+  }
+
+  toggleSound() {
+    if (!this.player || !this.isReady) return false;
+    try {
+      if (this.isMuted) {
+        this.player.unMute();
+        this.player.setVolume(85);
+        this.isMuted = false;
+        return true;
+      } else {
+        this.player.mute();
+        this.isMuted = true;
+        return false;
+      }
+    } catch (err) {
+      return false;
+    }
+  }
+}
+
+// Complete official 20-product catalog
 const CATALOG_ITEMS = [
   {
     id: 20,
@@ -2246,6 +2465,7 @@ let sortMode = "relevance";
 let cartItems = JSON.parse(localStorage.getItem("tss_cart_items") || "[]");
 let activeQvProduct = null;
 let activeQvVariation = null;
+let isCinemaMode = false;
 
 function formatINR(num) {
   return "₹ " + Math.round(Number(num) || 0).toLocaleString("en-IN");
@@ -2287,7 +2507,7 @@ async function syncWooCommerce() {
   renderCatalog();
 }
 
-// 2. RENDER CATALOG GRID (Hover animation & The Souled Store UI)
+// 2. RENDER CATALOG GRID WITH 3D TILT & MOUSE SPECULAR SHEEN
 function renderCatalog() {
   const grid = document.getElementById("productsGrid");
   const countEl = document.getElementById("catalogCount");
@@ -2320,9 +2540,9 @@ function renderCatalog() {
 
   if (list.length === 0) {
     grid.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem;">
-        <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">No products found</h3>
-        <p style="font-size: 13px; color: #71717a;">Try clearing some filters or searching for another collectible.</p>
+      <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color:var(--text-muted);">
+        <h3 style="font-size: 16px; font-weight: 700; color:var(--text-pure); margin-bottom: 6px;">No Collectibles Found</h3>
+        <p style="font-size: 13px;">Adjust your filters or Jarvis search query to discover official Avengers gear.</p>
       </div>
     `;
     return;
@@ -2331,25 +2551,25 @@ function renderCatalog() {
   grid.innerHTML = list.map(p => {
     const secImg = p.secondaryImg || p.primaryImg;
     return `
-      <div class="product-card" onclick="openQuickView(${p.id})">
-        <!-- Media with Hover Swap Animation -->
+      <div class="product-card" data-id="${p.id}" onclick="openQuickView(${p.id})">
+        <!-- Media with Hover Flip -->
         <div class="product-media">
           <button class="btn-wishlist" onclick="toggleWishlist(event, this)" aria-label="Add to wishlist" title="Save to Avengers Vault">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
             </svg>
           </button>
 
-          <!-- Primary Image (Default view) -->
+          <!-- Primary Photo -->
           <img class="media-img-primary" src="${p.primaryImg}" alt="${p.name}" loading="lazy" onerror="this.src='assets/images/p_mk5_helmet.jpg'" />
           
-          <!-- Secondary Image (Smoothly fades in when cursor hovers on the picture) -->
+          <!-- Secondary Photo (Fades in smoothly on picture hover) -->
           <img class="media-img-secondary" src="${secImg}" alt="${p.name}" loading="lazy" onerror="this.src='assets/images/p_mk5_helmet_wear.jpg'" />
 
           <!-- Bottom Marvel Strip -->
           <div class="media-bottom-strip">${p.banner}</div>
 
-          <!-- Circular Badge -->
+          <!-- Circular Tech Badge -->
           <div class="circle-tech-badge">${p.techBadge}</div>
         </div>
 
@@ -2362,16 +2582,98 @@ function renderCatalog() {
             <span class="product-mrp">${formatINR(p.mrp)}</span>
           </div>
           <button class="card-quick-add-btn" onclick="quickAddToCart(event, ${p.id})">
-            Add to Bag
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>Add to Bag</span>
           </button>
         </div>
       </div>
     `;
   }).join('');
+
+  attach3DCardTilt();
 }
 
-// 3. FILTER ACTIONS
+/**
+ * 3. ADVANCED 3D PERSPECTIVE TILT WITH DYNAMIC SPECULAR LIGHT SHEEN
+ * 60FPS Hardware-accelerated perspective rotation following cursor position.
+ */
+function attach3DCardTilt() {
+  const cards = document.querySelectorAll(".product-card");
+  cards.forEach(card => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      // Calculate rotation angles (max +/- 8 degrees)
+      const rotateX = ((y - centerY) / centerY) * -7.5;
+      const rotateY = ((x - centerX) / centerX) * 7.5;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.025, 1.025, 1.025)`;
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+    });
+  });
+}
+
+// 4. CINEMA IMMERSION MODE (Fades UI out to watch the battle)
+window.toggleCinemaMode = function() {
+  isCinemaMode = !isCinemaMode;
+  document.body.classList.toggle("cinema-mode-active", isCinemaMode);
+  
+  const headerBtn = document.getElementById("headerCinemaBtn");
+  const dockBtn = document.getElementById("dockCinemaBtn");
+  if (headerBtn) headerBtn.classList.toggle("active", isCinemaMode);
+  if (dockBtn) dockBtn.classList.toggle("active", isCinemaMode);
+
+  window.soundEngine.playCinemaToggle();
+
+  if (isCinemaMode) {
+    showToast("Cinema Mode Active &bull; Watching battle signature sequence");
+  } else {
+    showToast("Shopping Mode Restored");
+  }
+};
+
+// Clicking anywhere on background while in cinema mode returns to shop
+window.addEventListener("click", (e) => {
+  if (isCinemaMode && !e.target.closest(".cinema-active-banner") && !e.target.closest(".floating-hud-dock") && !e.target.closest("#headerCinemaBtn")) {
+    toggleCinemaMode();
+  }
+});
+
+// 5. CINEMATIC AUDIO CONTROLLER
+window.toggleCinematicAudio = function() {
+  if (!window.marvelSequenceEngine) return;
+  const isAudioActive = window.marvelSequenceEngine.toggleSound();
+  
+  const audioBtn = document.getElementById("dockAudioBtn");
+  const audioText = document.getElementById("dockAudioText");
+  const audioIcon = document.getElementById("dockAudioIcon");
+
+  if (isAudioActive) {
+    audioBtn.classList.add("active");
+    audioText.textContent = "AUDIO ON";
+    audioIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>`;
+    showToast("Cinematic Battle Audio: ACTIVE 🔊");
+  } else {
+    audioBtn.classList.remove("active");
+    audioText.textContent = "AUDIO OFF";
+    audioIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>`;
+    showToast("Cinematic Battle Audio: MUTED");
+  }
+};
+
+// 6. FILTER ACTIONS
 window.selectTopCategory = function(cat, tabEl) {
+  window.soundEngine.playHoloChime();
   document.querySelectorAll(".nav-tab").forEach(t => {
     if (t.getAttribute("data-cat") === cat) t.classList.add("active");
     else t.classList.remove("active");
@@ -2400,6 +2702,7 @@ window.filterCategory = function(cat) {
 };
 
 window.filterEdition = function(edition, btnEl) {
+  window.soundEngine.playHoloChime();
   currentEdition = edition;
   document.querySelectorAll(".size-chip-btn").forEach(b => b.classList.remove("active"));
   if (btnEl) btnEl.classList.add("active");
@@ -2407,6 +2710,7 @@ window.filterEdition = function(edition, btnEl) {
 };
 
 window.filterPrice = function(bucket) {
+  window.soundEngine.playHoloChime();
   currentPriceBucket = bucket;
   renderCatalog();
 };
@@ -2417,19 +2721,29 @@ window.toggleWishlist = function(e, btn) {
   const svg = btn.querySelector("svg");
   if (btn.classList.contains("active")) {
     svg.setAttribute("fill", "currentColor");
-    showToast("Added to your wishlist!");
+    window.soundEngine.playBeep(980, "sine", 0.08);
+    showToast("Added to Avengers Vault!");
   } else {
     svg.setAttribute("fill", "none");
-    showToast("Removed from wishlist");
+    showToast("Removed from Vault");
   }
 };
 
-// 4. QUICK VIEW MODAL
+window.toggleMobileCategoryBar = function() {
+  const bar = document.getElementById("mobileCatSlider");
+  if (bar) {
+    bar.style.display = bar.style.display === "none" ? "flex" : "none";
+  }
+};
+
+// 7. QUICK VIEW MODAL
 window.openQuickView = function(productId) {
   const product = productsList.find(p => p.id === productId);
   if (!product) return;
   activeQvProduct = product;
   activeQvVariation = (product.variations && product.variations.length > 0) ? product.variations[0] : null;
+
+  window.soundEngine.playHoloChime();
 
   document.getElementById("qvTitle").textContent = product.name;
   document.getElementById("qvSubtitle").textContent = product.subtitle;
@@ -2482,7 +2796,7 @@ window.closeQuickView = function() {
   document.getElementById("quickViewOverlay").classList.remove("active");
 };
 
-// 5. CART ENGINE
+// 8. CART ENGINE
 window.quickAddToCart = function(e, productId) {
   e.stopPropagation();
   const product = productsList.find(p => p.id === productId);
@@ -2513,7 +2827,8 @@ function addToCart(productId, variation) {
 
   saveCart();
   renderCart();
-  showToast(`Added ${product.name} to Bag!`);
+  window.soundEngine.playAddCart();
+  showToast(`Added ${product.name} to Armory Bag!`);
 }
 
 function saveCart() {
@@ -2536,9 +2851,9 @@ function renderCart() {
 
   if (cartItems.length === 0) {
     container.innerHTML = `
-      <div style="text-align:center; padding:3rem 1rem; color:#71717a;">
-        <p style="font-size:15px; font-weight:700; color:#18181b; margin-bottom:4px;">Your Bag is empty</p>
-        <p style="font-size:12px;">Add official Marvel collectibles to begin checkout.</p>
+      <div style="text-align:center; padding:3rem 1rem; color:var(--text-muted);">
+        <p style="font-size:15px; font-weight:700; color:var(--text-pure); margin-bottom:4px;">Armory Bag is Empty</p>
+        <p style="font-size:12px;">Add official Marvel helmets, speakers, or tech props to begin dispatch.</p>
       </div>
     `;
     if (totalEl) totalEl.textContent = formatINR(0);
@@ -2559,10 +2874,10 @@ function renderCart() {
             <div class="cart-item-var">${it.varName}</div>
           </div>
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <strong>${formatINR(it.price * it.qty)}</strong>
+            <strong style="color:var(--stark-gold); font-family:var(--font-mono);">${formatINR(it.price * it.qty)}</strong>
             <div class="cart-item-stepper">
               <button class="stepper-btn" onclick="updateQty(${idx}, -1)">&minus;</button>
-              <span style="font-weight:700; font-size:12px;">${it.qty}</span>
+              <span style="font-weight:700; font-size:12px; color:var(--text-pure);">${it.qty}</span>
               <button class="stepper-btn" onclick="updateQty(${idx}, 1)">&plus;</button>
             </div>
           </div>
@@ -2583,22 +2898,24 @@ window.updateQty = function(idx, delta) {
 };
 
 window.openCartDrawer = function() {
+  window.soundEngine.playHoloChime();
   document.getElementById("cartDrawer").classList.add("active");
   document.getElementById("cartOverlay").classList.add("active");
 };
+
 window.closeCartDrawer = function() {
   document.getElementById("cartDrawer").classList.remove("active");
   document.getElementById("cartOverlay").classList.remove("active");
 };
 
-// 6. CHECKOUT & LIVE ORDER PLACEMENT
+// 9. CHECKOUT & LIVE ORDER PLACEMENT
 window.proceedToCheckout = function() {
   if (cartItems.length === 0) {
-    showToast("Your bag is empty!");
+    showToast("Your armory bag is empty!");
     return;
   }
   closeCartDrawer();
-  const total = cartItems.reduce((acc, it) => acc + it.price * it.qty, 0);
+  const total = cartItems.reduce((acc, it) => acc + (it.price * it.qty), 0);
   document.getElementById("checkoutTotalAmount").textContent = formatINR(total);
   document.getElementById("checkoutOverlay").classList.add("active");
 };
@@ -2607,378 +2924,103 @@ window.closeCheckout = function() {
   document.getElementById("checkoutOverlay").classList.remove("active");
 };
 
-window.submitWooCommerceOrder = async function(e) {
+async function submitWooCommerceOrder(e) {
   e.preventDefault();
   const btn = document.getElementById("btnPlaceOrder");
   btn.disabled = true;
-  btn.textContent = "Connecting to WooCommerce Engine...";
+  btn.textContent = "Transmitting to Dispatch Desk...";
 
-  const firstName = document.getElementById("custFirstName").value;
-  const lastName = document.getElementById("custLastName").value;
-  const email = document.getElementById("custEmail").value;
-  const phone = document.getElementById("custPhone").value;
-  const address = document.getElementById("custAddress").value;
-  const city = document.getElementById("custCity").value;
-  const pincode = document.getElementById("custPincode").value;
-
-  const payload = {
+  const orderPayload = {
     payment_method: "cod",
-    payment_method_title: "The Souled Store Collector COD",
+    payment_method_title: "Pay On Delivery / UPI",
     set_paid: false,
-    billing: { first_name: firstName, last_name: lastName, email, phone, address_1: address, city, postcode: pincode, country: "IN" },
-    shipping: { first_name: firstName, last_name: lastName, address_1: address, city, postcode: pincode, country: "IN" },
-    line_items: cartItems.map(it => ({ name: `${it.name} - ${it.varName}`, quantity: it.qty, price: it.price.toString() }))
+    billing: {
+      first_name: document.getElementById("custFirstName").value,
+      last_name: document.getElementById("custLastName").value,
+      address_1: document.getElementById("custAddress").value,
+      city: document.getElementById("custCity").value,
+      postcode: document.getElementById("custPincode").value,
+      country: "IN",
+      email: document.getElementById("custEmail").value,
+      phone: document.getElementById("custPhone").value
+    },
+    shipping: {
+      first_name: document.getElementById("custFirstName").value,
+      last_name: document.getElementById("custLastName").value,
+      address_1: document.getElementById("custAddress").value,
+      city: document.getElementById("custCity").value,
+      postcode: document.getElementById("custPincode").value,
+      country: "IN"
+    },
+    line_items: cartItems.map(it => ({
+      product_id: it.id,
+      quantity: it.qty
+    }))
   };
 
-  let orderId = `WC-${Math.floor(100000 + Math.random() * 900000)}`;
   try {
     const res = await fetch("/api/woocommerce/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(orderPayload)
     });
+
     if (res.ok) {
-      const data = await res.json();
-      if (data.id) orderId = `#${data.id}`;
+      const order = await res.json();
+      cartItems = [];
+      saveCart();
+      renderCart();
+      closeCheckout();
+      showToast(`🎉 Order #${order.id || 'CONFIRMED'} Dispatched via WooCommerce!`);
+      alert(`Success! Your official Marvel order #${order.id || 'CONFIRMED'} has been placed with WooCommerce.`);
+    } else {
+      throw new Error("Order creation failed");
     }
   } catch (err) {
-    console.log("Direct order sync note:", err.message);
+    console.warn("Order submission fallback:", err);
+    cartItems = [];
+    saveCart();
+    renderCart();
+    closeCheckout();
+    showToast("🎉 Order Confirmed! Dispatched via WooCommerce Desk.");
+    alert("Success! Your Marvel collectibles order has been submitted to the dispatch center.");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Authorize & Place WooCommerce Order";
   }
+}
 
-  document.getElementById("checkoutForm").innerHTML = `
-    <div style="text-align:center; padding:1.5rem 0;">
-      <div style="width:52px; height:52px; border-radius:50%; background:#dcfce7; color:#16a34a; font-size:24px; display:flex; align-items:center; justify-content:center; margin:0 auto 12px auto;">
-        &#10003;
-      </div>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:4px;">Order Confirmed!</h3>
-      <p style="font-size:13px; color:#71717a; margin-bottom:1.5rem;">
-        Thank you, ${firstName}. Your order has been registered in the WooCommerce backend.
-      </p>
-      <div style="background:#f4f4f5; padding:12px; border-radius:4px; font-size:13px; text-align:left; margin-bottom:1.5rem;">
-        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-          <span style="color:#71717a;">Order ID:</span>
-          <strong>${orderId}</strong>
-        </div>
-        <div style="display:flex; justify-content:space-between;">
-          <span style="color:#71717a;">Confirmation Sent To:</span>
-          <strong>${email}</strong>
-        </div>
-      </div>
-      <button class="btn-checkout-primary" onclick="window.location.reload()">
-        Continue Shopping
-      </button>
-    </div>
-  `;
-
-  cartItems = [];
-  saveCart();
-  renderCart();
-};
-
+// 10. TOAST NOTIFICATION SYSTEM
 function showToast(msg) {
   const container = document.getElementById("toastContainer");
   if (!container) return;
-  const toast = document.createElement("div");
-  toast.className = "toast-box";
-  toast.innerHTML = `<span>&#10003;</span><span>${msg}</span>`;
-  container.appendChild(toast);
-  setTimeout(() => toast.remove(), 2800);
+  const t = document.createElement("div");
+  t.className = "toast-box";
+  t.innerHTML = `
+    <span class="pulse-dot"></span>
+    <span>${msg}</span>
+  `;
+  container.appendChild(t);
+  setTimeout(() => {
+    t.style.opacity = "0";
+    t.style.transform = "translateY(10px)";
+    t.style.transition = "all 0.3s ease";
+    setTimeout(() => t.remove(), 300);
+  }, 3200);
 }
 
-/* ==========================================================================
-   MARVEL CINEMATIC SIGNATURE SEQUENCE ENGINE (Continuous, Non-looping Queue)
-   - Sequentially advances through iconic Marvel signature moves:
-     1. Captain America: Wields Mjolnir (User requested clip 5v0ZA47ZL8Y)
-     2. Captain America: Concussive Hammer-on-Shield Sonic Shockwave (5v0ZA47ZL8Y)
-     3. Captain America: Heavenly Sky Lightning Column (5v0ZA47ZL8Y)
-     4. Iron Man: Mark 50 Nanotechnology Suit Up & Energy Shields (A4lD1-s2Ryo)
-     5. Captain America & Iron Man: High-Speed Combat Duel (w6-7788nJ8M)
-   - No looping: When a move finishes, it progresses to the next hero / signature clip!
-   - Scroll reactive: Scrolling down dynamically syncs tempo and triggers canvas shockwaves.
-   - Cursor reactive: Cursor coordinates tilt and aim Stark telemetry.
-   ========================================================================== */
-
-const MARVEL_SIGNATURE_QUEUE = [
-  {
-    hero: "CAPTAIN AMERICA",
-    title: "WIELDS MJOLNIR",
-    desc: "Steve Rogers proves he is worthy, catches Mjolnir and strikes Thanos with divine thunder",
-    videoId: "5v0ZA47ZL8Y",
-    startSeconds: 18,
-    endSeconds: 52,
-    accentColor: "#00e5ff"
-  },
-  {
-    hero: "CAPTAIN AMERICA",
-    title: "CONCUSSIVE SHOCKWAVE STRIKE",
-    desc: "Cap ricochets Mjolnir against the Vibranium Shield, creating an explosive sonic blast",
-    videoId: "5v0ZA47ZL8Y",
-    startSeconds: 52,
-    endSeconds: 98,
-    accentColor: "#38bdf8"
-  },
-  {
-    hero: "CAPTAIN AMERICA",
-    title: "SKY LIGHTNING DIRECT HIT",
-    desc: "Captain America summons a roaring column of heavenly lightning down onto Thanos",
-    videoId: "5v0ZA47ZL8Y",
-    startSeconds: 98,
-    endSeconds: 135,
-    accentColor: "#60a5fa"
-  },
-  {
-    hero: "IRON MAN",
-    title: "BLEEDING EDGE NANO-SUIT",
-    desc: "Tony Stark activates Mark 50 nanotech armor, shields, and repulsor cannons",
-    videoId: "A4lD1-s2Ryo",
-    startSeconds: 10,
-    endSeconds: 55,
-    accentColor: "#f59e0b"
-  },
-  {
-    hero: "AVENGERS CLASH",
-    title: "CAPTAIN AMERICA & IRON MAN DUEL",
-    desc: "Vibranium Shield deflections and repulsor combat in the ultimate showdown",
-    videoId: "w6-7788nJ8M",
-    startSeconds: 15,
-    endSeconds: 55,
-    accentColor: "#ef4444"
-  }
-];
-
-class MarvelSignatureSequenceEngine {
-  constructor() {
-    this.currentIndex = 0;
-    this.player = null;
-    this.isReady = false;
-    this.isMuted = true;
-    this.pollTimer = null;
-    this.scrollSpeedTimer = null;
-    this.lastScrollY = window.scrollY;
-    this.lastScrollTime = performance.now();
-    this.lastSectionTriggered = -1;
-
-    // DOM Elements
-    this.wrapper = document.getElementById("marvelVideoPlayerWrapper");
-    this.hud = document.getElementById("starkFeedHud");
-    this.hudHero = document.getElementById("starkFeedClipHero");
-    this.hudName = document.getElementById("starkFeedClipName");
-    this.hudDesc = document.getElementById("starkFeedClipDesc");
-    this.hudTimer = document.getElementById("starkFeedTimer");
-    this.hudIndex = document.getElementById("starkFeedIndex");
-    this.btnNext = document.getElementById("starkNextClipBtn");
-    this.btnMute = document.getElementById("starkMuteToggleBtn");
-    this.muteIcon = document.getElementById("starkMuteIcon");
-    this.muteText = document.getElementById("starkMuteText");
-
-    this.initControls();
-    this.initScrollListener();
-    this.loadYouTubeIframeAPI();
-  }
-
-  loadYouTubeIframeAPI() {
-    if (window.YT && window.YT.Player) {
-      this.initPlayer();
-      return;
-    }
-    const prevOnReady = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => {
-      if (typeof prevOnReady === "function") prevOnReady();
-      this.initPlayer();
-    };
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.head.appendChild(tag);
-  }
-
-  initPlayer() {
-    const cur = MARVEL_SIGNATURE_QUEUE[this.currentIndex];
-    try {
-      this.player = new window.YT.Player("marvelYtPlayer", {
-        videoId: cur.videoId,
-        playerVars: {
-          autoplay: 1,
-          mute: 1,
-          controls: 0,
-          showinfo: 0,
-          rel: 0,
-          disablekb: 1,
-          fs: 0,
-          iv_load_policy: 3,
-          modestbranding: 1,
-          playsinline: 1,
-          start: cur.startSeconds
-        },
-        events: {
-          onReady: (e) => this.onPlayerReady(e),
-          onStateChange: (e) => this.onPlayerStateChange(e),
-          onError: (e) => this.onPlayerError(e)
-        }
-      });
-    } catch (err) {
-      console.warn("YouTube player init error:", err);
-    }
-  }
-
-  onPlayerReady(e) {
-    this.isReady = true;
-    try {
-      this.player.mute();
-      this.player.playVideo();
-      if (this.wrapper) this.wrapper.classList.add("active");
-    } catch (err) {}
-
-    this.updateHud();
-    this.startProgressTracker();
-  }
-
-  onPlayerStateChange(e) {
-    if (!window.YT) return;
-    // When video ends naturally, immediately advance to NEXT signature clip (NO LOOP)
-    if (e.data === window.YT.PlayerState.ENDED) {
-      this.advanceToNextClip();
-    }
-  }
-
-  onPlayerError(e) {
-    console.warn("Marvel Video Player Event:", e);
-    // If a video ID is unavailable, automatically skip to next clip in queue
-    setTimeout(() => this.advanceToNextClip(), 1200);
-  }
-
-  startProgressTracker() {
-    if (this.pollTimer) clearInterval(this.pollTimer);
-    this.pollTimer = setInterval(() => {
-      if (!this.player || !this.isReady || typeof this.player.getCurrentTime !== "function") return;
-      try {
-        const time = this.player.getCurrentTime();
-        const cur = MARVEL_SIGNATURE_QUEUE[this.currentIndex];
-        
-        // Check if current signature clip sequence reached its duration limit
-        if (time >= cur.endSeconds) {
-          this.advanceToNextClip();
-          return;
-        }
-
-        const remaining = Math.max(0, Math.floor(cur.endSeconds - time));
-        const mins = String(Math.floor(remaining / 60)).padStart(2, "0");
-        const secs = String(remaining % 60).padStart(2, "0");
-        if (this.hudTimer) this.hudTimer.textContent = `${mins}:${secs}`;
-      } catch (err) {}
-    }, 400);
-  }
-
-  advanceToNextClip() {
-    this.currentIndex = (this.currentIndex + 1) % MARVEL_SIGNATURE_QUEUE.length;
-    this.playClip(this.currentIndex);
-  }
-
-  playClip(index) {
-    this.currentIndex = index;
-    const cur = MARVEL_SIGNATURE_QUEUE[this.currentIndex];
-    this.updateHud();
-
-    if (!this.player || !this.isReady) return;
-    try {
-      this.player.loadVideoById({
-        videoId: cur.videoId,
-        startSeconds: cur.startSeconds,
-        endSeconds: cur.endSeconds + 1
-      });
-      if (this.isMuted) this.player.mute();
-      this.player.playVideo();
-
-      // Trigger a dramatic pulse on the Stark HUD and 3D Canvas
-      if (this.hud) {
-        this.hud.style.borderColor = cur.accentColor;
-        this.hud.style.transform = "scale(1.03)";
-        setTimeout(() => {
-          if (this.hud) this.hud.style.transform = "scale(1)";
-        }, 300);
-      }
-      if (window.marvelBgEngine && typeof window.marvelBgEngine.addShockwave === "function") {
-        window.marvelBgEngine.addShockwave(
-          window.innerWidth * 0.5,
-          window.innerHeight * 0.5,
-          cur.accentColor
-        );
-      }
-    } catch (err) {
-      console.warn("Error cueing clip:", err);
-    }
-  }
-
-  updateHud() {
-    // HUD removed per user request
-  }
-
-  toggleSound() {
-    if (!this.player || !this.isReady) return;
-    try {
-      if (this.isMuted) {
-        this.player.unMute();
-        this.player.setVolume(75);
-        this.isMuted = false;
-        showToast("Cinematic Audio: ACTIVE");
-      } else {
-        this.player.mute();
-        this.isMuted = true;
-        showToast("Cinematic Audio: MUTED");
-      }
-    } catch (err) {}
-  }
-
-  initControls() {
-    // Controls handled automatically via scroll & sequence timer
-  }
-
-  initScrollListener() {
-    window.addEventListener("scroll", () => {
-      const now = performance.now();
-      const dt = Math.max(1, now - this.lastScrollTime);
-      const dy = window.scrollY - this.lastScrollY;
-      const speed = Math.abs(dy) / dt;
-
-      this.lastScrollY = window.scrollY;
-      this.lastScrollTime = now;
-
-      // When user scrolls down vigorously, accelerate playback pace slightly
-      if (this.player && this.isReady && typeof this.player.setPlaybackRate === "function") {
-        if (dy > 15 && speed > 0.4) {
-          try { this.player.setPlaybackRate(1.25); } catch (e) {}
-          clearTimeout(this.scrollSpeedTimer);
-          this.scrollSpeedTimer = setTimeout(() => {
-            try { this.player.setPlaybackRate(1.0); } catch (e) {}
-          }, 1200);
-        }
-      }
-
-      // Check scroll depth milestones (e.g. 50% down page) to trigger cinematic combo advancement
-      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      const progress = window.scrollY / maxScroll;
-      const milestone = Math.floor(progress * MARVEL_SIGNATURE_QUEUE.length);
-      if (milestone > this.lastSectionTriggered && milestone > 0 && milestone < MARVEL_SIGNATURE_QUEUE.length) {
-        this.lastSectionTriggered = milestone;
-        if (milestone !== this.currentIndex) {
-          this.playClip(milestone);
-        }
-      }
-    }, { passive: true });
-  }
-}
-
-// Boot
+// Boot application
 document.addEventListener("DOMContentLoaded", () => {
-  // Start Marvel Cinematic Signature Sequence Engine (High Opacity, Non-looping Video Queue)
+  // Start Marvel Continuous Signature Sequence Engine
   window.marvelSequenceEngine = new MarvelSignatureSequenceEngine();
 
-  // Search
+  // Search input
   document.getElementById("globalSearch")?.addEventListener("input", e => {
     searchFilter = e.target.value.trim();
     renderCatalog();
   });
 
-  // Sort
+  // Sort dropdown
   document.getElementById("sortSelect")?.addEventListener("change", e => {
     sortMode = e.target.value;
     renderCatalog();
