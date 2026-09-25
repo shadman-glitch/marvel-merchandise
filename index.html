@@ -85,10 +85,10 @@ body {
 }
 
 /* ==========================================================================
-   HIGH-FPS PROCEDURAL CANVAS FRAME SEQUENCE BACKGROUND (NO YOUTUBE)
-   Renders thousands of frames: atmospheric mist, lightning strikes, embers.
+   SELF-HOSTED CINEMATIC BATTLE VIDEO + 60 FPS OVERLAY (NO YOUTUBE)
+   Hardware accelerated 720p HD MP4 video with real-time procedural canvas.
    ========================================================================== */
-#marvelCanvas {
+.cinematic-bg-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -96,15 +96,67 @@ body {
   height: 100vh;
   z-index: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 30%, #111726 0%, #080b12 70%, #05070a 100%);
+  overflow: hidden;
+  background: #080b12;
+}
+
+.cinematic-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;
+  min-height: 100vh;
+  min-width: 177.78vh;
+  transform: translate(-50%, -50%) scale(1.15);
+  object-fit: cover;
+  opacity: 0.88;
+  filter: saturate(1.22) contrast(1.12) brightness(0.94);
+}
+
+@media (max-width: 768px) {
+  .cinematic-bg-video {
+    transform: translate(-50%, -46%) scale(1.48);
+  }
+}
+
+#marvelCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .canvas-overlay-vignette {
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, rgba(8, 11, 18, 0.15) 0%, rgba(8, 11, 18, 0.5) 75%, rgba(8, 11, 18, 0.9) 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(8, 11, 18, 0.1) 0%, rgba(8, 11, 18, 0.45) 75%, rgba(8, 11, 18, 0.88) 100%);
+}
+
+.btn-sound-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-light);
+  color: var(--text-pure);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 12px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+.btn-sound-toggle:hover, .btn-sound-toggle.active {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
 }
 
 /* ==========================================================================
@@ -973,19 +1025,13 @@ body {
 </head>
 <body>
 
-  <!-- HIGH-FPS CLIENT-SIDE CANVAS BACKGROUND (NO YOUTUBE EMBED) -->
-  <canvas id="marvelCanvas"></canvas>
-  <div class="canvas-overlay-vignette"></div>
-
-  <!-- Top Announcement Strip -->
-  <div class="top-notice-strip">
-    <div>
-      <span class="notice-tag">Official</span>
-      <span>Marvel Studios 1:1 Collectibles &bull; Direct From Manufacturer &bull; Free Insured Delivery Across India</span>
-    </div>
-    <div class="notice-right">
-      <span>Avengers Certified Merchandise</span>
-    </div>
+  <!-- SELF-HOSTED 720P HD MARVEL CINEMATIC BATTLE VIDEO + PARTICLES (NO YOUTUBE) -->
+  <div class="cinematic-bg-container">
+    <video id="bgBattleVideo" class="cinematic-bg-video" autoplay muted loop playsinline preload="auto">
+      <source src="assets/battle.mp4" type="video/mp4">
+    </video>
+    <canvas id="marvelCanvas"></canvas>
+    <div class="canvas-overlay-vignette"></div>
   </div>
 
   <!-- Main Navbar -->
@@ -1010,6 +1056,16 @@ body {
 
       <!-- Right Controls -->
       <div class="header-right">
+        <!-- Sound Toggle Button -->
+        <button class="btn-sound-toggle" id="btnSoundToggle" onclick="toggleBattleAudio()" title="Toggle Battle Sound">
+          <svg id="soundIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+          <span id="soundToggleLabel">Battle Audio: Muted</span>
+        </button>
+
         <!-- Search Input -->
         <div class="search-box">
           <input type="text" id="globalSearch" class="search-input" placeholder="Search products..." autocomplete="off" />
@@ -1215,7 +1271,7 @@ class CinematicFrameEngine {
   constructor(canvasId = "marvelCanvas") {
     this.canvas = document.getElementById(canvasId);
     if (!this.canvas) return;
-    this.ctx = this.canvas.getContext("2d", { alpha: false });
+    this.ctx = this.canvas.getContext("2d", { alpha: true });
     this.dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     this.width = window.innerWidth;
     this.height = window.innerHeight;
@@ -1239,6 +1295,21 @@ class CinematicFrameEngine {
       this.mouseX = e.clientX;
       this.mouseY = e.clientY;
     }, { passive: true });
+
+    // Ensure background video autoplays smoothly
+    const video = document.getElementById("bgBattleVideo");
+    if (video) {
+      video.play().catch(() => {
+        // Retry play on first user interaction if blocked by autoplay policy
+        const unlockPlay = () => {
+          video.play().catch(() => {});
+          window.removeEventListener("click", unlockPlay);
+          window.removeEventListener("touchstart", unlockPlay);
+        };
+        window.addEventListener("click", unlockPlay, { once: true });
+        window.addEventListener("touchstart", unlockPlay, { once: true });
+      });
+    }
 
     this.loop();
   }
@@ -1298,17 +1369,8 @@ class CinematicFrameEngine {
       this.nextLightningTime = now + (Math.random() * 5000 + 4000);
     }
 
-    // 1. Draw Deep Space Background with Atmospheric Radial Glow
-    const bgGrad = this.ctx.createRadialGradient(
-      this.width * 0.5, this.height * 0.35, 10,
-      this.width * 0.5, this.height * 0.5, Math.max(this.width, this.height) * 0.85
-    );
-    bgGrad.addColorStop(0, "#131b2e");
-    bgGrad.addColorStop(0.5, "#0b0f19");
-    bgGrad.addColorStop(1, "#05070a");
-
-    this.ctx.fillStyle = bgGrad;
-    this.ctx.fillRect(0, 0, this.width, this.height);
+    // 1. Transparent Clear (Allowing self-hosted 720p HD battle video to show through)
+    this.ctx.clearRect(0, 0, this.width, this.height);
 
     // 2. Draw Lightning Flash if active
     if (this.lightningAlpha > 0.02) {
@@ -1351,6 +1413,35 @@ class CinematicFrameEngine {
     }
   }
 }
+
+/**
+ * Toggle Battle Audio (Mute / Unmute background video)
+ */
+window.toggleBattleAudio = function() {
+  const video = document.getElementById("bgBattleVideo");
+  const btn = document.getElementById("btnSoundToggle");
+  const label = document.getElementById("soundToggleLabel");
+  const icon = document.getElementById("soundIcon");
+  if (!video) return;
+
+  if (video.muted) {
+    video.muted = false;
+    video.volume = 0.45;
+    video.play().catch(e => console.log("Audio allowed on user interaction:", e));
+    if (btn) btn.classList.add("active");
+    if (label) label.textContent = "Battle Audio: On";
+    if (icon) {
+      icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+    }
+  } else {
+    video.muted = true;
+    if (btn) btn.classList.remove("active");
+    if (label) label.textContent = "Battle Audio: Muted";
+    if (icon) {
+      icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+    }
+  }
+};
 
 // Full official 20-product catalog
 const CATALOG_ITEMS = [
