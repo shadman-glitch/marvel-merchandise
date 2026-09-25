@@ -208,31 +208,84 @@ body {
   padding-left: 8px;
 }
 
-/* Navigation Tabs */
+/* Navigation Tabs (Impressive Stark HUD Laser Animations) */
 .nav-tabs {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
+  gap: 1.6rem;
   height: 68px;
+  position: relative;
 }
 .nav-link {
+  position: relative;
   font-size: 13px;
   font-weight: 600;
   color: var(--text-muted);
   text-decoration: none;
-  border-bottom: 2px solid transparent;
   height: 100%;
   display: inline-flex;
   align-items: center;
+  padding: 0 4px;
   cursor: pointer;
-  transition: var(--transition);
+  letter-spacing: 0.035em;
+  transition: color 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.22s ease;
+  user-select: none;
+}
+/* Stark HUD Ambient Laser Pill behind tab on hover */
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -8px;
+  right: -8px;
+  height: 32px;
+  transform: translateY(-50%) scale(0.85);
+  background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.16) 0%, rgba(56, 189, 248, 0.03) 60%, transparent 75%);
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* Stark Laser Beam Underline */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background: linear-gradient(90deg, transparent, #38bdf8 20%, #7dd3fc 50%, #38bdf8 80%, transparent);
+  box-shadow: 0 0 12px #38bdf8, 0 0 24px rgba(56, 189, 248, 0.6);
+  transform: scaleX(0);
+  transform-origin: center;
+  border-radius: 2px;
+  opacity: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, box-shadow 0.25s ease;
 }
 .nav-link:hover {
-  color: var(--text-pure);
+  color: #ffffff;
+  transform: translateY(-1.5px);
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.75), 0 0 24px rgba(56, 189, 248, 0.4);
+}
+.nav-link:hover::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+  opacity: 1;
 }
 .nav-link.active {
   color: var(--text-pure);
-  border-bottom-color: var(--accent-blue);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(225, 29, 72, 0.4);
+}
+.nav-link.active::after {
+  transform: scaleX(1);
+  opacity: 1;
+  background: linear-gradient(90deg, transparent, #e11d48 20%, #fb7185 50%, #e11d48 80%, transparent);
+  box-shadow: 0 0 12px #e11d48, 0 0 24px rgba(225, 29, 72, 0.6);
 }
 
 /* Right Controls */
@@ -423,34 +476,6 @@ body {
   color: var(--text-dim);
 }
 
-/* Live Authenticity Radar Pill (Premium Animation) */
-.live-status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.28);
-  color: #34d399;
-  font-size: 10.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 3px 9px;
-  border-radius: var(--radius-pill);
-}
-.live-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 6px #10b981;
-  animation: radarPulse 2s infinite ease-out;
-}
-@keyframes radarPulse {
-  0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1.1); opacity: 0.8; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-  100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-}
 
 .sort-select {
   background: var(--bg-input);
@@ -565,7 +590,8 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: opacity 0.35s ease, transform 0.4s ease;
+  transition: opacity 0.08s cubic-bezier(0, 0, 0.2, 1), transform 0.12s ease-out;
+  will-change: opacity, transform;
 }
 .media-primary {
   opacity: 1;
@@ -576,10 +602,14 @@ body {
   z-index: 2;
 }
 
-.product-card:hover .media-primary {
+.product-card:hover .media-primary,
+.product-card.touch-active .media-primary,
+.product-card:active .media-primary {
   transform: scale(1.03);
 }
-.product-card:hover .media-secondary {
+.product-card:hover .media-secondary,
+.product-card.touch-active .media-secondary,
+.product-card:active .media-secondary {
   opacity: 1;
   transform: scale(1.03);
 }
@@ -728,7 +758,9 @@ body {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease !important;
   transform: none !important; /* Guaranteed zero jitter */
 }
 .btn-add-to-cart:hover {
@@ -737,8 +769,74 @@ body {
   border-color: rgba(255, 255, 255, 0.25);
 }
 .btn-add-to-cart:active {
-  transform: scale(0.98) !important;
+  transform: scale(0.97) !important;
 }
+
+/* Avengers Weapon & Emblem Animation & Hero Themed Button Colors */
+@keyframes weaponPop {
+  0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+  60% { transform: scale(1.28) rotate(8deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.avengers-weapon-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: weaponPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+/* Thor: Mjolnir Thunder Cyan & Asgardian Gold Glow */
+.btn-add-to-cart.added-thor {
+  background: linear-gradient(135deg, #0369a1 0%, #0284c7 40%, #d97706 100%) !important;
+  border-color: rgba(56, 189, 248, 0.7) !important;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.7), 0 4px 14px rgba(245, 158, 11, 0.4) !important;
+  color: #ffffff !important;
+}
+
+/* Captain America: Star Vibranium Blue & Crimson Shield Glow */
+.btn-add-to-cart.added-captain-america {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 45%, #b91c1c 100%) !important;
+  border-color: rgba(96, 165, 250, 0.7) !important;
+  box-shadow: 0 0 18px rgba(37, 99, 235, 0.7), 0 4px 14px rgba(220, 38, 38, 0.5) !important;
+  color: #ffffff !important;
+}
+
+/* Iron Man: Stark Arc Reactor Gold & Crimson Armor Glow */
+.btn-add-to-cart.added-iron-man {
+  background: linear-gradient(135deg, #991b1b 0%, #b91c1c 45%, #d97706 100%) !important;
+  border-color: rgba(245, 158, 11, 0.7) !important;
+  box-shadow: 0 0 18px rgba(220, 38, 38, 0.8), 0 4px 14px rgba(245, 158, 11, 0.5) !important;
+  color: #ffffff !important;
+}
+
+/* Spider-Man: Web Scarlet & Spidey Blue Glow */
+.btn-add-to-cart.added-spider-man {
+  background: linear-gradient(135deg, #991b1b 0%, #dc2626 50%, #1e3a8a 100%) !important;
+  border-color: rgba(239, 68, 68, 0.7) !important;
+  box-shadow: 0 0 18px rgba(220, 38, 38, 0.7), 0 4px 14px rgba(30, 58, 138, 0.4) !important;
+  color: #ffffff !important;
+}
+
+/* Black Panther / Wakanda: Kinetic Vibranium Purple Glow */
+.btn-add-to-cart.added-wakanda {
+  background: linear-gradient(135deg, #4c1d95 0%, #6b21a8 50%, #9333ea 100%) !important;
+  border-color: rgba(192, 132, 252, 0.7) !important;
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.75), 0 4px 14px rgba(147, 51, 234, 0.4) !important;
+  color: #ffffff !important;
+}
+
+/* Classic Avengers Assemble Gold & Crimson Glow */
+.btn-add-to-cart.added-avengers {
+  background: linear-gradient(135deg, #be123c 0%, #e11d48 50%, #f59e0b 100%) !important;
+  border-color: rgba(251, 191, 36, 0.7) !important;
+  box-shadow: 0 0 18px rgba(225, 29, 72, 0.7), 0 4px 14px rgba(245, 158, 11, 0.4) !important;
+  color: #ffffff !important;
+}
+
 .btn-add-to-cart.btn-added {
   background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
   border-color: rgba(52, 211, 153, 0.4) !important;
@@ -994,10 +1092,6 @@ body {
   .catalog-title {
     font-size: 15px;
   }
-  .live-status-pill {
-    font-size: 9px;
-    padding: 2px 6px;
-  }
   .sort-select {
     font-size: 11px;
     padding: 4px 8px;
@@ -1184,10 +1278,6 @@ body {
     <div class="catalog-heading-bar">
       <div class="catalog-title-wrap">
         <h1 class="catalog-title" id="catalogTitle">Marvel Cinematic Collection</h1>
-        <span class="live-status-pill">
-          <span class="live-dot"></span>
-          Official 1:1 Ready
-        </span>
         <span class="catalog-count" id="catalogCount">20 Products Available</span>
       </div>
 
@@ -1931,8 +2021,19 @@ window.openQuickView = function(productId) {
   }
 
   document.getElementById("qvAddToCartBtn").onclick = () => {
+    const btn = document.getElementById("qvAddToCartBtn");
+    const heroKey = product.hero && HERO_WEAPONS[product.hero] ? product.hero : "default";
+    const heroTheme = HERO_WEAPONS[heroKey];
+    btn.classList.remove("added-thor", "added-captain-america", "added-iron-man", "added-spider-man", "added-wakanda", "added-avengers", "btn-added");
+    btn.classList.add(heroTheme.className);
+    const origHTML = btn.innerHTML;
+    btn.innerHTML = `${heroTheme.svg}<span>${heroTheme.label}</span>`;
     addToCart(product.id, activeQvVariation);
-    closeQuickView();
+    setTimeout(() => {
+      btn.classList.remove(heroTheme.className);
+      btn.innerHTML = origHTML;
+      closeQuickView();
+    }, 600);
   };
 
   document.getElementById("quickViewOverlay").classList.add("active");
@@ -1954,24 +2055,63 @@ window.closeQuickView = function() {
   document.getElementById("quickViewOverlay").classList.remove("active");
 };
 
-// 7. CART ENGINE
+// 7. CART ENGINE WITH AVENGERS HERO WEAPONS & THEME TRANSFORMATION
+const HERO_WEAPONS = {
+  "thor": {
+    className: "added-thor",
+    label: "Mjolnir Summoned",
+    svg: `<svg class="avengers-weapon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="14" height="8" rx="1.5" fill="#bae6fd" stroke="#ffffff" stroke-width="1.4"/><polygon points="1.5,5.5 3,4 3,12 1.5,10.5" fill="#7dd3fc" stroke="#ffffff" stroke-width="1"/><polygon points="17,4 18.5,5.5 18.5,10.5 17,12" fill="#7dd3fc" stroke="#ffffff" stroke-width="1"/><path d="M10 12v9" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round"/><path d="M8.8 14.5h2.4M8.8 17h2.4M8.8 19.5h2.4" stroke="#78350f" stroke-width="1.2"/><path d="M10 21c0 1.2 1.5 2 2.5 1s1-2 0-2.5" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" fill="none"/></svg>`
+  },
+  "captain-america": {
+    className: "added-captain-america",
+    label: "Shield Equipped",
+    svg: `<svg class="avengers-weapon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#dc2626" stroke="#ffffff" stroke-width="1"/><circle cx="12" cy="12" r="7.4" fill="#f8fafc"/><circle cx="12" cy="12" r="4.9" fill="#dc2626"/><circle cx="12" cy="12" r="2.8" fill="#1d4ed8"/><polygon points="12,9.6 12.8,11.2 14.5,11.3 13.2,12.4 13.6,14.1 12,13.1 10.4,14.1 10.8,12.4 9.5,11.3 11.2,11.2" fill="#ffffff"/></svg>`
+  },
+  "iron-man": {
+    className: "added-iron-man",
+    label: "Arc Reactor Locked",
+    svg: `<svg class="avengers-weapon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#1c1917" stroke="#f59e0b" stroke-width="1.4"/><circle cx="12" cy="12" r="7.2" stroke="#38bdf8" stroke-width="1.6" stroke-dasharray="2.8 1.4"/><circle cx="12" cy="12" r="4" fill="#0284c7" stroke="#bae6fd" stroke-width="1"/><polygon points="12,9.2 14.6,13.8 9.4,13.8" fill="#e0f2fe" stroke="#38bdf8" stroke-width="0.8"/><circle cx="12" cy="12" r="1" fill="#ffffff"/></svg>`
+  },
+  "spider-man": {
+    className: "added-spider-man",
+    label: "Web Secured",
+    svg: `<svg class="avengers-weapon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="13" rx="2.5" ry="3.5" fill="#ffffff"/><circle cx="12" cy="8.5" r="1.8" fill="#ffffff"/><path d="M10 8L6 4M10 11L5 9M10 13L5 15M10 15L6 20" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round"/><path d="M14 8L18 4M14 11L19 9M14 13L19 15M14 15L18 20" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round"/></svg>`
+  },
+  "wakanda": {
+    className: "added-wakanda",
+    label: "Vibranium Added",
+    svg: `<svg class="avengers-weapon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L9.5 8l2.5 3.5L14.5 8 12 2z" fill="#f3e8ff" stroke="#a855f7" stroke-width="1"/><path d="M5 9l3.5 2 1.5-2.5-4-1.5-1 2z" fill="#c084fc"/><path d="M19 9l-3.5 2-1.5-2.5 4-1.5 1 2z" fill="#c084fc"/><path d="M8 15l2.5 1.5 1-2.5-3-1 0 2z" fill="#a855f7"/><path d="M16 15l-2.5 1.5-1-2.5 3-1 0 2z" fill="#a855f7"/><path d="M12 14l-1.2 4.5 1.2 1.8 1.2-1.8L12 14z" fill="#e9d5ff"/></svg>`
+  },
+  "default": {
+    className: "added-avengers",
+    label: "Avengers Added",
+    svg: `<svg class="avengers-weapon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#fbbf24" stroke-width="1.6"/><path d="M13 5.5L7.5 18.5h2.5l1.3-3.2h3.4l.7-1.8h-3.4l1.4-4h.2l3 9H19L14.8 5.5H13z" fill="#ffffff"/><path d="M6.5 13.5l9-1-1.3 1H6.5z" fill="#f43f5e"/></svg>`
+  }
+};
+
 window.quickAddToCart = function(e, productId) {
-  e.stopPropagation();
+  if (e) e.stopPropagation();
   const product = productsList.find(p => p.id === productId);
   if (!product) return;
   const variation = (product.variations && product.variations.length > 0) ? product.variations[0] : { name: "Standard", price: product.price };
   addToCart(product.id, variation);
 
-  // Micro-tactile button animation feedback
-  const btn = e.currentTarget;
+  // Micro-tactile button animation feedback with Avengers Hero Weapon & Color change
+  const btn = e ? e.currentTarget : null;
   if (btn) {
-    btn.classList.add("btn-added");
+    const heroKey = product.hero && HERO_WEAPONS[product.hero] ? product.hero : "default";
+    const heroTheme = HERO_WEAPONS[heroKey];
+
+    btn.classList.remove("added-thor", "added-captain-america", "added-iron-man", "added-spider-man", "added-wakanda", "added-avengers", "btn-added");
+    btn.classList.add(heroTheme.className);
+
     const origHTML = btn.innerHTML;
-    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Added</span>`;
+    btn.innerHTML = `${heroTheme.svg}<span>${heroTheme.label}</span>`;
+
     setTimeout(() => {
-      btn.classList.remove("btn-added");
+      btn.classList.remove(heroTheme.className);
       btn.innerHTML = origHTML;
-    }, 1100);
+    }, 1400);
   }
 };
 
@@ -2061,6 +2201,67 @@ window.addEventListener("storage", (e) => {
   }
 });
 
+// High-Performance Instant Touch Switch for Mobile Thumb Scrolling
+function initInstantMobileTouch() {
+  const grid = document.getElementById("productsGrid");
+  if (!grid) return;
+
+  let activeTouchCard = null;
+  let touchResetTimer = null;
+
+  function switchCardToTouch(card) {
+    if (activeTouchCard === card) return;
+    if (activeTouchCard) {
+      activeTouchCard.classList.remove("touch-active");
+    }
+    if (card) {
+      card.classList.add("touch-active");
+      activeTouchCard = card;
+    }
+  }
+
+  function getCardFromTouch(touch) {
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    return el ? el.closest(".product-card") : null;
+  }
+
+  // 1. Instant touchstart: As soon as thumb contacts ANY card surface, flip immediately (0ms)
+  grid.addEventListener("touchstart", function(e) {
+    if (touchResetTimer) clearTimeout(touchResetTimer);
+    if (e.touches && e.touches.length > 0) {
+      const card = getCardFromTouch(e.touches[0]);
+      if (card) switchCardToTouch(card);
+    }
+  }, { passive: true });
+
+  // 2. Fast thumb glide / scroll: as thumb moves across cards, each card touched flips instantly!
+  grid.addEventListener("touchmove", function(e) {
+    if (touchResetTimer) clearTimeout(touchResetTimer);
+    if (e.touches && e.touches.length > 0) {
+      const card = getCardFromTouch(e.touches[0]);
+      if (card) switchCardToTouch(card);
+    }
+  }, { passive: true });
+
+  // 3. Reset smoothly after touch completes
+  window.addEventListener("touchend", function() {
+    if (touchResetTimer) clearTimeout(touchResetTimer);
+    touchResetTimer = setTimeout(function() {
+      if (activeTouchCard) {
+        activeTouchCard.classList.remove("touch-active");
+        activeTouchCard = null;
+      }
+    }, 450);
+  }, { passive: true });
+
+  window.addEventListener("touchcancel", function() {
+    if (activeTouchCard) {
+      activeTouchCard.classList.remove("touch-active");
+      activeTouchCard = null;
+    }
+  }, { passive: true });
+}
+
 // Boot application
 document.addEventListener("DOMContentLoaded", () => {
   // Start High-FPS Procedural Canvas Frame Engine
@@ -2076,6 +2277,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCatalog();
   });
 
+  initInstantMobileTouch();
   renderCart();
   syncWooCommerce();
 });
