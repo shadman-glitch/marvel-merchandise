@@ -3,35 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marvel Studios Collectibles &mdash; Official 1:1 Helmets, Audio & Tech</title>
-  <meta name="description" content="Official Marvel Cinematic 1:1 life-size wearable helmets, Captain America shields, Thor Mjolnir Bluetooth speakers, and Arc Reactor wireless fast chargers." />
+  <title>Marvel Studios Collectibles &mdash; Official 1:1 Life-Size Helmets & Tech</title>
+  <meta name="description" content="Official Marvel Cinematic 1:1 life-size wearable helmets, Captain America shields, Thor Mjolnir speakers, and Arc Reactor wireless chargers." />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e11b23'><rect width='24' height='24' rx='4' fill='%23e11b23'/><text x='12' y='16' font-size='12' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
 
-  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <!-- Google Fonts: Syne (Luxury Display), Plus Jakarta Sans (Minimalist Sans) & JetBrains Mono (Precision Figures) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
   <style>
 /* ==========================================================================
    PREMIUM MINIMALIST MARVEL CINEMATIC E-COMMERCE DESIGN SYSTEM
-   - Zero emojis, refined luxury typography (Plus Jakarta Sans)
+   - Zero emojis, refined luxury typography (Syne & Plus Jakarta Sans)
    - Standard, intuitive e-commerce terminology (Add to Cart, Buy, Cart, Checkout)
-   - Stable titles and buttons (no jarring movement under mouse)
-   - Subtle 3D perspective applied ONLY to the product image
-   - 60 FPS Canvas Frame Sequence Background (No YouTube iframe dependency)
+   - Stable titles and buttons (strictly zero movement under cursor)
+   - Subtle 3D perspective isolated strictly to the product image
+   - Self-hosted 720p HD battle video with transparent cinematic particle canvas
    ========================================================================== */
 
 :root {
   /* Premium Dark Obsidian Palette */
-  --bg-dark: #080b12;
-  --bg-surface: rgba(14, 18, 28, 0.78);
-  --bg-card: rgba(16, 22, 34, 0.72);
-  --bg-card-hover: rgba(22, 30, 48, 0.82);
-  --bg-input: rgba(22, 29, 44, 0.75);
-  --bg-modal: rgba(10, 14, 22, 0.96);
+  --bg-dark: #07090e;
+  --bg-surface: rgba(12, 16, 25, 0.82);
+  --bg-card: rgba(14, 19, 30, 0.74);
+  --bg-card-hover: rgba(20, 27, 44, 0.85);
+  --bg-input: rgba(20, 26, 40, 0.78);
+  --bg-modal: rgba(9, 12, 19, 0.97);
 
   /* Subtle Marvel Cinematic Accents */
   --accent-gold: #f59e0b;          /* Champagne Gold for pricing */
@@ -62,6 +62,7 @@
   --radius-pill: 9999px;
 
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -138,66 +139,6 @@ body {
   background: radial-gradient(circle at 50% 50%, rgba(8, 11, 18, 0.1) 0%, rgba(8, 11, 18, 0.45) 75%, rgba(8, 11, 18, 0.88) 100%);
 }
 
-.btn-sound-toggle {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-light);
-  color: var(--text-pure);
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 7px 12px;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: var(--transition);
-}
-.btn-sound-toggle:hover, .btn-sound-toggle.active {
-  background: rgba(56, 189, 248, 0.15);
-  border-color: var(--accent-blue);
-  color: var(--accent-blue);
-}
-
-/* ==========================================================================
-   TOP NOTIFICATION STRIP
-   ========================================================================== */
-.top-notice-strip {
-  background: rgba(10, 14, 22, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: var(--text-muted);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  padding: 6px 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 50;
-  border-bottom: 1px solid var(--border-subtle);
-}
-.notice-tag {
-  background: var(--accent-red);
-  color: #fff;
-  padding: 2px 7px;
-  border-radius: 3px;
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-right: 8px;
-}
-.notice-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  color: var(--text-dim);
-}
-
 /* ==========================================================================
    MAIN NAVBAR (Clean Minimalist Luxury)
    ========================================================================== */
@@ -206,8 +147,8 @@ body {
   top: 0;
   z-index: 100;
   background: var(--bg-surface);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -226,7 +167,7 @@ body {
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   text-decoration: none;
 }
 .brand-badge {
@@ -234,21 +175,27 @@ body {
   color: #fff;
   font-weight: 900;
   font-size: 13px;
-  padding: 3px 7px;
+  padding: 3px 8px;
   border-radius: 4px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 .brand-title {
+  font-family: var(--font-display);
   color: var(--text-pure);
   font-weight: 800;
-  font-size: 16px;
-  letter-spacing: 0.02em;
+  font-size: 17px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 .brand-sub {
-  color: var(--text-dim);
-  font-size: 11px;
-  font-weight: 500;
-  margin-left: 4px;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-left: 6px;
+  border-left: 1px solid var(--border-light);
+  padding-left: 8px;
 }
 
 /* Navigation Tabs */
@@ -383,12 +330,13 @@ body {
 }
 
 .hero-pill {
-  background: rgba(22, 29, 44, 0.6);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-subtle);
   color: var(--text-muted);
   font-family: inherit;
   font-size: 12px;
   font-weight: 600;
+  letter-spacing: 0.02em;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
   cursor: pointer;
@@ -399,11 +347,14 @@ body {
 .hero-pill:hover {
   color: var(--text-pure);
   border-color: var(--border-light);
+  background: rgba(255, 255, 255, 0.08);
 }
 .hero-pill.active {
-  background: rgba(56, 189, 248, 0.15);
-  border-color: var(--accent-blue);
-  color: var(--text-pure);
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #07090e;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }
 
 /* ==========================================================================
@@ -426,10 +377,12 @@ body {
   margin-bottom: 2rem;
 }
 .catalog-title {
-  font-size: 20px;
+  font-family: var(--font-display);
+  font-size: 21px;
   font-weight: 800;
   color: var(--text-pure);
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 .catalog-count {
   font-size: 13px;
@@ -617,8 +570,10 @@ body {
 }
 
 .product-subtitle {
-  font-size: 11.5px;
-  color: var(--text-muted);
+  font-size: 11px;
+  color: var(--text-dim);
+  font-weight: 500;
+  letter-spacing: 0.02em;
   margin-bottom: 12px;
   white-space: nowrap;
   overflow: hidden;
@@ -627,47 +582,62 @@ body {
 
 .product-price-row {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 8px;
   margin-top: auto;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .product-price {
   font-size: 16px;
-  font-weight: 800;
-  color: var(--accent-gold);
+  font-weight: 700;
+  color: #fbbf24;
   font-family: var(--font-mono);
+  font-feature-settings: 'tnum' 1;
 }
 .product-mrp {
   font-size: 11.5px;
   color: var(--text-dim);
   text-decoration: line-through;
+  font-family: var(--font-mono);
+}
+.product-delivery-badge {
+  margin-left: auto;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
 }
 
 /* Clean, Rock-Solid "Add to Cart" Button (Easy to click!) */
 .btn-add-to-cart {
   width: 100%;
-  background: var(--accent-red);
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
   color: #ffffff;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   font-family: inherit;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 9px 12px;
-  border-radius: var(--radius-sm);
+  padding: 9.5px 12px;
+  border-radius: var(--radius-md);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 7px;
   transition: var(--transition);
   transform: none !important; /* Guaranteed zero jitter */
 }
 .btn-add-to-cart:hover {
-  background: var(--accent-red-hover);
-  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.35);
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.38);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 .btn-add-to-cart:active {
   transform: scale(0.98) !important;
@@ -722,9 +692,12 @@ body {
   align-items: center;
 }
 .cart-header-title {
-  font-size: 15px;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
   color: var(--text-pure);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 .cart-close-btn {
   background: none;
@@ -832,21 +805,22 @@ body {
 }
 .btn-checkout {
   width: 100%;
-  background: var(--accent-red);
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
   color: #fff;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   font-family: inherit;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 12px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: var(--transition);
 }
 .btn-checkout:hover {
-  background: var(--accent-red-hover);
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  box-shadow: 0 6px 20px rgba(225, 29, 72, 0.4);
 }
 
 /* ==========================================================================
@@ -1042,7 +1016,7 @@ body {
       <a href="#" class="brand-logo" aria-label="Marvel Store Home">
         <span class="brand-badge">MARVEL</span>
         <span class="brand-title">STUDIOS</span>
-        <span class="brand-sub">Official Gear</span>
+        <span class="brand-sub">COLLECTIBLES</span>
       </a>
 
       <!-- Category Navigation Links (Zero Emojis) -->
@@ -1051,21 +1025,11 @@ body {
         <span class="nav-link" data-cat="wearable-helmets" onclick="selectCategory('wearable-helmets', this)">Helmets</span>
         <span class="nav-link" data-cat="bluetooth-speakers" onclick="selectCategory('bluetooth-speakers', this)">Speakers</span>
         <span class="nav-link" data-cat="charging-stations" onclick="selectCategory('charging-stations', this)">Chargers</span>
-        <span class="nav-link" data-cat="digital-tech" onclick="selectCategory('digital-tech', this)">Audio & Tech</span>
+        <span class="nav-link" data-cat="digital-tech" onclick="selectCategory('digital-tech', this)">Tech Gear</span>
       </nav>
 
       <!-- Right Controls -->
       <div class="header-right">
-        <!-- Sound Toggle Button -->
-        <button class="btn-sound-toggle" id="btnSoundToggle" onclick="toggleBattleAudio()" title="Toggle Battle Sound">
-          <svg id="soundIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <line x1="23" y1="9" x2="17" y2="15"></line>
-            <line x1="17" y1="9" x2="23" y2="15"></line>
-          </svg>
-          <span id="soundToggleLabel">Battle Audio: Muted</span>
-        </button>
-
         <!-- Search Input -->
         <div class="search-box">
           <input type="text" id="globalSearch" class="search-input" placeholder="Search products..." autocomplete="off" />
@@ -1413,35 +1377,6 @@ class CinematicFrameEngine {
     }
   }
 }
-
-/**
- * Toggle Battle Audio (Mute / Unmute background video)
- */
-window.toggleBattleAudio = function() {
-  const video = document.getElementById("bgBattleVideo");
-  const btn = document.getElementById("btnSoundToggle");
-  const label = document.getElementById("soundToggleLabel");
-  const icon = document.getElementById("soundIcon");
-  if (!video) return;
-
-  if (video.muted) {
-    video.muted = false;
-    video.volume = 0.45;
-    video.play().catch(e => console.log("Audio allowed on user interaction:", e));
-    if (btn) btn.classList.add("active");
-    if (label) label.textContent = "Battle Audio: On";
-    if (icon) {
-      icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
-    }
-  } else {
-    video.muted = true;
-    if (btn) btn.classList.remove("active");
-    if (label) label.textContent = "Battle Audio: Muted";
-    if (icon) {
-      icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
-    }
-  }
-};
 
 // Full official 20-product catalog
 const CATALOG_ITEMS = [
@@ -1829,6 +1764,7 @@ function renderCatalog() {
           <div class="product-price-row">
             <span class="product-price">${formatINR(p.price)}</span>
             <span class="product-mrp">${formatINR(p.mrp)}</span>
+            <span class="product-delivery-badge">Free Shipping</span>
           </div>
           <button class="btn-add-to-cart" onclick="quickAddToCart(event, ${p.id})">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
