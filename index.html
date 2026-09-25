@@ -73,6 +73,14 @@
   padding: 0;
 }
 
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+
 body {
   background-color: var(--bg-dark);
   color: var(--text-main);
@@ -81,43 +89,43 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
 }
 
 /* ==========================================================================
    SELF-HOSTED CINEMATIC BATTLE VIDEO + 60 FPS OVERLAY (NO YOUTUBE)
    Hardware accelerated 720p HD MP4 video with real-time procedural canvas.
+   Zero CSS filters for 100% smooth 60 FPS performance on all devices.
    ========================================================================== */
 .cinematic-bg-container {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  background: #080b12;
+  background: #07090e;
+  transform: translateZ(0);
 }
 
 .cinematic-bg-video {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100vw;
-  height: 56.25vw;
-  min-height: 100vh;
-  min-width: 177.78vh;
-  transform: translate(-50%, -50%) scale(1.15);
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%) scale(1.06);
   object-fit: cover;
-  opacity: 0.88;
-  filter: saturate(1.22) contrast(1.12) brightness(0.94);
+  opacity: 0.86;
+  will-change: transform;
 }
 
 @media (max-width: 768px) {
   .cinematic-bg-video {
-    transform: translate(-50%, -46%) scale(1.48);
+    transform: translate(-50%, -50%) scale(1.28);
   }
 }
 
@@ -136,7 +144,7 @@ body {
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, rgba(8, 11, 18, 0.1) 0%, rgba(8, 11, 18, 0.45) 75%, rgba(8, 11, 18, 0.88) 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(7, 9, 14, 0.15) 0%, rgba(7, 9, 14, 0.58) 72%, rgba(7, 9, 14, 0.94) 100%);
 }
 
 /* ==========================================================================
@@ -291,20 +299,33 @@ body {
   font-weight: 700;
   padding: 1px 6px;
   border-radius: 10px;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease;
+  display: inline-block;
+}
+.cart-counter.bump {
+  animation: badgeBump 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes badgeBump {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); background: var(--accent-blue); }
+  100% { transform: scale(1); }
 }
 
 /* ==========================================================================
    HERO FILTER BAR (Zero Emojis, Minimalist Luxury Pills)
    ========================================================================== */
 .hero-filter-bar {
-  background: rgba(12, 16, 26, 0.82);
+  background: rgba(12, 16, 26, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
-  padding: 10px 2rem;
+  padding: 8px 0;
   position: sticky;
   top: 68px;
   z-index: 80;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .hero-filter-container {
@@ -312,8 +333,10 @@ body {
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 2rem;
   scrollbar-width: none;
 }
 .hero-filter-container::-webkit-scrollbar {
@@ -415,23 +438,37 @@ body {
    ========================================================================== */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.5rem;
+  width: 100%;
 }
 
 /* Stable Card Container (No 3D tilt on card itself!) */
 .product-card {
   background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-card);
-  transition: border-color 0.25s ease, background 0.25s ease;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
   position: relative;
+  min-width: 0; /* Prevents grid blowout on mobile */
+  animation: cardEntrance 0.42s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .product-card:hover {
@@ -641,6 +678,11 @@ body {
 }
 .btn-add-to-cart:active {
   transform: scale(0.98) !important;
+}
+.btn-add-to-cart.btn-added {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+  border-color: rgba(52, 211, 153, 0.4) !important;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35) !important;
 }
 
 /* ==========================================================================
@@ -941,58 +983,185 @@ body {
 
 /* ==========================================================================
    RESPONSIVE DESIGN (Smartphone & Tablet Optimization)
+   Zero horizontal overflow, 100% viewport fit, high touch-target usability
    ========================================================================== */
-@media (max-width: 1140px) {
+@media (max-width: 1200px) {
   .products-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
   }
 }
+
 @media (max-width: 860px) {
+  .header-container {
+    padding: 0 1rem;
+    height: 58px;
+    gap: 0.75rem;
+  }
+
   .nav-tabs {
     display: none;
   }
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.85rem;
-  }
-  .header-container {
-    padding: 0 1rem;
-  }
+
   .search-box {
     display: none;
   }
+
+  .hero-filter-bar {
+    top: 58px;
+    padding: 8px 0;
+  }
+  .hero-filter-container {
+    padding: 0 1rem;
+    gap: 8px;
+  }
+
+  .main-wrapper {
+    padding: 1.25rem 1rem 4rem 1rem;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
   .qv-grid {
     grid-template-columns: 1fr;
     padding: 1.25rem;
+    gap: 1.25rem;
   }
 }
-@media (max-width: 520px) {
-  .top-notice-strip {
+
+@media (max-width: 580px) {
+  .header-container {
+    padding: 0 0.85rem;
+    height: 54px;
+  }
+
+  .brand-logo {
+    gap: 6px;
+  }
+  .brand-badge {
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+  .brand-title {
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+  .brand-sub {
+    display: none; /* Hide COLLECTIBLES on small phones to prevent any header overflow */
+  }
+
+  .btn-cart {
+    padding: 6px 11px;
+    font-size: 11.5px;
+    gap: 5px;
+  }
+
+  .hero-filter-bar {
+    top: 54px;
+    padding: 6px 0;
+  }
+  .hero-filter-container {
+    padding: 0 0.85rem;
+    gap: 6px;
+  }
+  .filter-label {
     font-size: 10px;
-    padding: 6px 0.75rem;
+    letter-spacing: 0.05em;
   }
-  .notice-right {
-    display: none;
+  .hero-pill {
+    font-size: 11px;
+    padding: 5px 11px;
   }
+
   .main-wrapper {
-    padding: 1.25rem 0.75rem 4rem 0.75rem;
+    padding: 1rem 0.65rem 4rem 0.65rem;
   }
+
+  .catalog-heading-bar {
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+  }
+  .catalog-title {
+    font-size: 17px;
+  }
+  .catalog-count {
+    font-size: 11px;
+    margin-left: 4px;
+  }
+  .sort-select {
+    font-size: 11.5px;
+    padding: 5px 9px;
+  }
+
   .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.65rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
   }
+
+  .product-card {
+    border-radius: var(--radius-md);
+  }
+
   .product-details {
-    padding: 10px;
+    padding: 8px;
   }
+
   .product-title {
     font-size: 12px;
+    line-height: 1.3;
+    margin-bottom: 2px;
   }
+
+  .product-subtitle {
+    font-size: 9.5px;
+    margin-bottom: 6px;
+  }
+
+  .product-price-row {
+    flex-wrap: wrap;
+    gap: 3px;
+    margin-bottom: 6px;
+  }
+
   .product-price {
-    font-size: 14px;
+    font-size: 13.5px;
   }
+
+  .product-mrp {
+    font-size: 10px;
+  }
+
+  .product-delivery-badge {
+    display: none; /* Hide inside small mobile card grid to keep height compact */
+  }
+
   .btn-add-to-cart {
-    padding: 7px 8px;
-    font-size: 10.5px;
+    padding: 7px 6px;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    border-radius: var(--radius-sm);
+    gap: 4px;
+  }
+  .btn-add-to-cart svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .cart-drawer {
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  .modal-container {
+    width: 95%;
+    max-height: 85vh;
+  }
+  .qv-grid {
+    padding: 1rem;
+    gap: 1rem;
   }
 }
   </style>
@@ -1001,12 +1170,39 @@ body {
 
   <!-- SELF-HOSTED 720P HD MARVEL CINEMATIC BATTLE VIDEO + PARTICLES (NO YOUTUBE) -->
   <div class="cinematic-bg-container">
-    <video id="bgBattleVideo" class="cinematic-bg-video" autoplay muted loop playsinline preload="auto">
+    <video id="bgBattleVideo" class="cinematic-bg-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
       <source src="assets/battle.mp4" type="video/mp4">
     </video>
     <canvas id="marvelCanvas"></canvas>
     <div class="canvas-overlay-vignette"></div>
   </div>
+  <script>
+    // Immediate early boot for background video on page open
+    (function() {
+      var v = document.getElementById("bgBattleVideo");
+      if (v) {
+        v.muted = true;
+        v.defaultMuted = true;
+        v.playsInline = true;
+        var p = v.play();
+        if (p !== undefined) {
+          p.catch(function() {
+            var start = function() {
+              v.play().catch(function(){});
+              window.removeEventListener("touchstart", start, { passive: true });
+              window.removeEventListener("pointerdown", start, { passive: true });
+              window.removeEventListener("click", start, { passive: true });
+              window.removeEventListener("scroll", start, { passive: true });
+            };
+            window.addEventListener("touchstart", start, { once: true, passive: true });
+            window.addEventListener("pointerdown", start, { once: true, passive: true });
+            window.addEventListener("click", start, { once: true, passive: true });
+            window.addEventListener("scroll", start, { once: true, passive: true });
+          });
+        }
+      }
+    })();
+  </script>
 
   <!-- Main Navbar -->
   <header class="main-header">
@@ -1236,7 +1432,7 @@ class CinematicFrameEngine {
     this.canvas = document.getElementById(canvasId);
     if (!this.canvas) return;
     this.ctx = this.canvas.getContext("2d", { alpha: true });
-    this.dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    this.dpr = (window.innerWidth < 768) ? 1 : Math.min(window.devicePixelRatio || 1, 1.25);
     this.width = window.innerWidth;
     this.height = window.innerHeight;
 
@@ -1263,15 +1459,19 @@ class CinematicFrameEngine {
     // Ensure background video autoplays smoothly
     const video = document.getElementById("bgBattleVideo");
     if (video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
       video.play().catch(() => {
-        // Retry play on first user interaction if blocked by autoplay policy
         const unlockPlay = () => {
           video.play().catch(() => {});
-          window.removeEventListener("click", unlockPlay);
-          window.removeEventListener("touchstart", unlockPlay);
+          ["click", "touchstart", "pointerdown", "scroll"].forEach(ev => {
+            window.removeEventListener(ev, unlockPlay);
+          });
         };
-        window.addEventListener("click", unlockPlay, { once: true });
-        window.addEventListener("touchstart", unlockPlay, { once: true });
+        ["click", "touchstart", "pointerdown", "scroll"].forEach(ev => {
+          window.addEventListener(ev, unlockPlay, { once: true, passive: true });
+        });
       });
     }
 
@@ -1281,6 +1481,7 @@ class CinematicFrameEngine {
   resize() {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+    this.dpr = (this.width < 768) ? 1 : Math.min(window.devicePixelRatio || 1, 1.25);
     this.canvas.width = Math.floor(this.width * this.dpr);
     this.canvas.height = Math.floor(this.height * this.dpr);
     this.canvas.style.width = `${this.width}px`;
@@ -1291,18 +1492,18 @@ class CinematicFrameEngine {
 
   initEmbers() {
     this.embers = [];
-    const count = this.width < 768 ? 60 : 130;
+    const count = this.width < 768 ? 24 : 45;
     for (let i = 0; i < count; i++) {
       this.embers.push({
         x: Math.random() * this.width,
         y: Math.random() * this.height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: - (Math.random() * 0.9 + 0.4),
-        size: Math.random() * 2.2 + 0.8,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: - (Math.random() * 0.75 + 0.35),
+        size: Math.random() * 2.0 + 0.8,
         color: Math.random() > 0.45 ? "245, 158, 11" : "56, 189, 248",
-        alpha: Math.random() * 0.6 + 0.2,
+        alpha: Math.random() * 0.55 + 0.2,
         wobble: Math.random() * Math.PI * 2,
-        wobbleSpeed: Math.random() * 0.04 + 0.01
+        wobbleSpeed: Math.random() * 0.03 + 0.01
       });
     }
   }
@@ -1312,9 +1513,9 @@ class CinematicFrameEngine {
     let startX = Math.random() * (this.width * 0.6) + (this.width * 0.2);
     let startY = 0;
 
-    const segments = 16;
+    const segments = 14;
     for (let i = 0; i < segments; i++) {
-      let nextX = startX + (Math.random() - 0.5) * 60;
+      let nextX = startX + (Math.random() - 0.5) * 50;
       let nextY = startY + (this.height / segments) * (0.8 + Math.random() * 0.4);
       this.lightningBranches.push({ x1: startX, y1: startY, x2: nextX, y2: nextY });
       startX = nextX;
@@ -1325,12 +1526,13 @@ class CinematicFrameEngine {
 
   loop() {
     requestAnimationFrame(() => this.loop());
+    if (document.hidden) return; // Skip work when tab is in background
     const now = performance.now();
 
     // Check lightning interval
     if (now > this.nextLightningTime) {
       this.triggerLightning();
-      this.nextLightningTime = now + (Math.random() * 5000 + 4000);
+      this.nextLightningTime = now + (Math.random() * 6000 + 5000);
     }
 
     // 1. Transparent Clear (Allowing self-hosted 720p HD battle video to show through)
@@ -1733,10 +1935,11 @@ function renderCatalog() {
     return;
   }
 
-  grid.innerHTML = list.map(p => {
+  grid.innerHTML = list.map((p, idx) => {
     const secImg = p.secondaryImg || p.primaryImg;
+    const animDelay = (idx * 0.035).toFixed(3);
     return `
-      <div class="product-card" data-id="${p.id}">
+      <div class="product-card" data-id="${p.id}" style="animation-delay: ${animDelay}s;">
         <!-- ONLY the image box tilts gently on hover (Max 3 degrees) -->
         <div class="product-image-container" onclick="openQuickView(${p.id})">
           <div class="product-image-inner">
@@ -1781,32 +1984,40 @@ function renderCatalog() {
 /**
  * SUBTLE MICRO-TILT APPLIED STRICTLY TO THE IMAGE CONTAINER
  * Titles, prices, and buttons remain 100% stable.
+ * Uses requestAnimationFrame throttling and disables on touch screens for 0 lag.
  */
 function attachSubtleImageTilt() {
+  if (window.matchMedia && window.matchMedia("(hover: none)").matches) {
+    return; // Touch screen - skip tilt listeners for maximum speed
+  }
   const containers = document.querySelectorAll(".product-image-container");
   containers.forEach(container => {
     const inner = container.querySelector(".product-image-inner");
     if (!inner) return;
 
+    let rafId = null;
     container.addEventListener("mousemove", (e) => {
-      const rect = container.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-      // Micro-tilt: maximum +/- 3.5 degrees only (very gentle and subtle)
-      const rotateX = ((y - centerY) / centerY) * -3.5;
-      const rotateY = ((x - centerX) / centerX) * 3.5;
+        const rotateX = ((y - centerY) / centerY) * -3.5;
+        const rotateY = ((x - centerX) / centerX) * 3.5;
 
-      inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      container.style.setProperty("--glint-x", `${x}px`);
-      container.style.setProperty("--glint-y", `${y}px`);
-    });
+        inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        container.style.setProperty("--glint-x", `${x}px`);
+        container.style.setProperty("--glint-y", `${y}px`);
+      });
+    }, { passive: true });
 
     container.addEventListener("mouseleave", () => {
+      if (rafId) cancelAnimationFrame(rafId);
       inner.style.transform = `rotateX(0deg) rotateY(0deg)`;
-    });
+    }, { passive: true });
   });
 }
 
@@ -1914,6 +2125,18 @@ window.quickAddToCart = function(e, productId) {
   if (!product) return;
   const variation = (product.variations && product.variations.length > 0) ? product.variations[0] : { name: "Standard", price: product.price };
   addToCart(product.id, variation);
+
+  // Micro-tactile button animation feedback
+  const btn = e.currentTarget;
+  if (btn) {
+    btn.classList.add("btn-added");
+    const origHTML = btn.innerHTML;
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Added</span>`;
+    setTimeout(() => {
+      btn.classList.remove("btn-added");
+      btn.innerHTML = origHTML;
+    }, 1100);
+  }
 };
 
 function addToCart(productId, variation) {
@@ -1948,8 +2171,15 @@ function saveCart() {
 
 function updateCartBadge() {
   const count = cartItems.reduce((acc, it) => acc + it.qty, 0);
-  document.getElementById("cartCountBadge").textContent = count;
-  document.getElementById("cartDrawerCount").textContent = count;
+  const badge = document.getElementById("cartCountBadge");
+  const drawerBadge = document.getElementById("cartDrawerCount");
+  if (badge) {
+    badge.textContent = count;
+    badge.classList.remove("bump");
+    void badge.offsetWidth; // trigger reflow for smooth keyframe restart
+    badge.classList.add("bump");
+  }
+  if (drawerBadge) drawerBadge.textContent = count;
 }
 
 function renderCart() {
