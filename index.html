@@ -14,6 +14,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Three.js & OrbitControls for 3D Arc Reactor Showcase -->
+  <script src="assets/js/three.min.js"></script>
+  <script src="assets/js/OrbitControls.js"></script>
+  <script src="assets/js/arc-reactor-3d.js"></script>
+
   <style>
 /* ==========================================================================
    PREMIUM MINIMALIST MARVEL CINEMATIC E-COMMERCE DESIGN SYSTEM
@@ -1025,6 +1030,789 @@ body {
 }
 
 /* ==========================================================================
+   3D ARC REACTOR SPOTLIGHT HERO SHOWCASE
+   - Billet 6061-T6 Aluminum, 10-Phase Copper Toroids, Cold Fusion LED 3D
+   - Premium 2-Column Split Grid (occupies ~half laptop screen, ~half mobile screen)
+   - Zero emojis, precision Syne, Plus Jakarta Sans & JetBrains Mono typography
+   ========================================================================== */
+.hero-3d-showcase {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 80px 24px 36px 24px;
+  box-sizing: border-box;
+}
+
+.hero-3d-grid {
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 32px;
+  align-items: center;
+}
+
+/* 3D Viewport Glass Card */
+.arc-3d-card {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  border-radius: var(--radius-lg);
+  background: radial-gradient(ellipse at 50% 35%, rgba(18, 25, 42, 0.85) 0%, rgba(8, 11, 18, 0.98) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.arc-3d-canvas-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.arc-3d-canvas-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+  cursor: grab;
+}
+
+.arc-3d-canvas-wrap canvas:active {
+  cursor: grabbing;
+}
+
+/* Top Overlays */
+.arc-card-top-bar {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.arc-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(9, 12, 19, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent-blue);
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  pointer-events: auto;
+}
+
+.arc-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00f0ff;
+  box-shadow: 0 0 8px #00f0ff;
+  animation: arcPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes arcPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.8); }
+}
+
+.arc-spectrum-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(9, 12, 19, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+  pointer-events: auto;
+}
+
+.arc-spectrum-title {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.arc-spectrum-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+  padding: 0;
+  outline: none;
+  background: none;
+}
+
+.arc-spectrum-dot:hover {
+  transform: scale(1.22);
+}
+
+.arc-spectrum-dot.active {
+  border-color: #ffffff;
+  transform: scale(1.25);
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* Bottom Controls Toolbar */
+.arc-card-bottom-bar {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.arc-tools-dock {
+  display: flex;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.arc-btn-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(14, 20, 32, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.arc-btn-tool:hover {
+  border-color: var(--accent-blue);
+  color: #ffffff;
+  background: rgba(20, 28, 48, 0.95);
+}
+
+.arc-btn-tool.active {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  background: rgba(56, 189, 248, 0.14);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+}
+
+.arc-btn-tool svg {
+  width: 14px;
+  height: 14px;
+}
+
+.arc-hint-hud {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+  background: rgba(9, 12, 19, 0.7);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Right Column: High-Impact Minimalist Product Details */
+.arc-info-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.arc-kicker-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.arc-pill-kicker {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: var(--accent-blue);
+  letter-spacing: 0.8px;
+}
+
+.arc-pill-gold {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.4);
+  color: var(--accent-gold);
+}
+
+.arc-main-title {
+  font-family: var(--font-display);
+  font-size: clamp(23px, 2.5vw, 34px);
+  font-weight: 800;
+  color: var(--text-pure);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.arc-main-sub {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.arc-story-lead {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 18px;
+  padding-left: 12px;
+  border-left: 2px solid var(--accent-blue);
+}
+
+/* 4-cell Technical Spec Matrix */
+.arc-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.arc-spec-cell {
+  background: rgba(14, 20, 32, 0.72);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  transition: var(--transition);
+}
+
+.arc-spec-cell:hover {
+  border-color: var(--border-light);
+  background: rgba(19, 27, 44, 0.85);
+}
+
+.arc-spec-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--accent-blue);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.arc-spec-val {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-pure);
+}
+
+/* Pricing & Action Bar */
+.arc-price-action-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 18px;
+  background: rgba(12, 17, 27, 0.85);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  margin-bottom: 14px;
+}
+
+.arc-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.arc-current-price {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: -0.02em;
+}
+
+.arc-mrp-price {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-dim);
+  text-decoration: line-through;
+}
+
+.arc-discount-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.arc-action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-arc-primary {
+  flex: 1.4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-red);
+  color: #ffffff;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-arc-primary:hover {
+  background: var(--accent-red-hover);
+  box-shadow: 0 0 16px rgba(225, 29, 72, 0.4);
+}
+
+.btn-arc-secondary {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border-light);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-arc-secondary:hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+/* Scroll down indicator to Marvel collection */
+.arc-scroll-cue-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 2px;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.arc-scroll-cue-link:hover {
+  color: var(--accent-blue);
+}
+
+.arc-scroll-cue-link svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s;
+}
+
+.arc-scroll-cue-link:hover svg {
+  transform: translateY(3px);
+}
+
+/* Scroll Anchor with smooth scroll offset */
+.collection-scroll-anchor {
+  display: block;
+  position: relative;
+  top: -64px;
+  visibility: hidden;
+}
+
+/* ==========================================================================
+   ARC REACTOR HANDS-ON VIDEO SHOWCASE
+   - Centered luxury video presentation
+   - Direct interactive link to the Arc Reactor catalog item
+   ========================================================================== */
+
+.arc-video-showcase-section {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(56, 189, 248, 0.16);
+  position: relative;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.arc-video-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.arc-video-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.arc-video-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+}
+
+.arc-video-sub {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  color: var(--text-muted);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Centered Medium-Sized Video Container */
+.arc-video-container {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 50%, rgba(14, 20, 32, 0.95) 0%, rgba(6, 8, 14, 1) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(0, 240, 255, 0.08);
+  aspect-ratio: 16 / 9;
+  max-height: 480px;
+  display: flex;
+}
+
+.arc-video-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arc-video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
+  background: #000000;
+}
+
+.arc-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s ease;
+  z-index: 3;
+}
+
+.arc-video-overlay:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.arc-video-overlay.is-playing {
+  background: transparent;
+  pointer-events: none;
+}
+
+.arc-video-big-play {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(12, 16, 26, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(0, 240, 255, 0.55);
+  color: #00f0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 24px rgba(0, 240, 255, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.arc-video-big-play:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 240, 255, 0.55);
+}
+
+.arc-video-big-play svg {
+  width: 24px;
+  height: 24px;
+  margin-left: 3px;
+}
+
+.arc-video-hud {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 18px;
+  background: linear-gradient(to top, rgba(6, 8, 14, 0.95) 0%, rgba(6, 8, 14, 0.4) 70%, transparent 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 4;
+}
+
+.arc-video-hud-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.arc-hud-title {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.arc-hud-desc {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.arc-video-hud-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.arc-hud-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: rgba(18, 25, 40, 0.8);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.arc-hud-btn:hover {
+  background: rgba(28, 38, 60, 0.95);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.arc-hud-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Action Bar below video: Clean luxury button to Arc Reactor in catalog */
+.arc-video-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.btn-reactor-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #00f0ff;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(0, 240, 255, 0.12);
+}
+
+.btn-reactor-link:hover {
+  background: #00f0ff;
+  color: #040810;
+  box-shadow: 0 6px 24px rgba(0, 240, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn-reactor-scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: rgba(18, 25, 40, 0.7);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-reactor-scroll:hover {
+  background: rgba(28, 38, 60, 0.95);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* Subtle highlight pulse when scrolled to reactor card */
+@keyframes reactor-highlight-glow {
+  0% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.6); }
+  50% { box-shadow: 0 0 30px 4px rgba(0, 240, 255, 0.5); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
+}
+
+.product-card.reactor-pulse-highlight {
+  animation: reactor-highlight-glow 2.2s ease-in-out;
+  border-color: rgba(0, 240, 255, 0.8) !important;
+}
+
+
+/* Lightbox Modal */
+.photo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 6, 10, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.photo-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.photo-modal-box {
+  position: relative;
+  max-width: 900px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo-modal-img {
+  max-width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85);
+}
+
+.photo-modal-caption {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 14px;
+  text-align: center;
+}
+
+.photo-modal-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(20, 26, 40, 0.9);
+  border: 1px solid var(--border-light);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.photo-modal-close:hover {
+  background: var(--accent-red);
+  border-color: var(--accent-red);
+}
+
+.photo-modal-close svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN (Smartphone & Tablet Optimization)
    Zero horizontal overflow, 100% viewport fit, high touch-target usability
    ========================================================================== */
@@ -1036,6 +1824,50 @@ body {
 }
 
 @media (max-width: 860px) {
+  .hero-3d-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .hero-3d-showcase {
+    padding: 68px 14px 28px 14px;
+  }
+
+  .arc-3d-card {
+    height: 48vh; /* Exactly half of phone screen height */
+    min-height: 310px;
+    max-height: 420px;
+  }
+
+  .arc-video-showcase-section {
+    margin-top: 32px;
+    padding-top: 24px;
+  }
+
+  .arc-video-container {
+    min-height: 200px;
+  }
+
+  .arc-video-frame {
+    min-height: 200px;
+  }
+
+  .arc-video-element {
+    max-height: 260px;
+  }
+
+  .arc-main-title {
+    font-size: 22px;
+  }
+
+  .arc-specs-grid {
+    gap: 8px;
+  }
+
+  .arc-spec-cell {
+    padding: 8px 10px;
+  }
+
   .header-container {
     padding: 0 1rem;
     height: 58px;
@@ -1076,6 +1908,29 @@ body {
 }
 
 @media (max-width: 580px) {
+  .arc-card-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .arc-photos-container {
+    grid-template-columns: 1fr;
+  }
+  .arc-hint-hud {
+    display: none;
+  }
+  .arc-action-buttons {
+    flex-direction: column;
+  }
+  .arc-tools-dock {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .arc-btn-tool {
+    padding: 5px 8px;
+    font-size: 9.5px;
+  }
+
   .header-container {
     padding: 0 0.85rem;
     height: 52px;
@@ -1304,6 +2159,198 @@ body {
     </div>
   </header>
 
+  <!-- 3D ARC REACTOR SPOTLIGHT HERO SHOWCASE -->
+  <section class="hero-3d-showcase" id="hero3dSection">
+    <div class="hero-3d-grid">
+      
+      <!-- Left Column: Interactive 3D Digital Twin Card (~50% width on laptop, ~50% height on phone) -->
+      <div class="arc-3d-card" id="arc3dCard">
+        
+        <!-- Three.js Canvas Container -->
+        <div id="arc3dCanvasContainer" class="arc-3d-canvas-wrap"></div>
+
+        <!-- Top Status & Color Spectrum Overlays -->
+        <div class="arc-card-top-bar">
+          <div class="arc-status-badge">
+            <span class="arc-pulse-dot"></span>
+            <span>1:1 INTERACTIVE DIGITAL TWIN</span>
+          </div>
+
+          <div class="arc-spectrum-selector">
+            <span class="arc-spectrum-title" id="arcSpectrumName">MK-I Cyan (460nm)</span>
+            <button class="arc-spectrum-dot active" data-mode="classic" style="background:#00f0ff; color:#00f0ff;" title="MK-I Cyan (460nm)" onclick="ArcReactor3D.setColorMode('classic')"></button>
+            <button class="arc-spectrum-dot" data-mode="vibranium" style="background:#dff9fb; color:#dff9fb;" title="Overdrive White-Blue" onclick="ArcReactor3D.setColorMode('vibranium')"></button>
+            <button class="arc-spectrum-dot" data-mode="nanotech" style="background:#ff3b3b; color:#ff3b3b;" title="MK-85 Nano Crimson" onclick="ArcReactor3D.setColorMode('nanotech')"></button>
+            <button class="arc-spectrum-dot" data-mode="stealth" style="background:#e2a86a; color:#e2a86a;" title="Tungsten Amber" onclick="ArcReactor3D.setColorMode('stealth')"></button>
+          </div>
+        </div>
+
+        <!-- Bottom Controls Dock -->
+        <div class="arc-card-bottom-bar">
+          <div class="arc-tools-dock">
+            <button class="arc-btn-tool" id="arcBtnExplode" onclick="ArcReactor3D.toggleExplode()" title="Exploded CAD Schematic View">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8l8-4 8 4-8 4-8-4zm0 8l8 4 8-4M4 12l8 4 8-4"/></svg>
+              <span class="btn-label">Explode CAD</span>
+            </button>
+
+            <button class="arc-btn-tool" id="arcBtnDock" onclick="ArcReactor3D.toggleDockPhone()" title="Simulate 15W Qi Magnetic Phone Charging">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><polygon points="12 6 10 11 13 11 11 16 15 10 12 10 12 6" fill="currentColor"/></svg>
+              <span class="btn-label">Dock Phone</span>
+            </button>
+
+            <button class="arc-btn-tool" id="arcBtnVitrine" onclick="ArcReactor3D.toggleVitrine()" title="Pepper Potts Memorial Glass Vitrine Display Case">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              <span class="btn-label">Glass Vitrine</span>
+            </button>
+
+            <button class="arc-btn-tool" onclick="ArcReactor3D.resetCamera()" title="Re-center 3D View">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+              <span class="btn-label">Re-Center</span>
+            </button>
+          </div>
+
+          <div class="arc-hint-hud" id="arcDockStatus">
+            360&deg; Drag Orbit &bull; Scroll Zoom
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: High-Impact Minimalist Product Details -->
+      <div class="arc-info-col">
+        <div class="arc-kicker-row">
+          <span class="arc-pill-kicker">STARK INDUSTRIES // PROTOTYPE 001</span>
+          <span class="arc-pill-kicker arc-pill-gold">OFFICIALLY LICENSED</span>
+          <span class="arc-pill-kicker">15W QI / MAGSAFE</span>
+        </div>
+
+        <h1 class="arc-main-title">
+          "PROOF THAT TONY STARK HAS A HEART"
+        </h1>
+
+        <p class="arc-main-sub">
+          Mark I Arc Reactor 15W Wireless Fast Charger & Billet Aluminum Desktop Display Prop
+        </p>
+
+        <p class="arc-story-lead">
+          Forged from missile electromagnets in Afghanistan to keep Tony Stark alive, preserved by Pepper Potts in glass vitrine. Engineered with CNC aerospace billet alloy, 10-phase copper toroids, and cold-fusion LED multi-spectrum glow.
+        </p>
+
+        <!-- 4 Key Technical Specs Matrix -->
+        <div class="arc-specs-grid">
+          <div class="arc-spec-cell">
+            <span class="arc-spec-tag">INDUCTIVE OUTPUT</span>
+            <span class="arc-spec-val">15W Fast Qi & MagSafe</span>
+          </div>
+          <div class="arc-spec-cell">
+            <span class="arc-spec-tag">CHASSIS MATERIAL</span>
+            <span class="arc-spec-val">Billet 6061-T6 CNC Alloy</span>
+          </div>
+          <div class="arc-spec-cell">
+            <span class="arc-spec-tag">INDUCTION ARRAY</span>
+            <span class="arc-spec-val">10-Phase Copper Toroids</span>
+          </div>
+          <div class="arc-spec-cell">
+            <span class="arc-spec-tag">CORE ILLUMINATION</span>
+            <span class="arc-spec-val">460nm Cold-Fusion LEDs</span>
+          </div>
+        </div>
+
+        <!-- Pricing & Action Bar -->
+        <div class="arc-price-action-box">
+          <div class="arc-price-row">
+            <span class="arc-current-price">&#8377;11,815</span>
+            <span class="arc-mrp-price">&#8377;13,999</span>
+            <span class="arc-discount-badge">15% OFF</span>
+          </div>
+
+          <div class="arc-action-buttons">
+            <button class="btn-arc-primary" onclick="quickAddToCart(event, 31)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span>Add to Cart</span>
+            </button>
+            <button class="btn-arc-secondary" onclick="openQuickView(31)">
+              <span>Quick View Specs</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Smooth Scroll Down to Full Marvel Collection -->
+        <a href="#marvelCollectionSection" class="arc-scroll-cue-link" onclick="document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'}); return false;">
+          <span>Explore Marvel Collection</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 10l5 5 5-5"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- REAL-WORLD PRODUCT SHOWCASE & HANDS-ON VIDEO DEMONSTRATION -->
+    <div class="arc-video-showcase-section">
+      <div class="arc-video-header">
+        <span class="arc-video-tag">PRODUCT SHOWCASE</span>
+        <h2 class="arc-video-title">Hands-On Demonstration</h2>
+        <p class="arc-video-sub">Billet aluminum engineering, motorized lift action, and 15W inductive charging in real-world motion.</p>
+      </div>
+
+      <!-- Centered Medium-Sized Hands-On Video Demonstration -->
+      <div class="arc-video-container">
+        <div class="arc-video-frame">
+          <video 
+            id="arcShowcaseVideo" 
+            class="arc-video-element" 
+            playsinline 
+            loop 
+            muted 
+            preload="metadata" 
+            poster="assets/images/p_arc_reactor_charger.jpg"
+            onclick="toggleArcVideo()"
+          >
+            <source src="assets/videos/arc_reactor_showcase.mp4" type="video/mp4">
+          </video>
+
+          <!-- Video Controls Overlay -->
+          <div class="arc-video-overlay" id="arcVideoOverlay" onclick="toggleArcVideo()">
+            <button class="arc-video-big-play" id="arcVideoBigPlay" aria-label="Play Video">
+              <svg class="play-svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+              <svg class="pause-svg" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            </button>
+          </div>
+
+          <!-- Bottom Video HUD -->
+          <div class="arc-video-hud">
+            <div class="arc-video-hud-info">
+              <span class="arc-hud-title">Mark I Arc Reactor Charging Station</span>
+              <span class="arc-hud-desc">CNC assembly &bull; MagSafe dock &bull; Ambient night glow</span>
+            </div>
+            <div class="arc-video-hud-actions">
+              <button class="arc-hud-btn" id="arcMuteToggleBtn" onclick="toggleArcVideoAudio(event)" title="Toggle Sound">
+                <svg id="arcMuteIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              </button>
+              <button class="arc-hud-btn" onclick="toggleArcVideoFullscreen(event)" title="Fullscreen">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Bar linking directly to the Arc Reactor in Catalog -->
+      <div class="arc-video-action-bar">
+        <button class="btn-reactor-link" onclick="openQuickView(31)">
+          <span>View Mark I Arc Reactor in Catalog</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn-reactor-scroll" onclick="scrollToReactorCard()">
+          <span>Locate in Collection</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10l5 5 5-5"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scroll Anchor & Target for Full Marvel Collection -->
+  <div id="marvelCollectionSection" class="collection-scroll-anchor"></div>
+
   <!-- Hero Filter Bar (Clean Minimalist Pills, Zero Emojis) -->
   <div class="hero-filter-bar">
     <div class="hero-filter-container">
@@ -1322,7 +2369,7 @@ body {
     <div class="catalog-heading-bar">
       <div class="catalog-title-wrap">
         <h1 class="catalog-title" id="catalogTitle">Marvel Collection</h1>
-        <span class="catalog-count" id="catalogCount">20 Products Available</span>
+        <span class="catalog-count" id="catalogCount">19 Products Available</span>
       </div>
 
       <div>
@@ -1380,6 +2427,17 @@ body {
           </button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- High-Resolution Photo Lightbox Modal -->
+  <div class="photo-modal-overlay" id="photoModalOverlay" onclick="closePhotoModal()">
+    <div class="photo-modal-box" onclick="event.stopPropagation()">
+      <button class="photo-modal-close" onclick="closePhotoModal()" aria-label="Close Photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <img id="photoModalImg" src="" alt="Studio Photo" class="photo-modal-img" />
+      <div class="photo-modal-caption" id="photoModalCaption"></div>
     </div>
   </div>
 
@@ -1845,10 +2903,13 @@ function cleanImg(src) {
   return src;
 }
 
-// 1. DYNAMIC WOOCOMMERCE SYNC
+// 1. DYNAMIC WOOCOMMERCE SYNC (Non-blocking with graceful fallback)
 async function syncWooCommerce() {
   try {
-    const res = await fetch("/api/woocommerce/products?per_page=100");
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000);
+    const res = await fetch("/api/woocommerce/products?per_page=100", { signal: controller.signal });
+    clearTimeout(timeoutId);
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data) && data.length > 0) {
@@ -1859,18 +2920,14 @@ async function syncWooCommerce() {
             if (numPrice < 1000) numPrice = Math.round(numPrice * 85);
             match.price = numPrice;
             match.mrp = Math.round(numPrice * 1.15);
-            if (p.images && p.images.length > 0) {
-              match.primaryImg = cleanImg(p.images[0].src);
-              if (p.images.length > 1) match.secondaryImg = cleanImg(p.images[1].src);
-            }
           }
         });
+        renderCatalog();
       }
     }
   } catch (err) {
-    console.log("Using cached catalog:", err.message);
+    console.log("Using cached catalog (standalone):", err.message);
   }
-  renderCatalog();
 }
 
 // 2. RENDER CATALOG (Text and Buttons are 100% STABLE; Image micro-tilts)
@@ -2037,6 +3094,9 @@ window.selectCategory = function(cat, tabEl) {
     setCatalogTitle(catTitles[cat] || 'Marvel Collection');
   }
   renderCatalog();
+  if (window.scrollY < 300) {
+    document.getElementById("marvelCollectionSection")?.scrollIntoView({ behavior: "smooth" });
+  }
 };
 
 // 4. HERO FILTER SELECTION
@@ -2142,6 +3202,88 @@ window.selectQvVar = function(idx) {
 
 window.closeQuickView = function() {
   document.getElementById("quickViewOverlay").classList.remove("active");
+};
+
+// 6B. HANDS-ON VIDEO & PHOTO LIGHTBOX CONTROLS
+window.toggleArcVideo = function() {
+  const vid = document.getElementById("arcShowcaseVideo");
+  const overlay = document.getElementById("arcVideoOverlay");
+  const playSvg = document.querySelector("#arcVideoBigPlay .play-svg");
+  const pauseSvg = document.querySelector("#arcVideoBigPlay .pause-svg");
+  if (!vid) return;
+
+  if (vid.paused) {
+    vid.play().then(() => {
+      if (overlay) overlay.classList.add("is-playing");
+      if (playSvg) playSvg.style.display = "none";
+      if (pauseSvg) pauseSvg.style.display = "block";
+    }).catch(err => {
+      console.warn("Autoplay was prevented:", err);
+    });
+  } else {
+    vid.pause();
+    if (overlay) overlay.classList.remove("is-playing");
+    if (playSvg) playSvg.style.display = "block";
+    if (pauseSvg) pauseSvg.style.display = "none";
+  }
+};
+
+window.toggleArcVideoAudio = function(e) {
+  if (e) e.stopPropagation();
+  const vid = document.getElementById("arcShowcaseVideo");
+  const icon = document.getElementById("arcMuteIcon");
+  if (!vid) return;
+
+  vid.muted = !vid.muted;
+  if (icon) {
+    if (vid.muted) {
+      icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+    } else {
+      icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+    }
+  }
+};
+
+window.toggleArcVideoFullscreen = function(e) {
+  if (e) e.stopPropagation();
+  const vid = document.getElementById("arcShowcaseVideo");
+  if (!vid) return;
+
+  if (vid.requestFullscreen) {
+    vid.requestFullscreen();
+  } else if (vid.webkitRequestFullscreen) {
+    vid.webkitRequestFullscreen();
+  }
+};
+
+window.scrollToReactorCard = function() {
+  const section = document.getElementById("marvelCollectionSection");
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+  setTimeout(() => {
+    const card = document.querySelector('.product-card[data-id="31"]');
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.add('reactor-pulse-highlight');
+      setTimeout(() => card.classList.remove('reactor-pulse-highlight'), 2400);
+    }
+  }, 400);
+};
+
+window.openPhotoModal = function(src, caption) {
+  const overlay = document.getElementById("photoModalOverlay");
+  const img = document.getElementById("photoModalImg");
+  const cap = document.getElementById("photoModalCaption");
+  if (!overlay || !img) return;
+
+  img.src = src;
+  if (cap) cap.innerHTML = caption || "";
+  overlay.classList.add("active");
+};
+
+window.closePhotoModal = function() {
+  document.getElementById("photoModalOverlay")?.classList.remove("active");
 };
 
 // 7. CART ENGINE WITH AVENGERS HERO WEAPONS & THEME TRANSFORMATION
@@ -2353,8 +3495,16 @@ function initInstantMobileTouch() {
 
 // Boot application
 document.addEventListener("DOMContentLoaded", () => {
+  // Immediately render full official catalog (0ms delay)
+  renderCatalog();
+
   // Start High-FPS Procedural Canvas Frame Engine
   window.cinematicFrameEngine = new CinematicFrameEngine("marvelCanvas");
+
+  // Initialize 3D Arc Reactor Digital Twin Engine
+  if (window.ArcReactor3D) {
+    window.ArcReactor3D.init("arc3dCanvasContainer");
+  }
 
   document.getElementById("globalSearch")?.addEventListener("input", e => {
     searchFilter = e.target.value.trim();
