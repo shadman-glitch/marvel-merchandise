@@ -953,22 +953,128 @@ body {
 .modal-overlay.active .modal-container {
   transform: translateY(0);
 }
-.modal-close-btn {
-  position: absolute;
-  top: 14px;
-  right: 14px;
+.modal-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(14, 19, 30, 0.96);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.qv-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: rgba(255, 255, 255, 0.08);
-  border: none;
-  width: 30px;
-  height: 30px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-pill);
+  color: var(--text-main);
+  padding: 6px 14px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.qv-back-btn:hover {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.modal-close-btn {
+  position: static;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-light);
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
   border-radius: 50%;
   color: var(--text-pure);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(225, 29, 72, 0.25);
+  border-color: var(--accent-red);
+  color: #ff4d6d;
+  transform: scale(1.08);
+}
+
+.qv-actions-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: auto;
+}
+
+.btn-qv-back {
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-qv-back:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Floating Back to Top / 3D Heart Showcase Button */
+.floating-back-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(10, 14, 23, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #00f0ff;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 240, 255, 0.15);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s, box-shadow 0.2s;
+}
+
+.floating-back-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.floating-back-top:hover {
+  background: #00f0ff;
+  color: #040810;
+  box-shadow: 0 10px 35px rgba(0, 240, 255, 0.45);
+  transform: translateY(-2px);
 }
 .qv-grid {
   display: grid;
@@ -1064,6 +1170,10 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  touch-action: none !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .arc-3d-canvas-wrap {
@@ -1073,6 +1183,10 @@ body {
   width: 100%;
   height: 100%;
   z-index: 1;
+  touch-action: none !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .arc-3d-canvas-wrap canvas {
@@ -1080,6 +1194,10 @@ body {
   height: 100% !important;
   outline: none;
   cursor: grab;
+  touch-action: none !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .arc-3d-canvas-wrap canvas:active {
@@ -1552,57 +1670,6 @@ body {
   background: #000000;
 }
 
-.arc-video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.25s ease;
-  z-index: 3;
-}
-
-.arc-video-overlay:hover {
-  background: rgba(0, 0, 0, 0.12);
-}
-
-.arc-video-overlay.is-playing {
-  background: transparent;
-  pointer-events: none;
-}
-
-.arc-video-big-play {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: rgba(12, 16, 26, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(0, 240, 255, 0.55);
-  color: #00f0ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 24px rgba(0, 240, 255, 0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.arc-video-big-play:hover {
-  transform: scale(1.08);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 240, 255, 0.55);
-}
-
-.arc-video-big-play svg {
-  width: 24px;
-  height: 24px;
-  margin-left: 3px;
-}
 
 .arc-video-hud {
   position: absolute;
@@ -2301,32 +2368,28 @@ body {
             playsinline 
             loop 
             muted 
-            preload="metadata" 
+            autoplay
+            preload="auto" 
             poster="assets/images/p_arc_reactor_charger.jpg"
-            onclick="toggleArcVideo()"
+            onclick="toggleArcVideo(event)"
           >
             <source src="assets/videos/arc_reactor_showcase.mp4" type="video/mp4">
           </video>
 
-          <!-- Video Controls Overlay -->
-          <div class="arc-video-overlay" id="arcVideoOverlay" onclick="toggleArcVideo()">
-            <button class="arc-video-big-play" id="arcVideoBigPlay" aria-label="Play Video">
-              <svg class="play-svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
-              <svg class="pause-svg" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-            </button>
-          </div>
-
-          <!-- Bottom Video HUD -->
+          <!-- Bottom Video HUD with Small Controls at Bottom -->
           <div class="arc-video-hud">
             <div class="arc-video-hud-info">
               <span class="arc-hud-title">Mark I Arc Reactor Charging Station</span>
               <span class="arc-hud-desc">CNC assembly &bull; MagSafe dock &bull; Ambient night glow</span>
             </div>
             <div class="arc-video-hud-actions">
-              <button class="arc-hud-btn" id="arcMuteToggleBtn" onclick="toggleArcVideoAudio(event)" title="Toggle Sound">
+              <button class="arc-hud-btn" id="arcPlayToggleBtn" onclick="toggleArcVideo(event)" title="Play / Pause Video" aria-label="Play or Pause">
+                <svg id="arcPlayIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              </button>
+              <button class="arc-hud-btn" id="arcMuteToggleBtn" onclick="toggleArcVideoAudio(event)" title="Toggle Sound" aria-label="Toggle Sound">
                 <svg id="arcMuteIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
               </button>
-              <button class="arc-hud-btn" onclick="toggleArcVideoFullscreen(event)" title="Fullscreen">
+              <button class="arc-hud-btn" onclick="toggleArcVideoFullscreen(event)" title="Fullscreen" aria-label="Fullscreen">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
               </button>
             </div>
@@ -2386,10 +2449,19 @@ body {
     <div class="products-grid" id="productsGrid"></div>
   </main>
 
-  <!-- Quick View Modal -->
-  <div class="modal-overlay" id="quickViewOverlay">
+  <!-- Quick View Modal with Easy Back & Cut Controls -->
+  <div class="modal-overlay" id="quickViewOverlay" onclick="if(event.target === this) closeQuickView()">
     <div class="modal-container">
-      <button class="modal-close-btn" onclick="closeQuickView()">&times;</button>
+      <!-- Easy Top Controls Bar with Back Button & Prominent Close (Cut) -->
+      <div class="modal-top-bar">
+        <button class="qv-back-btn" onclick="closeQuickView()" title="Go back to catalog">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span>Back to Catalog</span>
+        </button>
+        <button class="modal-close-btn" onclick="closeQuickView()" title="Close details" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
       
       <div class="qv-grid">
         <div>
@@ -2422,13 +2494,24 @@ body {
             </div>
           </div>
 
-          <button class="btn-add-to-cart" id="qvAddToCartBtn" style="padding:12px; font-size:13px; margin-top:auto;">
-            Add to Cart
-          </button>
+          <div class="qv-actions-row">
+            <button class="btn-add-to-cart" id="qvAddToCartBtn" style="padding:12px; font-size:13px; flex:1;">
+              Add to Cart
+            </button>
+            <button class="btn-qv-back" onclick="closeQuickView()" title="Close details and return to catalog">
+              Back to Catalog
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Floating Back to Top / 3D Heart Showcase Button -->
+  <button id="btnFloatingBackToTop" class="floating-back-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to 3D Showcase & Top" aria-label="Back to Top">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+    <span>Back to Top</span>
+  </button>
 
   <!-- High-Resolution Photo Lightbox Modal -->
   <div class="photo-modal-overlay" id="photoModalOverlay" onclick="closePhotoModal()">
@@ -3204,27 +3287,22 @@ window.closeQuickView = function() {
   document.getElementById("quickViewOverlay").classList.remove("active");
 };
 
-// 6B. HANDS-ON VIDEO & PHOTO LIGHTBOX CONTROLS
-window.toggleArcVideo = function() {
+// 6B. HANDS-ON VIDEO CONTROLS & AUTOPLAY ENGINE
+window.toggleArcVideo = function(e) {
+  if (e) e.stopPropagation();
   const vid = document.getElementById("arcShowcaseVideo");
-  const overlay = document.getElementById("arcVideoOverlay");
-  const playSvg = document.querySelector("#arcVideoBigPlay .play-svg");
-  const pauseSvg = document.querySelector("#arcVideoBigPlay .pause-svg");
+  const playIcon = document.getElementById("arcPlayIcon");
   if (!vid) return;
 
   if (vid.paused) {
     vid.play().then(() => {
-      if (overlay) overlay.classList.add("is-playing");
-      if (playSvg) playSvg.style.display = "none";
-      if (pauseSvg) pauseSvg.style.display = "block";
+      if (playIcon) playIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
     }).catch(err => {
-      console.warn("Autoplay was prevented:", err);
+      console.warn("Play interrupted:", err);
     });
   } else {
     vid.pause();
-    if (overlay) overlay.classList.remove("is-playing");
-    if (playSvg) playSvg.style.display = "block";
-    if (pauseSvg) pauseSvg.style.display = "none";
+    if (playIcon) playIcon.innerHTML = '<polygon points="6 4 20 12 6 20 6 4"/>';
   }
 };
 
@@ -3285,6 +3363,66 @@ window.openPhotoModal = function(src, caption) {
 window.closePhotoModal = function() {
   document.getElementById("photoModalOverlay")?.classList.remove("active");
 };
+
+// Sync play/pause icons with showcase video element & trigger autoplay on scroll
+(function initVideoSyncAndAutoplay() {
+  const showcaseVid = document.getElementById("arcShowcaseVideo");
+  if (!showcaseVid) return;
+
+  showcaseVid.addEventListener('play', () => {
+    const playIcon = document.getElementById("arcPlayIcon");
+    if (playIcon) playIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+  });
+  showcaseVid.addEventListener('pause', () => {
+    const playIcon = document.getElementById("arcPlayIcon");
+    if (playIcon) playIcon.innerHTML = '<polygon points="6 4 20 12 6 20 6 4"/>';
+  });
+
+  // Autoplay video on scroll into viewport
+  if ('IntersectionObserver' in window) {
+    const vidObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          showcaseVid.play().catch(() => {});
+        }
+      });
+    }, { threshold: 0.15 });
+    vidObserver.observe(showcaseVid);
+  }
+
+  // Fallback autoplay check on scroll & touch
+  const handleScrollAutoplay = () => {
+    const r = showcaseVid.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) {
+      if (showcaseVid.paused) showcaseVid.play().catch(() => {});
+    }
+  };
+  window.addEventListener('scroll', handleScrollAutoplay, { passive: true });
+  window.addEventListener('touchmove', handleScrollAutoplay, { passive: true });
+
+  // Initial trigger
+  showcaseVid.play().catch(() => {});
+})();
+
+// Close Quick View & Lightbox on Escape Key
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeQuickView();
+    closePhotoModal();
+  }
+});
+
+// Floating Back to Top button scroll handler
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('btnFloatingBackToTop');
+  if (btn) {
+    if (window.scrollY > 450) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }
+}, { passive: true });
 
 // 7. CART ENGINE WITH AVENGERS HERO WEAPONS & THEME TRANSFORMATION
 const HERO_WEAPONS = {
