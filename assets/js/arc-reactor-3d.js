@@ -39,6 +39,8 @@
     vitrineMesh: null,
     engravingText: "PROOF THAT TONY STARK HAS A HEART",
     mouseParallax: { x: 0, y: 0, targetX: 0, targetY: 0 },
+    isInteracting: false,
+    userHasRotated: false,
     isInitialized: false
   };
 
@@ -981,7 +983,8 @@
       controls.dampingFactor = 0.08;
       controls.minDistance = 1.6;
       controls.maxDistance = 7.5;
-      controls.maxPolarAngle = Math.PI / 2 + 0.2;
+      controls.maxPolarAngle = Math.PI / 2 + 0.35;
+      controls.minPolarAngle = 0.05;
       controls.enableZoom = true;
       controls.enableRotate = true;
       controls.rotateSpeed = 1.0;
@@ -989,44 +992,15 @@
         controls.touches.ONE = THREE.TOUCH.ROTATE;
         controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
       }
-      controls.addEventListener('start', () => { STATE.isInteracting = true; });
+      controls.addEventListener('start', () => {
+        STATE.isInteracting = true;
+        STATE.userHasRotated = true;
+      });
       controls.addEventListener('end', () => {
-        setTimeout(() => { STATE.isInteracting = false; }, 600);
+        setTimeout(() => { STATE.isInteracting = false; }, 400);
       });
       STATE.controls = controls;
     }
-
-    // Direct Mobile Touch Drag Fallback for smooth 360-degree rotation on phones
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let isDirectTouch = false;
-
-    renderer.domElement.addEventListener('touchstart', (e) => {
-      if (e.touches && e.touches.length === 1) {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-        isDirectTouch = true;
-        STATE.isInteracting = true;
-      }
-    }, { passive: false });
-
-    renderer.domElement.addEventListener('touchmove', (e) => {
-      if (isDirectTouch && e.touches && e.touches.length === 1 && STATE.reactorGroup) {
-        e.preventDefault(); // Prioritize 3D rotation over page scroll when dragging on 3D canvas
-        const dx = (e.touches[0].clientX - touchStartX);
-        const dy = (e.touches[0].clientY - touchStartY);
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-
-        STATE.reactorGroup.rotation.y += dx * 0.014;
-        STATE.reactorGroup.rotation.x = Math.max(-0.6, Math.min(0.6, STATE.reactorGroup.rotation.x + dy * 0.014));
-      }
-    }, { passive: false });
-
-    renderer.domElement.addEventListener('touchend', () => {
-      isDirectTouch = false;
-      setTimeout(() => { STATE.isInteracting = false; }, 600);
-    }, { passive: true });
 
     setupLighting(scene);
     buildArcReactorModel(scene);
@@ -1059,34 +1033,17 @@
       });
     }
 
-    // Gentle mouse parallax when idle on desktop
-    window.addEventListener('mousemove', (e) => {
-      const nx = (e.clientX / window.innerWidth) * 2 - 1;
-      const ny = (e.clientY / window.innerHeight) * 2 - 1;
-      STATE.mouseParallax.targetX = nx;
-      STATE.mouseParallax.targetY = ny;
-    });
-
-    // Mobile scroll-driven 3D movement: 3D heart moves as user scrolls the page
-    window.addEventListener('scroll', () => {
-      if (!STATE.isInteracting && STATE.reactorGroup) {
-        const scrollY = window.scrollY || window.pageYOffset || 0;
-        const progress = Math.min(scrollY / 700, 1);
-        STATE.mouseParallax.targetY = progress * 0.85;
-        STATE.mouseParallax.targetX = Math.sin(progress * Math.PI) * 0.55;
-      }
-    }, { passive: true });
-
-    // Touchmove on window (moving fingers on mobile updates parallax)
-    window.addEventListener('touchmove', (e) => {
-      if (!STATE.isInteracting && e.touches && e.touches.length > 0) {
-        const touch = e.touches[0];
-        const nx = (touch.clientX / window.innerWidth) * 2 - 1;
-        const ny = (touch.clientY / window.innerHeight) * 2 - 1;
-        STATE.mouseParallax.targetX = nx * 0.8;
-        STATE.mouseParallax.targetY = ny * 0.8;
-      }
-    }, { passive: true });
+    // Gentle mouse parallax when idle on desktop only (before user rotates model)
+    if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
+      window.addEventListener('mousemove', (e) => {
+        if (!STATE.isInteracting && !STATE.userHasRotated) {
+          const nx = (e.clientX / window.innerWidth) * 2 - 1;
+          const ny = (e.clientY / window.innerHeight) * 2 - 1;
+          STATE.mouseParallax.targetX = nx;
+          STATE.mouseParallax.targetY = ny;
+        }
+      });
+    }
 
     STATE.isInitialized = true;
     animate();
@@ -1168,8 +1125,8 @@
       }
     }
 
-    // Idle mouse parallax (only when user is not actively dragging with OrbitControls)
-    if (!STATE.isInteracting && STATE.reactorGroup) {
+    // Idle subtle mouse parallax (only on desktop BEFORE user rotates or moves model)
+    if (!STATE.isInteracting && !STATE.userHasRotated && STATE.reactorGroup) {
       STATE.mouseParallax.x += (STATE.mouseParallax.targetX - STATE.mouseParallax.x) * 0.05;
       STATE.mouseParallax.y += (STATE.mouseParallax.targetY - STATE.mouseParallax.y) * 0.05;
       STATE.reactorGroup.rotation.y = STATE.mouseParallax.x * 0.25;
@@ -1217,6 +1174,14 @@
       STATE.controls.reset();
       STATE.camera.position.set(0, 0.25, 4.4);
       STATE.controls.target.set(0, 0.25, 0);
+      STATE.userHasRotated = false;
+      STATE.mouseParallax.x = 0;
+      STATE.mouseParallax.y = 0;
+      STATE.mouseParallax.targetX = 0;
+      STATE.mouseParallax.targetY = 0;
+      if (STATE.reactorGroup) {
+        STATE.reactorGroup.rotation.set(-0.16, 0, 0);
+      }
     }
   }
 

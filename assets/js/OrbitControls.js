@@ -701,9 +701,9 @@
 
 					case 'mouse':
 					case 'pen':
+					case 'touch':
 						onMouseDown( event );
 						break;
-        // TODO touch
 
 				}
 
@@ -717,9 +717,9 @@
 
 					case 'mouse':
 					case 'pen':
+					case 'touch':
 						onMouseMove( event );
 						break;
-        // TODO touch
 
 				}
 
@@ -731,9 +731,9 @@
 
 					case 'mouse':
 					case 'pen':
+					case 'touch':
 						onMouseUp( event );
 						break;
-        // TODO touch
 
 				}
 
@@ -748,22 +748,30 @@
 				scope.domElement.focus ? scope.domElement.focus() : window.focus();
 				let mouseAction;
 
-				switch ( event.button ) {
+				if ( event.pointerType === 'touch' || event.button === 0 ) {
 
-					case 0:
-						mouseAction = scope.mouseButtons.LEFT;
-						break;
+					mouseAction = scope.mouseButtons.LEFT;
 
-					case 1:
-						mouseAction = scope.mouseButtons.MIDDLE;
-						break;
+				} else {
 
-					case 2:
-						mouseAction = scope.mouseButtons.RIGHT;
-						break;
+					switch ( event.button ) {
 
-					default:
-						mouseAction = - 1;
+						case 0:
+							mouseAction = scope.mouseButtons.LEFT;
+							break;
+
+						case 1:
+							mouseAction = scope.mouseButtons.MIDDLE;
+							break;
+
+						case 2:
+							mouseAction = scope.mouseButtons.RIGHT;
+							break;
+
+						default:
+							mouseAction = scope.mouseButtons.LEFT;
+
+					}
 
 				}
 
@@ -816,8 +824,13 @@
 
 				if ( state !== STATE.NONE ) {
 
+					if ( scope.domElement.setPointerCapture && event.pointerId !== undefined ) {
+						try { scope.domElement.setPointerCapture( event.pointerId ); } catch ( e ) {}
+					}
+
 					scope.domElement.ownerDocument.addEventListener( 'pointermove', onPointerMove );
 					scope.domElement.ownerDocument.addEventListener( 'pointerup', onPointerUp );
+					scope.domElement.ownerDocument.addEventListener( 'pointercancel', onPointerUp );
 					scope.dispatchEvent( _startEvent );
 
 				}
@@ -852,8 +865,13 @@
 
 			function onMouseUp( event ) {
 
+				if ( scope.domElement.releasePointerCapture && event.pointerId !== undefined ) {
+					try { scope.domElement.releasePointerCapture( event.pointerId ); } catch ( e ) {}
+				}
+
 				scope.domElement.ownerDocument.removeEventListener( 'pointermove', onPointerMove );
 				scope.domElement.ownerDocument.removeEventListener( 'pointerup', onPointerUp );
+				scope.domElement.ownerDocument.removeEventListener( 'pointercancel', onPointerUp );
 				if ( scope.enabled === false ) return;
 				handleMouseUp( event );
 				scope.dispatchEvent( _endEvent );
@@ -881,6 +899,8 @@
 			function onTouchStart( event ) {
 
 				if ( scope.enabled === false ) return;
+				if ( event.touches.length === 1 && state === STATE.ROTATE ) return;
+
 				event.preventDefault(); // prevent scrolling
 
 				switch ( event.touches.length ) {
@@ -945,6 +965,8 @@
 			function onTouchMove( event ) {
 
 				if ( scope.enabled === false ) return;
+				if ( state === STATE.ROTATE ) return;
+
 				event.preventDefault(); // prevent scrolling
 
 				switch ( state ) {
@@ -983,6 +1005,8 @@
 			function onTouchEnd( event ) {
 
 				if ( scope.enabled === false ) return;
+				if ( state === STATE.ROTATE ) return;
+
 				handleTouchEnd( event );
 				scope.dispatchEvent( _endEvent );
 				state = STATE.NONE;
