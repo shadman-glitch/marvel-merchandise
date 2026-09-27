@@ -984,7 +984,7 @@
     renderer.toneMappingExposure = 1.35;
     renderer.shadowMap.enabled = !isMobile;
     renderer.shadowMap.type = THREE.BasicShadowMap;
-    renderer.domElement.style.touchAction = isMobile ? 'pan-y' : 'none';
+    renderer.domElement.style.touchAction = 'none';
     container.appendChild(renderer.domElement);
     STATE.renderer = renderer;
 
@@ -994,11 +994,11 @@
       controls.dampingFactor = 0.09;
       controls.minDistance = 1.6;
       controls.maxDistance = 7.5;
-      controls.maxPolarAngle = Math.PI / 2 + 0.35;
+      controls.maxPolarAngle = Math.PI - 0.1;
       controls.minPolarAngle = 0.05;
       controls.enableZoom = true;
       controls.enableRotate = true;
-      controls.rotateSpeed = isMobile ? 0.85 : 1.0;
+      controls.rotateSpeed = isMobile ? 1.05 : 1.0;
       if (isMobile) {
         controls.autoRotate = true;
         controls.autoRotateSpeed = 1.8;

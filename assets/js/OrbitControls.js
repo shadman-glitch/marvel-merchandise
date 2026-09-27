@@ -903,24 +903,13 @@
 
 			}
 
-			var touchStartX = 0;
-			var touchStartY = 0;
-			var touchGestureDecided = false;
-			var isVerticalPageScroll = false;
-			var isDedicated3DPage = (typeof window !== 'undefined' && window.location && window.location.pathname.indexOf('arc-reactor-3d') !== -1);
-
 			function onTouchStart( event ) {
 
 				if ( scope.enabled === false ) return;
 				if ( event.touches.length === 1 && state === STATE.ROTATE ) return;
 
-				if ( event.touches.length === 1 ) {
-					touchStartX = event.touches[ 0 ].clientX;
-					touchStartY = event.touches[ 0 ].clientY;
-					touchGestureDecided = false;
-					isVerticalPageScroll = false;
-				} else if ( event.touches.length > 1 ) {
-					if ( event.cancelable ) event.preventDefault();
+				if ( event.cancelable ) {
+					event.preventDefault();
 				}
 
 				switch ( event.touches.length ) {
@@ -987,31 +976,7 @@
 				if ( scope.enabled === false ) return;
 				if ( state === STATE.ROTATE ) return;
 
-				if ( event.touches.length === 1 && !isDedicated3DPage ) {
-					if ( !touchGestureDecided ) {
-						var dx = Math.abs( event.touches[ 0 ].clientX - touchStartX );
-						var dy = Math.abs( event.touches[ 0 ].clientY - touchStartY );
-						if ( dy > dx && dy > 6 ) {
-							// Vertical movement: user wants to scroll the page!
-							isVerticalPageScroll = true;
-							touchGestureDecided = true;
-							state = STATE.NONE;
-							return; // Native smooth scroll!
-						} else if ( dx >= dy && dx > 6 ) {
-							// Horizontal movement: user wants to rotate the 3D model!
-							isVerticalPageScroll = false;
-							touchGestureDecided = true;
-						}
-					}
-
-					if ( isVerticalPageScroll ) {
-						return; // Let the browser scroll natively without interference!
-					}
-
-					if ( event.cancelable ) {
-						event.preventDefault();
-					}
-				} else if ( event.cancelable ) {
+				if ( event.cancelable ) {
 					event.preventDefault();
 				}
 
@@ -1050,9 +1015,6 @@
 
 			function onTouchEnd( event ) {
 
-				touchGestureDecided = false;
-				isVerticalPageScroll = false;
-
 				if ( scope.enabled === false ) return;
 				if ( state === STATE.ROTATE ) return;
 
@@ -1076,10 +1038,10 @@
 				passive: false
 			} );
 			scope.domElement.addEventListener( 'touchstart', onTouchStart, {
-				passive: true
+				passive: false
 			} );
 			scope.domElement.addEventListener( 'touchend', onTouchEnd, {
-				passive: true
+				passive: false
 			} );
 			scope.domElement.addEventListener( 'touchmove', onTouchMove, {
 				passive: false

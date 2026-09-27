@@ -183,6 +183,13 @@
       position: absolute;
       inset: 0;
       cursor: grab;
+      touch-action: none !important;
+    }
+    .big-3d-canvas-wrap canvas {
+      width: 100% !important;
+      height: 100% !important;
+      touch-action: none !important;
+      pointer-events: auto !important;
     }
     .big-3d-canvas-wrap:active {
       cursor: grabbing;

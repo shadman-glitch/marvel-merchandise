@@ -1557,7 +1557,7 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  touch-action: pan-y !important;
+  touch-action: none !important;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
@@ -1570,7 +1570,8 @@ body {
   width: 100%;
   height: 100%;
   z-index: 1;
-  touch-action: pan-y !important;
+  touch-action: none !important;
+  pointer-events: auto !important;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
@@ -1581,7 +1582,8 @@ body {
   height: 100% !important;
   outline: none;
   cursor: grab;
-  touch-action: pan-y !important;
+  touch-action: none !important;
+  pointer-events: auto !important;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
@@ -3089,16 +3091,16 @@ body {
     margin-left: 0;
     margin-right: auto; /* sits snugly on the left side */
     align-self: flex-start;
-    touch-action: pan-y !important;
+    touch-action: none !important;
   }
 
   .arc-3d-canvas-wrap {
-    touch-action: pan-y !important;
+    touch-action: none !important;
     pointer-events: auto !important;
   }
 
   .arc-3d-canvas-wrap canvas {
-    touch-action: pan-y !important;
+    touch-action: none !important;
     pointer-events: auto !important;
   }
 
