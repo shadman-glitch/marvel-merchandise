@@ -984,7 +984,7 @@
     renderer.toneMappingExposure = 1.35;
     renderer.shadowMap.enabled = !isMobile;
     renderer.shadowMap.type = THREE.BasicShadowMap;
-    renderer.domElement.style.touchAction = 'none';
+    renderer.domElement.style.touchAction = isMobile ? 'pan-y' : 'none';
     container.appendChild(renderer.domElement);
     STATE.renderer = renderer;
 
@@ -999,6 +999,10 @@
       controls.enableZoom = true;
       controls.enableRotate = true;
       controls.rotateSpeed = isMobile ? 0.85 : 1.0;
+      if (isMobile) {
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 1.8;
+      }
       if (controls.touches) {
         controls.touches.ONE = THREE.TOUCH.ROTATE;
         controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;

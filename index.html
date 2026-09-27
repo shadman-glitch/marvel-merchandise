@@ -599,6 +599,8 @@ body {
   position: relative;
   min-width: 0;
   contain: layout style paint;
+  content-visibility: auto;
+  contain-intrinsic-size: 360px;
   animation: fastCardFade 0.12s ease-out;
 }
 
@@ -1565,7 +1567,7 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  touch-action: none !important;
+  touch-action: pan-y !important;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
@@ -1578,7 +1580,7 @@ body {
   width: 100%;
   height: 100%;
   z-index: 1;
-  touch-action: none !important;
+  touch-action: pan-y !important;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
@@ -1589,7 +1591,7 @@ body {
   height: 100% !important;
   outline: none;
   cursor: grab;
-  touch-action: none !important;
+  touch-action: pan-y !important;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
@@ -3093,6 +3095,21 @@ body {
     margin-left: 0;
     margin-right: auto; /* sits snugly on the left side */
     align-self: flex-start;
+    touch-action: pan-y !important;
+  }
+
+  .arc-3d-canvas-wrap {
+    touch-action: pan-y !important;
+    pointer-events: none; /* Let vertical thumb scroll pass through naturally */
+  }
+
+  .arc-3d-canvas-wrap canvas {
+    touch-action: pan-y !important;
+    pointer-events: none;
+  }
+
+  #marvelCanvas {
+    display: none !important;
   }
 
   .arc-card-top-bar {
@@ -4623,6 +4640,7 @@ body {
  */
 class CinematicFrameEngine {
   constructor(canvasId = "marvelCanvas") {
+    if (window.innerWidth < 768) return; // Touch screen mobile optimization: zero 2D canvas overhead
     this.canvas = document.getElementById(canvasId);
     if (!this.canvas) return;
     this.ctx = this.canvas.getContext("2d", { alpha: true });
@@ -5673,66 +5691,7 @@ window.addEventListener("storage", (e) => {
   }
 });
 
-// High-Performance Instant Touch Switch for Mobile Thumb Scrolling
-function initInstantMobileTouch() {
-  const grid = document.getElementById("productsGrid");
-  if (!grid) return;
 
-  let activeTouchCard = null;
-  let touchResetTimer = null;
-
-  function switchCardToTouch(card) {
-    if (activeTouchCard === card) return;
-    if (activeTouchCard) {
-      activeTouchCard.classList.remove("touch-active");
-    }
-    if (card) {
-      card.classList.add("touch-active");
-      activeTouchCard = card;
-    }
-  }
-
-  function getCardFromTouch(touch) {
-    const el = document.elementFromPoint(touch.clientX, touch.clientY);
-    return el ? el.closest(".product-card") : null;
-  }
-
-  // 1. Instant touchstart: As soon as thumb contacts ANY card surface, flip immediately (0ms)
-  grid.addEventListener("touchstart", function(e) {
-    if (touchResetTimer) clearTimeout(touchResetTimer);
-    if (e.touches && e.touches.length > 0) {
-      const card = getCardFromTouch(e.touches[0]);
-      if (card) switchCardToTouch(card);
-    }
-  }, { passive: true });
-
-  // 2. Fast thumb glide / scroll: as thumb moves across cards, each card touched flips instantly!
-  grid.addEventListener("touchmove", function(e) {
-    if (touchResetTimer) clearTimeout(touchResetTimer);
-    if (e.touches && e.touches.length > 0) {
-      const card = getCardFromTouch(e.touches[0]);
-      if (card) switchCardToTouch(card);
-    }
-  }, { passive: true });
-
-  // 3. Reset smoothly after touch completes
-  window.addEventListener("touchend", function() {
-    if (touchResetTimer) clearTimeout(touchResetTimer);
-    touchResetTimer = setTimeout(function() {
-      if (activeTouchCard) {
-        activeTouchCard.classList.remove("touch-active");
-        activeTouchCard = null;
-      }
-    }, 450);
-  }, { passive: true });
-
-  window.addEventListener("touchcancel", function() {
-    if (activeTouchCard) {
-      activeTouchCard.classList.remove("touch-active");
-      activeTouchCard = null;
-    }
-  }, { passive: true });
-}
 
 // =========================================================================
 // HUD INTERACTIVE MODALS & BOTTOM NAVIGATION (TRACKING, PROFILE, HELP, STORE)
@@ -5871,7 +5830,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCatalog();
   });
 
-  initInstantMobileTouch();
   initSubtleImageTilt();
   renderCart();
   syncWooCommerce();
