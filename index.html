@@ -9,10 +9,10 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e11b23'><rect width='24' height='24' rx='4' fill='%23e11b23'/><text x='12' y='16' font-size='12' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
 
-  <!-- Google Fonts: Syne (Luxury Display), Plus Jakarta Sans (Minimalist Sans) & JetBrains Mono (Precision Figures) -->
+  <!-- Google Fonts: Bebas Neue, Oswald, Syne, Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600;700&family=Oswald:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
   <!-- Three.js & OrbitControls for 3D Arc Reactor Showcase -->
   <script src="assets/js/three.min.js"></script>
@@ -69,6 +69,7 @@
 
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-marvel: 'Oswald', 'Bebas Neue', 'Impact', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1133,6 +1134,352 @@ body {
 @keyframes slideUpToast {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   OFFICIAL MARVEL AESTHETIC & HERO SHOWCASE (IMAGE 2 & IMAGE 1 VIBE)
+   - Official Red Box Marvel Branding & Ticker Stream
+   - Cinematic "COLLECTIBLES" display header
+   - Clean Poster Cards Carousel with Red Chevron Next Button
+   - Dynamic S-Curve Character Montage Strip
+   - "A UNIVERSE OF SUPER HERO COLLECTIBLES" Callout with Slanted Red CTA
+   ========================================================================== */
+
+/* Announcement Ticker Bar */
+.marvel-stream-ticker {
+  background: #000000;
+  color: #f1f5f9;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  padding: 7px 16px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.marvel-stream-ticker-dot {
+  width: 5px;
+  height: 5px;
+  background: #e62429;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Mobile Hamburger & Search Buttons */
+.btn-hamburger, .btn-search-mobile {
+  background: none;
+  border: none;
+  color: var(--text-pure);
+  cursor: pointer;
+  padding: 8px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+.btn-hamburger:hover, .btn-search-mobile:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Official Marvel Hero Wrapper */
+.marvel-official-hero-wrap {
+  width: 100%;
+  position: relative;
+  z-index: 20;
+}
+
+/* Header Area ("COLLECTIBLES") */
+.marvel-hero-header-area {
+  background: radial-gradient(circle at 85% 40%, rgba(200, 30, 35, 0.2) 0%, rgba(15, 17, 23, 0.98) 72%),
+              linear-gradient(180deg, #181615 0%, #100f0e 100%);
+  padding: 46px 20px 24px 20px;
+  text-align: center;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.marvel-hero-main-title {
+  font-family: var(--font-marvel);
+  font-size: clamp(40px, 6.8vw, 62px);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 8px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.65);
+}
+.marvel-hero-main-sub {
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 2.2vw, 15.5px);
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+/* Poster Cards Slider Outer (Pure White Background matching Image 2) */
+.marvel-cards-slider-outer {
+  background: #ffffff;
+  padding: 24px 20px 28px 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+.marvel-cards-slider {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-right: 56px;
+}
+.marvel-cards-slider::-webkit-scrollbar {
+  display: none;
+}
+.marvel-poster-card {
+  flex: 0 0 clamp(160px, 42vw, 210px);
+  scroll-snap-align: start;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.marvel-poster-card:hover {
+  transform: translateY(-4px);
+}
+.marvel-poster-img-wrap {
+  aspect-ratio: 2 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  background: #0f131a;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+.marvel-poster-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.35s ease;
+}
+.marvel-poster-card:hover .marvel-poster-img-wrap img {
+  transform: scale(1.06);
+}
+.marvel-poster-scale-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.78);
+  padding: 3px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(4px);
+}
+.marvel-poster-info {
+  padding-top: 10px;
+}
+.marvel-poster-title {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.25;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.marvel-poster-sub {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.marvel-slider-next-btn {
+  position: absolute;
+  right: 12px;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 44px;
+  background: #e62429;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(230, 36, 41, 0.45);
+  z-index: 5;
+  transition: background 0.2s, transform 0.2s;
+}
+.marvel-slider-next-btn:hover {
+  background: #c5181d;
+  transform: translateY(-50%) scale(1.06);
+}
+
+/* S-Curve Character Montage Strip (from Image 1) */
+.marvel-montage-strip-wrap {
+  width: 100%;
+  overflow: hidden;
+  background: #000000;
+  line-height: 0;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.marvel-montage-img {
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Universe Callout Feature Section (from Image 1) */
+.marvel-universe-callout-section {
+  background: #111216;
+  padding: 40px 20px 48px 20px;
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), 0 100%);
+  border-bottom: 2px solid rgba(230, 36, 41, 0.35);
+}
+.marvel-universe-callout-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  text-align: left;
+}
+.marvel-arch-insignia {
+  width: 80px;
+  height: 24px;
+  margin-bottom: 14px;
+}
+.marvel-arch-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.marvel-universe-title {
+  font-family: var(--font-marvel);
+  font-size: clamp(28px, 5.5vw, 44px);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.08;
+  letter-spacing: 0.03em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.marvel-universe-sub {
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 2.2vw, 15.5px);
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 520px;
+  line-height: 1.45;
+  margin-bottom: 24px;
+}
+.marvel-slanted-cta-btn {
+  display: inline-block;
+  background: #e62429;
+  transform: skewX(-14deg);
+  padding: 13px 36px;
+  border-radius: 2px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(230, 36, 41, 0.45);
+  transition: background 0.2s, transform 0.2s;
+}
+.marvel-slanted-cta-btn:hover {
+  background: #c5181d;
+  transform: skewX(-14deg) translateY(-2px);
+}
+.marvel-slanted-cta-text {
+  display: inline-block;
+  transform: skewX(14deg);
+  font-family: var(--font-marvel);
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Slide-out Mobile Navigation Drawer */
+.marvel-nav-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background: #0d111a;
+  z-index: 500;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.7);
+  transform: translateX(-100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px;
+}
+.marvel-nav-drawer.active {
+  transform: translateX(0);
+}
+.marvel-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 499;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+.marvel-drawer-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.marvel-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.marvel-drawer-close {
+  background: none;
+  border: none;
+  color: var(--text-pure);
+  cursor: pointer;
+  padding: 6px;
+}
+.marvel-drawer-link {
+  padding: 12px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+.marvel-drawer-link:hover {
+  color: #38bdf8;
 }
 
 /* ==========================================================================
@@ -2710,6 +3057,28 @@ body {
     padding: 0 1rem;
     height: 58px;
     gap: 0.75rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .btn-hamburger {
+    display: flex;
+  }
+
+  .btn-search-mobile {
+    display: flex;
+  }
+
+  .brand-logo.marvel-official-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .brand-sub, .brand-title {
+    display: none;
   }
 
   .nav-tabs {
@@ -2781,12 +3150,17 @@ body {
     font-size: 11px;
     padding: 2px 6px;
   }
+  .brand-badge.marvel-red-box {
+    font-size: 19px;
+    padding: 3px 10px;
+    letter-spacing: -0.02em;
+  }
   .brand-title {
     font-size: 14px;
     letter-spacing: 0.04em;
   }
   .brand-sub {
-    display: none; /* Hide COLLECTIBLES on small phones to prevent any header overflow */
+    display: none;
   }
 
   .btn-cart {
@@ -3012,13 +3386,22 @@ body {
     })();
   </script>
 
-  <!-- Main Navbar -->
+  <!-- Main Navbar (Official Marvel Header with Hamburger on Left, Centered Red Marvel Box, Search & Cart on Right) -->
   <header class="main-header">
     <div class="header-container">
       
-      <!-- Brand Logo -->
-      <a href="#" class="brand-logo" aria-label="Marvel Store Home">
-        <span class="brand-badge">MARVEL</span>
+      <!-- Mobile Hamburger Button (Image 2 style) -->
+      <button class="btn-hamburger" id="navMenuBtn" aria-label="Toggle Navigation" onclick="toggleNavMenu()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Brand Logo (Centered Red Box on Mobile) -->
+      <a href="#" class="brand-logo marvel-official-brand" aria-label="Marvel Store Home">
+        <span class="brand-badge marvel-red-box">MARVEL</span>
         <span class="brand-title">STUDIOS</span>
         <span class="brand-sub">COLLECTIBLES</span>
       </a>
@@ -3034,7 +3417,7 @@ body {
 
       <!-- Right Controls -->
       <div class="header-right">
-        <!-- Search Input -->
+        <!-- Search Input (Desktop) -->
         <div class="search-box">
           <input type="text" id="globalSearch" class="search-input" placeholder="Search products..." autocomplete="off" />
           <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
@@ -3042,6 +3425,14 @@ body {
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </div>
+
+        <!-- Mobile Search Button (Image 2 style) -->
+        <button class="btn-search-mobile" aria-label="Search Products" onclick="document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ var s = document.getElementById('globalSearch'); if(s) s.focus(); }, 400);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
 
         <!-- Dedicated Standalone Cart Page Link -->
         <a href="cart.html" class="btn-cart" title="View Cart">
@@ -3056,6 +3447,164 @@ body {
       </div>
     </div>
   </header>
+
+  <!-- Official Marvel Announcement Ticker Bar (Image 2 aesthetic) -->
+  <div class="marvel-stream-ticker">
+    <span class="marvel-stream-ticker-dot"></span>
+    <span>STREAM THE MULTIVERSE // OFFICIAL 1:1 LIFE-SIZE MASTERPIECES</span>
+    <span class="marvel-stream-ticker-dot"></span>
+  </div>
+
+  <!-- Slide-out Mobile Navigation Drawer & Backdrop -->
+  <div class="marvel-drawer-backdrop" id="marvelDrawerBackdrop" onclick="toggleNavMenu()"></div>
+  <aside class="marvel-nav-drawer" id="marvelNavDrawer">
+    <div class="marvel-drawer-header">
+      <span class="brand-badge marvel-red-box">MARVEL</span>
+      <button class="marvel-drawer-close" onclick="toggleNavMenu()" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <nav class="marvel-drawer-links">
+      <a class="marvel-drawer-link" onclick="selectCategory('all', null); toggleNavMenu(); document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'});">All Collectibles</a>
+      <a class="marvel-drawer-link" onclick="selectCategory('wearable-helmets', null); toggleNavMenu(); document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'});">Wearable Helmets (1:1)</a>
+      <a class="marvel-drawer-link" onclick="selectCategory('bluetooth-speakers', null); toggleNavMenu(); document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'});">Bluetooth Speakers</a>
+      <a class="marvel-drawer-link" onclick="selectCategory('charging-stations', null); toggleNavMenu(); document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'});">Charging Stations</a>
+      <a class="marvel-drawer-link" onclick="selectCategory('digital-tech', null); toggleNavMenu(); document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'});">Tech Gear & Props</a>
+      <a class="marvel-drawer-link" onclick="toggleNavMenu(); document.getElementById('hero3dSection').scrollIntoView({behavior:'smooth'});">3D Arc Reactor (Interactive)</a>
+    </nav>
+  </aside>
+
+  <!-- MARVEL OFFICIAL HERO SHOWCASE (IMAGE 2 & IMAGE 1 VIBE) -->
+  <section class="marvel-official-hero-wrap" id="marvelHeroShowcase">
+    
+    <!-- Top Hero Header Area ("COLLECTIBLES" - Image 2 aesthetic) -->
+    <div class="marvel-hero-header-area">
+      <div class="marvel-hero-header-content">
+        <h1 class="marvel-hero-main-title">COLLECTIBLES</h1>
+        <p class="marvel-hero-main-sub">Journey into the cosmic depths of authentic Marvel prop replicas and wearables!</p>
+      </div>
+    </div>
+
+    <!-- Hero Products Poster Cards Row (Horizontal Slider with Red Chevron - Image 2 aesthetic) -->
+    <div class="marvel-cards-slider-outer">
+      <div class="marvel-cards-slider" id="marvelHeroCardsSlider">
+        <!-- Hero Card 1: Iron Man MK5 -->
+        <div class="marvel-poster-card" onclick="openQuickView(20)">
+          <div class="marvel-poster-img-wrap">
+            <img src="assets/images/p_mk5_helmet.jpg" alt="Iron Man MK5 Helmet" loading="eager" />
+            <span class="marvel-poster-scale-badge">1:1 LIFE SCALE</span>
+          </div>
+          <div class="marvel-poster-info">
+            <h3 class="marvel-poster-title">Iron Man MK5 Helmet</h3>
+            <p class="marvel-poster-sub">VOICE CONTROL 1:1</p>
+          </div>
+        </div>
+
+        <!-- Hero Card 2: Spider-Man Mask -->
+        <div class="marvel-poster-card" onclick="openQuickView(28)">
+          <div class="marvel-poster-img-wrap">
+            <img src="assets/images/p_iron_spider_helmet.jpg" alt="Spider-Man Iron Mask" loading="lazy" />
+            <span class="marvel-poster-scale-badge">EXPRESSIVE EYES</span>
+          </div>
+          <div class="marvel-poster-info">
+            <h3 class="marvel-poster-title">Spider-Man Iron Mask</h3>
+            <p class="marvel-poster-sub">NANO TECH WEARABLE</p>
+          </div>
+        </div>
+
+        <!-- Hero Card 3: Captain America Shield -->
+        <div class="marvel-poster-card" onclick="openQuickView(25)">
+          <div class="marvel-poster-img-wrap">
+            <img src="assets/images/p_cap_shield.jpg" alt="Captain America Shield" loading="lazy" />
+            <span class="marvel-poster-scale-badge">60CM VIBRANIUM</span>
+          </div>
+          <div class="marvel-poster-info">
+            <h3 class="marvel-poster-title">Captain America Shield</h3>
+            <p class="marvel-poster-sub">FULL SCALE 1:1 ALLOY</p>
+          </div>
+        </div>
+
+        <!-- Hero Card 4: Thor Mjolnir Hammer -->
+        <div class="marvel-poster-card" onclick="openQuickView(29)">
+          <div class="marvel-poster-img-wrap">
+            <img src="assets/images/p_mjolnir_speaker.jpg" alt="Thor Mjolnir Hammer" loading="lazy" />
+            <span class="marvel-poster-scale-badge">SOUND & LIGHT</span>
+          </div>
+          <div class="marvel-poster-info">
+            <h3 class="marvel-poster-title">Thor Mjolnir Hammer</h3>
+            <p class="marvel-poster-sub">DIE-CAST AUDIO BASE</p>
+          </div>
+        </div>
+
+        <!-- Hero Card 5: Arc Reactor Mark I -->
+        <div class="marvel-poster-card" onclick="document.getElementById('hero3dSection').scrollIntoView({behavior:'smooth'})">
+          <div class="marvel-poster-img-wrap">
+            <img src="assets/images/p_arc_reactor_charger.jpg" alt="Arc Reactor Mark I" loading="lazy" />
+            <span class="marvel-poster-scale-badge">3D DIGITAL TWIN</span>
+          </div>
+          <div class="marvel-poster-info">
+            <h3 class="marvel-poster-title">Mark I Arc Reactor</h3>
+            <p class="marvel-poster-sub">15W FAST CHARGER</p>
+          </div>
+        </div>
+
+        <!-- Hero Card 6: Black Panther Helmet -->
+        <div class="marvel-poster-card" onclick="openQuickView(27)">
+          <div class="marvel-poster-img-wrap">
+            <img src="assets/images/p_black_panther_helmet.jpg" alt="Black Panther Helmet" loading="lazy" />
+            <span class="marvel-poster-scale-badge">PURPLE GLOW</span>
+          </div>
+          <div class="marvel-poster-info">
+            <h3 class="marvel-poster-title">Black Panther Helmet</h3>
+            <p class="marvel-poster-sub">WAKANDA VIBRANIUM</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Red Navigation Arrow Button (as seen in Image 2) -->
+      <button class="marvel-slider-next-btn" aria-label="Next Products" onclick="scrollHeroCardsSlider(1)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- S-Curve Character Montage Strip (Image 1 aesthetic) -->
+    <div class="marvel-montage-strip-wrap">
+      <img src="assets/images/marvel_hero_montage.png" alt="Marvel Cinematic Heroes" class="marvel-montage-img" />
+    </div>
+
+    <!-- Feature Callout Banner ("A UNIVERSE OF SUPER HERO COLLECTIBLES" - Image 1 aesthetic) -->
+    <div class="marvel-universe-callout-section">
+      <div class="marvel-universe-callout-inner">
+        <!-- Glowing Arch Insignia -->
+        <div class="marvel-arch-insignia">
+          <svg viewBox="0 0 100 28" fill="none" class="marvel-arch-svg">
+            <path d="M5 24 C 30 2, 70 2, 95 24" stroke="url(#archGlow)" stroke-width="2.5" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="archGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#38bdf8"/>
+                <stop offset="50%" stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#e62429"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <h2 class="marvel-universe-title">A UNIVERSE OF SUPER HERO COLLECTIBLES</h2>
+        <p class="marvel-universe-sub">All Your Favorite Hero Gear and Wearable Props. Precision Engineered by Stark Industries.</p>
+        
+        <!-- Slanted Red Parallelogram CTA Button (Image 1 aesthetic) -->
+        <a href="#hero3dSection" class="marvel-slanted-cta-btn" onclick="document.getElementById('hero3dSection').scrollIntoView({behavior:'smooth'}); return false;">
+          <span class="marvel-slanted-cta-text">EXPLORE 3D ART NOW</span>
+        </a>
+      </div>
+    </div>
+
+  </section>
 
   <!-- 3D ARC REACTOR SPOTLIGHT HERO SHOWCASE -->
   <section class="hero-3d-showcase" id="hero3dSection">
@@ -3117,7 +3666,6 @@ body {
       <!-- Right Column: High-Impact Minimalist Product Details -->
       <div class="arc-info-col">
         <div class="arc-kicker-row">
-          <span class="arc-pill-kicker">STARK INDUSTRIES // PROTOTYPE 001</span>
           <span class="arc-pill-kicker arc-pill-gold">OFFICIALLY LICENSED</span>
           <span class="arc-pill-kicker">15W QI / MAGSAFE</span>
         </div>
@@ -3125,10 +3673,6 @@ body {
         <h1 class="arc-main-title">
           "PROOF THAT TONY STARK HAS A HEART"
         </h1>
-
-        <p class="arc-main-sub">
-          Mark I Arc Reactor 15W Wireless Fast Charger & Billet Aluminum Desktop Display Prop
-        </p>
 
         <p class="arc-story-lead">
           Forged from missile electromagnets in Afghanistan to keep Tony Stark alive, preserved by Pepper Potts in glass vitrine. Engineered with CNC aerospace billet alloy, 10-phase copper toroids, and cold-fusion LED multi-spectrum glow.
@@ -4472,6 +5016,23 @@ window.selectCategory = function(cat, tabEl) {
   if (window.scrollY < 300) {
     document.getElementById("marvelCollectionSection")?.scrollIntoView({ behavior: "smooth" });
   }
+};
+
+// 3.1 HERO CARDS SLIDER SCROLL (Image 2 Red Chevron)
+window.scrollHeroCardsSlider = function(dir) {
+  var slider = document.getElementById("marvelHeroCardsSlider");
+  if (!slider) return;
+  var cardWidth = (window.innerWidth < 600) ? 180 : 230;
+  slider.scrollBy({ left: dir * cardWidth * 1.5, behavior: "smooth" });
+};
+
+// 3.2 MOBILE DRAWER NAVIGATION MENU
+window.toggleNavMenu = function() {
+  var drawer = document.getElementById("marvelNavDrawer");
+  var backdrop = document.getElementById("marvelDrawerBackdrop");
+  if (!drawer || !backdrop) return;
+  drawer.classList.toggle("active");
+  backdrop.classList.toggle("active");
 };
 
 // 4. HERO FILTER SELECTION
