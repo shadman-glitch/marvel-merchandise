@@ -1010,6 +1010,9 @@
       controls.addEventListener('start', () => {
         STATE.isInteracting = true;
         STATE.userHasRotated = true;
+        if (controls.autoRotate) {
+          controls.autoRotate = false;
+        }
       });
       controls.addEventListener('end', () => {
         setTimeout(() => { STATE.isInteracting = false; }, 400);
