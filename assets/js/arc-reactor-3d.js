@@ -1223,6 +1223,19 @@
     return STATE.isVitrineVisible;
   }
 
+  function toggleAutoRotate() {
+    if (!STATE.controls) return false;
+    STATE.controls.autoRotate = !STATE.controls.autoRotate;
+    STATE.controls.autoRotateSpeed = 2.2;
+    const btn = document.getElementById('arcBtnAutoRotate');
+    if (btn) {
+      btn.classList.toggle('active', STATE.controls.autoRotate);
+      const label = btn.querySelector('.btn-label');
+      if (label) label.textContent = STATE.controls.autoRotate ? 'Stop Spin' : 'Auto Rotate';
+    }
+    return STATE.controls.autoRotate;
+  }
+
   // Export to global scope
   window.ArcReactor3D = {
     init: init,
@@ -1231,6 +1244,7 @@
     toggleVitrine: toggleVitrine,
     resetCamera: resetCamera,
     setColorMode: setColorMode,
+    toggleAutoRotate: toggleAutoRotate,
     getState: function() { return STATE; }
   };
 

@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Mark I Arc Reactor 1:1 3D Experience — Marvel Studios Collectibles</title>
+  <meta name="description" content="Interactive 1:1 3D digital twin of Tony Stark's Mark I Arc Reactor wireless charger with CAD exploded view, vitrine display case, and multi-spectrum cold fusion illumination." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e11b23'><rect width='24' height='24' rx='4' fill='%23e11b23'/><text x='12' y='16' font-size='12' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
+
+  <!-- Google Fonts: Bebas Neue, Oswald, Plus Jakarta Sans, Syne, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600;700&family=Oswald:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Three.js & OrbitControls for 3D Arc Reactor Showcase -->
+  <script src="assets/js/three.min.js"></script>
+  <script src="assets/js/OrbitControls.js"></script>
+  <script src="assets/js/arc-reactor-3d.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-surface: rgba(12, 16, 25, 0.94);
+      --bg-card: #0d121e;
+      --accent-gold: #f59e0b;
+      --accent-blue: #38bdf8;
+      --accent-red: #e11d48;
+      --accent-red-hover: #be123c;
+      --text-pure: #ffffff;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-light: rgba(255, 255, 255, 0.14);
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-marvel: 'Oswald', 'Bebas Neue', 'Impact', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-surface);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+    .top-nav-inner {
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .btn-back-store {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-light);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .btn-back-store:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fff;
+    }
+
+    .brand-marvel-logo {
+      background: #e62429;
+      color: #fff;
+      font-family: var(--font-marvel);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      padding: 3px 12px;
+      line-height: 1;
+      text-decoration: none;
+      border-radius: 2px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .btn-cart-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(225, 29, 72, 0.12);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+    .btn-cart-nav:hover {
+      background: rgba(225, 29, 72, 0.25);
+    }
+    .cart-count {
+      background: var(--accent-red);
+      color: #fff;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 999px;
+    }
+
+    /* Big Screen 3D Stage Section */
+    .stage-section {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 16px 20px 24px 20px;
+    }
+
+    .big-3d-card {
+      position: relative;
+      width: 100%;
+      height: 68vh;
+      min-height: 480px;
+      max-height: 820px;
+      background: radial-gradient(circle at 50% 45%, #0f1626 0%, #080b12 80%);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65);
+    }
+
+    .big-3d-canvas-wrap {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      cursor: grab;
+    }
+    .big-3d-canvas-wrap:active {
+      cursor: grabbing;
+    }
+
+    /* Top HUD in 3D Stage */
+    .stage-top-hud {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      pointer-events: none;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .stage-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(14, 20, 32, 0.88);
+      border: 1px solid var(--border-light);
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent-blue);
+      letter-spacing: 0.06em;
+      pointer-events: auto;
+    }
+    .status-pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00f0ff;
+      box-shadow: 0 0 8px #00f0ff;
+      animation: pulseAnim 1.6s infinite ease-in-out;
+    }
+    @keyframes pulseAnim {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .stage-spectrum-dock {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(14, 20, 32, 0.88);
+      border: 1px solid var(--border-light);
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      pointer-events: auto;
+    }
+    .spectrum-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+    .spectrum-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .spectrum-dot:hover {
+      transform: scale(1.2);
+    }
+    .spectrum-dot.active {
+      border-color: #ffffff;
+      box-shadow: 0 0 10px currentColor;
+    }
+
+    /* Bottom HUD Tools Dock */
+    .stage-bottom-hud {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      right: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      pointer-events: none;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .stage-tools-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: auto;
+      flex-wrap: wrap;
+    }
+    .stage-btn-tool {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      background: rgba(14, 20, 32, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-light);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .stage-btn-tool:hover {
+      background: rgba(22, 32, 54, 0.95);
+      border-color: var(--accent-blue);
+      color: #fff;
+    }
+    .stage-btn-tool.active {
+      background: rgba(56, 189, 248, 0.16);
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    }
+
+    .stage-hint-cue {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-dim);
+      background: rgba(14, 20, 32, 0.7);
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Details Breakdown Below 3D Stage */
+    .details-section {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 20px 48px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    @media (max-width: 900px) {
+      .details-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .big-3d-card {
+        height: 52vh;
+        min-height: 380px;
+      }
+    }
+
+    .details-left-col {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+    .details-main-title {
+      font-family: var(--font-marvel);
+      font-size: clamp(26px, 4vw, 34px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+    .details-sub {
+      font-size: 13px;
+      color: var(--accent-blue);
+      font-family: var(--font-mono);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .details-story {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 2px solid var(--accent-blue);
+    }
+
+    /* Mini Gallery on Details Page */
+    .details-gallery-title {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .details-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .details-thumb-card {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: #090c14;
+      border: 1px solid var(--border-subtle);
+    }
+    .details-thumb-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .details-thumb-card:hover img {
+      transform: scale(1.08);
+    }
+    .details-thumb-tag {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+      color: #fff;
+      font-size: 9.5px;
+      font-weight: 600;
+      text-align: center;
+      padding: 10px 2px 3px 2px;
+      letter-spacing: 0.02em;
+      font-family: var(--font-sans);
+    }
+
+    /* Right Column: Engineering Specs & Purchase */
+    .details-right-col {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .specs-matrix {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .spec-item {
+      background: rgba(14, 20, 32, 0.72);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+    }
+    .spec-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--accent-blue);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .spec-val {
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-pure);
+    }
+
+    .tech-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 14px;
+    }
+    .tech-list li {
+      display: flex;
+      justify-content: space-between;
+    }
+    .tech-list li span:last-child {
+      color: #fff;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+    }
+
+    /* Purchase Box */
+    .purchase-box {
+      background: rgba(12, 17, 27, 0.85);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .curr-price {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+    .mrp-price {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-dim);
+      text-decoration: line-through;
+    }
+    .discount-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-buy-primary {
+      flex: 1.4;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-red);
+      color: #ffffff;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-buy-primary:hover {
+      background: var(--accent-red-hover);
+      box-shadow: 0 0 16px rgba(225, 29, 72, 0.4);
+    }
+
+    .btn-buy-secondary {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-light);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .btn-buy-secondary:hover {
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+
+    /* Toast Notification */
+    .hud-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #111827;
+      color: #ffffff;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      z-index: 500;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .hud-toast.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="index.html#hero3dSection" class="btn-back-store" title="Return to Marvel Store">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>Back to Store</span>
+      </a>
+
+      <a href="index.html" class="brand-marvel-logo" aria-label="Marvel Store Home">
+        MARVEL
+      </a>
+
+      <a href="cart.html" class="btn-cart-nav" title="View Cart">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        <span>Cart</span>
+        <span class="cart-count" id="cartCountBadge">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Big Screen 3D Stage Section -->
+  <section class="stage-section">
+    <div class="big-3d-card" id="big3dCard">
+      
+      <!-- Three.js Canvas Container -->
+      <div id="arc3dCanvasContainer" class="big-3d-canvas-wrap"></div>
+
+      <!-- Top HUD in 3D Stage -->
+      <div class="stage-top-hud">
+        <div class="stage-status-badge">
+          <span class="status-pulse-dot"></span>
+          <span>1:1 INTERACTIVE DIGITAL TWIN</span>
+        </div>
+
+        <!-- Color Spectrum Selector -->
+        <div class="stage-spectrum-dock">
+          <span class="spectrum-title" id="arcSpectrumName">MK-I Cyan (460nm)</span>
+          <button class="spectrum-dot active" data-mode="classic" style="background:#00f0ff; color:#00f0ff;" title="MK-I Cyan (460nm)" onclick="ArcReactor3D.setColorMode('classic')"></button>
+          <button class="spectrum-dot" data-mode="vibranium" style="background:#dff9fb; color:#dff9fb;" title="Overdrive White-Blue" onclick="ArcReactor3D.setColorMode('vibranium')"></button>
+          <button class="spectrum-dot" data-mode="nanotech" style="background:#ff3b3b; color:#ff3b3b;" title="MK-85 Nano Crimson" onclick="ArcReactor3D.setColorMode('nanotech')"></button>
+          <button class="spectrum-dot" data-mode="stealth" style="background:#e2a86a; color:#e2a86a;" title="Tungsten Amber" onclick="ArcReactor3D.setColorMode('stealth')"></button>
+        </div>
+      </div>
+
+      <!-- Bottom HUD Tools Dock -->
+      <div class="stage-bottom-hud">
+        <div class="stage-tools-group">
+          <!-- 1. Explode CAD -->
+          <button class="stage-btn-tool" id="arcBtnExplode" onclick="ArcReactor3D.toggleExplode()" title="Exploded CAD Schematic View">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8l8-4 8 4-8 4-8-4zm0 8l8 4 8-4M4 12l8 4 8-4"/></svg>
+            <span class="btn-label">Explode CAD</span>
+          </button>
+
+          <!-- 2. Dock Phone -->
+          <button class="stage-btn-tool" id="arcBtnDock" onclick="ArcReactor3D.toggleDockPhone()" title="Simulate 15W Qi Magnetic Phone Charging">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><polygon points="12 6 10 11 13 11 11 16 15 10 12 10 12 6" fill="currentColor"/></svg>
+            <span class="btn-label">Dock Phone</span>
+          </button>
+
+          <!-- 3. Glass Vitrine -->
+          <button class="stage-btn-tool" id="arcBtnVitrine" onclick="ArcReactor3D.toggleVitrine()" title="Pepper Potts Memorial Glass Vitrine Display Case">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span class="btn-label">Glass Vitrine</span>
+          </button>
+
+          <!-- 4. Re-Center -->
+          <button class="stage-btn-tool" onclick="ArcReactor3D.resetCamera()" title="Re-center 3D View">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+            <span class="btn-label">Re-Center</span>
+          </button>
+
+          <!-- 5. Auto Rotate -->
+          <button class="stage-btn-tool" id="arcBtnAutoRotate" onclick="ArcReactor3D.toggleAutoRotate()" title="Continuous 360° Turntable Rotation">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="btn-label">Auto Rotate</span>
+          </button>
+
+          <!-- 6. Fullscreen -->
+          <button class="stage-btn-tool" onclick="toggleStageFullscreen()" title="Toggle Fullscreen Canvas">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            <span class="btn-label">Fullscreen</span>
+          </button>
+        </div>
+
+        <div class="stage-hint-cue" id="arcDockStatus">
+          360&deg; Drag Orbit &bull; Scroll / Pinch Zoom
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Technical Breakdown & Physical Product Details Below 3D Stage -->
+  <section class="details-section">
+    
+    <!-- Left Column: Story & Product Gallery -->
+    <div class="details-left-col">
+      <h1 class="details-main-title">"PROOF THAT TONY STARK HAS A HEART"</h1>
+      <p class="details-sub">Stark Industries Official Replica &bull; 15W Qi Fast Charger</p>
+      
+      <p class="details-story">
+        Forged from missile electromagnets in Afghanistan to keep Tony Stark alive, preserved by Pepper Potts in glass vitrine. Engineered with CNC aerospace billet alloy, 10-phase copper toroids, and cold-fusion LED multi-spectrum glow.
+      </p>
+
+      <h3 class="details-gallery-title">Physical Product Showcase</h3>
+      <div class="details-gallery-grid">
+        <div class="details-thumb-card">
+          <img src="assets/images/p_arc_reactor_charger.jpg" alt="Arc Reactor Vitrine Base" />
+          <span class="details-thumb-tag">Vitrine Base</span>
+        </div>
+        <div class="details-thumb-card">
+          <img src="assets/images/p_arc_reactor_charging.jpg" alt="15W Qi Charging in Action" />
+          <span class="details-thumb-tag">15W Qi Active</span>
+        </div>
+        <div class="details-thumb-card">
+          <img src="assets/images/arc_reactor_real_front.jpg" alt="Billet Alloy Toroids Macro" />
+          <span class="details-thumb-tag">Billet Coils</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Engineering Matrix & Purchase -->
+    <div class="details-right-col">
+      <div>
+        <h3 class="details-gallery-title" style="margin-bottom:12px;">Technical Engineering Matrix</h3>
+        <div class="specs-matrix">
+          <div class="spec-item">
+            <span class="spec-tag">INDUCTIVE OUTPUT</span>
+            <span class="spec-val">15W Fast Qi & MagSafe</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-tag">CHASSIS MATERIAL</span>
+            <span class="spec-val">Billet 6061-T6 CNC Alloy</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-tag">INDUCTION ARRAY</span>
+            <span class="spec-val">10-Phase Copper Toroids</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-tag">CORE ILLUMINATION</span>
+            <span class="spec-val">460nm Cold-Fusion LEDs</span>
+          </div>
+        </div>
+
+        <ul class="tech-list" style="margin-top:16px;">
+          <li><span>Power Input:</span><span>USB-C Fast Charging (9V/2A)</span></li>
+          <li><span>Vitrine Dimensions:</span><span>150mm &times; 150mm &times; 180mm</span></li>
+          <li><span>Chassis Weight:</span><span>1.45 kg Solid Metal</span></li>
+          <li><span>Compatibility:</span><span>iPhone 12-16 MagSafe &amp; Android Qi</span></li>
+        </ul>
+      </div>
+
+      <!-- Purchase Box -->
+      <div class="purchase-box">
+        <div class="price-row">
+          <span class="curr-price">&#8377;11,815</span>
+          <span class="mrp-price">&#8377;13,999</span>
+          <span class="discount-pill">15% OFF</span>
+        </div>
+
+        <div class="action-row">
+          <button class="btn-buy-primary" onclick="addToCartAndNotify()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>Add to Cart</span>
+          </button>
+          <a href="cart.html" class="btn-buy-secondary">
+            <span>Checkout Now</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Notification Toast -->
+  <div class="hud-toast" id="hudToast">Added to Cart!</div>
+
+  <script>
+    // Initialize 3D Engine on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.ArcReactor3D) {
+        ArcReactor3D.init('arc3dCanvasContainer');
+      }
+      updateCartBadge();
+    });
+
+    // Cart LocalStorage Sync
+    function getStoredCart() {
+      try {
+        return JSON.parse(localStorage.getItem('marvel_cart')) || [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function updateCartBadge() {
+      const cart = getStoredCart();
+      const count = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
+      const badge = document.getElementById('cartCountBadge');
+      if (badge) badge.textContent = count;
+    }
+
+    function addToCartAndNotify() {
+      const cart = getStoredCart();
+      const existing = cart.find(item => item.id === 31);
+      if (existing) {
+        existing.quantity = (existing.quantity || 1) + 1;
+      } else {
+        cart.push({
+          id: 31,
+          name: "Proof That Tony Stark Has A Heart - Mark I Arc Reactor",
+          price: 11815,
+          image: "assets/images/p_arc_reactor_charger.jpg",
+          quantity: 1,
+          variation: "Standard Aluminum Vitrine"
+        });
+      }
+      localStorage.setItem('marvel_cart', JSON.stringify(cart));
+      updateCartBadge();
+      showToast("Added Arc Reactor to Cart!");
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('hudToast');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add('active');
+      setTimeout(() => { toast.classList.remove('active'); }, 2200);
+    }
+
+    // Fullscreen Toggle for 3D Stage
+    function toggleStageFullscreen() {
+      const card = document.getElementById('big3dCard');
+      if (!card) return;
+      if (!document.fullscreenElement) {
+        if (card.requestFullscreen) card.requestFullscreen();
+        else if (card.webkitRequestFullscreen) card.webkitRequestFullscreen();
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+  </script>
+
+</body>
+</html>
