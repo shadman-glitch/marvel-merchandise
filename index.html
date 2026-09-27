@@ -598,9 +598,6 @@ body {
   transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
   position: relative;
   min-width: 0;
-  contain: layout style paint;
-  content-visibility: auto;
-  contain-intrinsic-size: 360px;
   animation: fastCardFade 0.12s ease-out;
 }
 
@@ -2281,6 +2278,8 @@ body {
   margin: 3.5rem auto 1.5rem auto;
   padding: 0 1.5rem;
   box-sizing: border-box;
+  position: relative;
+  z-index: 10;
 }
 
 .store-contact-container {
@@ -2371,6 +2370,8 @@ body {
   margin: 0 auto 3rem auto;
   padding: 0 1.5rem;
   box-sizing: border-box;
+  position: relative;
+  z-index: 10;
 }
 
 .social-channels-container {
@@ -3415,6 +3416,43 @@ body {
     padding: 8px 14px;
     font-size: 11px;
   }
+  .floating-bottom-nav {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(10, 14, 24, 0.98) !important;
+  }
+  .hero-filter-bar {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(8, 11, 18, 0.98) !important;
+  }
+  .site-header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(8, 11, 18, 0.98) !important;
+  }
+  .product-image-container {
+    perspective: none !important;
+  }
+  .product-image-inner {
+    transform-style: flat !important;
+    will-change: auto !important;
+    transition: none !important;
+  }
+  .product-card {
+    animation: none !important;
+  }
+  .cinematic-bg-video {
+    will-change: auto !important;
+  }
+  .store-contact-section {
+    margin: 1.5rem auto 1rem auto;
+    padding: 0 1rem;
+  }
+  .social-channels-bar {
+    margin: 0 auto 1.5rem auto;
+    padding: 0 1rem;
+  }
   .store-contact-container {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -3527,29 +3565,6 @@ body {
       }
       window.addEventListener("pageshow", triggerPlay);
 
-      // Auto-pause background video & canvas engine when scrolled down into catalog to save 100% GPU fillrate
-      function initBgObserver() {
-        if (!('IntersectionObserver' in window)) return;
-        var topSection = document.getElementById("marvelHeroShowcase") || document.getElementById("hero3dSection");
-        if (!topSection) return;
-        var bgObs = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              v.play().catch(function(){});
-              if (window.cinematicFrameEngine) window.cinematicFrameEngine.resume();
-            } else {
-              v.pause();
-              if (window.cinematicFrameEngine) window.cinematicFrameEngine.pause();
-            }
-          });
-        }, { threshold: 0.01, rootMargin: "200px" });
-        bgObs.observe(topSection);
-      }
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initBgObserver);
-      } else {
-        initBgObserver();
-      }
     })();
   </script>
 
@@ -4072,7 +4087,7 @@ body {
     <div class="catalog-heading-bar">
       <div class="catalog-title-wrap">
         <h1 class="catalog-title" id="catalogTitle">Marvel Collection</h1>
-        <span class="catalog-count" id="catalogCount">19 Products Available</span>
+        <span class="catalog-count" id="catalogCount">20 Products Available</span>
       </div>
 
       <div>
@@ -5076,6 +5091,20 @@ const CATALOG_ITEMS = [
     secondaryImg: "assets/images/p_mk4_bust_speaker_action.jpg",
     allImages: ["assets/images/p_mk4_bust_speaker.jpg", "assets/images/p_mk4_bust_speaker_action.jpg", "assets/images/p_mk4_bust_speaker_box.jpg"],
     variations: [{ name: "Compact Armor Vitality Edition", price: 6715 }]
+  },
+  {
+    id: 41,
+    name: "Thor Stormbreaker Lighting Sound Speaker",
+    subtitle: "Asgardian Thunder Acoustic FX w/ Kinetic Glow Base",
+    category: "bluetooth-speakers",
+    hero: "thor",
+    price: 8990,
+    mrp: 11499,
+    banner: "KINETIC GLOW FX",
+    primaryImg: "assets/images/p_mjolnir_speaker.jpg",
+    secondaryImg: "assets/images/p_mjolnir_speaker_action.jpg",
+    allImages: ["assets/images/p_mjolnir_speaker.jpg", "assets/images/p_mjolnir_speaker_action.jpg"],
+    variations: [{ name: "Stormbreaker Sound Edition", price: 8990 }]
   }
 ];
 
@@ -5174,10 +5203,10 @@ function renderCatalog() {
             </button>
 
             <!-- Primary Photo -->
-            <img class="media-primary" src="${p.primaryImg}" alt="${p.name}" loading="lazy" onerror="this.src='assets/images/p_mk5_helmet.jpg'" />
+            <img class="media-primary" src="${p.primaryImg}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.src='assets/images/p_mk5_helmet.jpg'" />
             
             <!-- Secondary Photo (Fades in on hover) -->
-            <img class="media-secondary" src="${secImg}" alt="${p.name}" loading="lazy" onerror="this.src='assets/images/p_mk5_helmet_wear.jpg'" />
+            <img class="media-secondary" src="${secImg}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.src='assets/images/p_mk5_helmet_wear.jpg'" />
 
             <div class="image-specular-glint"></div>
             <div class="image-banner-strip">${p.banner}</div>
