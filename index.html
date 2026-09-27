@@ -1040,7 +1040,7 @@ body {
 /* Floating Back to Top / 3D Heart Showcase Button */
 .floating-back-top {
   position: fixed;
-  bottom: 24px;
+  bottom: 80px;
   right: 24px;
   display: inline-flex;
   align-items: center;
@@ -1880,6 +1880,777 @@ body {
 }
 
 /* ==========================================================================
+   BOTTOM EXPERIENCE SECTION (STORE LOCATION, CONTACT, SOCIAL & BOTTOM NAV)
+   ========================================================================== */
+
+/* 1. Quick Action: Contact & Store Locations */
+.store-contact-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 3.5rem auto 1.5rem auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+.store-contact-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.store-contact-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  background: rgba(13, 18, 30, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  user-select: none;
+}
+
+.store-contact-card:hover {
+  transform: translateY(-2px);
+  background: rgba(20, 28, 48, 0.95);
+  border-color: rgba(0, 240, 255, 0.4);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 240, 255, 0.12);
+}
+
+.store-contact-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.store-contact-card:hover .store-contact-icon-wrap {
+  transform: scale(1.08);
+}
+
+.phone-pulse {
+  background: rgba(0, 240, 255, 0.12);
+  color: #00f0ff;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.15);
+}
+
+.pin-pulse {
+  background: rgba(225, 29, 72, 0.14);
+  color: #e11d48;
+  border: 1px solid rgba(225, 29, 72, 0.35);
+  box-shadow: 0 0 14px rgba(225, 29, 72, 0.2);
+}
+
+.store-contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.store-contact-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.01em;
+}
+
+.store-contact-sub {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 2. Social Media Ribbon */
+.social-channels-bar {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 3rem auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+.social-channels-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: rgba(10, 14, 24, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+}
+
+.social-icons-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.social-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.22s ease;
+}
+
+.social-icon-btn:hover {
+  color: #ffffff;
+  background: rgba(225, 29, 72, 0.2);
+  border-color: rgba(225, 29, 72, 0.5);
+  box-shadow: 0 0 15px rgba(225, 29, 72, 0.35);
+  transform: translateY(-2px);
+}
+
+.social-brand-monogram {
+  display: flex;
+  align-items: center;
+  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.social-brand-monogram:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* 3. Comprehensive Site Footer */
+.site-footer {
+  width: 100%;
+  background: linear-gradient(180deg, rgba(8, 11, 18, 0.96) 0%, rgba(4, 6, 10, 1) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  padding: 3.5rem 1.5rem 6.5rem 1.5rem;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.footer-logo-badge {
+  background: #e11d48;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.footer-logo-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+}
+
+.footer-desc {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  max-width: 320px;
+}
+
+.footer-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #34d399;
+}
+
+.footer-heading {
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #00f0ff;
+  padding-left: 4px;
+}
+
+.footer-address-card {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.address-icon {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.address-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.address-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.address-text {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.footer-contact-item a {
+  color: var(--text-main);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-contact-item a:hover {
+  color: #00f0ff;
+}
+
+.footer-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.footer-copy {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: var(--text-dim);
+}
+
+.footer-payment-methods {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pay-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+/* 4. Fixed App Bottom Navigation Bar */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 62px;
+  background: rgba(9, 13, 22, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 10000;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.b-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex: 1;
+  height: 100%;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  padding: 4px 0;
+  outline: none;
+}
+
+.b-nav-item svg {
+  transition: transform 0.2s ease, stroke 0.2s ease;
+}
+
+.b-nav-label {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: color 0.2s ease;
+}
+
+.b-nav-item:hover,
+.b-nav-item.active {
+  color: #00f0ff;
+}
+
+.b-nav-item:hover svg,
+.b-nav-item.active svg {
+  transform: translateY(-2px);
+  stroke: #00f0ff;
+}
+
+.b-nav-item:active {
+  transform: scale(0.92);
+}
+
+/* 5. Generic HUD Interactive Bottom Sheets & Modals */
+.hud-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 7, 12, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.hud-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hud-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: rgba(12, 17, 28, 0.98);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 240, 255, 0.1);
+  transform: translateY(20px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.hud-modal-overlay.active .hud-modal-dialog {
+  transform: translateY(0);
+}
+
+.hud-modal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hud-modal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hud-modal-icon-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: #00f0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hud-modal-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.hud-modal-close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hud-modal-close-btn:hover {
+  background: #e11d48;
+  border-color: #e11d48;
+  color: #ffffff;
+}
+
+/* Tracking Timeline Styles */
+.track-search-box {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.track-input {
+  flex: 1;
+  background: rgba(18, 25, 40, 0.85);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  outline: none;
+}
+
+.track-input:focus {
+  border-color: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+}
+
+.btn-track-submit {
+  padding: 10px 18px;
+  background: #00f0ff;
+  color: #040810;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-track-submit:hover {
+  background: #38bdf8;
+  transform: translateY(-1px);
+}
+
+.track-order-summary {
+  background: rgba(18, 26, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 22px;
+}
+
+.track-summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.track-summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.track-summary-label {
+  color: var(--text-dim);
+}
+
+.track-summary-val {
+  color: #ffffff;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.timeline-wrap {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 20px;
+}
+
+.timeline-wrap::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 10px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.timeline-step {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.timeline-step:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -28px;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0b111d;
+  border: 2px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: var(--text-dim);
+}
+
+.timeline-step.completed .timeline-dot {
+  border-color: #10b981;
+  background: #10b981;
+  color: #ffffff;
+}
+
+.timeline-step.active .timeline-dot {
+  border-color: #00f0ff;
+  background: rgba(0, 240, 255, 0.2);
+  color: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff;
+}
+
+.timeline-step-title {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.timeline-step-desc {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.timeline-step-time {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 3px;
+}
+
+/* Profile Modal Details */
+.vip-profile-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: radial-gradient(circle at 10% 20%, rgba(225, 29, 72, 0.18) 0%, rgba(13, 19, 32, 0.8) 100%);
+  border: 1px solid rgba(225, 29, 72, 0.35);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.vip-avatar-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #e11d48;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(225, 29, 72, 0.4);
+}
+
+.vip-profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vip-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.vip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #f59e0b;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.profile-section-box {
+  background: rgba(18, 25, 40, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.profile-section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.profile-address-text {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+/* Help Quick Contact Buttons */
+.help-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.help-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 10px;
+  background: rgba(18, 25, 40, 0.7);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.help-btn:hover {
+  background: rgba(28, 38, 60, 0.95);
+  border-color: #00f0ff;
+  color: #00f0ff;
+  transform: translateY(-2px);
+}
+
+.help-btn-title {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.help-btn-sub {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN (Smartphone & Tablet Optimization)
    Zero horizontal overflow, 100% viewport fit, high touch-target usability
    ========================================================================== */
@@ -2130,6 +2901,66 @@ body {
   .qv-grid {
     padding: 1rem;
     gap: 1rem;
+  }
+
+  /* Bottom Experience Section Mobile Adjustments */
+  body {
+    padding-bottom: 70px;
+  }
+  .floating-back-top {
+    bottom: 76px;
+    right: 14px;
+    padding: 8px 14px;
+    font-size: 11px;
+  }
+  .store-contact-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .store-contact-card {
+    padding: 14px 16px;
+  }
+  .store-contact-icon-wrap {
+    width: 42px;
+    height: 42px;
+  }
+  .store-contact-title {
+    font-size: 14px;
+  }
+  .store-contact-sub {
+    font-size: 11px;
+  }
+  .social-channels-container {
+    padding: 12px 16px;
+  }
+  .social-icons-group {
+    gap: 12px;
+  }
+  .social-icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .social-icon-btn svg {
+    width: 17px;
+    height: 17px;
+  }
+  .footer-top-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .footer-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .help-actions-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .hud-modal-dialog {
+    padding: 18px 16px;
+    width: calc(100% - 20px);
+    margin: 10px;
   }
 }
   </style>
@@ -2449,6 +3280,160 @@ body {
     <div class="products-grid" id="productsGrid"></div>
   </main>
 
+  <!-- Quick Action Customer Care & Store Locations Section (Matches Mobile App UI) -->
+  <section class="store-contact-section" aria-label="Customer Care and Store Locations">
+    <div class="store-contact-container">
+      <!-- Contact Us / Help Card -->
+      <div class="store-contact-card" onclick="openHelpModal()" role="button" tabindex="0">
+        <div class="store-contact-icon-wrap phone-pulse">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </div>
+        <div class="store-contact-content">
+          <span class="store-contact-title">Contact Us</span>
+          <span class="store-contact-sub">24/7 Priority Support &amp; Customer Care</span>
+        </div>
+      </div>
+
+      <!-- Store Locations Card -->
+      <div class="store-contact-card" onclick="openStoreModal()" role="button" tabindex="0">
+        <div class="store-contact-icon-wrap pin-pulse">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="store-contact-content">
+          <span class="store-contact-title">Store Locations</span>
+          <span class="store-contact-sub">84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Media Ribbon -->
+  <section class="social-channels-bar" aria-label="Social Media Channels">
+    <div class="social-channels-container">
+      <div class="social-icons-group">
+        <a href="https://instagram.com/marvel" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Marvel on Instagram" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="https://x.com/marvel" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Marvel on X" aria-label="X">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://facebook.com/marvel" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Marvel on Facebook" aria-label="Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+        <a href="https://youtube.com/marvel" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Marvel on YouTube" aria-label="YouTube">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="social-brand-monogram" title="Marvel Studios Official Collectibles">
+        <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+          <rect width="40" height="40" rx="8" fill="rgba(225,29,72,0.18)" stroke="rgba(225,29,72,0.4)" stroke-width="1.5"/>
+          <path d="M12 28V12L20 22L28 12V28" stroke="#e11d48" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comprehensive Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top-grid">
+        <!-- Col 1: Brand & Certification -->
+        <div class="footer-col brand-col">
+          <div class="footer-logo">
+            <span class="footer-logo-badge">MARVEL</span>
+            <span class="footer-logo-title">COLLECTION</span>
+          </div>
+          <p class="footer-desc">
+            Official 1:1 scale movie-accurate collectible recreations, electronic wearable helmets, and certified prop replicas engineered with Stark precision.
+          </p>
+          <div class="footer-badge-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>100% Genuine Licensed Collectibles</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Categories -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Categories</h4>
+          <ul class="footer-links">
+            <li><a href="javascript:void(0)" onclick="filterByHero('all'); scrollToCollection();">All Collectibles</a></li>
+            <li><a href="javascript:void(0)" onclick="filterByHero('iron-man'); scrollToCollection();">Iron Man Prop Replicas</a></li>
+            <li><a href="javascript:void(0)" onclick="filterByHero('thor'); scrollToCollection();">Thor Mjolnir &amp; Stormbreaker</a></li>
+            <li><a href="javascript:void(0)" onclick="filterByHero('captain-america'); scrollToCollection();">Captain America Shield</a></li>
+            <li><a href="javascript:void(0)" onclick="filterByHero('spider-man'); scrollToCollection();">Spider-Man Helmets</a></li>
+            <li><a href="javascript:void(0)" onclick="openQuickView(31)">Mark I Arc Reactor Charger</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Customer Care & Tracking -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Customer Care</h4>
+          <ul class="footer-links">
+            <li><a href="javascript:void(0)" onclick="openTrackingModal()">Track Your Shipment</a></li>
+            <li><a href="javascript:void(0)" onclick="openProfileModal()">VIP Collector Profile</a></li>
+            <li><a href="javascript:void(0)" onclick="openHelpModal()">Help Center &amp; Support</a></li>
+            <li><a href="javascript:void(0)" onclick="openStoreModal()">Store Experience Center</a></li>
+            <li><a href="cart.html">View Cart &amp; Checkout</a></li>
+            <li><a href="javascript:void(0)" onclick="showToast('1-Year Full Replacement Warranty Active on All Products')">1-Year Replacement Warranty</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Store Location & Address -->
+        <div class="footer-col address-col">
+          <h4 class="footer-heading">Flagship Experience Hub</h4>
+          <div class="footer-address-card">
+            <div class="address-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="address-details">
+              <strong class="address-name">Stark Flagship Fulfillment Center</strong>
+              <p class="address-text">84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018</p>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:+919830012345">+91 (033) 2469-STARK / +91 98300 12345</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:concierge@marvelmerchandise.in">concierge@marvelmerchandise.in</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright & Payments Bar -->
+      <div class="footer-bottom-bar">
+        <div class="footer-copy">
+          &copy; 2026 Marvel Studios Collectibles. Officially Licensed Merchandise. All Rights Reserved.
+        </div>
+        <div class="footer-payment-methods">
+          <span class="pay-pill">UPI</span>
+          <span class="pay-pill">Visa</span>
+          <span class="pay-pill">MasterCard</span>
+          <span class="pay-pill">RuPay</span>
+          <span class="pay-pill">Net Banking</span>
+          <span class="pay-pill">Cash on Delivery</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <!-- Quick View Modal with Easy Back & Cut Controls -->
   <div class="modal-overlay" id="quickViewOverlay" onclick="if(event.target === this) closeQuickView()">
     <div class="modal-container">
@@ -2530,6 +3515,313 @@ body {
 
   <!-- Toast Notification Container -->
   <div id="toastContainer"></div>
+
+  <!-- 1. LIVE ORDER TRACKING MODAL -->
+  <div class="hud-modal-overlay" id="trackingModal" onclick="if(event.target === this) closeTrackingModal()">
+    <div class="hud-modal-dialog">
+      <div class="hud-modal-top">
+        <div class="hud-modal-title-group">
+          <div class="hud-modal-icon-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <rect x="1" y="3" width="15" height="13"/>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/>
+              <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="hud-modal-title">Live Shipment Tracking</h3>
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim);">Real-Time Bluedart &amp; Stark Logistics</span>
+          </div>
+        </div>
+        <button class="hud-modal-close-btn" onclick="closeTrackingModal()" aria-label="Close Tracking Modal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="track-search-box">
+        <input type="text" id="trackOrderInput" class="track-input" value="MCU-700018-KOL" placeholder="Enter Order ID (e.g. MCU-700018-KOL)" />
+        <button class="btn-track-submit" onclick="runOrderTrack()">Track Order</button>
+      </div>
+
+      <div class="track-order-summary">
+        <div class="track-summary-row">
+          <span class="track-summary-label">Tracking Number:</span>
+          <span class="track-summary-val" id="dispTrackingNum">BLU-89412-IN</span>
+        </div>
+        <div class="track-summary-row">
+          <span class="track-summary-label">Order Reference:</span>
+          <span class="track-summary-val">MCU-700018-KOL</span>
+        </div>
+        <div class="track-summary-row">
+          <span class="track-summary-label">Estimated Delivery:</span>
+          <span class="track-summary-val" style="color:#00f0ff;">Tomorrow by 04:30 PM IST</span>
+        </div>
+        <div class="track-summary-row">
+          <span class="track-summary-label">Current Status:</span>
+          <span class="track-summary-val" style="color:#10b981;">In Transit (Air Express)</span>
+        </div>
+      </div>
+
+      <div class="timeline-wrap">
+        <div class="timeline-step completed">
+          <div class="timeline-dot">✓</div>
+          <div class="timeline-step-title">Order Confirmed &amp; Stark QC Passed</div>
+          <div class="timeline-step-desc">Item inspected, calibrated, and cleared for express courier handover.</div>
+          <div class="timeline-step-time">26 Sep 2026, 04:30 PM</div>
+        </div>
+
+        <div class="timeline-step completed">
+          <div class="timeline-dot">✓</div>
+          <div class="timeline-step-title">Dispatched from Kolkata Flagship Hub</div>
+          <div class="timeline-step-desc">Handed to Bluedart Courier at: <strong>84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018</strong>.</div>
+          <div class="timeline-step-time">27 Sep 2026, 09:15 AM</div>
+        </div>
+
+        <div class="timeline-step active">
+          <div class="timeline-dot">●</div>
+          <div class="timeline-step-title">In Transit - Express Air Logistics</div>
+          <div class="timeline-step-desc">Package en route to local delivery facility. Insured air transit active.</div>
+          <div class="timeline-step-time">Live Status: Updated 15 mins ago</div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-dot">4</div>
+          <div class="timeline-step-title">Out for Delivery</div>
+          <div class="timeline-step-desc">Designated courier agent will arrive at shipping address with OTP verification.</div>
+          <div class="timeline-step-time">Expected: 28 Sep 2026</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:20px;">
+        <button class="btn-track-submit" onclick="closeTrackingModal()" style="flex:1; background:rgba(255,255,255,0.08); color:#ffffff; border:1px solid rgba(255,255,255,0.15);">Back to Catalog</button>
+        <button class="btn-track-submit" onclick="openHelpModal()" style="flex:1;">Contact Support</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. STARK VIP PROFILE MODAL -->
+  <div class="hud-modal-overlay" id="profileModal" onclick="if(event.target === this) closeProfileModal()">
+    <div class="hud-modal-dialog">
+      <div class="hud-modal-top">
+        <div class="hud-modal-title-group">
+          <div class="hud-modal-icon-badge" style="background:rgba(225,29,72,0.15); border-color:rgba(225,29,72,0.35); color:#e11d48;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="hud-modal-title">VIP Collector Profile</h3>
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim);">Stark Industries Secure Credentials</span>
+          </div>
+        </div>
+        <button class="hud-modal-close-btn" onclick="closeProfileModal()" aria-label="Close Profile Modal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="vip-profile-card">
+        <div class="vip-avatar-wrap">TS</div>
+        <div class="vip-profile-info">
+          <div class="vip-name">Tony Stark</div>
+          <div class="vip-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>Level 5 Asgardian Clearance</span>
+          </div>
+          <span style="font-size:11.5px; color:var(--text-muted);">Member ID: STARK-700018-VIP</span>
+        </div>
+      </div>
+
+      <div class="profile-section-box">
+        <div class="profile-section-label">Default Shipping &amp; Dispatch Address</div>
+        <div class="profile-address-text">
+          <strong>Official Address:</strong><br>
+          84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:18px;">
+        <div style="background:rgba(20,28,45,0.7); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); padding:12px; text-align:center;">
+          <div style="font-family:var(--font-mono); font-size:18px; font-weight:800; color:#00f0ff;">1</div>
+          <div style="font-size:10px; color:var(--text-muted); text-transform:uppercase; margin-top:2px;">Active Order</div>
+        </div>
+        <div style="background:rgba(20,28,45,0.7); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); padding:12px; text-align:center;">
+          <div style="font-family:var(--font-mono); font-size:18px; font-weight:800; color:#f59e0b;">19</div>
+          <div style="font-size:10px; color:var(--text-muted); text-transform:uppercase; margin-top:2px;">Catalog Items</div>
+        </div>
+        <div style="background:rgba(20,28,45,0.7); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); padding:12px; text-align:center;">
+          <div style="font-family:var(--font-mono); font-size:18px; font-weight:800; color:#10b981;">100%</div>
+          <div style="font-size:10px; color:var(--text-muted); text-transform:uppercase; margin-top:2px;">Genuine QC</div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button class="btn-track-submit" onclick="closeProfileModal(); openTrackingModal();" style="width:100%;">Track Active Shipment</button>
+        <button class="btn-track-submit" onclick="window.location.href='cart.html'" style="width:100%; background:rgba(255,255,255,0.06); color:#ffffff; border:1px solid rgba(255,255,255,0.12);">Open Shopping Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. HELP & CONCIERGE MODAL -->
+  <div class="hud-modal-overlay" id="helpModal" onclick="if(event.target === this) closeHelpModal()">
+    <div class="hud-modal-dialog">
+      <div class="hud-modal-top">
+        <div class="hud-modal-title-group">
+          <div class="hud-modal-icon-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="hud-modal-title">Help &amp; Customer Care</h3>
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim);">24/7 Priority Concierge Assistance</span>
+          </div>
+        </div>
+        <button class="hud-modal-close-btn" onclick="closeHelpModal()" aria-label="Close Help Modal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="help-actions-grid">
+        <a href="tel:+919830012345" class="help-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="help-btn-title">Phone Call</span>
+          <span class="help-btn-sub">+91 98300 12345</span>
+        </a>
+        <a href="https://wa.me/919830012345" target="_blank" rel="noopener noreferrer" class="help-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span class="help-btn-title">WhatsApp</span>
+          <span class="help-btn-sub">Instant Chat</span>
+        </a>
+        <a href="mailto:concierge@marvelmerchandise.in" class="help-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span class="help-btn-title">Email Us</span>
+          <span class="help-btn-sub">Priority Inbox</span>
+        </a>
+      </div>
+
+      <div class="profile-section-box">
+        <div class="profile-section-label">Official Store &amp; Fulfillment Hub Address</div>
+        <div class="profile-address-text">
+          84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018
+        </div>
+      </div>
+
+      <div class="profile-section-box" style="margin-bottom:20px;">
+        <div class="profile-section-label">Frequently Asked Questions</div>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:12px; margin-top:6px;">
+          <div>
+            <strong style="color:#ffffff;">Q: How long does express shipping take?</strong>
+            <p style="color:var(--text-muted); margin-top:2px;">All products dispatch within 24 hours via Bluedart Air Express with complete tracking.</p>
+          </div>
+          <div>
+            <strong style="color:#ffffff;">Q: Are these official Marvel licensed items?</strong>
+            <p style="color:var(--text-muted); margin-top:2px;">Yes, 100% authentic Marvel Studios licensed collectibles with holographic seal &amp; 1-year replacement warranty.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-track-submit" onclick="closeHelpModal()" style="width:100%;">Close Help Desk</button>
+    </div>
+  </div>
+
+  <!-- 4. STORE LOCATIONS MODAL -->
+  <div class="hud-modal-overlay" id="storeModal" onclick="if(event.target === this) closeStoreModal()">
+    <div class="hud-modal-dialog">
+      <div class="hud-modal-top">
+        <div class="hud-modal-title-group">
+          <div class="hud-modal-icon-badge" style="background:rgba(225,29,72,0.15); border-color:rgba(225,29,72,0.35); color:#e11d48;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="hud-modal-title">Flagship Experience Hub</h3>
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim);">Physical Store &amp; Demonstration Center</span>
+          </div>
+        </div>
+        <button class="hud-modal-close-btn" onclick="closeStoreModal()" aria-label="Close Store Modal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="profile-section-box" style="background:rgba(20,28,48,0.85); border-color:rgba(0,240,255,0.35); margin-bottom:16px;">
+        <div class="profile-section-label" style="color:#00f0ff;">Verified Store Location</div>
+        <div style="font-family:var(--font-display); font-size:16px; font-weight:700; color:#ffffff; margin-bottom:6px;">
+          Marvel Studios Collectibles Hub
+        </div>
+        <div style="font-family:var(--font-sans); font-size:13px; color:var(--text-main); line-height:1.5; margin-bottom:10px;">
+          84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018
+        </div>
+        <div style="font-family:var(--font-mono); font-size:11px; color:#10b981;">
+          Open 7 Days a Week: 10:00 AM &ndash; 09:00 PM IST
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:18px;">
+        <a href="https://www.google.com/maps/search/?api=1&query=84E,+SA+Farooquie+Rd,+Bartala,+Metiabruz,+Kolkata,+West+Bengal+700018" target="_blank" rel="noopener noreferrer" class="btn-track-submit" style="text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Open in Google Maps / Directions</span>
+        </a>
+        <a href="tel:+919830012345" class="btn-track-submit" style="text-align:center; text-decoration:none; background:rgba(255,255,255,0.06); color:#ffffff; border:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; gap:8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>Call Flagship Hub Directly</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. FIXED APP BOTTOM NAVIGATION BAR (Home, Categories, Tracking, Profile, Help) -->
+  <nav class="mobile-bottom-nav" aria-label="Quick Mobile Navigation">
+    <button class="b-nav-item active" onclick="navToHome(this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <span class="b-nav-label">Home</span>
+    </button>
+
+    <button class="b-nav-item" onclick="navToCategories(this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"/>
+        <rect x="14" y="3" width="7" height="7"/>
+        <rect x="14" y="14" width="7" height="7"/>
+        <rect x="3" y="14" width="7" height="7"/>
+      </svg>
+      <span class="b-nav-label">Categories</span>
+    </button>
+
+    <button class="b-nav-item" onclick="navToTracking(this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13"/>
+        <polygon points="16 8 20 8 23 11 23 16 16 16 8"/>
+        <circle cx="5.5" cy="18.5" r="2.5"/>
+        <circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+      <span class="b-nav-label">Tracking</span>
+    </button>
+
+    <button class="b-nav-item" onclick="navToProfile(this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span class="b-nav-label">Profile</span>
+    </button>
+
+    <button class="b-nav-item" onclick="navToHelp(this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      <span class="b-nav-label">Help</span>
+    </button>
+  </nav>
 
   <!-- =========================================================================
        APPLICATION LOGIC & 60-FPS CANVAS FRAME SEQUENCE ENGINE
@@ -3630,6 +4922,120 @@ function initInstantMobileTouch() {
     }
   }, { passive: true });
 }
+
+// =========================================================================
+// HUD INTERACTIVE MODALS & BOTTOM NAVIGATION (TRACKING, PROFILE, HELP, STORE)
+// =========================================================================
+
+function openTrackingModal() {
+  closeAllHudModals();
+  const m = document.getElementById("trackingModal");
+  if (m) m.classList.add("active");
+  updateBottomNavActive("Tracking");
+}
+
+function closeTrackingModal() {
+  const m = document.getElementById("trackingModal");
+  if (m) m.classList.remove("active");
+}
+
+function runOrderTrack() {
+  const input = document.getElementById("trackOrderInput");
+  const val = input ? input.value.trim().toUpperCase() : "";
+  if (!val) {
+    showToast("Please enter a valid Order ID");
+    return;
+  }
+  const disp = document.getElementById("dispTrackingNum");
+  if (disp) {
+    disp.textContent = "BLU-" + Math.floor(10000 + Math.random() * 90000) + "-IN";
+  }
+  showToast("Real-time telemetry retrieved for " + val);
+}
+
+function openProfileModal() {
+  closeAllHudModals();
+  const m = document.getElementById("profileModal");
+  if (m) m.classList.add("active");
+  updateBottomNavActive("Profile");
+}
+
+function closeProfileModal() {
+  const m = document.getElementById("profileModal");
+  if (m) m.classList.remove("active");
+}
+
+function openHelpModal() {
+  closeAllHudModals();
+  const m = document.getElementById("helpModal");
+  if (m) m.classList.add("active");
+  updateBottomNavActive("Help");
+}
+
+function closeHelpModal() {
+  const m = document.getElementById("helpModal");
+  if (m) m.classList.remove("active");
+}
+
+function openStoreModal() {
+  closeAllHudModals();
+  const m = document.getElementById("storeModal");
+  if (m) m.classList.add("active");
+}
+
+function closeStoreModal() {
+  const m = document.getElementById("storeModal");
+  if (m) m.classList.remove("active");
+}
+
+function closeAllHudModals() {
+  document.querySelectorAll(".hud-modal-overlay").forEach(m => m.classList.remove("active"));
+}
+
+function updateBottomNavActive(label) {
+  document.querySelectorAll(".b-nav-item").forEach(item => {
+    const txt = item.querySelector(".b-nav-label")?.textContent.trim();
+    item.classList.toggle("active", txt === label);
+  });
+}
+
+function navToHome(el) {
+  closeAllHudModals();
+  updateBottomNavActive("Home");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function navToCategories(el) {
+  closeAllHudModals();
+  updateBottomNavActive("Categories");
+  scrollToCollection();
+}
+
+function navToTracking(el) {
+  openTrackingModal();
+}
+
+function navToProfile(el) {
+  openProfileModal();
+}
+
+function navToHelp(el) {
+  openHelpModal();
+}
+
+function scrollToCollection() {
+  const el = document.getElementById("marvelCollectionSection") || document.getElementById("productsGrid");
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+// Close modals on ESC key
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeAllHudModals();
+  }
+});
 
 // Boot application
 document.addEventListener("DOMContentLoaded", () => {
