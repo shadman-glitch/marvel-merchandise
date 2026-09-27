@@ -1547,16 +1547,17 @@ body {
 
 .hero-3d-grid {
   display: grid;
-  grid-template-columns: 1.12fr 0.88fr;
-  gap: 32px;
+  grid-template-columns: minmax(320px, 460px) 1fr;
+  gap: 36px;
   align-items: center;
 }
 
-/* 3D Viewport Glass Card */
+/* 3D Viewport Glass Card (Adjusted smaller on landing page) */
 .arc-3d-card {
   position: relative;
   width: 100%;
-  height: 550px;
+  max-width: 460px;
+  height: 440px;
   border-radius: var(--radius-lg);
   background: radial-gradient(ellipse at 50% 35%, rgba(18, 25, 42, 0.85) 0%, rgba(8, 11, 18, 0.98) 100%);
   border: 1px solid rgba(56, 189, 248, 0.28);
@@ -2361,12 +2362,12 @@ body {
 
 .store-contact-sub {
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--text-muted);
-  line-height: 1.4;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.45;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 /* 2. Social Media Ribbon */
@@ -2383,25 +2384,49 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 14px 24px;
-  background: rgba(10, 14, 24, 0.7);
+  background: rgba(10, 14, 24, 0.75);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.social-heading-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.social-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e11d48;
+  box-shadow: 0 0 8px rgba(225, 29, 72, 0.6);
+}
+
+.social-bar-title {
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .social-icons-group {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 14px;
 }
 
 .social-icon-btn {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--text-muted);
   display: flex;
   align-items: center;
@@ -2412,22 +2437,23 @@ body {
 
 .social-icon-btn:hover {
   color: #ffffff;
-  background: rgba(225, 29, 72, 0.2);
-  border-color: rgba(225, 29, 72, 0.5);
-  box-shadow: 0 0 15px rgba(225, 29, 72, 0.35);
+  background: rgba(225, 29, 72, 0.25);
+  border-color: rgba(225, 29, 72, 0.6);
+  box-shadow: 0 0 15px rgba(225, 29, 72, 0.4);
   transform: translateY(-2px);
 }
 
 .social-brand-monogram {
   display: flex;
   align-items: center;
-  opacity: 0.85;
+  opacity: 0.9;
   transition: opacity 0.2s, transform 0.2s;
+  margin-left: 4px;
 }
 
 .social-brand-monogram:hover {
   opacity: 1;
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 /* 3. Comprehensive Site Footer */
@@ -3057,18 +3083,66 @@ body {
 
 @media (max-width: 860px) {
   .hero-3d-grid {
-    grid-template-columns: 1fr;
-    gap: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* firmly adjusted in the left side */
+    gap: 20px;
+    width: 100%;
   }
 
   .hero-3d-showcase {
-    padding: 68px 14px 28px 14px;
+    padding: 56px 14px 24px 14px;
   }
 
   .arc-3d-card {
-    height: 48vh; /* Exactly half of phone screen height */
-    min-height: 310px;
-    max-height: 420px;
+    width: 90%;
+    max-width: 335px;
+    height: 35vh; /* smaller scale as requested */
+    min-height: 250px;
+    max-height: 310px;
+    margin-left: 0;
+    margin-right: auto; /* sits snugly on the left side */
+    align-self: flex-start;
+  }
+
+  .arc-card-top-bar {
+    padding: 8px 10px;
+    left: 8px;
+    right: 8px;
+    top: 8px;
+  }
+  .arc-status-badge {
+    font-size: 8px;
+    padding: 3px 6px;
+    gap: 5px;
+  }
+  .arc-spectrum-title {
+    display: none;
+  }
+  .arc-spectrum-selector {
+    gap: 5px;
+    padding: 3px 6px;
+  }
+  .arc-spectrum-dot {
+    width: 14px;
+    height: 14px;
+  }
+  .arc-card-bottom-bar {
+    padding: 6px 10px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+  }
+  .arc-btn-tool {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+  .arc-btn-tool svg {
+    width: 13px;
+    height: 13px;
+  }
+  .arc-hint-hud {
+    font-size: 8.5px;
   }
 
   .arc-video-showcase-section {
@@ -3336,34 +3410,49 @@ body {
   }
   .store-contact-container {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 12px;
   }
   .store-contact-card {
     padding: 14px 16px;
+    align-items: flex-start;
   }
   .store-contact-icon-wrap {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
+    margin-top: 2px;
   }
   .store-contact-title {
     font-size: 14px;
   }
   .store-contact-sub {
-    font-size: 11px;
+    font-size: 12px;
+    line-height: 1.45;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
   }
   .social-channels-container {
-    padding: 12px 16px;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 16px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .social-heading-group {
+    justify-content: center;
   }
   .social-icons-group {
-    gap: 12px;
+    gap: 14px;
+    justify-content: center;
   }
   .social-icon-btn {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
   }
   .social-icon-btn svg {
-    width: 17px;
-    height: 17px;
+    width: 18px;
+    height: 18px;
   }
   .footer-top-grid {
     grid-template-columns: 1fr;
@@ -3973,8 +4062,8 @@ body {
           </svg>
         </div>
         <div class="store-contact-content">
-          <span class="store-contact-title">Contact Us</span>
-          <span class="store-contact-sub">24/7 Priority Support &amp; Customer Care</span>
+          <span class="store-contact-title">Contact &amp; Priority Care</span>
+          <span class="store-contact-sub">+91 98300 12345 &bull; 24/7 Dedicated Care</span>
         </div>
       </div>
 
@@ -3987,7 +4076,7 @@ body {
           </svg>
         </div>
         <div class="store-contact-content">
-          <span class="store-contact-title">Store Locations</span>
+          <span class="store-contact-title">Store &amp; Dispatch Hub</span>
           <span class="store-contact-sub">84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018</span>
         </div>
       </div>
@@ -3997,36 +4086,39 @@ body {
   <!-- Social Media Ribbon -->
   <section class="social-channels-bar" aria-label="Social Media Channels">
     <div class="social-channels-container">
+      <div class="social-heading-group">
+        <span class="social-badge-dot"></span>
+        <span class="social-bar-title">Official Marvel Community</span>
+      </div>
       <div class="social-icons-group">
         <a href="https://instagram.com/marvel" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Marvel on Instagram" aria-label="Instagram">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
           </svg>
         </a>
-        <a href="https://x.com/marvel" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Marvel on X" aria-label="X">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-          </svg>
-        </a>
         <a href="https://facebook.com/marvel" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Marvel on Facebook" aria-label="Facebook">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
           </svg>
         </a>
+        <a href="https://x.com/marvel" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Marvel on X" aria-label="X">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
         <a href="https://youtube.com/marvel" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Marvel on YouTube" aria-label="YouTube">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
           </svg>
         </a>
-      </div>
-
-      <div class="social-brand-monogram" title="Marvel Studios Official Collectibles">
-        <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
-          <rect width="40" height="40" rx="8" fill="rgba(225,29,72,0.18)" stroke="rgba(225,29,72,0.4)" stroke-width="1.5"/>
-          <path d="M12 28V12L20 22L28 12V28" stroke="#e11d48" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <div class="social-brand-monogram" title="Marvel Studios Official Collectibles">
+          <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+            <rect width="40" height="40" rx="8" fill="rgba(225,29,72,0.18)" stroke="rgba(225,29,72,0.4)" stroke-width="1.5"/>
+            <path d="M12 28V12L20 22L28 12V28" stroke="#e11d48" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
       </div>
     </div>
   </section>
