@@ -979,11 +979,11 @@
       depth: true
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio, 1.5) : Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(isMobile ? 1.0 : Math.min(window.devicePixelRatio, 1.3));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.35;
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = isMobile ? THREE.BasicShadowMap : THREE.PCFSoftShadowMap;
+    renderer.shadowMap.enabled = !isMobile;
+    renderer.shadowMap.type = THREE.BasicShadowMap;
     renderer.domElement.style.touchAction = 'none';
     container.appendChild(renderer.domElement);
     STATE.renderer = renderer;

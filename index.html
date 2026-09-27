@@ -189,9 +189,9 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--bg-surface);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  background: rgba(8, 11, 18, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -1618,9 +1618,7 @@ body {
   gap: 8px;
   padding: 5px 12px;
   border-radius: var(--radius-pill);
-  background: rgba(9, 12, 19, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(9, 12, 19, 0.95);
   border: 1px solid rgba(0, 240, 255, 0.35);
   font-family: var(--font-mono);
   font-size: 10px;
@@ -1650,9 +1648,7 @@ body {
   gap: 8px;
   padding: 4px 10px;
   border-radius: var(--radius-pill);
-  background: rgba(9, 12, 19, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(9, 12, 19, 0.95);
   border: 1px solid var(--border-light);
   pointer-events: auto;
 }
@@ -1712,9 +1708,7 @@ body {
   gap: 6px;
   padding: 6px 12px;
   border-radius: var(--radius-sm);
-  background: rgba(14, 20, 32, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(14, 20, 32, 0.95);
   border: 1px solid var(--border-light);
   color: var(--text-main);
   font-family: var(--font-mono);
@@ -2298,9 +2292,7 @@ body {
   align-items: center;
   gap: 16px;
   padding: 18px 22px;
-  background: rgba(13, 18, 30, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(13, 18, 30, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -2384,9 +2376,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 14px 24px;
-  background: rgba(10, 14, 24, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(10, 14, 24, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
@@ -3520,21 +3510,28 @@ body {
       }
       window.addEventListener("pageshow", triggerPlay);
 
-      // Auto-pause background video when user scrolls far down into catalog to save 100% video decoding GPU fillrate
-      if ('IntersectionObserver' in window) {
-        var heroWrap = document.getElementById("marvelHeroShowcase");
-        if (heroWrap) {
-          var bgObs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-              if (entry.isIntersecting) {
-                v.play().catch(function(){});
-              } else {
-                v.pause();
-              }
-            });
-          }, { threshold: 0.01, rootMargin: "350px" });
-          bgObs.observe(heroWrap);
-        }
+      // Auto-pause background video & canvas engine when scrolled down into catalog to save 100% GPU fillrate
+      function initBgObserver() {
+        if (!('IntersectionObserver' in window)) return;
+        var topSection = document.getElementById("marvelHeroShowcase") || document.getElementById("hero3dSection");
+        if (!topSection) return;
+        var bgObs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              v.play().catch(function(){});
+              if (window.cinematicFrameEngine) window.cinematicFrameEngine.resume();
+            } else {
+              v.pause();
+              if (window.cinematicFrameEngine) window.cinematicFrameEngine.pause();
+            }
+          });
+        }, { threshold: 0.01, rootMargin: "200px" });
+        bgObs.observe(topSection);
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initBgObserver);
+      } else {
+        initBgObserver();
       }
     })();
   </script>
@@ -4640,8 +4637,26 @@ class CinematicFrameEngine {
 
     this.mouseX = this.width * 0.5;
     this.mouseY = this.height * 0.5;
+    this.isPaused = false;
+    this.rafId = null;
 
     this.init();
+  }
+
+  pause() {
+    this.isPaused = true;
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
+  }
+
+  resume() {
+    if (!this.isPaused) return;
+    this.isPaused = false;
+    if (!this.rafId) {
+      this.loop();
+    }
   }
 
   init() {
@@ -4711,7 +4726,8 @@ class CinematicFrameEngine {
   }
 
   loop() {
-    requestAnimationFrame(() => this.loop());
+    if (this.isPaused) return;
+    this.rafId = requestAnimationFrame(() => this.loop());
     if (document.hidden) return; // Skip work when tab is in background
     if (this.isScrolling && this.width < 768) return; // Yield 100% GPU to mobile scrolling
 
@@ -5476,30 +5492,19 @@ window.closePhotoModal = function() {
     if (playIcon) playIcon.innerHTML = '<polygon points="6 4 20 12 6 20 6 4"/>';
   });
 
-  // Autoplay video on scroll into viewport
+  // High-performance IntersectionObserver autoplay/auto-pause (Zero scroll lag)
   if ('IntersectionObserver' in window) {
     const vidObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           showcaseVid.play().catch(() => {});
+        } else {
+          showcaseVid.pause();
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1 });
     vidObserver.observe(showcaseVid);
   }
-
-  // Fallback autoplay check on scroll & touch
-  const handleScrollAutoplay = () => {
-    const r = showcaseVid.getBoundingClientRect();
-    if (r.top < window.innerHeight && r.bottom > 0) {
-      if (showcaseVid.paused) showcaseVid.play().catch(() => {});
-    }
-  };
-  window.addEventListener('scroll', handleScrollAutoplay, { passive: true });
-  window.addEventListener('touchmove', handleScrollAutoplay, { passive: true });
-
-  // Initial trigger
-  showcaseVid.play().catch(() => {});
 })();
 
 // Close Quick View & Lightbox on Escape Key
