@@ -89,6 +89,33 @@ html, body {
   touch-action: pan-y; /* Lock mobile to strictly vertical scrolling, prevents accidental horizontal drift */
 }
 
+/* Zero-latency mobile touch response: Eliminate 300ms tap delay */
+button, a, input, select, .marvel-poster-card, .catalog-card, .btn, .arc-btn-tool, .action-btn {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* GPU Compositor Acceleration & Zero Glitch Layering */
+.marvel-official-hero-wrap,
+.marvel-cards-slider-outer,
+.marvel-montage-strip-wrap,
+.hero-3d-showcase,
+.cinematic-bg-container,
+.hud-bottom-nav {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Off-screen layout skipping for instantaneous scrolling & high FPS */
+.catalogue-section,
+.marvel-universe-callout-section,
+.faq-section,
+.hud-footer-main {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
+}
+
 body {
   background-color: var(--bg-dark);
   color: var(--text-main);
@@ -3403,6 +3430,23 @@ body {
         document.addEventListener("DOMContentLoaded", triggerPlay);
       }
       window.addEventListener("pageshow", triggerPlay);
+
+      // Auto-pause background video when user scrolls far down into catalog to save 100% video decoding GPU fillrate
+      if ('IntersectionObserver' in window) {
+        var heroWrap = document.getElementById("marvelHeroShowcase");
+        if (heroWrap) {
+          var bgObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                v.play().catch(function(){});
+              } else {
+                v.pause();
+              }
+            });
+          }, { threshold: 0.01, rootMargin: "350px" });
+          bgObs.observe(heroWrap);
+        }
+      }
     })();
   </script>
 

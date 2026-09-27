@@ -912,16 +912,20 @@
     };
   }
 
-  // 10. LIGHTING
+  // 10. LIGHTING (Optimized for 60-120 FPS high performance)
   function setupLighting(scene) {
+    const isMobile = window.innerWidth <= 768;
     const ambient = new THREE.AmbientLight(0x202936, 1.4);
     scene.add(ambient);
 
     const keyLight = new THREE.DirectionalLight(0xffffff, 2.6);
     keyLight.position.set(2.5, 6, 4);
     keyLight.castShadow = true;
-    keyLight.shadow.mapSize.width = 1024;
-    keyLight.shadow.mapSize.height = 1024;
+    keyLight.shadow.mapSize.width = isMobile ? 512 : 1024;
+    keyLight.shadow.mapSize.height = isMobile ? 512 : 1024;
+    keyLight.shadow.camera.near = 0.5;
+    keyLight.shadow.camera.far = 15;
+    keyLight.shadow.bias = -0.0005;
     scene.add(keyLight);
 
     const copperRim = new THREE.DirectionalLight(0xff9f68, 1.8);
@@ -966,13 +970,20 @@
     camera.position.set(0, 0.25, 4.4);
     STATE.camera = camera;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+    const isMobile = window.innerWidth <= 768;
+    const renderer = new THREE.WebGLRenderer({
+      antialias: !isMobile,
+      alpha: true,
+      powerPreference: 'high-performance',
+      stencil: false,
+      depth: true
+    });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio, 1.5) : Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.35;
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = isMobile ? THREE.BasicShadowMap : THREE.PCFSoftShadowMap;
     renderer.domElement.style.touchAction = 'none';
     container.appendChild(renderer.domElement);
     STATE.renderer = renderer;
@@ -980,14 +991,14 @@
     if (typeof THREE.OrbitControls !== 'undefined') {
       const controls = new THREE.OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
-      controls.dampingFactor = 0.08;
+      controls.dampingFactor = 0.09;
       controls.minDistance = 1.6;
       controls.maxDistance = 7.5;
       controls.maxPolarAngle = Math.PI / 2 + 0.35;
       controls.minPolarAngle = 0.05;
       controls.enableZoom = true;
       controls.enableRotate = true;
-      controls.rotateSpeed = 1.0;
+      controls.rotateSpeed = isMobile ? 0.85 : 1.0;
       if (controls.touches) {
         controls.touches.ONE = THREE.TOUCH.ROTATE;
         controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
@@ -1030,7 +1041,7 @@
           camera.updateProjectionMatrix();
           renderer.setSize(w, h);
         }
-      });
+      }, { passive: true });
     }
 
     // Gentle mouse parallax when idle on desktop only (before user rotates model)
@@ -1042,17 +1053,36 @@
           STATE.mouseParallax.targetX = nx;
           STATE.mouseParallax.targetY = ny;
         }
-      });
+      }, { passive: true });
+    }
+
+    // Auto-pause 3D render loop when off-screen to preserve 100% GPU for silky 120 FPS page scroll
+    if ('IntersectionObserver' in window && container) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          STATE.isCanvasInView = entry.isIntersecting;
+          if (STATE.isCanvasInView && !STATE.animationFrameId) {
+            clock.start();
+            animate();
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '120px' });
+      observer.observe(container);
     }
 
     STATE.isInitialized = true;
+    STATE.isCanvasInView = true;
     animate();
   }
 
-  // 12. ANIMATION LOOP
+  // 12. ANIMATION LOOP (Adaptive 60-120 FPS with zero off-screen latency)
   const clock = new THREE.Clock();
   function animate() {
-    requestAnimationFrame(animate);
+    if (STATE.isCanvasInView === false) {
+      STATE.animationFrameId = null;
+      return;
+    }
+    STATE.animationFrameId = requestAnimationFrame(animate);
     const time = clock.getElapsedTime();
 
     // Heartbeat cold fusion breathing cycle

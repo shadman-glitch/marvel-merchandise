@@ -56,6 +56,18 @@
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
       overflow-x: hidden;
+      touch-action: pan-y;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Zero-latency mobile touch response & hardware compositor acceleration */
+    button, a, input, select, .stage-btn-tool, .color-pill, .btn-action {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .big-3d-stage {
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
 
     /* Top Navigation Bar */
