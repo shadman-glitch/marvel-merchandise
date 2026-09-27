@@ -1199,13 +1199,13 @@ body {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
-/* Poster Cards Slider Outer (Pure White Background matching Image 2) */
+/* Poster Cards Slider Outer (Transparent to show background video) */
 .marvel-cards-slider-outer {
-  background: #ffffff;
-  padding: 20px 16px 22px 16px;
+  background: transparent;
+  padding: 10px 16px 20px 16px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  box-shadow: none;
 }
 .marvel-cards-slider {
   max-width: 1440px;
@@ -1240,7 +1240,8 @@ body {
   overflow: hidden;
   position: relative;
   background: #0f131a;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 .marvel-poster-img-wrap img {
   width: 100%;
@@ -1274,20 +1275,22 @@ body {
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 700;
-  color: #111827;
+  color: #ffffff;
   line-height: 1.25;
   margin-bottom: 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85);
 }
 .marvel-poster-sub {
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 600;
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.72);
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
 }
 .marvel-slider-next-btn {
   position: absolute;
@@ -1313,91 +1316,20 @@ body {
   transform: translateY(-50%) scale(1.06);
 }
 
-/* Catalogue Showcase Strip (Replacing movie characters with real catalogue products) */
-.marvel-catalog-strip-wrap {
+/* S-Curve Product Showcase Strip (Exact cropping & style of Image 2 with product photos) */
+.marvel-montage-strip-wrap {
   width: 100%;
-  background: #080a0f;
-  padding: 14px 18px;
-  box-sizing: border-box;
+  overflow: hidden;
+  background: #000000;
+  line-height: 0;
+  position: relative;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
-.marvel-catalog-strip-grid {
-  max-width: 1440px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-@media (max-width: 768px) {
-  .marvel-catalog-strip-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-}
-.marvel-catalog-strip-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(18, 24, 38, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-}
-.marvel-catalog-strip-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(225, 29, 72, 0.4);
-  background: rgba(26, 34, 52, 0.85);
-}
-.catalog-strip-img-wrap {
-  width: 60px;
-  height: 60px;
-  flex-shrink: 0;
-  border-radius: 5px;
-  overflow: hidden;
-  position: relative;
-  background: #0b0e14;
-}
-.catalog-strip-img-wrap img {
+.marvel-montage-svg {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.catalog-strip-badge {
-  position: absolute;
-  bottom: 2px;
-  left: 2px;
-  font-family: var(--font-mono);
-  font-size: 7.5px;
-  font-weight: 700;
-  color: #fff;
-  background: rgba(0,0,0,0.85);
-  padding: 1px 4px;
-  border-radius: 2px;
-}
-.catalog-strip-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  overflow: hidden;
-}
-.catalog-strip-hero-tag {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  color: #e62429;
-  letter-spacing: 0.08em;
-}
-.catalog-strip-title {
-  font-family: var(--font-sans);
-  font-size: 12.5px;
-  font-weight: 700;
-  color: #ffffff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  height: clamp(170px, 28vw, 320px);
+  display: block;
 }
 
 /* Universe Callout Feature Section (from Image 1) */
@@ -3654,40 +3586,112 @@ body {
       </button>
     </div>
 
-    <!-- Catalogue Hero Showcase Strip (Real Catalogue Products replacing movie characters) -->
-    <div class="marvel-catalog-strip-wrap">
-      <div class="marvel-catalog-strip-grid">
-        <div class="marvel-catalog-strip-card" onclick="openQuickView(20)">
-          <div class="catalog-strip-img-wrap">
-            <img src="assets/images/p_mk5_helmet.jpg" alt="Iron Man MK5 Helmet" />
-            <span class="catalog-strip-badge">VOICE CONTROL 1:1</span>
-          </div>
-          <div class="catalog-strip-info">
-            <span class="catalog-strip-hero-tag">STARK INDUSTRIES</span>
-            <h4 class="catalog-strip-title">Iron Man MK5 Wearable Helmet</h4>
-          </div>
-        </div>
-        <div class="marvel-catalog-strip-card" onclick="openQuickView(25)">
-          <div class="catalog-strip-img-wrap">
-            <img src="assets/images/p_cap_shield.jpg" alt="Captain America Shield" />
-            <span class="catalog-strip-badge">60CM VIBRANIUM</span>
-          </div>
-          <div class="catalog-strip-info">
-            <span class="catalog-strip-hero-tag">CAPTAIN AMERICA</span>
-            <h4 class="catalog-strip-title">Vibranium Alloy Shield 1:1</h4>
-          </div>
-        </div>
-        <div class="marvel-catalog-strip-card" onclick="openQuickView(29)">
-          <div class="catalog-strip-img-wrap">
-            <img src="assets/images/p_mjolnir_speaker.jpg" alt="Thor Mjolnir Hammer" />
-            <span class="catalog-strip-badge">DIE-CAST AUDIO BASE</span>
-          </div>
-          <div class="catalog-strip-info">
-            <span class="catalog-strip-hero-tag">THOR ODINSON</span>
-            <h4 class="catalog-strip-title">Mjolnir Hammer Sound & Light</h4>
-          </div>
-        </div>
-      </div>
+    <!-- S-Curve Product Showcase Strip (Exact cropping & style of Image 2, featuring real product photos) -->
+    <div class="marvel-montage-strip-wrap">
+      <svg class="marvel-montage-svg" viewBox="0 0 1200 450" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Marvel Super Hero Collectibles Montage">
+        <defs>
+          <!-- Slice 1: Left panel with outward S-curve on the right -->
+          <clipPath id="panelClipLeft">
+            <path d="M 0,0 L 420,0 C 495,135 495,315 425,450 L 0,450 Z" />
+          </clipPath>
+          
+          <!-- Slice 2: Center panel bounded by Left S-Curve and Right S-Curve -->
+          <clipPath id="panelClipCenter">
+            <path d="M 420,0 C 495,135 495,315 425,450 L 800,450 C 875,315 875,135 805,0 Z" />
+          </clipPath>
+          
+          <!-- Slice 3: Right panel bounded by Right S-Curve to right edge -->
+          <clipPath id="panelClipRight">
+            <path d="M 805,0 C 875,135 875,315 800,450 L 1200,450 L 1200,0 Z" />
+          </clipPath>
+
+          <!-- Golden/Amber luminous glow filter -->
+          <filter id="goldGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="7" result="blur1" />
+            <feGaussianBlur stdDeviation="2.5" result="blur2" />
+            <feMerge>
+              <feMergeNode in="blur1" />
+              <feMergeNode in="blur2" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+
+          <!-- White/Cyan luminous glow filter -->
+          <filter id="whiteGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="7" result="blur1" />
+            <feGaussianBlur stdDeviation="2.5" result="blur2" />
+            <feMerge>
+              <feMergeNode in="blur1" />
+              <feMergeNode in="blur2" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+
+          <!-- S-Curve 1 Golden/Amber Gradient (Image 2 style) -->
+          <linearGradient id="goldRibbonGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffb703" stop-opacity="0.95" />
+            <stop offset="45%" stop-color="#fb8500" stop-opacity="1" />
+            <stop offset="70%" stop-color="#ef4444" stop-opacity="1" />
+            <stop offset="100%" stop-color="#991b1b" stop-opacity="0.9" />
+          </linearGradient>
+
+          <!-- S-Curve 2 Radiant White/Cyan Gradient (Image 2 style) -->
+          <linearGradient id="whiteRibbonGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+            <stop offset="50%" stop-color="#e0f2fe" stop-opacity="1" />
+            <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.95" />
+          </linearGradient>
+
+          <!-- Cinematic Vignette Overlays -->
+          <linearGradient id="shadeLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#000000" stop-opacity="0.3" />
+            <stop offset="75%" stop-color="#000000" stop-opacity="0" />
+            <stop offset="100%" stop-color="#000000" stop-opacity="0.55" />
+          </linearGradient>
+
+          <linearGradient id="shadeCenter" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#000000" stop-opacity="0.55" />
+            <stop offset="25%" stop-color="#000000" stop-opacity="0" />
+            <stop offset="75%" stop-color="#000000" stop-opacity="0" />
+            <stop offset="100%" stop-color="#000000" stop-opacity="0.55" />
+          </linearGradient>
+
+          <linearGradient id="shadeRight" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#000000" stop-opacity="0.55" />
+            <stop offset="30%" stop-color="#000000" stop-opacity="0" />
+            <stop offset="100%" stop-color="#000000" stop-opacity="0.3" />
+          </linearGradient>
+        </defs>
+
+        <!-- Product Panel 1 (Left): Iron Man MK5 Wearable Helmet -->
+        <g clip-path="url(#panelClipLeft)" style="cursor:pointer;" onclick="openQuickView(20)">
+          <rect x="0" y="0" width="550" height="450" fill="#0b0e14" />
+          <image href="assets/images/p_mk5_helmet.jpg" xlink:href="assets/images/p_mk5_helmet.jpg" x="-10" y="-30" width="520" height="510" preserveAspectRatio="xMidYMid slice" />
+          <rect x="0" y="0" width="550" height="450" fill="url(#shadeLeft)" />
+        </g>
+
+        <!-- Product Panel 2 (Center): Captain America 1:1 Shield -->
+        <g clip-path="url(#panelClipCenter)" style="cursor:pointer;" onclick="openQuickView(25)">
+          <rect x="390" y="0" width="480" height="450" fill="#080c16" />
+          <image href="assets/images/p_cap_shield.jpg" xlink:href="assets/images/p_cap_shield.jpg" x="400" y="-30" width="460" height="510" preserveAspectRatio="xMidYMid slice" />
+          <rect x="390" y="0" width="480" height="450" fill="url(#shadeCenter)" />
+        </g>
+
+        <!-- Product Panel 3 (Right): Thor Mjolnir Die-Cast Hammer -->
+        <g clip-path="url(#panelClipRight)" style="cursor:pointer;" onclick="openQuickView(29)">
+          <rect x="760" y="0" width="450" height="450" fill="#0a0c10" />
+          <image href="assets/images/p_mjolnir_speaker.jpg" xlink:href="assets/images/p_mjolnir_speaker.jpg" x="770" y="-30" width="450" height="510" preserveAspectRatio="xMidYMid slice" />
+          <rect x="760" y="0" width="450" height="450" fill="url(#shadeRight)" />
+        </g>
+
+        <!-- Glowing S-Curve Ribbon 1 (Gold/Amber Glow matching Image 2) -->
+        <path d="M 420,0 C 495,135 495,315 425,450" fill="none" stroke="url(#goldRibbonGrad)" stroke-width="7" filter="url(#goldGlowFilter)" opacity="0.9" />
+        <path d="M 420,0 C 495,135 495,315 425,450" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.98" />
+
+        <!-- Glowing S-Curve Ribbon 2 (White/Cyan Glow matching Image 2) -->
+        <path d="M 805,0 C 875,135 875,315 800,450" fill="none" stroke="url(#whiteRibbonGrad)" stroke-width="7" filter="url(#whiteGlowFilter)" opacity="0.9" />
+        <path d="M 805,0 C 875,135 875,315 800,450" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.98" />
+      </svg>
     </div>
 
     <!-- Feature Callout Banner ("A UNIVERSE OF SUPER HERO COLLECTIBLES" - Image 1 aesthetic) -->
