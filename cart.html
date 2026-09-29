@@ -14,6 +14,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Shared Core CSS -->
+  <link rel="stylesheet" href="assets/css/marvel-core.css" />
+
   <style>
 /* ==========================================================================
    PREMIUM MARVEL STANDALONE CART & CHECKOUT PAGE
@@ -901,19 +904,21 @@ html, body {
       </a>
 
       <div class="nav-actions">
-        <div class="trust-badge-nav">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        <a href="categories.html" class="btn-continue-shopping">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
           </svg>
-          <span>Official 1:1 Certified</span>
-        </div>
-
+          <span>Categories</span>
+        </a>
         <a href="index.html" class="btn-continue-shopping">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
           </svg>
-          <span>Store</span>
+          <span>Home</span>
         </a>
       </div>
     </div>
@@ -1126,6 +1131,127 @@ html, body {
 
     </div>
   </div>
+
+  <!-- Site Footer (Minimalist & Clean) -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top-grid">
+        <!-- Col 1: Brand -->
+        <div class="footer-col brand-col">
+          <div class="footer-logo">
+            <span class="footer-logo-badge">MARVEL</span>
+            <span class="footer-logo-title">VERSE</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Categories -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Categories</h4>
+          <ul class="footer-links">
+            <li><a href="categories.html">All Collectibles</a></li>
+            <li><a href="categories.html?cat=wearable-helmets">Wearable Helmets (1:1)</a></li>
+            <li><a href="categories.html?cat=bluetooth-speakers">Bluetooth Speakers</a></li>
+            <li><a href="categories.html?cat=charging-stations">Charging Stations</a></li>
+            <li><a href="categories.html?cat=digital-tech">Tech Gear &amp; Audio</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Customer Care -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Customer Care</h4>
+          <ul class="footer-links">
+            <li><a href="tracking.html">Track Shipment</a></li>
+            <li><a href="profile.html">VIP Collector Profile</a></li>
+            <li><a href="help.html">Help &amp; Support</a></li>
+            <li><a href="cart.html">Shopping Cart</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Store & Address -->
+        <div class="footer-col address-col">
+          <h4 class="footer-heading">Store &amp; Contact</h4>
+          <div class="footer-address-card">
+            <div class="address-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="address-details">
+              <p class="address-text">84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018</p>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:+919330648314">+91 93306 48314 / +91 62893 62476</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:support@marvelverse.in">support@marvelverse.in</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="footer-bottom-bar">
+        <div class="footer-copy">
+          &copy; 2026 Marvel Verse. Officially Licensed Merchandise. All Rights Reserved.
+        </div>
+        <div class="footer-payment-methods">
+          <span class="pay-pill">UPI</span>
+          <span class="pay-pill">Visa</span>
+          <span class="pay-pill">MasterCard</span>
+          <span class="pay-pill">NetBanking</span>
+          <span class="pay-pill">Cash on Delivery</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Fixed App Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav" aria-label="Quick Mobile Navigation">
+    <a href="index.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <span class="b-nav-label">Home</span>
+    </a>
+
+    <a href="categories.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"/>
+        <rect x="14" y="3" width="7" height="7"/>
+        <rect x="14" y="14" width="7" height="7"/>
+        <rect x="3" y="14" width="7" height="7"/>
+      </svg>
+      <span class="b-nav-label">Categories</span>
+    </a>
+
+    <a href="tracking.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13"/>
+        <polygon points="16 8 20 8 23 11 23 16 16 16 8"/>
+        <circle cx="5.5" cy="18.5" r="2.5"/>
+        <circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+      <span class="b-nav-label">Tracking</span>
+    </a>
+
+    <a href="profile.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span class="b-nav-label">Profile</span>
+    </a>
+
+    <a href="help.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      <span class="b-nav-label">Help</span>
+    </a>
+  </nav>
 
   <!-- Toast Notification Box -->
   <div id="cartToast"></div>

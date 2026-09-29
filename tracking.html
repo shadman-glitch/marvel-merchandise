@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Track Your Shipment &mdash; Marvel Verse</title>
+  <meta name="description" content="Live shipment status and tracking for Marvel Verse official 1:1 collectibles, wearable helmets, and tech gear." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e11b23'><rect width='24' height='24' rx='4' fill='%23e11b23'/><text x='12' y='16' font-size='12' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Shared Core CSS -->
+  <link rel="stylesheet" href="assets/css/marvel-core.css" />
+
+  <style>
+/* ==========================================================================
+   TRACKING PAGE - DEDICATED CLEAN E-COMMERCE LAYOUT
+   ========================================================================== */
+.tracking-wrapper {
+  position: relative;
+  z-index: 10;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem 5rem 1.5rem;
+}
+
+/* Search Card */
+.track-search-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin: 1.5rem 0 2.5rem 0;
+  box-shadow: var(--shadow-card);
+}
+
+.track-search-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.track-search-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.track-input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.track-input {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  outline: none;
+  transition: var(--transition);
+}
+.track-input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+.btn-track-submit {
+  background: var(--accent-red);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0 24px;
+  font-weight: 700;
+  font-size: 13.5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.btn-track-submit:hover {
+  background: var(--accent-red-hover);
+  transform: translateY(-1px);
+}
+
+/* Tracking Result Card */
+.tracking-dashboard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 2rem;
+}
+
+.tracking-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.order-badge-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-blue);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.order-main-number {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34d399;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+}
+
+.status-dot-pulse {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #10b981;
+  animation: pulseDot 1.8s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+/* Key Metrics Grid */
+.tracking-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  background: rgba(8, 11, 18, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.meta-value {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Visual Progress Timeline */
+.timeline-section-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timeline-flow {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 12px;
+  padding-left: 28px;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+}
+
+.timeline-step {
+  position: relative;
+  padding-bottom: 1.75rem;
+}
+.timeline-step:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-icon-dot {
+  position: absolute;
+  left: -38px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0d121e;
+  border: 2px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+.timeline-step.completed .timeline-icon-dot {
+  background: #10b981;
+  border-color: #10b981;
+  color: #fff;
+}
+
+.timeline-step.active .timeline-icon-dot {
+  background: var(--accent-blue);
+  border-color: #7dd3fc;
+  color: #07090e;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.8);
+}
+
+.timeline-step-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 3px;
+}
+
+.timeline-step-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.timeline-step-time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+/* Package Manifest */
+.manifest-box {
+  background: rgba(8, 11, 18, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.manifest-thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #060910;
+  border: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.manifest-info {
+  flex: 1;
+}
+
+.manifest-name {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.manifest-sub {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.manifest-tag {
+  display: inline-block;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #38bdf8;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Action Buttons */
+.tracking-actions-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-track-action {
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.btn-action-primary {
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+}
+.btn-action-primary:hover {
+  background: rgba(56, 189, 248, 0.25);
+  color: #fff;
+}
+
+.btn-action-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+}
+.btn-action-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .tracking-meta-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .track-input-group {
+    flex-direction: column;
+  }
+  .btn-track-submit {
+    padding: 12px;
+    justify-content: center;
+  }
+  .manifest-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- Subtle Video Background -->
+  <div class="cinematic-bg-container">
+    <video class="cinematic-bg-video" autoplay muted loop playsinline poster="assets/battle_poster.jpg">
+      <source src="assets/battle.mp4" type="video/mp4">
+    </video>
+    <div class="canvas-overlay-vignette"></div>
+  </div>
+
+  <!-- Main Navbar -->
+  <header class="main-header">
+    <div class="header-container">
+      
+      <!-- Mobile Hamburger -->
+      <button class="btn-hamburger" id="navMenuBtn" aria-label="Toggle Navigation" onclick="toggleNavMenu()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Brand Logo -->
+      <a href="index.html" class="brand-logo" aria-label="Marvel Verse Home">
+        <span class="brand-badge">MARVEL</span>
+        <span class="brand-title">VERSE</span>
+      </a>
+
+      <!-- Category Navigation Tabs -->
+      <nav class="nav-tabs">
+        <a href="categories.html" class="nav-link" data-cat="all">All Products</a>
+        <a href="categories.html?cat=wearable-helmets" class="nav-link" data-cat="wearable-helmets">Helmets</a>
+        <a href="categories.html?cat=bluetooth-speakers" class="nav-link" data-cat="bluetooth-speakers">Speakers</a>
+        <a href="categories.html?cat=charging-stations" class="nav-link" data-cat="charging-stations">Chargers</a>
+        <a href="categories.html?cat=digital-tech" class="nav-link" data-cat="digital-tech">Tech Gear</a>
+      </nav>
+
+      <!-- Right Controls -->
+      <div class="header-right">
+        <!-- Search Input (Redirects to categories.html) -->
+        <div class="search-box">
+          <input type="text" id="globalSearch" class="search-input" placeholder="Search products..." autocomplete="off" onkeydown="if(event.key==='Enter') window.location.href='categories.html?q=' + encodeURIComponent(this.value)" />
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" onclick="window.location.href='categories.html?q=' + encodeURIComponent(document.getElementById('globalSearch').value)">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+
+        <!-- Mobile Search Button -->
+        <button class="btn-search-mobile" aria-label="Search Products" onclick="toggleMobileSearch()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <!-- Cart Button -->
+        <a href="cart.html" class="btn-cart" title="View Cart">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span>Cart</span>
+          <span class="cart-counter" id="cartCountBadge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Search Bar -->
+  <div class="mobile-search-bar" id="mobileSearchBar">
+    <div class="mobile-search-inner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2.2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="mobileGlobalSearch" class="mobile-search-input" placeholder="Search helmets, speakers, tech..." autocomplete="off" onkeydown="if(event.key==='Enter') window.location.href='categories.html?q=' + encodeURIComponent(this.value)" />
+      <button class="mobile-search-close" onclick="toggleMobileSearch(false)" aria-label="Close search">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div class="marvel-drawer-backdrop" id="marvelDrawerBackdrop" onclick="toggleNavMenu()"></div>
+  <aside class="marvel-nav-drawer" id="marvelNavDrawer">
+    <div class="marvel-drawer-header">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span class="brand-badge">MARVEL</span>
+        <span class="brand-title">VERSE</span>
+      </div>
+      <button class="marvel-drawer-close" onclick="toggleNavMenu()" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <nav class="marvel-drawer-links">
+      <a href="index.html" class="marvel-drawer-link">Home Showcase</a>
+      <a href="categories.html" class="marvel-drawer-link">All Categories</a>
+      <a href="categories.html?cat=wearable-helmets" class="marvel-drawer-link">Wearable Helmets (1:1)</a>
+      <a href="categories.html?cat=bluetooth-speakers" class="marvel-drawer-link">Bluetooth Speakers</a>
+      <a href="categories.html?cat=charging-stations" class="marvel-drawer-link">Charging Stations</a>
+      <a href="categories.html?cat=digital-tech" class="marvel-drawer-link">Tech Gear &amp; Audio</a>
+      <a href="tracking.html" class="marvel-drawer-link active">Track Shipment</a>
+      <a href="profile.html" class="marvel-drawer-link">VIP Collector Profile</a>
+      <a href="help.html" class="marvel-drawer-link">Customer Help &amp; Support</a>
+      <a href="cart.html" class="marvel-drawer-link">View Cart</a>
+    </nav>
+  </aside>
+
+  <!-- Breadcrumbs -->
+  <div class="breadcrumbs-bar">
+    <a href="index.html">Home</a>
+    <span class="sep">/</span>
+    <span class="current">Track Shipment</span>
+  </div>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <h1 class="page-title">Live Shipment Tracking</h1>
+    <p class="page-subtitle">Track your official Marvel Verse express shipment with real-time courier dispatch checkpoints.</p>
+  </div>
+
+  <!-- Main Tracking Container -->
+  <main class="tracking-wrapper">
+    
+    <!-- Search Order Bar -->
+    <div class="track-search-card">
+      <div class="track-search-title">Track Any Order</div>
+      <p class="track-search-desc">Enter your Order ID (e.g. MCU-700018-KOL) or Bluedart AWB number to check real-time progress.</p>
+      
+      <div class="track-input-group">
+        <input type="text" id="trackInput" class="track-input" value="MCU-700018-KOL" placeholder="Order ID or Tracking AWB" />
+        <button class="btn-track-submit" onclick="performTrackingSearch()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Track Order</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Tracking Dashboard -->
+    <div class="tracking-dashboard" id="trackingDashboard">
+      
+      <!-- Top Status Header -->
+      <div class="tracking-header-row">
+        <div>
+          <div class="order-badge-title">Express Air Logistics &bull; Bluedart India</div>
+          <div class="order-main-number" id="dispOrderNumber">MCU-700018-KOL</div>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot-pulse"></span>
+          <span id="dispStatus">In Transit (Air Express)</span>
+        </div>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="tracking-meta-grid">
+        <div class="meta-item">
+          <span class="meta-label">Tracking AWB</span>
+          <span class="meta-value" id="dispAwb">BLU-89412-IN</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Estimated Delivery</span>
+          <span class="meta-value" style="color:#38bdf8;">Tomorrow by 04:30 PM</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Origin Facility</span>
+          <span class="meta-value">Kolkata Hub (700018)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Delivery Mode</span>
+          <span class="meta-value">OTP Verified Handover</span>
+        </div>
+      </div>
+
+      <!-- Package Item Details -->
+      <div class="manifest-box">
+        <img class="manifest-thumb" src="assets/images/p_mk5_helmet.jpg" alt="Iron Man MK5 Helmet" />
+        <div class="manifest-info">
+          <div class="manifest-name">Iron Man MK5 Helmet: Stark Edition (1:1 Life Size)</div>
+          <div class="manifest-sub">1:1 Motorized Voice-Control Wearable Helmet &bull; Package Weight: 3.4 kg (Insured Transit)</div>
+          <span class="manifest-tag">QC PASSED &bull; HOLOGRAM CERTIFIED</span>
+        </div>
+      </div>
+
+      <!-- Progress Timeline -->
+      <div class="timeline-section-title">Shipment Checkpoints</div>
+      <div class="timeline-flow">
+        
+        <!-- Step 1 -->
+        <div class="timeline-step completed">
+          <div class="timeline-icon-dot">✓</div>
+          <div class="timeline-step-title">Order Confirmed &amp; Quality Check Passed</div>
+          <div class="timeline-step-desc">Item inspected, calibrated, and cleared for express courier handover.</div>
+          <div class="timeline-step-time">26 Sep 2026, 04:30 PM IST</div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="timeline-step completed">
+          <div class="timeline-icon-dot">✓</div>
+          <div class="timeline-step-title">Dispatched from Kolkata Hub</div>
+          <div class="timeline-step-desc">Handed to Bluedart Courier at: 84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018.</div>
+          <div class="timeline-step-time">27 Sep 2026, 09:15 AM IST</div>
+        </div>
+
+        <!-- Step 3 (Active) -->
+        <div class="timeline-step active">
+          <div class="timeline-icon-dot">●</div>
+          <div class="timeline-step-title">In Transit &mdash; Express Air Logistics</div>
+          <div class="timeline-step-desc">Package en route to local delivery facility. Insured air transit active.</div>
+          <div class="timeline-step-time">Updated 15 mins ago &bull; Air Cargo Flight B738</div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="timeline-step">
+          <div class="timeline-icon-dot">4</div>
+          <div class="timeline-step-title">Out for Delivery</div>
+          <div class="timeline-step-desc">Designated courier agent will arrive at delivery address with secure OTP verification.</div>
+          <div class="timeline-step-time">Expected Tomorrow Morning</div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="timeline-step">
+          <div class="timeline-icon-dot">5</div>
+          <div class="timeline-step-title">Delivered &amp; Unboxing Verification</div>
+          <div class="timeline-step-desc">Recipient signature and physical delivery confirmation.</div>
+          <div class="timeline-step-time">Pending Final Delivery</div>
+        </div>
+
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="tracking-actions-row">
+        <a href="help.html" class="btn-track-action btn-action-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Need Delivery Support?</span>
+        </a>
+        <a href="categories.html" class="btn-track-action btn-action-secondary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <span>Continue Shopping</span>
+        </a>
+        <button class="btn-track-action btn-action-secondary" onclick="showGlobalToast('Invoice downloaded successfully.')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download Tax Invoice</span>
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Site Footer (Minimalist & Clean) -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top-grid">
+        <!-- Col 1: Brand -->
+        <div class="footer-col brand-col">
+          <div class="footer-logo">
+            <span class="footer-logo-badge">MARVEL</span>
+            <span class="footer-logo-title">VERSE</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Categories -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Categories</h4>
+          <ul class="footer-links">
+            <li><a href="categories.html">All Collectibles</a></li>
+            <li><a href="categories.html?cat=wearable-helmets">Wearable Helmets (1:1)</a></li>
+            <li><a href="categories.html?cat=bluetooth-speakers">Bluetooth Speakers</a></li>
+            <li><a href="categories.html?cat=charging-stations">Charging Stations</a></li>
+            <li><a href="categories.html?cat=digital-tech">Tech Gear &amp; Audio</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Customer Care -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Customer Care</h4>
+          <ul class="footer-links">
+            <li><a href="tracking.html">Track Shipment</a></li>
+            <li><a href="profile.html">VIP Collector Profile</a></li>
+            <li><a href="help.html">Help &amp; Support</a></li>
+            <li><a href="cart.html">Shopping Cart</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Store & Address -->
+        <div class="footer-col address-col">
+          <h4 class="footer-heading">Store &amp; Contact</h4>
+          <div class="footer-address-card">
+            <div class="address-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="address-details">
+              <p class="address-text">84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018</p>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:+919330648314">+91 93306 48314 / +91 62893 62476</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:support@marvelverse.in">support@marvelverse.in</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="footer-bottom-bar">
+        <div class="footer-copy">
+          &copy; 2026 Marvel Verse. Officially Licensed Merchandise. All Rights Reserved.
+        </div>
+        <div class="footer-payment-methods">
+          <span class="pay-pill">UPI</span>
+          <span class="pay-pill">Visa</span>
+          <span class="pay-pill">MasterCard</span>
+          <span class="pay-pill">NetBanking</span>
+          <span class="pay-pill">Cash on Delivery</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Fixed App Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav" aria-label="Quick Mobile Navigation">
+    <a href="index.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <span class="b-nav-label">Home</span>
+    </a>
+
+    <a href="categories.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"/>
+        <rect x="14" y="3" width="7" height="7"/>
+        <rect x="14" y="14" width="7" height="7"/>
+        <rect x="3" y="14" width="7" height="7"/>
+      </svg>
+      <span class="b-nav-label">Categories</span>
+    </a>
+
+    <a href="tracking.html" class="b-nav-item active">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13"/>
+        <polygon points="16 8 20 8 23 11 23 16 16 16 8"/>
+        <circle cx="5.5" cy="18.5" r="2.5"/>
+        <circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+      <span class="b-nav-label">Tracking</span>
+    </a>
+
+    <a href="profile.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span class="b-nav-label">Profile</span>
+    </a>
+
+    <a href="help.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      <span class="b-nav-label">Help</span>
+    </a>
+  </nav>
+
+  <!-- Core Catalog Data & Shared JS -->
+  <script src="assets/js/catalog-data.js"></script>
+
+  <script>
+    function performTrackingSearch() {
+      const val = (document.getElementById("trackInput").value || "").trim().toUpperCase();
+      if (!val) {
+        showGlobalToast("Please enter an Order ID or AWB Number");
+        return;
+      }
+
+      document.getElementById("dispOrderNumber").textContent = val;
+      if (val.startsWith("BLU")) {
+        document.getElementById("dispAwb").textContent = val;
+      }
+      showGlobalToast(`Loaded status for ${val}`);
+    }
+
+    function toggleNavMenu() {
+      const drawer = document.getElementById("marvelNavDrawer");
+      const backdrop = document.getElementById("marvelDrawerBackdrop");
+      if (drawer && backdrop) {
+        drawer.classList.toggle("active");
+        backdrop.classList.toggle("active");
+      }
+    }
+
+    function toggleMobileSearch(force) {
+      const bar = document.getElementById("mobileSearchBar");
+      if (!bar) return;
+      if (force !== undefined) {
+        bar.classList.toggle("active", force);
+      } else {
+        bar.classList.toggle("active");
+      }
+      if (bar.classList.contains("active")) {
+        const input = document.getElementById("mobileGlobalSearch");
+        if (input) input.focus();
+      }
+    }
+  </script>
+</body>
+</html>

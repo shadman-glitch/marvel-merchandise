@@ -18,6 +18,10 @@
   <script src="assets/js/three.min.js"></script>
   <script src="assets/js/OrbitControls.js"></script>
   <script src="assets/js/arc-reactor-3d.js"></script>
+  <script src="assets/js/catalog-data.js"></script>
+
+  <!-- Shared Core CSS -->
+  <link rel="stylesheet" href="assets/css/marvel-core.css" />
 
   <style>
 /* ==========================================================================
@@ -3691,23 +3695,24 @@ body {
 
       <!-- Category Navigation Links (Zero Emojis) -->
       <nav class="nav-tabs">
-        <span class="nav-link active" data-cat="all" onclick="selectCategory('all', this)">All Products</span>
-        <span class="nav-link" data-cat="wearable-helmets" onclick="selectCategory('wearable-helmets', this)">Helmets</span>
-        <span class="nav-link" data-cat="bluetooth-speakers" onclick="selectCategory('bluetooth-speakers', this)">Speakers</span>
-        <span class="nav-link" data-cat="charging-stations" onclick="selectCategory('charging-stations', this)">Chargers</span>
-        <span class="nav-link" data-cat="digital-tech" onclick="selectCategory('digital-tech', this)">Tech Gear</span>
+        <a href="categories.html" class="nav-link">All Products</a>
+        <a href="categories.html?cat=wearable-helmets" class="nav-link">Helmets</a>
+        <a href="categories.html?cat=bluetooth-speakers" class="nav-link">Speakers</a>
+        <a href="categories.html?cat=charging-stations" class="nav-link">Chargers</a>
+        <a href="categories.html?cat=digital-tech" class="nav-link">Tech Gear</a>
       </nav>
 
       <!-- Right Controls -->
       <div class="header-right">
         <!-- Search Input (Desktop) -->
         <div class="search-box">
-          <input type="text" id="globalSearch" class="search-input" placeholder="Search products..." autocomplete="off" oninput="handleSearchInput(this.value, 'desktop')" />
-          <button class="search-clear-btn" id="desktopSearchClear" aria-label="Clear search" onclick="clearSearch()">&times;</button>
-          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <input type="text" id="globalSearch" class="search-input" placeholder="Search products..." autocomplete="off" oninput="handleHomeSearch(this.value, 'desktop')" onkeydown="if(event.key==='Enter') window.location.href='categories.html?q=' + encodeURIComponent(this.value)" />
+          <button class="search-clear-btn" id="desktopSearchClear" aria-label="Clear search" onclick="clearHomeSearch()">&times;</button>
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" onclick="window.location.href='categories.html?q=' + encodeURIComponent(document.getElementById('globalSearch').value)">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
+          <div class="search-dropdown" id="desktopSearchDropdown"></div>
         </div>
 
         <!-- Mobile Search Button (Image 2 style) -->
@@ -3739,10 +3744,11 @@ body {
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-      <input type="text" id="mobileGlobalSearch" class="mobile-search-input" placeholder="Search helmets, speakers, tech..." autocomplete="off" oninput="handleSearchInput(this.value, 'mobile')" />
-      <button class="mobile-search-clear" id="mobileSearchClear" aria-label="Clear search" onclick="clearSearch()">&times;</button>
+      <input type="text" id="mobileGlobalSearch" class="mobile-search-input" placeholder="Search helmets, speakers, tech..." autocomplete="off" oninput="handleHomeSearch(this.value, 'mobile')" onkeydown="if(event.key==='Enter') window.location.href='categories.html?q=' + encodeURIComponent(this.value)" />
+      <button class="mobile-search-clear" id="mobileSearchClear" aria-label="Clear search" onclick="clearHomeSearch()">&times;</button>
       <button class="mobile-search-close" onclick="toggleMobileSearch(false)" aria-label="Close search">Cancel</button>
     </div>
+    <div class="search-dropdown" id="mobileSearchDropdown"></div>
   </div>
 
   <!-- Slide-out Mobile Navigation Drawer & Backdrop -->
@@ -3761,12 +3767,16 @@ body {
       </button>
     </div>
     <nav class="marvel-drawer-links">
-      <a class="marvel-drawer-link" onclick="selectCategory('all', null); toggleNavMenu(); document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'});">All Collectibles</a>
-      <a class="marvel-drawer-link" onclick="selectCategory('wearable-helmets', null); toggleNavMenu(); document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'});">Wearable Helmets (1:1)</a>
-      <a class="marvel-drawer-link" onclick="selectCategory('bluetooth-speakers', null); toggleNavMenu(); document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'});">Bluetooth Speakers</a>
-      <a class="marvel-drawer-link" onclick="selectCategory('charging-stations', null); toggleNavMenu(); document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'});">Charging Stations</a>
-      <a class="marvel-drawer-link" onclick="selectCategory('digital-tech', null); toggleNavMenu(); document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'});">Tech Gear & Props</a>
-      <a class="marvel-drawer-link" onclick="toggleNavMenu(); document.getElementById('hero3dSection').scrollIntoView({behavior:'smooth'});">3D Arc Reactor (Interactive)</a>
+      <a href="index.html" class="marvel-drawer-link active">Home Showcase</a>
+      <a href="categories.html" class="marvel-drawer-link">All Categories</a>
+      <a href="categories.html?cat=wearable-helmets" class="marvel-drawer-link">Wearable Helmets (1:1)</a>
+      <a href="categories.html?cat=bluetooth-speakers" class="marvel-drawer-link">Bluetooth Speakers</a>
+      <a href="categories.html?cat=charging-stations" class="marvel-drawer-link">Charging Stations</a>
+      <a href="categories.html?cat=digital-tech" class="marvel-drawer-link">Tech Gear &amp; Audio</a>
+      <a href="tracking.html" class="marvel-drawer-link">Track Shipment</a>
+      <a href="profile.html" class="marvel-drawer-link">VIP Collector Profile</a>
+      <a href="help.html" class="marvel-drawer-link">Customer Help &amp; Support</a>
+      <a href="cart.html" class="marvel-drawer-link">View Cart</a>
     </nav>
   </aside>
 
@@ -4306,21 +4316,18 @@ body {
             <span class="footer-logo-badge">MARVEL</span>
             <span class="footer-logo-title">VERSE</span>
           </div>
-          <p class="footer-desc">
-            Official 1:1 scale movie-accurate collectible recreations, electronic wearable helmets, and certified prop replicas engineered with Stark precision.
-          </p>
         </div>
 
         <!-- Col 2: Categories -->
         <div class="footer-col">
           <h4 class="footer-heading">Categories</h4>
           <ul class="footer-links">
-            <li><a href="javascript:void(0)" onclick="filterByHero('all'); scrollToCollection();">All Collectibles</a></li>
-            <li><a href="javascript:void(0)" onclick="filterByHero('iron-man'); scrollToCollection();">Iron Man Prop Replicas</a></li>
-            <li><a href="javascript:void(0)" onclick="filterByHero('thor'); scrollToCollection();">Thor Mjolnir &amp; Stormbreaker</a></li>
-            <li><a href="javascript:void(0)" onclick="filterByHero('captain-america'); scrollToCollection();">Captain America Shield</a></li>
-            <li><a href="javascript:void(0)" onclick="filterByHero('spider-man'); scrollToCollection();">Spider-Man Helmets</a></li>
-            <li><a href="javascript:void(0)" onclick="openQuickView(31)">Mark I Arc Reactor Charger</a></li>
+            <li><a href="categories.html">All Collectibles</a></li>
+            <li><a href="categories.html?hero=iron-man">Iron Man Prop Replicas</a></li>
+            <li><a href="categories.html?hero=thor">Thor Mjolnir &amp; Stormbreaker</a></li>
+            <li><a href="categories.html?hero=captain-america">Captain America Shield</a></li>
+            <li><a href="categories.html?hero=spider-man">Spider-Man Helmets</a></li>
+            <li><a href="categories.html?q=arc+reactor">Mark I Arc Reactor Charger</a></li>
           </ul>
         </div>
 
@@ -4328,23 +4335,21 @@ body {
         <div class="footer-col">
           <h4 class="footer-heading">Customer Care</h4>
           <ul class="footer-links">
-            <li><a href="javascript:void(0)" onclick="openTrackingModal()">Track Your Shipment</a></li>
-            <li><a href="javascript:void(0)" onclick="openProfileModal()">VIP Collector Profile</a></li>
-            <li><a href="javascript:void(0)" onclick="openHelpModal()">Help Center &amp; Support</a></li>
-            <li><a href="javascript:void(0)" onclick="openStoreModal()">Store Experience Center</a></li>
+            <li><a href="tracking.html">Track Your Shipment</a></li>
+            <li><a href="profile.html">VIP Collector Profile</a></li>
+            <li><a href="help.html">Help Center &amp; Support</a></li>
             <li><a href="cart.html">View Cart &amp; Checkout</a></li>
           </ul>
         </div>
 
         <!-- Col 4: Store Location & Address -->
         <div class="footer-col address-col">
-          <h4 class="footer-heading">Flagship Experience Hub</h4>
+          <h4 class="footer-heading">Store &amp; Contact</h4>
           <div class="footer-address-card">
             <div class="address-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div class="address-details">
-              <strong class="address-name">Stark Flagship Fulfillment Center</strong>
               <p class="address-text">84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018</p>
             </div>
           </div>
@@ -4454,276 +4459,17 @@ body {
   <!-- Toast Notification Container -->
   <div id="toastContainer"></div>
 
-  <!-- 1. LIVE ORDER TRACKING MODAL -->
-  <div class="hud-modal-overlay" id="trackingModal" onclick="if(event.target === this) closeTrackingModal()">
-    <div class="hud-modal-dialog">
-      <div class="hud-modal-top">
-        <div class="hud-modal-title-group">
-          <div class="hud-modal-icon-badge">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-              <rect x="1" y="3" width="15" height="13"/>
-              <polygon points="16 8 20 8 23 11 23 16 16 16 8"/>
-              <circle cx="5.5" cy="18.5" r="2.5"/>
-              <circle cx="18.5" cy="18.5" r="2.5"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="hud-modal-title">Live Shipment Tracking</h3>
-            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim);">Real-Time Bluedart &amp; Stark Logistics</span>
-          </div>
-        </div>
-        <button class="hud-modal-close-btn" onclick="closeTrackingModal()" aria-label="Close Tracking Modal">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-      </div>
-
-      <div class="track-search-box">
-        <input type="text" id="trackOrderInput" class="track-input" value="MCU-700018-KOL" placeholder="Enter Order ID (e.g. MCU-700018-KOL)" />
-        <button class="btn-track-submit" onclick="runOrderTrack()">Track Order</button>
-      </div>
-
-      <div class="track-order-summary">
-        <div class="track-summary-row">
-          <span class="track-summary-label">Tracking Number:</span>
-          <span class="track-summary-val" id="dispTrackingNum">BLU-89412-IN</span>
-        </div>
-        <div class="track-summary-row">
-          <span class="track-summary-label">Order Reference:</span>
-          <span class="track-summary-val">MCU-700018-KOL</span>
-        </div>
-        <div class="track-summary-row">
-          <span class="track-summary-label">Estimated Delivery:</span>
-          <span class="track-summary-val" style="color:#00f0ff;">Tomorrow by 04:30 PM IST</span>
-        </div>
-        <div class="track-summary-row">
-          <span class="track-summary-label">Current Status:</span>
-          <span class="track-summary-val" style="color:#10b981;">In Transit (Air Express)</span>
-        </div>
-      </div>
-
-      <div class="timeline-wrap">
-        <div class="timeline-step completed">
-          <div class="timeline-dot">✓</div>
-          <div class="timeline-step-title">Order Confirmed &amp; Stark QC Passed</div>
-          <div class="timeline-step-desc">Item inspected, calibrated, and cleared for express courier handover.</div>
-          <div class="timeline-step-time">26 Sep 2026, 04:30 PM</div>
-        </div>
-
-        <div class="timeline-step completed">
-          <div class="timeline-dot">✓</div>
-          <div class="timeline-step-title">Dispatched from Kolkata Flagship Hub</div>
-          <div class="timeline-step-desc">Handed to Bluedart Courier at: <strong>84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018</strong>.</div>
-          <div class="timeline-step-time">27 Sep 2026, 09:15 AM</div>
-        </div>
-
-        <div class="timeline-step active">
-          <div class="timeline-dot">●</div>
-          <div class="timeline-step-title">In Transit - Express Air Logistics</div>
-          <div class="timeline-step-desc">Package en route to local delivery facility. Insured air transit active.</div>
-          <div class="timeline-step-time">Live Status: Updated 15 mins ago</div>
-        </div>
-
-        <div class="timeline-step">
-          <div class="timeline-dot">4</div>
-          <div class="timeline-step-title">Out for Delivery</div>
-          <div class="timeline-step-desc">Designated courier agent will arrive at shipping address with OTP verification.</div>
-          <div class="timeline-step-time">Expected: 28 Sep 2026</div>
-        </div>
-      </div>
-
-      <div style="display:flex; gap:10px; margin-top:20px;">
-        <button class="btn-track-submit" onclick="closeTrackingModal()" style="flex:1; background:rgba(255,255,255,0.08); color:#ffffff; border:1px solid rgba(255,255,255,0.15);">Back to Catalog</button>
-        <button class="btn-track-submit" onclick="openHelpModal()" style="flex:1;">Contact Support</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2. STARK VIP PROFILE MODAL -->
-  <div class="hud-modal-overlay" id="profileModal" onclick="if(event.target === this) closeProfileModal()">
-    <div class="hud-modal-dialog">
-      <div class="hud-modal-top">
-        <div class="hud-modal-title-group">
-          <div class="hud-modal-icon-badge" style="background:rgba(225,29,72,0.15); border-color:rgba(225,29,72,0.35); color:#e11d48;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="hud-modal-title">VIP Collector Profile</h3>
-            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim);">Stark Industries Secure Credentials</span>
-          </div>
-        </div>
-        <button class="hud-modal-close-btn" onclick="closeProfileModal()" aria-label="Close Profile Modal">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-      </div>
-
-      <div class="vip-profile-card">
-        <div class="vip-avatar-wrap">TS</div>
-        <div class="vip-profile-info">
-          <div class="vip-name">Tony Stark</div>
-          <div class="vip-badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span>Level 5 Asgardian Clearance</span>
-          </div>
-          <span style="font-size:11.5px; color:var(--text-muted);">Member ID: STARK-700018-VIP</span>
-        </div>
-      </div>
-
-      <div class="profile-section-box">
-        <div class="profile-section-label">Default Shipping &amp; Dispatch Address</div>
-        <div class="profile-address-text">
-          <strong>Official Address:</strong><br>
-          84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018
-        </div>
-      </div>
-
-      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:18px;">
-        <div style="background:rgba(20,28,45,0.7); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); padding:12px; text-align:center;">
-          <div style="font-family:var(--font-mono); font-size:18px; font-weight:800; color:#00f0ff;">1</div>
-          <div style="font-size:10px; color:var(--text-muted); text-transform:uppercase; margin-top:2px;">Active Order</div>
-        </div>
-        <div style="background:rgba(20,28,45,0.7); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); padding:12px; text-align:center;">
-          <div style="font-family:var(--font-mono); font-size:18px; font-weight:800; color:#f59e0b;">19</div>
-          <div style="font-size:10px; color:var(--text-muted); text-transform:uppercase; margin-top:2px;">Catalog Items</div>
-        </div>
-        <div style="background:rgba(20,28,45,0.7); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); padding:12px; text-align:center;">
-          <div style="font-family:var(--font-mono); font-size:18px; font-weight:800; color:#10b981;">100%</div>
-          <div style="font-size:10px; color:var(--text-muted); text-transform:uppercase; margin-top:2px;">Genuine QC</div>
-        </div>
-      </div>
-
-      <div style="display:flex; flex-direction:column; gap:8px;">
-        <button class="btn-track-submit" onclick="closeProfileModal(); openTrackingModal();" style="width:100%;">Track Active Shipment</button>
-        <button class="btn-track-submit" onclick="window.location.href='cart.html'" style="width:100%; background:rgba(255,255,255,0.06); color:#ffffff; border:1px solid rgba(255,255,255,0.12);">Open Shopping Cart</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3. HELP & CONCIERGE MODAL -->
-  <div class="hud-modal-overlay" id="helpModal" onclick="if(event.target === this) closeHelpModal()">
-    <div class="hud-modal-dialog">
-      <div class="hud-modal-top">
-        <div class="hud-modal-title-group">
-          <div class="hud-modal-icon-badge">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-              <line x1="12" y1="17" x2="12.01" y2="17"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="hud-modal-title">Help &amp; Customer Care</h3>
-            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim);">24/7 Priority Concierge Assistance</span>
-          </div>
-        </div>
-        <button class="hud-modal-close-btn" onclick="closeHelpModal()" aria-label="Close Help Modal">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-      </div>
-
-      <div class="help-actions-grid">
-        <a href="tel:+919330648314" class="help-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span class="help-btn-title">Phone Call</span>
-          <span class="help-btn-sub">+91 93306 48314 / 62893 62476</span>
-        </a>
-        <a href="https://wa.me/919330648314" target="_blank" rel="noopener noreferrer" class="help-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          <span class="help-btn-title">WhatsApp</span>
-          <span class="help-btn-sub">Instant Chat</span>
-        </a>
-        <a href="mailto:support@marvelverse.in" class="help-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span class="help-btn-title">Email Us</span>
-          <span class="help-btn-sub">support@marvelverse.in</span>
-        </a>
-      </div>
-
-      <div class="profile-section-box">
-        <div class="profile-section-label">Official Store &amp; Fulfillment Hub Address</div>
-        <div class="profile-address-text">
-          84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018
-        </div>
-      </div>
-
-      <div class="profile-section-box" style="margin-bottom:20px;">
-        <div class="profile-section-label">Frequently Asked Questions</div>
-        <div style="display:flex; flex-direction:column; gap:10px; font-size:12px; margin-top:6px;">
-          <div>
-            <strong style="color:#ffffff;">Q: How long does express shipping take?</strong>
-            <p style="color:var(--text-muted); margin-top:2px;">All products dispatch within 24 hours via Bluedart Air Express with complete tracking.</p>
-          </div>
-          <div>
-            <strong style="color:#ffffff;">Q: Are these official Marvel licensed items?</strong>
-            <p style="color:var(--text-muted); margin-top:2px;">Yes, 100% authentic Marvel Verse officially licensed merchandise with verification seal.</p>
-          </div>
-        </div>
-      </div>
-
-      <button class="btn-track-submit" onclick="closeHelpModal()" style="width:100%;">Close Help Desk</button>
-    </div>
-  </div>
-
-  <!-- 4. STORE LOCATIONS MODAL -->
-  <div class="hud-modal-overlay" id="storeModal" onclick="if(event.target === this) closeStoreModal()">
-    <div class="hud-modal-dialog">
-      <div class="hud-modal-top">
-        <div class="hud-modal-title-group">
-          <div class="hud-modal-icon-badge" style="background:rgba(225,29,72,0.15); border-color:rgba(225,29,72,0.35); color:#e11d48;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="hud-modal-title">Flagship Experience Hub</h3>
-            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim);">Physical Store &amp; Demonstration Center</span>
-          </div>
-        </div>
-        <button class="hud-modal-close-btn" onclick="closeStoreModal()" aria-label="Close Store Modal">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-      </div>
-
-      <div class="profile-section-box" style="background:rgba(20,28,48,0.85); border-color:rgba(0,240,255,0.35); margin-bottom:16px;">
-        <div class="profile-section-label" style="color:#00f0ff;">Verified Store Location</div>
-        <div style="font-family:var(--font-display); font-size:16px; font-weight:700; color:#ffffff; margin-bottom:6px;">
-          Marvel Studios Collectibles Hub
-        </div>
-        <div style="font-family:var(--font-sans); font-size:13px; color:var(--text-main); line-height:1.5; margin-bottom:10px;">
-          84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018
-        </div>
-        <div style="font-family:var(--font-mono); font-size:11px; color:#10b981;">
-          Open 7 Days a Week: 10:00 AM &ndash; 09:00 PM IST
-        </div>
-      </div>
-
-      <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:18px;">
-        <a href="https://www.google.com/maps/search/?api=1&query=84E,+SA+Farooquie+Rd,+Bartala,+Metiabruz,+Kolkata,+West+Bengal+700018" target="_blank" rel="noopener noreferrer" class="btn-track-submit" style="text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:8px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>Open in Google Maps / Directions</span>
-        </a>
-        <a href="tel:+919330648314" class="btn-track-submit" style="text-align:center; text-decoration:none; background:rgba(255,255,255,0.06); color:#ffffff; border:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; gap:8px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span>Call Flagship Hub Directly</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5. FIXED APP BOTTOM NAVIGATION BAR (Home, Categories, Tracking, Profile, Help) -->
+  <!-- Fixed App Bottom Navigation Bar -->
   <nav class="mobile-bottom-nav" aria-label="Quick Mobile Navigation">
-    <button class="b-nav-item active" onclick="navToHome(this)">
+    <a href="index.html" class="b-nav-item active">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
         <polyline points="9 22 9 12 15 12 15 22"/>
       </svg>
       <span class="b-nav-label">Home</span>
-    </button>
+    </a>
 
-    <button class="b-nav-item" onclick="navToCategories(this)">
+    <a href="categories.html" class="b-nav-item">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="3" y="3" width="7" height="7"/>
         <rect x="14" y="3" width="7" height="7"/>
@@ -4731,9 +4477,9 @@ body {
         <rect x="3" y="14" width="7" height="7"/>
       </svg>
       <span class="b-nav-label">Categories</span>
-    </button>
+    </a>
 
-    <button class="b-nav-item" onclick="navToTracking(this)">
+    <a href="tracking.html" class="b-nav-item">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="1" y="3" width="15" height="13"/>
         <polygon points="16 8 20 8 23 11 23 16 16 16 8"/>
@@ -4741,24 +4487,24 @@ body {
         <circle cx="18.5" cy="18.5" r="2.5"/>
       </svg>
       <span class="b-nav-label">Tracking</span>
-    </button>
+    </a>
 
-    <button class="b-nav-item" onclick="navToProfile(this)">
+    <a href="profile.html" class="b-nav-item">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
         <circle cx="12" cy="7" r="4"/>
       </svg>
       <span class="b-nav-label">Profile</span>
-    </button>
+    </a>
 
-    <button class="b-nav-item" onclick="navToHelp(this)">
+    <a href="help.html" class="b-nav-item">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10"/>
         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
         <line x1="12" y1="17" x2="12.01" y2="17"/>
       </svg>
       <span class="b-nav-label">Help</span>
-    </button>
+    </a>
   </nav>
 
   <!-- =========================================================================
@@ -5873,159 +5619,131 @@ window.addEventListener("storage", (e) => {
 
 
 // =========================================================================
-// HUD INTERACTIVE MODALS & BOTTOM NAVIGATION (TRACKING, PROFILE, HELP, STORE)
+// CLEAN MULTI-PAGE NAVIGATION (CATEGORIES, TRACKING, PROFILE, HELP, CART)
 // =========================================================================
 
-function openTrackingModal() {
-  closeAllHudModals();
-  const m = document.getElementById("trackingModal");
-  if (m) m.classList.add("active");
-  updateBottomNavActive("Tracking");
-}
-
-function closeTrackingModal() {
-  const m = document.getElementById("trackingModal");
-  if (m) m.classList.remove("active");
-}
-
-function runOrderTrack() {
-  const input = document.getElementById("trackOrderInput");
-  const val = input ? input.value.trim().toUpperCase() : "";
-  if (!val) {
-    showToast("Please enter a valid Order ID");
-    return;
-  }
-  const disp = document.getElementById("dispTrackingNum");
-  if (disp) {
-    disp.textContent = "BLU-" + Math.floor(10000 + Math.random() * 90000) + "-IN";
-  }
-  showToast("Real-time telemetry retrieved for " + val);
-}
-
-function openProfileModal() {
-  closeAllHudModals();
-  const m = document.getElementById("profileModal");
-  if (m) m.classList.add("active");
-  updateBottomNavActive("Profile");
-}
-
-function closeProfileModal() {
-  const m = document.getElementById("profileModal");
-  if (m) m.classList.remove("active");
-}
-
-function openHelpModal() {
-  closeAllHudModals();
-  const m = document.getElementById("helpModal");
-  if (m) m.classList.add("active");
-  updateBottomNavActive("Help");
-}
-
-function closeHelpModal() {
-  const m = document.getElementById("helpModal");
-  if (m) m.classList.remove("active");
-}
-
-function openStoreModal() {
-  closeAllHudModals();
-  const m = document.getElementById("storeModal");
-  if (m) m.classList.add("active");
-}
-
-function closeStoreModal() {
-  const m = document.getElementById("storeModal");
-  if (m) m.classList.remove("active");
-}
-
-function closeAllHudModals() {
-  document.querySelectorAll(".hud-modal-overlay").forEach(m => m.classList.remove("active"));
-}
-
-function updateBottomNavActive(label) {
-  document.querySelectorAll(".b-nav-item").forEach(item => {
-    const txt = item.querySelector(".b-nav-label")?.textContent.trim();
-    item.classList.toggle("active", txt === label);
-  });
-}
-
 function navToHome(el) {
-  closeAllHudModals();
-  updateBottomNavActive("Home");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.location.href = "index.html";
 }
 
 function navToCategories(el) {
-  closeAllHudModals();
-  updateBottomNavActive("Categories");
-  scrollToCollection();
+  window.location.href = "categories.html";
 }
 
 function navToTracking(el) {
-  openTrackingModal();
+  window.location.href = "tracking.html";
 }
 
 function navToProfile(el) {
-  openProfileModal();
+  window.location.href = "profile.html";
 }
 
 function navToHelp(el) {
-  openHelpModal();
+  window.location.href = "help.html";
 }
 
-function scrollToCollection() {
-  const el = document.getElementById("marvelCollectionSection") || document.getElementById("productsGrid");
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-}
+window.openTrackingModal = function() { window.location.href = "tracking.html"; };
+window.openProfileModal = function() { window.location.href = "profile.html"; };
+window.openHelpModal = function() { window.location.href = "help.html"; };
+window.openStoreModal = function() { window.location.href = "help.html"; };
+window.closeAllHudModals = function() {};
 
 // Close modals on ESC key
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     closeAllHudModals();
+    clearHomeSearch();
   }
 });
 
-// Global Search Handlers (Desktop & Mobile Unified)
-window.handleSearchInput = function(value, source) {
-  searchFilter = (value || "").trim();
+// Home Search Handlers with Instant Dropdown (No Auto-Scrolling)
+window.handleHomeSearch = function(value, source) {
+  const query = (value || "").trim();
   const desktopInput = document.getElementById("globalSearch");
   const mobileInput = document.getElementById("mobileGlobalSearch");
   const desktopClear = document.getElementById("desktopSearchClear");
   const mobileClear = document.getElementById("mobileSearchClear");
+  const desktopDrop = document.getElementById("desktopSearchDropdown");
+  const mobileDrop = document.getElementById("mobileSearchDropdown");
 
   if (desktopInput && source !== 'desktop') desktopInput.value = value;
   if (mobileInput && source !== 'mobile') mobileInput.value = value;
 
-  if (desktopClear) desktopClear.style.display = searchFilter ? 'inline-block' : 'none';
-  if (mobileClear) mobileClear.style.display = searchFilter ? 'inline-block' : 'none';
+  if (desktopClear) desktopClear.style.display = query ? 'inline-block' : 'none';
+  if (mobileClear) mobileClear.style.display = query ? 'inline-block' : 'none';
 
-  renderCatalog();
+  if (!query) {
+    if (desktopDrop) { desktopDrop.style.display = 'none'; desktopDrop.innerHTML = ''; }
+    if (mobileDrop) { mobileDrop.style.display = 'none'; mobileDrop.innerHTML = ''; }
+    return;
+  }
 
-  // If user types a search query and is scrolled up, smoothly scroll them to the catalog
-  if (searchFilter.length > 0) {
-    const coll = document.getElementById("marvelCollectionSection") || document.getElementById("productsGrid");
-    if (coll) {
-      const rect = coll.getBoundingClientRect();
-      if (rect.top > 200 || rect.top < -3000) {
-        coll.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
+  const qLower = query.toLowerCase();
+  const matches = CATALOG_ITEMS.filter(p => {
+    return p.name.toLowerCase().includes(qLower) ||
+           p.subtitle.toLowerCase().includes(qLower) ||
+           p.category.toLowerCase().includes(qLower);
+  }).slice(0, 5);
+
+  let html = '';
+  if (matches.length > 0) {
+    html = matches.map(p => `
+      <a href="categories.html?q=${encodeURIComponent(p.name)}" class="search-result-item">
+        <img class="search-result-thumb" src="${p.primaryImg}" alt="${escapeHtml(p.name)}" />
+        <div class="search-result-details">
+          <div class="search-result-name">${escapeHtml(p.name)}</div>
+          <div class="search-result-price">${formatINR(p.price)}</div>
+        </div>
+      </a>
+    `).join('') + `
+      <div style="padding: 8px 14px; border-top: 1px solid var(--border-subtle); text-align: center;">
+        <a href="categories.html?q=${encodeURIComponent(query)}" style="font-size: 11.5px; color: var(--accent-blue); text-decoration: none; font-weight: 700;">
+          View all results for "${escapeHtml(query)}" &rarr;
+        </a>
+      </div>
+    `;
+  } else {
+    html = `
+      <div style="padding: 14px; text-align: center; color: var(--text-muted); font-size: 12.5px;">
+        No products found.
+        <div style="margin-top: 6px;">
+          <a href="categories.html?q=${encodeURIComponent(query)}" style="color: var(--accent-blue); font-weight: 700;">Search in All Categories &rarr;</a>
+        </div>
+      </div>
+    `;
+  }
+
+  const drop = (source === 'desktop') ? desktopDrop : mobileDrop;
+  if (drop) {
+    drop.style.display = 'block';
+    drop.innerHTML = html;
   }
 };
 
-window.clearSearch = function() {
-  searchFilter = "";
+window.clearHomeSearch = function() {
   const desktopInput = document.getElementById("globalSearch");
   const mobileInput = document.getElementById("mobileGlobalSearch");
   const desktopClear = document.getElementById("desktopSearchClear");
   const mobileClear = document.getElementById("mobileSearchClear");
+  const desktopDrop = document.getElementById("desktopSearchDropdown");
+  const mobileDrop = document.getElementById("mobileSearchDropdown");
+
   if (desktopInput) desktopInput.value = "";
   if (mobileInput) mobileInput.value = "";
   if (desktopClear) desktopClear.style.display = 'none';
   if (mobileClear) mobileClear.style.display = 'none';
-  renderCatalog();
+  if (desktopDrop) { desktopDrop.style.display = 'none'; desktopDrop.innerHTML = ''; }
+  if (mobileDrop) { mobileDrop.style.display = 'none'; mobileDrop.innerHTML = ''; }
 };
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".search-box") && !e.target.closest(".mobile-search-bar")) {
+    const desktopDrop = document.getElementById("desktopSearchDropdown");
+    const mobileDrop = document.getElementById("mobileSearchDropdown");
+    if (desktopDrop) desktopDrop.style.display = 'none';
+    if (mobileDrop) mobileDrop.style.display = 'none';
+  }
+});
 
 window.toggleMobileSearch = function(forceState) {
   const bar = document.getElementById("mobileSearchBar");
@@ -6037,8 +5755,6 @@ window.toggleMobileSearch = function(forceState) {
     if (inp) {
       setTimeout(() => inp.focus(), 100);
     }
-    const coll = document.getElementById("marvelCollectionSection") || document.getElementById("productsGrid");
-    if (coll) coll.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else {
     bar.classList.remove("active");
   }
@@ -6097,20 +5813,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // Wire up desktop and mobile search
   const desktopSearch = document.getElementById("globalSearch");
   if (desktopSearch) {
-    desktopSearch.addEventListener("input", e => handleSearchInput(e.target.value, "desktop"));
+    desktopSearch.addEventListener("input", e => handleHomeSearch(e.target.value, "desktop"));
     desktopSearch.addEventListener("keydown", e => {
       if (e.key === "Enter") {
-        document.getElementById("marvelCollectionSection")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        const q = e.target.value.trim();
+        window.location.href = q ? `categories.html?q=${encodeURIComponent(q)}` : `categories.html`;
       }
     });
   }
 
   const mobileSearch = document.getElementById("mobileGlobalSearch");
   if (mobileSearch) {
-    mobileSearch.addEventListener("input", e => handleSearchInput(e.target.value, "mobile"));
+    mobileSearch.addEventListener("input", e => handleHomeSearch(e.target.value, "mobile"));
     mobileSearch.addEventListener("keydown", e => {
       if (e.key === "Enter") {
-        document.getElementById("marvelCollectionSection")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        const q = e.target.value.trim();
+        window.location.href = q ? `categories.html?q=${encodeURIComponent(q)}` : `categories.html`;
       }
     });
   }

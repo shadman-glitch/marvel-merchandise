@@ -1,6 +1,11 @@
 {
   "cleanUrls": true,
   "rewrites": [
+    { "source": "/categories", "destination": "/categories.html" },
+    { "source": "/tracking", "destination": "/tracking.html" },
+    { "source": "/profile", "destination": "/profile.html" },
+    { "source": "/help", "destination": "/help.html" },
+    { "source": "/cart", "destination": "/cart.html" },
     {
       "source": "/api/woocommerce/:path*",
       "destination": "http://72.61.254.137:8085/wp-json/wc/v3/:path*"

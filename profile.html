@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>VIP Collector Profile &mdash; Marvel Verse</title>
+  <meta name="description" content="VIP Collector account dashboard, order history, shipping addresses, and authenticity certificates for Marvel Verse collectibles." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e11b23'><rect width='24' height='24' rx='4' fill='%23e11b23'/><text x='12' y='16' font-size='12' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Shared Core CSS -->
+  <link rel="stylesheet" href="assets/css/marvel-core.css" />
+
+  <style>
+/* ==========================================================================
+   PROFILE PAGE - DEDICATED CLEAN E-COMMERCE LAYOUT
+   ========================================================================== */
+.profile-wrapper {
+  position: relative;
+  z-index: 10;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem 5rem 1.5rem;
+}
+
+/* Profile Hero Card */
+.profile-hero-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin: 1.5rem 0 2rem 0;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.profile-identity-group {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.vip-avatar-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e11d48, #9f1239);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(225, 29, 72, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.profile-identity-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-name {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.vip-rank-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  width: fit-content;
+}
+
+.profile-id-code {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-dim);
+}
+
+.profile-header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-profile-top {
+  padding: 9px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+/* Profile Stats Grid */
+.profile-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-number {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Profile Tabs Navigation */
+.profile-tabs-bar {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.profile-tabs-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.p-tab-btn {
+  padding: 10px 18px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+.p-tab-btn:hover {
+  color: #fff;
+}
+.p-tab-btn.active {
+  color: #38bdf8;
+  border-color: #38bdf8;
+}
+
+/* Tab Panels */
+.tab-panel {
+  display: none;
+}
+.tab-panel.active {
+  display: block;
+}
+
+/* Order Item Row */
+.order-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.order-thumb-info {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.order-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #060910;
+  border: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.order-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.order-item-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.order-item-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.order-meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: right;
+}
+
+.order-price {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--accent-gold);
+}
+
+.order-status-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.status-transit {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.status-delivered {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.btn-order-action {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+}
+.btn-order-action:hover {
+  background: rgba(56, 189, 248, 0.25);
+  color: #fff;
+}
+
+/* Address Card */
+.address-display-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.address-type-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.address-line-strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.address-line-body {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+/* Wishlist Grid */
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.wl-item-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wl-thumb {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.wl-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.wl-price {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--accent-gold);
+}
+
+.btn-wl-cart {
+  background: var(--accent-red);
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+.btn-wl-cart:hover {
+  background: var(--accent-red-hover);
+}
+
+@media (max-width: 860px) {
+  .profile-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .wishlist-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 580px) {
+  .profile-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .order-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .order-meta-col {
+    text-align: left;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .wishlist-grid {
+    grid-template-columns: 1fr;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- Subtle Video Background -->
+  <div class="cinematic-bg-container">
+    <video class="cinematic-bg-video" autoplay muted loop playsinline poster="assets/battle_poster.jpg">
+      <source src="assets/battle.mp4" type="video/mp4">
+    </video>
+    <div class="canvas-overlay-vignette"></div>
+  </div>
+
+  <!-- Main Navbar -->
+  <header class="main-header">
+    <div class="header-container">
+      
+      <!-- Mobile Hamburger -->
+      <button class="btn-hamburger" id="navMenuBtn" aria-label="Toggle Navigation" onclick="toggleNavMenu()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Brand Logo -->
+      <a href="index.html" class="brand-logo" aria-label="Marvel Verse Home">
+        <span class="brand-badge">MARVEL</span>
+        <span class="brand-title">VERSE</span>
+      </a>
+
+      <!-- Category Navigation Tabs -->
+      <nav class="nav-tabs">
+        <a href="categories.html" class="nav-link" data-cat="all">All Products</a>
+        <a href="categories.html?cat=wearable-helmets" class="nav-link" data-cat="wearable-helmets">Helmets</a>
+        <a href="categories.html?cat=bluetooth-speakers" class="nav-link" data-cat="bluetooth-speakers">Speakers</a>
+        <a href="categories.html?cat=charging-stations" class="nav-link" data-cat="charging-stations">Chargers</a>
+        <a href="categories.html?cat=digital-tech" class="nav-link" data-cat="digital-tech">Tech Gear</a>
+      </nav>
+
+      <!-- Right Controls -->
+      <div class="header-right">
+        <!-- Search Input (Redirects to categories.html) -->
+        <div class="search-box">
+          <input type="text" id="globalSearch" class="search-input" placeholder="Search products..." autocomplete="off" onkeydown="if(event.key==='Enter') window.location.href='categories.html?q=' + encodeURIComponent(this.value)" />
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" onclick="window.location.href='categories.html?q=' + encodeURIComponent(document.getElementById('globalSearch').value)">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+
+        <!-- Mobile Search Button -->
+        <button class="btn-search-mobile" aria-label="Search Products" onclick="toggleMobileSearch()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <!-- Cart Button -->
+        <a href="cart.html" class="btn-cart" title="View Cart">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span>Cart</span>
+          <span class="cart-counter" id="cartCountBadge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Search Bar -->
+  <div class="mobile-search-bar" id="mobileSearchBar">
+    <div class="mobile-search-inner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2.2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="mobileGlobalSearch" class="mobile-search-input" placeholder="Search helmets, speakers, tech..." autocomplete="off" onkeydown="if(event.key==='Enter') window.location.href='categories.html?q=' + encodeURIComponent(this.value)" />
+      <button class="mobile-search-close" onclick="toggleMobileSearch(false)" aria-label="Close search">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div class="marvel-drawer-backdrop" id="marvelDrawerBackdrop" onclick="toggleNavMenu()"></div>
+  <aside class="marvel-nav-drawer" id="marvelNavDrawer">
+    <div class="marvel-drawer-header">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span class="brand-badge">MARVEL</span>
+        <span class="brand-title">VERSE</span>
+      </div>
+      <button class="marvel-drawer-close" onclick="toggleNavMenu()" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <nav class="marvel-drawer-links">
+      <a href="index.html" class="marvel-drawer-link">Home Showcase</a>
+      <a href="categories.html" class="marvel-drawer-link">All Categories</a>
+      <a href="categories.html?cat=wearable-helmets" class="marvel-drawer-link">Wearable Helmets (1:1)</a>
+      <a href="categories.html?cat=bluetooth-speakers" class="marvel-drawer-link">Bluetooth Speakers</a>
+      <a href="categories.html?cat=charging-stations" class="marvel-drawer-link">Charging Stations</a>
+      <a href="categories.html?cat=digital-tech" class="marvel-drawer-link">Tech Gear &amp; Audio</a>
+      <a href="tracking.html" class="marvel-drawer-link">Track Shipment</a>
+      <a href="profile.html" class="marvel-drawer-link active">VIP Collector Profile</a>
+      <a href="help.html" class="marvel-drawer-link">Customer Help &amp; Support</a>
+      <a href="cart.html" class="marvel-drawer-link">View Cart</a>
+    </nav>
+  </aside>
+
+  <!-- Breadcrumbs -->
+  <div class="breadcrumbs-bar">
+    <a href="index.html">Home</a>
+    <span class="sep">/</span>
+    <span class="current">VIP Collector Profile</span>
+  </div>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <h1 class="page-title">Collector Account</h1>
+    <p class="page-subtitle">Manage your verified Marvel Verse credentials, active shipments, and authenticated collectible collection.</p>
+  </div>
+
+  <!-- Main Profile Container -->
+  <main class="profile-wrapper">
+    
+    <!-- Profile Hero Card -->
+    <div class="profile-hero-card">
+      <div class="profile-identity-group">
+        <div class="vip-avatar-badge">TS</div>
+        <div class="profile-identity-text">
+          <h2 class="profile-name">Tony Stark</h2>
+          <span class="vip-rank-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>Level 5 Asgardian Clearance</span>
+          </span>
+          <span class="profile-id-code">Member ID: STARK-700018-VIP &bull; support@marvelverse.in</span>
+        </div>
+      </div>
+
+      <div class="profile-header-actions">
+        <a href="tracking.html" class="btn-profile-top" style="background:rgba(56,189,248,0.12); color:#38bdf8; border:1px solid rgba(56,189,248,0.35);">Track Active Order</a>
+        <a href="cart.html" class="btn-profile-top" style="background:rgba(255,255,255,0.06); color:#fff; border:1px solid var(--border-subtle);">Open Cart</a>
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="profile-stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" style="color:#38bdf8;">1</div>
+        <div class="stat-label">Active Shipment</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" style="color:#f59e0b;">3</div>
+        <div class="stat-label">Replicas Owned</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" style="color:#10b981;">2,450</div>
+        <div class="stat-label">Reward Points</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" style="color:#e11d48;">100%</div>
+        <div class="stat-label">Genuine Certified</div>
+      </div>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <div class="profile-tabs-bar">
+      <button class="p-tab-btn active" onclick="switchProfileTab('orders', this)">Order History</button>
+      <button class="p-tab-btn" onclick="switchProfileTab('address', this)">Saved Addresses</button>
+      <button class="p-tab-btn" onclick="switchProfileTab('wishlist', this)">Collector Wishlist</button>
+      <button class="p-tab-btn" onclick="switchProfileTab('certificate', this)">Authenticity Guarantee</button>
+    </div>
+
+    <!-- Tab 1: Orders -->
+    <div class="tab-panel active" id="tab-orders">
+      
+      <!-- Order 1: Active In Transit -->
+      <div class="order-card">
+        <div class="order-thumb-info">
+          <img class="order-thumb" src="assets/images/p_mk5_helmet.jpg" alt="MK5 Helmet" />
+          <div class="order-info-col">
+            <div class="order-item-title">Iron Man MK5 Helmet: Stark Edition (1:1 Life Size)</div>
+            <div class="order-item-sub">Order ID: MCU-700018-KOL &bull; Dispatched 27 Sep 2026</div>
+          </div>
+        </div>
+        <div class="order-meta-col">
+          <span class="order-price">₹33,915</span>
+          <span class="order-status-badge status-transit">In Transit &bull; Bluedart Air</span>
+        </div>
+        <a href="tracking.html" class="btn-order-action">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          <span>Track Live</span>
+        </a>
+      </div>
+
+      <!-- Order 2: Delivered -->
+      <div class="order-card">
+        <div class="order-thumb-info">
+          <img class="order-thumb" src="assets/images/p_arc_reactor_charger.jpg" alt="Arc Reactor Charger" />
+          <div class="order-info-col">
+            <div class="order-item-title">Iron Man Arc Reactor Wireless Fast Charger (15W Qi)</div>
+            <div class="order-item-sub">Order ID: MCU-684920-KOL &bull; Delivered 14 Aug 2026</div>
+          </div>
+        </div>
+        <div class="order-meta-col">
+          <span class="order-price">₹11,815</span>
+          <span class="order-status-badge status-delivered">Delivered &amp; Verified</span>
+        </div>
+        <button class="btn-order-action" onclick="showGlobalToast('Invoice MCU-684920 downloaded.')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Invoice</span>
+        </button>
+      </div>
+
+      <!-- Order 3: Delivered -->
+      <div class="order-card">
+        <div class="order-thumb-info">
+          <img class="order-thumb" src="assets/images/p_mjolnir_speaker.jpg" alt="Thor Mjolnir Speaker" />
+          <div class="order-info-col">
+            <div class="order-item-title">Thor Mjolnir Pressure-Relief Speaker (Solid Zinc Alloy)</div>
+            <div class="order-item-sub">Order ID: MCU-519284-DEL &bull; Delivered 02 Jul 2026</div>
+          </div>
+        </div>
+        <div class="order-meta-col">
+          <span class="order-price">₹7,565</span>
+          <span class="order-status-badge status-delivered">Delivered &amp; Verified</span>
+        </div>
+        <button class="btn-order-action" onclick="showGlobalToast('Invoice MCU-519284 downloaded.')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Invoice</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Tab 2: Saved Address -->
+    <div class="tab-panel" id="tab-address">
+      <div class="address-display-box">
+        <span class="address-type-pill">Default Dispatch &amp; Delivery Address</span>
+        <div class="address-line-strong">Tony Stark &bull; +91 93306 48314</div>
+        <div class="address-line-body">
+          84E, SA Farooquie Rd, Bartala, Metiabruz<br>
+          Kolkata, West Bengal &mdash; 700018<br>
+          India
+        </div>
+        <div style="display:flex; gap:10px;">
+          <a href="help.html" class="btn-order-action">Contact Concierge to Update</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Wishlist -->
+    <div class="tab-panel" id="tab-wishlist">
+      <div class="wishlist-grid" id="profileWishlistGrid">
+        
+        <div class="wl-item-card">
+          <img class="wl-thumb" src="assets/images/p_cap_shield.jpg" alt="Captain America Shield" />
+          <div class="wl-title">Captain America Shield: Vibranium 1:1 (60cm Scale)</div>
+          <div class="wl-price">₹41,565</div>
+          <button class="btn-wl-cart" onclick="addToCart(25)">Add to Cart</button>
+        </div>
+
+        <div class="wl-item-card">
+          <img class="wl-thumb" src="assets/images/p_black_panther_helmet.jpg" alt="Black Panther Helmet" />
+          <div class="wl-title">Black Panther Helmet: Wakanda Edition (Purple Glow)</div>
+          <div class="wl-price">₹33,065</div>
+          <button class="btn-wl-cart" onclick="addToCart(27)">Add to Cart</button>
+        </div>
+
+        <div class="wl-item-card">
+          <img class="wl-thumb" src="assets/images/p_mk3_bust_charger.jpg" alt="MK3 Bust PD65W Charger" />
+          <div class="wl-title">Iron Man MK3 Bust Charging Center PD65W GaN</div>
+          <div class="wl-price">₹10,115</div>
+          <button class="btn-wl-cart" onclick="addToCart(34)">Add to Cart</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab 4: Authenticity Guarantee -->
+    <div class="tab-panel" id="tab-certificate">
+      <div class="address-display-box" style="border-color:rgba(56,189,248,0.35);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <h3 style="font-family:var(--font-display); font-size:18px; color:#fff; font-weight:800;">Stark Industries Certified Authenticity</h3>
+        </div>
+        <p style="font-size:13.5px; color:var(--text-muted); line-height:1.6; margin-bottom:16px;">
+          Every Marvel Verse collectible is engineered under strict movie-accurate 1:1 blueprints. Wearable helmets feature automotive-grade electroplated finish, servo-driven motorized faceplates, voice recognition microcontrollers, and authenticated serial hologram seals.
+        </p>
+        <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:12px; font-family:var(--font-mono); font-size:12px; color:var(--text-main);">
+          <div>&bull; Warranty: 1-Year Comprehensive Replacement</div>
+          <div>&bull; QC Standards: Inspected at 84E, SA Farooquie Rd Hub</div>
+          <div>&bull; Logistics: Bluedart Express Air Fragile Insured</div>
+          <div>&bull; Handoff: Secure One-Time Password (OTP) Verified</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Site Footer (Minimalist & Clean) -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top-grid">
+        <!-- Col 1: Brand -->
+        <div class="footer-col brand-col">
+          <div class="footer-logo">
+            <span class="footer-logo-badge">MARVEL</span>
+            <span class="footer-logo-title">VERSE</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Categories -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Categories</h4>
+          <ul class="footer-links">
+            <li><a href="categories.html">All Collectibles</a></li>
+            <li><a href="categories.html?cat=wearable-helmets">Wearable Helmets (1:1)</a></li>
+            <li><a href="categories.html?cat=bluetooth-speakers">Bluetooth Speakers</a></li>
+            <li><a href="categories.html?cat=charging-stations">Charging Stations</a></li>
+            <li><a href="categories.html?cat=digital-tech">Tech Gear &amp; Audio</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Customer Care -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Customer Care</h4>
+          <ul class="footer-links">
+            <li><a href="tracking.html">Track Shipment</a></li>
+            <li><a href="profile.html">VIP Collector Profile</a></li>
+            <li><a href="help.html">Help &amp; Support</a></li>
+            <li><a href="cart.html">Shopping Cart</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Store & Address -->
+        <div class="footer-col address-col">
+          <h4 class="footer-heading">Store &amp; Contact</h4>
+          <div class="footer-address-card">
+            <div class="address-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="address-details">
+              <p class="address-text">84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018</p>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:+919330648314">+91 93306 48314 / +91 62893 62476</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:support@marvelverse.in">support@marvelverse.in</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="footer-bottom-bar">
+        <div class="footer-copy">
+          &copy; 2026 Marvel Verse. Officially Licensed Merchandise. All Rights Reserved.
+        </div>
+        <div class="footer-payment-methods">
+          <span class="pay-pill">UPI</span>
+          <span class="pay-pill">Visa</span>
+          <span class="pay-pill">MasterCard</span>
+          <span class="pay-pill">NetBanking</span>
+          <span class="pay-pill">Cash on Delivery</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Fixed App Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav" aria-label="Quick Mobile Navigation">
+    <a href="index.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <span class="b-nav-label">Home</span>
+    </a>
+
+    <a href="categories.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"/>
+        <rect x="14" y="3" width="7" height="7"/>
+        <rect x="14" y="14" width="7" height="7"/>
+        <rect x="3" y="14" width="7" height="7"/>
+      </svg>
+      <span class="b-nav-label">Categories</span>
+    </a>
+
+    <a href="tracking.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13"/>
+        <polygon points="16 8 20 8 23 11 23 16 16 16 8"/>
+        <circle cx="5.5" cy="18.5" r="2.5"/>
+        <circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+      <span class="b-nav-label">Tracking</span>
+    </a>
+
+    <a href="profile.html" class="b-nav-item active">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span class="b-nav-label">Profile</span>
+    </a>
+
+    <a href="help.html" class="b-nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      <span class="b-nav-label">Help</span>
+    </a>
+  </nav>
+
+  <!-- Core Catalog Data & Shared JS -->
+  <script src="assets/js/catalog-data.js"></script>
+
+  <script>
+    function switchProfileTab(tabId, btn) {
+      document.querySelectorAll(".p-tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+
+      if (btn) btn.classList.add("active");
+      const target = document.getElementById("tab-" + tabId);
+      if (target) target.classList.add("active");
+    }
+
+    function toggleNavMenu() {
+      const drawer = document.getElementById("marvelNavDrawer");
+      const backdrop = document.getElementById("marvelDrawerBackdrop");
+      if (drawer && backdrop) {
+        drawer.classList.toggle("active");
+        backdrop.classList.toggle("active");
+      }
+    }
+
+    function toggleMobileSearch(force) {
+      const bar = document.getElementById("mobileSearchBar");
+      if (!bar) return;
+      if (force !== undefined) {
+        bar.classList.toggle("active", force);
+      } else {
+        bar.classList.toggle("active");
+      }
+      if (bar.classList.contains("active")) {
+        const input = document.getElementById("mobileGlobalSearch");
+        if (input) input.focus();
+      }
+    }
+  </script>
+</body>
+</html>
