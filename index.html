@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Marvel Studios Collectibles &mdash; Official 1:1 Life-Size Helmets & Tech</title>
-  <meta name="description" content="Official Marvel Cinematic 1:1 life-size wearable helmets, Captain America shields, Thor Mjolnir speakers, and Arc Reactor wireless chargers." />
+  <title>Marvel Verse &mdash; Official 1:1 Life-Size Helmets & Tech</title>
+  <meta name="description" content="Official Marvel Verse 1:1 life-size wearable helmets, Captain America shields, Thor Mjolnir speakers, and Arc Reactor wireless chargers." />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e11b23'><rect width='24' height='24' rx='4' fill='%23e11b23'/><text x='12' y='16' font-size='12' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
@@ -182,10 +182,9 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(8, 11, 18, 0.95);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: #080b12;
   border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .header-container {
@@ -224,14 +223,7 @@ body {
   text-transform: uppercase;
 }
 .brand-sub {
-  color: var(--text-muted);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin-left: 6px;
-  border-left: 1px solid var(--border-light);
-  padding-left: 8px;
+  display: none !important;
 }
 
 /* Navigation Tabs (Impressive Stark HUD Laser Animations) */
@@ -323,15 +315,17 @@ body {
 
 .search-box {
   position: relative;
-  width: 220px;
+  width: 240px;
+  display: flex;
+  align-items: center;
 }
 .search-input {
   width: 100%;
   background: var(--bg-input);
   border: 1px solid var(--border-subtle);
-  padding: 7px 32px 7px 14px;
+  padding: 8px 36px 8px 14px;
   border-radius: var(--radius-pill);
-  font-size: 12.5px;
+  font-size: 13px;
   font-family: inherit;
   color: var(--text-pure);
   outline: none;
@@ -339,18 +333,124 @@ body {
 }
 .search-input:focus {
   border-color: var(--accent-blue);
-  background: rgba(28, 38, 58, 0.85);
+  background: rgba(28, 38, 58, 0.95);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
 }
 .search-input::placeholder {
   color: var(--text-dim);
 }
 .search-icon {
   position: absolute;
-  right: 11px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-dim);
   pointer-events: none;
+}
+.search-clear-btn {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+  display: none;
+  line-height: 1;
+}
+.search-clear-btn:hover {
+  color: var(--text-pure);
+}
+
+/* Mobile Expandable Search Bar */
+.mobile-search-bar {
+  display: none;
+  background: #090d16;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 10px 16px;
+  position: sticky;
+  top: 68px;
+  z-index: 99;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+.mobile-search-bar.active {
+  display: block;
+}
+.mobile-search-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+}
+.mobile-search-inner:focus-within {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+.mobile-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-pure);
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+}
+.mobile-search-clear {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 4px;
+  display: none;
+  line-height: 1;
+}
+.mobile-search-clear:hover {
+  color: #fff;
+}
+.mobile-search-close {
+  background: none;
+  border: none;
+  color: var(--accent-blue);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+/* Active Search Filter Banner */
+.search-filter-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+  font-size: 13.5px;
+}
+.btn-clear-search-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-light);
+  color: var(--text-pure);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.btn-clear-search-pill:hover {
+  background: var(--accent-red);
+  border-color: var(--accent-red);
 }
 
 /* Cart Button */
@@ -397,9 +497,7 @@ body {
    HERO FILTER BAR (Zero Emojis, Minimalist Luxury Pills)
    ========================================================================== */
 .hero-filter-bar {
-  background: rgba(12, 16, 26, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: #090d16;
   border-bottom: 1px solid var(--border-subtle);
   padding: 8px 0;
   position: sticky;
@@ -408,6 +506,7 @@ body {
   width: 100%;
   max-width: 100%;
   overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 
 .hero-filter-container {
@@ -3199,10 +3298,18 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 7px;
   }
 
-  .brand-sub, .brand-title {
-    display: none;
+  .brand-sub {
+    display: none !important;
+  }
+
+  .brand-title {
+    display: inline-block;
+    font-size: 15px;
   }
 
   .nav-tabs {
@@ -3577,10 +3684,9 @@ body {
       </button>
 
       <!-- Brand Logo (Centered Red Box on Mobile) -->
-      <a href="#" class="brand-logo marvel-official-brand" aria-label="Marvel Store Home">
+      <a href="#" class="brand-logo marvel-official-brand" aria-label="Marvel Verse Home">
         <span class="brand-badge marvel-red-box">MARVEL</span>
-        <span class="brand-title">STUDIOS</span>
-        <span class="brand-sub">COLLECTIBLES</span>
+        <span class="brand-title">VERSE</span>
       </a>
 
       <!-- Category Navigation Links (Zero Emojis) -->
@@ -3596,7 +3702,8 @@ body {
       <div class="header-right">
         <!-- Search Input (Desktop) -->
         <div class="search-box">
-          <input type="text" id="globalSearch" class="search-input" placeholder="Search products..." autocomplete="off" />
+          <input type="text" id="globalSearch" class="search-input" placeholder="Search products..." autocomplete="off" oninput="handleSearchInput(this.value, 'desktop')" />
+          <button class="search-clear-btn" id="desktopSearchClear" aria-label="Clear search" onclick="clearSearch()">&times;</button>
           <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -3604,7 +3711,7 @@ body {
         </div>
 
         <!-- Mobile Search Button (Image 2 style) -->
-        <button class="btn-search-mobile" aria-label="Search Products" onclick="document.getElementById('marvelCollectionSection').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ var s = document.getElementById('globalSearch'); if(s) s.focus(); }, 400);">
+        <button class="btn-search-mobile" aria-label="Search Products" onclick="toggleMobileSearch()">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -3625,12 +3732,27 @@ body {
     </div>
   </header>
 
+  <!-- Expandable Mobile Search Bar -->
+  <div class="mobile-search-bar" id="mobileSearchBar">
+    <div class="mobile-search-inner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2.2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="mobileGlobalSearch" class="mobile-search-input" placeholder="Search helmets, speakers, tech..." autocomplete="off" oninput="handleSearchInput(this.value, 'mobile')" />
+      <button class="mobile-search-clear" id="mobileSearchClear" aria-label="Clear search" onclick="clearSearch()">&times;</button>
+      <button class="mobile-search-close" onclick="toggleMobileSearch(false)" aria-label="Close search">Cancel</button>
+    </div>
+  </div>
 
   <!-- Slide-out Mobile Navigation Drawer & Backdrop -->
   <div class="marvel-drawer-backdrop" id="marvelDrawerBackdrop" onclick="toggleNavMenu()"></div>
   <aside class="marvel-nav-drawer" id="marvelNavDrawer">
     <div class="marvel-drawer-header">
-      <span class="brand-badge marvel-red-box">MARVEL</span>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span class="brand-badge marvel-red-box">MARVEL</span>
+        <span class="brand-title" style="color:#fff; font-weight:800; font-family:var(--font-display); font-size:18px; letter-spacing:0.05em;">VERSE</span>
+      </div>
       <button class="marvel-drawer-close" onclick="toggleNavMenu()" aria-label="Close menu">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
           <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -4095,6 +4217,9 @@ body {
       </div>
     </div>
 
+    <!-- Active Search Filter Notification Bar -->
+    <div id="searchFilterNotification" class="search-filter-banner" style="display:none;"></div>
+
     <!-- Product Grid (Stable text & button, micro-tilt on image only) -->
     <div class="products-grid" id="productsGrid"></div>
   </main>
@@ -4111,7 +4236,7 @@ body {
         </div>
         <div class="store-contact-content">
           <span class="store-contact-title">Contact &amp; Priority Care</span>
-          <span class="store-contact-sub">+91 93306 48314 &bull; +91 62893 62476</span>
+          <span class="store-contact-sub">+91 93306 48314 &bull; +91 62893 62476 &bull; support@marvelverse.in</span>
         </div>
       </div>
 
@@ -4161,7 +4286,7 @@ body {
             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
           </svg>
         </a>
-        <div class="social-brand-monogram" title="Marvel Studios Official Collectibles">
+        <div class="social-brand-monogram" title="Marvel Verse Official Store">
           <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
             <rect width="40" height="40" rx="8" fill="rgba(225,29,72,0.18)" stroke="rgba(225,29,72,0.4)" stroke-width="1.5"/>
             <path d="M12 28V12L20 22L28 12V28" stroke="#e11d48" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -4179,7 +4304,7 @@ body {
         <div class="footer-col brand-col">
           <div class="footer-logo">
             <span class="footer-logo-badge">MARVEL</span>
-            <span class="footer-logo-title">COLLECTION</span>
+            <span class="footer-logo-title">VERSE</span>
           </div>
           <p class="footer-desc">
             Official 1:1 scale movie-accurate collectible recreations, electronic wearable helmets, and certified prop replicas engineered with Stark precision.
@@ -4229,7 +4354,7 @@ body {
           </div>
           <div class="footer-contact-item">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <a href="mailto:concierge@marvelmerchandise.in">concierge@marvelmerchandise.in</a>
+            <a href="mailto:support@marvelverse.in">support@marvelverse.in</a>
           </div>
         </div>
       </div>
@@ -4237,7 +4362,7 @@ body {
       <!-- Bottom Copyright & Payments Bar -->
       <div class="footer-bottom-bar">
         <div class="footer-copy">
-          &copy; 2026 Marvel Studios Collectibles. Officially Licensed Merchandise. All Rights Reserved.
+          &copy; 2026 Marvel Verse. Officially Licensed Merchandise. All Rights Reserved.
         </div>
         <div class="footer-payment-methods">
           <span class="pay-pill">UPI</span>
@@ -4509,10 +4634,10 @@ body {
           <span class="help-btn-title">WhatsApp</span>
           <span class="help-btn-sub">Instant Chat</span>
         </a>
-        <a href="mailto:concierge@marvelmerchandise.in" class="help-btn">
+        <a href="mailto:support@marvelverse.in" class="help-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           <span class="help-btn-title">Email Us</span>
-          <span class="help-btn-sub">Priority Inbox</span>
+          <span class="help-btn-sub">support@marvelverse.in</span>
         </a>
       </div>
 
@@ -4532,7 +4657,7 @@ body {
           </div>
           <div>
             <strong style="color:#ffffff;">Q: Are these official Marvel licensed items?</strong>
-            <p style="color:var(--text-muted); margin-top:2px;">Yes, 100% authentic Marvel Studios licensed collectibles with holographic seal.</p>
+            <p style="color:var(--text-muted); margin-top:2px;">Yes, 100% authentic Marvel Verse officially licensed merchandise with verification seal.</p>
           </div>
         </div>
       </div>
@@ -5138,33 +5263,77 @@ async function syncWooCommerce() {
   }
 }
 
-// 2. RENDER CATALOG (Text and Buttons are 100% STABLE; Image micro-tilts)
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+// 2. RENDER CATALOG (Stable e-commerce UI with instant omni-search)
 function renderCatalog() {
   const grid = document.getElementById("productsGrid");
   const countEl = document.getElementById("catalogCount");
+  const searchNotice = document.getElementById("searchFilterNotification");
   if (!grid) return;
 
-  let list = productsList.filter(p => {
-    const matchCat = (currentCategory === "all" || p.category === currentCategory);
-    const matchHero = (currentHero === "all" || p.hero === currentHero);
-    const matchSearch = !searchFilter || 
-      p.name.toLowerCase().includes(searchFilter.toLowerCase()) || 
-      p.subtitle.toLowerCase().includes(searchFilter.toLowerCase());
+  const query = (searchFilter || "").toLowerCase().trim();
 
-    return matchCat && matchHero && matchSearch;
-  });
+  let list;
+  if (!query) {
+    list = productsList.filter(p => {
+      const matchCat = (currentCategory === "all" || p.category === currentCategory);
+      const matchHero = (currentHero === "all" || p.hero === currentHero);
+      return matchCat && matchHero;
+    });
+    if (searchNotice) searchNotice.style.display = "none";
+  } else {
+    // Search across name, subtitle, category, hero, banner, variations
+    const matchesAll = productsList.filter(p => {
+      const nameMatch = p.name && p.name.toLowerCase().includes(query);
+      const subMatch = p.subtitle && p.subtitle.toLowerCase().includes(query);
+      const catMatch = p.category && p.category.toLowerCase().includes(query);
+      const heroMatch = p.hero && p.hero.toLowerCase().includes(query);
+      const bannerMatch = p.banner && p.banner.toLowerCase().includes(query);
+      const varMatch = p.variations && p.variations.some(v => v.name && v.name.toLowerCase().includes(query));
+      return nameMatch || subMatch || catMatch || heroMatch || bannerMatch || varMatch;
+    });
+
+    const matchesInCurrent = matchesAll.filter(p => {
+      const matchCat = (currentCategory === "all" || p.category === currentCategory);
+      const matchHero = (currentHero === "all" || p.hero === currentHero);
+      return matchCat && matchHero;
+    });
+
+    // If matches exist in current category filter, show those; otherwise show all matching items
+    if (matchesInCurrent.length > 0) {
+      list = matchesInCurrent;
+    } else {
+      list = matchesAll;
+    }
+
+    if (searchNotice) {
+      searchNotice.style.display = "flex";
+      searchNotice.innerHTML = `
+        <div style="display:flex; align-items:center; gap:8px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Search results for <strong>"${escapeHtml(searchFilter)}"</strong> (${list.length} item${list.length === 1 ? '' : 's'} found)</span>
+        </div>
+        <button class="btn-clear-search-pill" onclick="clearSearch()">Clear Search</button>
+      `;
+    }
+  }
 
   if (sortMode === "price-asc") list.sort((a,b) => a.price - b.price);
   if (sortMode === "price-desc") list.sort((a,b) => b.price - a.price);
   if (sortMode === "name") list.sort((a,b) => a.name.localeCompare(b.name));
 
-  countEl.textContent = `${list.length} Products Available`;
+  countEl.textContent = `${list.length} Product${list.length === 1 ? '' : 's'} Available`;
 
   if (list.length === 0) {
     grid.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color:var(--text-muted);">
-        <h3 style="font-size: 16px; font-weight: 700; color:var(--text-pure); margin-bottom: 6px;">No products found</h3>
-        <p style="font-size: 13px;">Try switching your filter or adjusting your search term.</p>
+        <h3 style="font-size: 16px; font-weight: 700; color:var(--text-pure); margin-bottom: 6px;">No products found for "${escapeHtml(searchFilter)}"</h3>
+        <p style="font-size: 13px; margin-bottom: 14px;">Try checking your spelling or searching by category, helmet, speaker, or hero.</p>
+        <button class="btn-clear-search-pill" onclick="clearSearch()" style="padding:6px 16px; font-size:13px; display:inline-block;">View All Products</button>
       </div>
     `;
     return;
@@ -5817,6 +5986,98 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+// Global Search Handlers (Desktop & Mobile Unified)
+window.handleSearchInput = function(value, source) {
+  searchFilter = (value || "").trim();
+  const desktopInput = document.getElementById("globalSearch");
+  const mobileInput = document.getElementById("mobileGlobalSearch");
+  const desktopClear = document.getElementById("desktopSearchClear");
+  const mobileClear = document.getElementById("mobileSearchClear");
+
+  if (desktopInput && source !== 'desktop') desktopInput.value = value;
+  if (mobileInput && source !== 'mobile') mobileInput.value = value;
+
+  if (desktopClear) desktopClear.style.display = searchFilter ? 'inline-block' : 'none';
+  if (mobileClear) mobileClear.style.display = searchFilter ? 'inline-block' : 'none';
+
+  renderCatalog();
+
+  // If user types a search query and is scrolled up, smoothly scroll them to the catalog
+  if (searchFilter.length > 0) {
+    const coll = document.getElementById("marvelCollectionSection") || document.getElementById("productsGrid");
+    if (coll) {
+      const rect = coll.getBoundingClientRect();
+      if (rect.top > 200 || rect.top < -3000) {
+        coll.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }
+};
+
+window.clearSearch = function() {
+  searchFilter = "";
+  const desktopInput = document.getElementById("globalSearch");
+  const mobileInput = document.getElementById("mobileGlobalSearch");
+  const desktopClear = document.getElementById("desktopSearchClear");
+  const mobileClear = document.getElementById("mobileSearchClear");
+  if (desktopInput) desktopInput.value = "";
+  if (mobileInput) mobileInput.value = "";
+  if (desktopClear) desktopClear.style.display = 'none';
+  if (mobileClear) mobileClear.style.display = 'none';
+  renderCatalog();
+};
+
+window.toggleMobileSearch = function(forceState) {
+  const bar = document.getElementById("mobileSearchBar");
+  if (!bar) return;
+  const shouldOpen = (typeof forceState === "boolean") ? forceState : !bar.classList.contains("active");
+  if (shouldOpen) {
+    bar.classList.add("active");
+    const inp = document.getElementById("mobileGlobalSearch");
+    if (inp) {
+      setTimeout(() => inp.focus(), 100);
+    }
+    const coll = document.getElementById("marvelCollectionSection") || document.getElementById("productsGrid");
+    if (coll) coll.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    bar.classList.remove("active");
+  }
+};
+
+// High-FPS Performance Optimization:
+// Automatically pause 720p background video and 2D particle canvas loop when user scrolls down to browse catalog
+function setupPerformanceObserver() {
+  const heroWrap = document.querySelector(".marvel-official-hero-wrap");
+  const video = document.getElementById("bgBattleVideo");
+  if (!heroWrap || !video) return;
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Hero is in viewport: resume video and canvas
+          if (video.paused) {
+            video.play().catch(() => {});
+          }
+          if (window.cinematicFrameEngine && typeof window.cinematicFrameEngine.resume === "function") {
+            window.cinematicFrameEngine.resume();
+          }
+        } else {
+          // Hero is offscreen: pause video & particle loop to save 80%+ GPU/CPU
+          if (!video.paused) {
+            video.pause();
+          }
+          if (window.cinematicFrameEngine && typeof window.cinematicFrameEngine.pause === "function") {
+            window.cinematicFrameEngine.pause();
+          }
+        }
+      });
+    }, { threshold: 0.05 });
+
+    observer.observe(heroWrap);
+  }
+}
+
 // Boot application
 document.addEventListener("DOMContentLoaded", () => {
   // Immediately render full official catalog (0ms delay)
@@ -5830,10 +6091,29 @@ document.addEventListener("DOMContentLoaded", () => {
     window.ArcReactor3D.init("arc3dCanvasContainer");
   }
 
-  document.getElementById("globalSearch")?.addEventListener("input", e => {
-    searchFilter = e.target.value.trim();
-    renderCatalog();
-  });
+  // Setup High-FPS hero video/canvas observer
+  setupPerformanceObserver();
+
+  // Wire up desktop and mobile search
+  const desktopSearch = document.getElementById("globalSearch");
+  if (desktopSearch) {
+    desktopSearch.addEventListener("input", e => handleSearchInput(e.target.value, "desktop"));
+    desktopSearch.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        document.getElementById("marvelCollectionSection")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+
+  const mobileSearch = document.getElementById("mobileGlobalSearch");
+  if (mobileSearch) {
+    mobileSearch.addEventListener("input", e => handleSearchInput(e.target.value, "mobile"));
+    mobileSearch.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        document.getElementById("marvelCollectionSection")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
 
   document.getElementById("sortSelect")?.addEventListener("change", e => {
     sortMode = e.target.value;
