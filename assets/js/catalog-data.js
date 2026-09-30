@@ -540,7 +540,7 @@ function updateCartQty(index, delta) {
 
 function updateHeaderBadges() {
   const count = getCartCount();
-  document.querySelectorAll(".cart-count-badge, #nav-cart-badge").forEach(badge => {
+  document.querySelectorAll(".cart-count-badge, #nav-cart-badge, .mobile-cart-badge, #mobile-bottom-cart-badge").forEach(badge => {
     badge.textContent = count;
     badge.classList.remove("bump");
     void badge.offsetWidth;
@@ -548,7 +548,7 @@ function updateHeaderBadges() {
   });
 
   const wishCount = getWishlistCount();
-  document.querySelectorAll(".wishlist-count-badge, #nav-wishlist-badge").forEach(badge => {
+  document.querySelectorAll(".wishlist-count-badge, #nav-wishlist-badge, .mobile-wishlist-badge, #mobile-drawer-wishlist-badge").forEach(badge => {
     badge.textContent = wishCount;
   });
 }
@@ -611,6 +611,44 @@ function closeBagDrawer() {
   const drawer = document.getElementById("nike-bag-drawer");
   const backdrop = document.getElementById("drawer-backdrop");
   if (drawer) drawer.classList.remove("active");
+  if (backdrop) backdrop.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+// ==========================================================================
+// NIKE MOBILE NAVIGATION DRAWER
+// ==========================================================================
+function openMobileMenu() {
+  const drawer = document.getElementById("mobile-nav-drawer");
+  const backdrop = document.getElementById("mobile-nav-backdrop");
+  if (drawer) drawer.classList.add("active");
+  if (backdrop) backdrop.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeMobileMenu() {
+  const drawer = document.getElementById("mobile-nav-drawer");
+  const backdrop = document.getElementById("mobile-nav-backdrop");
+  if (drawer) drawer.classList.remove("active");
+  if (backdrop) backdrop.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+// ==========================================================================
+// NIKE MOBILE FILTER SHEET (CATEGORIES)
+// ==========================================================================
+function openMobileFilterDrawer() {
+  const sheet = document.getElementById("mobile-filter-sheet");
+  const backdrop = document.getElementById("mobile-filter-backdrop");
+  if (sheet) sheet.classList.add("active");
+  if (backdrop) backdrop.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeMobileFilterDrawer() {
+  const sheet = document.getElementById("mobile-filter-sheet");
+  const backdrop = document.getElementById("mobile-filter-backdrop");
+  if (sheet) sheet.classList.remove("active");
   if (backdrop) backdrop.classList.remove("active");
   document.body.style.overflow = "";
 }
@@ -939,6 +977,8 @@ window.addEventListener("keydown", (e) => {
     closeBagDrawer();
     closeSearchOverlay();
     closeQuickView();
+    closeMobileMenu();
+    closeMobileFilterDrawer();
   }
 });
 

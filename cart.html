@@ -346,11 +346,11 @@
             <span>Search</span>
           </button>
 
-          <button type="button" class="nav-icon-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+          <button type="button" class="nav-icon-btn desktop-only-action" onclick="toggleTheme()" aria-label="Toggle Theme">
             <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"/></svg>
           </button>
 
-          <a href="profile.html" class="nav-icon-btn" aria-label="Favourites">
+          <a href="profile.html" class="nav-icon-btn desktop-only-action" aria-label="Favourites">
             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
             <span class="cart-count-badge wishlist-count-badge" id="nav-wishlist-badge">0</span>
           </a>
@@ -359,6 +359,12 @@
             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
             <span class="cart-count-badge" id="nav-cart-badge">0</span>
           </a>
+
+          <button type="button" class="mobile-menu-toggle" onclick="openMobileMenu()" aria-label="Open Navigation Menu">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
         </div>
       </nav>
     </div>
@@ -499,6 +505,74 @@
     </div>
   </div>
 
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" onclick="closeMobileMenu()"></div>
+  <aside class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="mobile-nav-header">
+      <div class="mobile-nav-brand">
+        <div class="brand-icon-box" style="width:30px;height:30px;font-size:16px;">M</div>
+        <span>MARVEL VERSE</span>
+      </div>
+      <button type="button" class="mobile-nav-close" onclick="closeMobileMenu()" aria-label="Close Menu">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="mobile-nav-body">
+      <div>
+        <div class="mobile-nav-section-title">Shop Collection</div>
+        <div class="mobile-nav-links">
+          <a href="categories.html" class="mobile-nav-link-item">
+            <span>Shop All Gear</span>
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+          <a href="categories.html?cat=helmets" class="mobile-nav-sublink-item">
+            <span>🪖 1:1 Wearable Helmets</span>
+          </a>
+          <a href="categories.html?cat=speakers" class="mobile-nav-sublink-item">
+            <span>🔊 Audio Speakers & Replicas</span>
+          </a>
+          <a href="categories.html?cat=chargers" class="mobile-nav-sublink-item">
+            <span>⚡ Fast Chargers & Power</span>
+          </a>
+          <a href="categories.html?cat=tech" class="mobile-nav-sublink-item">
+            <span>🛡️ Tech Collectibles</span>
+          </a>
+          <a href="index.html#customizer3d" class="mobile-nav-sublink-item">
+            <span>🌀 3D Armor Customizer</span>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="mobile-nav-section-title">Hero Vaults</div>
+        <div class="mobile-nav-links">
+          <a href="categories.html?hero=iron-man" class="mobile-nav-sublink-item">🔴 Iron Man Vault</a>
+          <a href="categories.html?hero=captain-america" class="mobile-nav-sublink-item">🔵 Captain America Shield & Gear</a>
+          <a href="categories.html?hero=thor" class="mobile-nav-sublink-item">⚡ Thor Asgardian Tech</a>
+          <a href="categories.html?hero=wakanda" class="mobile-nav-sublink-item">🐾 Wakanda Vibranium</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="mobile-nav-section-title">Collector Care & Services</div>
+        <div class="mobile-nav-links">
+          <a href="tracking.html" class="mobile-nav-sublink-item">📦 Track Order Status</a>
+          <a href="profile.html" class="mobile-nav-sublink-item">👑 VIP Collector Club</a>
+          <a href="help.html" class="mobile-nav-sublink-item">❓ Help & Store Locator</a>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-nav-footer">
+      <div class="mobile-theme-row">
+        <span>Display Mode</span>
+        <button type="button" class="btn-nike-outline" onclick="toggleTheme()" style="padding:6px 14px; font-size:12px;">Toggle Theme</button>
+      </div>
+      <a href="categories.html" class="btn-nike-black" style="width:100%; text-align:center; padding:12px;" onclick="closeMobileMenu()">
+        Explore All Drops
+      </a>
+    </div>
+  </aside>
+
   <!-- Mobile Bottom Nav -->
   <nav class="mobile-bottom-bar" id="mobile-bottom-nav">
     <a href="index.html" class="mobile-bar-item">
@@ -515,12 +589,13 @@
     </button>
     <a href="cart.html" class="mobile-bar-item active">
       <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="mobile-bar-badge mobile-cart-badge" id="mobile-bottom-cart-badge">0</span>
       <span>Bag</span>
     </a>
-    <a href="profile.html" class="mobile-bar-item">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span>Profile</span>
-    </a>
+    <button type="button" class="mobile-bar-item" onclick="openMobileMenu()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Menu</span>
+    </button>
   </nav>
 
   <!-- Bag Page Script -->
