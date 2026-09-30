@@ -98,6 +98,9 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -108,6 +111,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
   transition: background-color var(--transition-normal), color var(--transition-normal);
 }
 
@@ -545,6 +551,8 @@ img {
   width: 340px;
   max-width: 86vw;
   height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
   background: var(--bg-primary);
   z-index: 1201;
   display: flex;
@@ -690,6 +698,7 @@ img {
   left: 0;
   right: 0;
   max-height: 85vh;
+  max-height: 85dvh;
   background: var(--bg-primary);
   border-radius: 20px 20px 0 0;
   z-index: 1151;
@@ -963,6 +972,8 @@ img {
   width: 440px;
   max-width: 100%;
   height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
   background: var(--bg-drawer);
   box-shadow: var(--shadow-drawer);
   z-index: 1001;
@@ -1871,6 +1882,9 @@ img {
   }
   [data-theme="dark"] .card-wishlist-btn {
     background: rgba(40, 40, 40, 0.95);
+  }
+  .card-quick-add {
+    display: none !important;
   }
 }
 

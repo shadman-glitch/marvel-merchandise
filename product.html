@@ -251,6 +251,31 @@
       border-top: 1px solid var(--border-subtle);
       padding-top: 3.5rem;
     }
+
+    @media (max-width: 768px) {
+      .mobile-bottom-bar {
+        display: none !important;
+      }
+      .pdp-mobile-sticky-bar {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: var(--bg-primary) !important;
+        border-top: 1px solid var(--border-subtle) !important;
+        padding: 12px 1.25rem calc(12px + env(safe-area-inset-bottom, 0px)) 1.25rem !important;
+        z-index: 999 !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12) !important;
+      }
+      body {
+        padding-bottom: calc(85px + env(safe-area-inset-bottom, 0px)) !important;
+      }
+      .pdp-photo-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -575,7 +600,13 @@
 
     function initPDP() {
       const urlParams = new URLSearchParams(window.location.search);
-      const productId = Number(urlParams.get("id")) || 20;
+      const paramId = urlParams.get("id");
+      let productId = Number(paramId);
+      if ((isNaN(productId) || !productId) && paramId) {
+        const found = CATALOG_ITEMS.find(p => String(p.id) === paramId || p.hero === paramId || p.name.toLowerCase().includes(paramId.replace(/-/g, " ").toLowerCase()));
+        if (found) productId = found.id;
+      }
+      if (!productId || isNaN(productId)) productId = 20;
 
       activeProduct = CATALOG_ITEMS.find(p => p.id === productId) || CATALOG_ITEMS[0];
       activeVariant = activeProduct.variations[0];

@@ -621,9 +621,11 @@ function closeBagDrawer() {
 function openMobileMenu() {
   const drawer = document.getElementById("mobile-nav-drawer");
   const backdrop = document.getElementById("mobile-nav-backdrop");
-  if (drawer) drawer.classList.add("active");
-  if (backdrop) backdrop.classList.add("active");
-  document.body.style.overflow = "hidden";
+  if (drawer && backdrop) {
+    drawer.classList.add("active");
+    backdrop.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
 }
 
 function closeMobileMenu() {
@@ -640,9 +642,11 @@ function closeMobileMenu() {
 function openMobileFilterDrawer() {
   const sheet = document.getElementById("mobile-filter-sheet");
   const backdrop = document.getElementById("mobile-filter-backdrop");
-  if (sheet) sheet.classList.add("active");
-  if (backdrop) backdrop.classList.add("active");
-  document.body.style.overflow = "hidden";
+  if (sheet && backdrop) {
+    sheet.classList.add("active");
+    backdrop.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
 }
 
 function closeMobileFilterDrawer() {

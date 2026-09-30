@@ -43,15 +43,22 @@ class Nike3DStage {
     this.camera.position.set(0, 0, 7.2);
 
     // Renderer
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    this.renderer.setSize(width, height);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.15;
-    this.renderer.domElement.style.width = "100%";
-    this.renderer.domElement.style.height = "100%";
-    this.renderer.domElement.style.cursor = "grab";
-    this.container.appendChild(this.renderer.domElement);
+    try {
+      this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "default" });
+      this.renderer.setSize(width, height);
+      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      this.renderer.toneMappingExposure = 1.15;
+      this.renderer.domElement.style.width = "100%";
+      this.renderer.domElement.style.height = "100%";
+      this.renderer.domElement.style.cursor = "grab";
+      this.renderer.domElement.style.touchAction = "pan-y";
+      this.container.appendChild(this.renderer.domElement);
+    } catch (e) {
+      console.warn("WebGL not available or context creation failed; using high-res fallback:", e);
+      this.renderFallback();
+      return;
+    }
 
     // Lighting (Nike Studio Lighting with Rim Accents)
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
@@ -210,29 +217,50 @@ class Nike3DStage {
       }
     });
 
-    // Touch support (mobile 360° rotation)
+    // Touch support (smart mobile rotation vs vertical scroll detection)
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let isHorizontalGesture = false;
+
     el.addEventListener("touchstart", (e) => {
       if (e.touches.length === 1) {
         this.isDragging = true;
         this.autoRotate = false;
-        this.previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        this.previousMousePosition = { x: touchStartX, y: touchStartY };
+        isHorizontalGesture = false;
       }
     }, { passive: true });
 
     el.addEventListener("touchmove", (e) => {
-      if (!this.isDragging || e.touches.length !== 1) return;
-      const deltaX = e.touches[0].clientX - this.previousMousePosition.x;
-      const deltaY = e.touches[0].clientY - this.previousMousePosition.y;
+      if (!this.isDragging || e.touches.length !== 1 || !this.modelGroup) return;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const totalDeltaX = Math.abs(currentX - touchStartX);
+      const totalDeltaY = Math.abs(currentY - touchStartY);
 
-      this.modelGroup.rotation.y += deltaX * 0.008;
-      this.modelGroup.rotation.x += deltaY * 0.008;
-      this.modelGroup.rotation.x = Math.max(-0.6, Math.min(0.6, this.modelGroup.rotation.x));
+      // If user is swiping up or down to scroll the page, hand off to native scroll!
+      if (!isHorizontalGesture && totalDeltaY > totalDeltaX && totalDeltaY > 8) {
+        this.isDragging = false;
+        return;
+      }
 
-      this.previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      if (totalDeltaX > totalDeltaY && totalDeltaX > 8) {
+        isHorizontalGesture = true;
+      }
+
+      if (isHorizontalGesture) {
+        const deltaX = currentX - this.previousMousePosition.x;
+        this.modelGroup.rotation.y += deltaX * 0.008;
+      }
+
+      this.previousMousePosition = { x: currentX, y: currentY };
     }, { passive: true });
 
     el.addEventListener("touchend", () => {
       this.isDragging = false;
+      isHorizontalGesture = false;
       setTimeout(() => { this.autoRotate = true; }, 2500);
     });
 
@@ -247,7 +275,32 @@ class Nike3DStage {
     });
   }
 
+  renderFallback() {
+    if (!this.container) return;
+    this.container.innerHTML = `
+      <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(circle at 50% 50%, var(--bg-secondary) 0%, var(--bg-card) 75%);border-radius:var(--radius-md);overflow:hidden;padding:1.5rem;">
+        <img id="fallback-3d-img" src="assets/images/p_mk5_helmet.jpg" alt="Iron Man MK5 1:1 Helmet" style="max-height:85%;max-width:85%;object-fit:contain;filter:drop-shadow(0 15px 25px rgba(0,0,0,0.35));transition:all 0.3s ease;" />
+        <div style="position:absolute;bottom:12px;left:12px;font-size:11px;font-weight:700;color:var(--text-secondary);letter-spacing:0.05em;text-transform:uppercase;">
+          Studio 1:1 Armor View
+        </div>
+      </div>
+    `;
+  }
+
   setColorway(colorwayName) {
+    const fallbackImg = document.getElementById("fallback-3d-img");
+    if (fallbackImg) {
+      if (colorwayName === "stealth-carbon") {
+        fallbackImg.style.filter = "drop-shadow(0 15px 25px rgba(0,0,0,0.45)) grayscale(0.85) brightness(0.6)";
+      } else if (colorwayName === "silver-centurion") {
+        fallbackImg.style.filter = "drop-shadow(0 15px 25px rgba(0,0,0,0.35)) grayscale(0.4) brightness(1.2)";
+      } else if (colorwayName === "arc-blue") {
+        fallbackImg.style.filter = "drop-shadow(0 15px 25px rgba(56,189,248,0.45)) hue-rotate(180deg)";
+      } else {
+        fallbackImg.style.filter = "drop-shadow(0 15px 25px rgba(0,0,0,0.35))";
+      }
+    }
+
     if (!this.materials.primaryShell || !this.materials.secondaryGold) return;
 
     if (colorwayName === "crimson-gold") {
@@ -284,6 +337,7 @@ class Nike3DStage {
   }
 
   animate() {
+    if (!this.renderer || !this.scene || !this.camera) return;
     requestAnimationFrame(this.animate);
 
     // Smooth auto-rotation
