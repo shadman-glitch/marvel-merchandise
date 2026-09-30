@@ -2,6 +2,8 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/categories", "destination": "/categories.html" },
+    { "source": "/shop", "destination": "/categories.html" },
+    { "source": "/product", "destination": "/product.html" },
     { "source": "/tracking", "destination": "/tracking.html" },
     { "source": "/profile", "destination": "/profile.html" },
     { "source": "/help", "destination": "/help.html" },

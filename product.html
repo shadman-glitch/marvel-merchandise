@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0" />
+  <title>Marvel Verse &bull; Official Product Experience</title>
+  <meta name="description" content="View full movie-accurate specifications, motorized features, and high-resolution photo galleries of official Marvel Verse 1:1 collectibles." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23111111'><rect width='24' height='24' rx='4' fill='%23111111'/><text x='12' y='16' font-size='12' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="assets/css/marvel-core.css" />
+
+  <!-- Core Logic Scripts -->
+  <script src="assets/js/catalog-data.js"></script>
+
+  <style>
+    /* Nike PDP Layout Styles */
+    .pdp-page-container {
+      padding: 2.5rem 0 5rem 0;
+    }
+
+    .pdp-breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .pdp-breadcrumbs a:hover {
+      color: var(--text-primary);
+      text-decoration: underline;
+    }
+
+    .pdp-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 992px) {
+      .pdp-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    /* Left Gallery: Vertical Staggered or Grid */
+    .pdp-left-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .pdp-main-photo-well {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .pdp-main-photo-well img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s var(--ease-nike);
+    }
+
+    .pdp-main-photo-well:hover img {
+      transform: scale(1.03);
+    }
+
+    .pdp-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .pdp-sub-photo-well {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .pdp-sub-photo-well img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Right Sticky Info Panel */
+    .pdp-right-info {
+      position: sticky;
+      top: 88px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pdp-tag-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .pdp-kicker-tag {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pdp-rating-summary {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .pdp-item-headline {
+      font-family: var(--font-headline);
+      font-size: clamp(28px, 3.5vw, 38px);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .pdp-item-subline {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .pdp-price-panel {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 4px;
+    }
+
+    .pdp-current-price {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .pdp-original-mrp {
+      font-size: 17px;
+      color: var(--text-tertiary);
+      text-decoration: line-through;
+    }
+
+    .pdp-tax-caption {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    /* Variations / Edition Selector */
+    .pdp-variant-selector-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .pdp-variant-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .pdp-variant-option-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border: 1.5px solid var(--border-medium);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      background: var(--bg-primary);
+      transition: all var(--transition-fast);
+    }
+
+    .pdp-variant-option-card:hover {
+      border-color: var(--text-primary);
+    }
+
+    .pdp-variant-option-card.active {
+      border-color: var(--text-primary);
+      background: var(--bg-secondary);
+      font-weight: 700;
+    }
+
+    .pdp-variant-option-card.active .variant-radio-dot {
+      border-color: var(--text-primary);
+      background: var(--text-primary);
+    }
+
+    .variant-radio-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: var(--radius-pill);
+      border: 2px solid var(--border-medium);
+      margin-right: 10px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* Action Buttons */
+    .pdp-cta-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .pdp-guarantee-box {
+      background: var(--bg-secondary);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+
+    /* Recommendations Carousel */
+    .pdp-recommendations-section {
+      margin-top: 5rem;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 3.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Top Subnav -->
+  <div class="top-subnav">
+    <div class="top-subnav-inner">
+      <div class="subnav-brands">
+        <span class="subnav-brand-item">
+          <span class="subnav-brand-badge">MARVEL</span> VERSE
+        </span>
+        <span class="subnav-divider">|</span>
+        <span>STARK LABS</span>
+        <span class="subnav-divider">|</span>
+        <span>1:1 COLLECTIBLES</span>
+      </div>
+      <ul class="subnav-links">
+        <li><a href="categories.html">Find a Product</a></li>
+        <li class="subnav-divider">|</li>
+        <li><a href="tracking.html">Track Order</a></li>
+        <li class="subnav-divider">|</li>
+        <li><a href="help.html">Help</a></li>
+        <li class="subnav-divider">|</li>
+        <li><a href="profile.html">VIP Collector Club</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2. Sticky Header -->
+  <header class="main-header">
+    <div class="container">
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a href="index.html" class="brand-logo" aria-label="Marvel Verse Home">
+          <div class="brand-icon-box">M</div>
+          <div class="brand-title-wrap">
+            <span class="brand-title-text">MARVEL VERSE</span>
+            <span class="brand-sub-text">1:1 Official Replicas</span>
+          </div>
+        </a>
+
+        <ul class="nav-menu-list">
+          <li class="nav-item-dropdown">
+            <a href="categories.html" class="nav-link-btn">New & Featured</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <a href="categories.html?cat=helmets" class="nav-link-btn">Wearable Helmets</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <a href="categories.html?cat=speakers" class="nav-link-btn">Audio Speakers</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <a href="categories.html?cat=chargers" class="nav-link-btn">Fast Chargers</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <a href="categories.html?cat=tech" class="nav-link-btn">Tech Gear</a>
+          </li>
+        </ul>
+
+        <div class="nav-actions">
+          <button type="button" class="search-pill-btn" onclick="openSearchOverlay()" aria-label="Search">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+            </svg>
+            <span>Search</span>
+          </button>
+
+          <button type="button" class="nav-icon-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+            <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"/>
+            </svg>
+          </button>
+
+          <a href="profile.html" class="nav-icon-btn" aria-label="Favourites">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            </svg>
+            <span class="cart-count-badge wishlist-count-badge" id="nav-wishlist-badge">0</span>
+          </a>
+
+          <button type="button" class="nav-icon-btn" onclick="openBagDrawer()" aria-label="Shopping Bag">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            <span class="cart-count-badge" id="nav-cart-badge">0</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main PDP Container -->
+  <main class="container pdp-page-container">
+    <!-- Breadcrumbs -->
+    <div class="pdp-breadcrumbs">
+      <a href="index.html">Home</a> &gt;
+      <a href="categories.html">Collectibles</a> &gt;
+      <span id="breadcrumb-product-name">Product Detail</span>
+    </div>
+
+    <!-- 2-Column Product Layout -->
+    <div class="pdp-layout" id="pdp-main-content">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- Recommendations Carousel -->
+    <section class="pdp-recommendations-section">
+      <div class="section-header-row">
+        <h2 class="section-title">Complete the Collection</h2>
+      </div>
+      <div class="snap-carousel-track" id="pdp-rec-track">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Nike Footer -->
+  <footer class="nike-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <div class="footer-col-title">Store & Contact</div>
+          <p style="color:#a3a3a3; line-height:1.6; margin-bottom:1rem;">
+            <strong>Marvel Verse Flagship Store</strong><br>
+            84E, SA Farooquie Rd, Bartala, Metiabruz,<br>
+            Kolkata, West Bengal 700018
+          </p>
+          <p style="color:#737373; font-size:12px;">Direct WhatsApp Concierge & Phone Support available Monday – Saturday.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Categories</div>
+          <ul class="footer-col-links">
+            <li><a href="categories.html">All Collectibles</a></li>
+            <li><a href="categories.html?cat=helmets">Wearable Helmets</a></li>
+            <li><a href="categories.html?cat=speakers">Audio Speakers</a></li>
+            <li><a href="categories.html?cat=chargers">Fast Chargers</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Customer Care</div>
+          <ul class="footer-col-links">
+            <li><a href="tracking.html">Track Your Order</a></li>
+            <li><a href="profile.html">VIP Collector Club</a></li>
+            <li><a href="help.html">Help Center & Support</a></li>
+            <li><a href="cart.html">View Bag</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Stark Precision Guarantee</div>
+          <p style="color:#a3a3a3; line-height:1.6;">Every item is certified for 1:1 scale movie-accuracy and backed by our concierge replacement guarantee.</p>
+        </div>
+      </div>
+      <div class="footer-bottom-bar">
+        <div>&copy; 2026 Marvel Verse. Official 1:1 Life-Size Replicas. All rights reserved.</div>
+        <ul class="footer-legal-links">
+          <li><a href="help.html">Privacy Policy</a></li>
+          <li><a href="help.html">Terms of Sale</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Out Bag Drawer -->
+  <div class="drawer-backdrop" id="drawer-backdrop" onclick="closeBagDrawer()"></div>
+  <aside class="bag-drawer" id="nike-bag-drawer" aria-label="Shopping Bag Drawer">
+    <div class="bag-drawer-header">
+      <div class="bag-drawer-title-wrap">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="bag-drawer-title">Shopping Bag</span>
+      </div>
+      <button type="button" class="bag-drawer-close" onclick="closeBagDrawer()" aria-label="Close Bag Drawer">&times;</button>
+    </div>
+    <div class="free-shipping-meter">
+      <div class="shipping-meter-text" id="shipping-meter-status"></div>
+      <div class="shipping-bar-bg"><div class="shipping-bar-fill" id="shipping-meter-bar"></div></div>
+    </div>
+    <div class="bag-drawer-items" id="bag-drawer-items-list"></div>
+    <div class="bag-drawer-footer" id="bag-drawer-footer-actions">
+      <div class="bag-subtotal-row">
+        <span>Subtotal</span>
+        <span id="bag-drawer-subtotal">₹0</span>
+      </div>
+      <div class="bag-drawer-btns">
+        <a href="cart.html" class="btn-nike-outline" style="width:100%;">View Full Bag</a>
+        <a href="cart.html" class="btn-nike-black" style="width:100%;">Checkout Now</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Search Overlay -->
+  <div class="nike-search-overlay" id="nike-search-overlay">
+    <div class="nike-search-bar-wrap">
+      <div class="search-bar-inner">
+        <a href="index.html" class="brand-logo" style="margin-right:1rem;">
+          <div class="brand-icon-box" style="width:30px; height:30px; font-size:16px;">M</div>
+        </a>
+        <div class="search-input-box">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="overlay-search-input" placeholder="Search Marvel Verse products..." autocomplete="off" oninput="handleSearchInput(this.value)" />
+        </div>
+        <button type="button" class="search-cancel-btn" onclick="closeSearchOverlay()">Cancel</button>
+      </div>
+    </div>
+    <div class="search-overlay-content">
+      <div class="search-results-grid" id="overlay-search-results"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-bar" id="mobile-bottom-nav">
+    <a href="index.html" class="mobile-bar-item">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="categories.html" class="mobile-bar-item">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+      <span>Shop</span>
+    </a>
+    <button type="button" class="mobile-bar-item" onclick="openSearchOverlay()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <span>Search</span>
+    </button>
+    <button type="button" class="mobile-bar-item" onclick="openBagDrawer()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span>Bag</span>
+    </button>
+    <a href="profile.html" class="mobile-bar-item">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- PDP Logic -->
+  <script>
+    let activeProduct = null;
+    let activeVariant = null;
+
+    function initPDP() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = Number(urlParams.get("id")) || 20;
+
+      activeProduct = CATALOG_ITEMS.find(p => p.id === productId) || CATALOG_ITEMS[0];
+      activeVariant = activeProduct.variations[0];
+
+      document.title = `${activeProduct.name} — Marvel Verse Official`;
+      const bcName = document.getElementById("breadcrumb-product-name");
+      if (bcName) bcName.textContent = activeProduct.name;
+
+      renderPDP();
+      renderRecommendations();
+    }
+
+    function renderPDP() {
+      const layout = document.getElementById("pdp-main-content");
+      if (!layout || !activeProduct) return;
+
+      const p = activeProduct;
+      const otherImages = p.allImages.slice(1);
+
+      layout.innerHTML = `
+        <!-- Left: Photo Gallery -->
+        <div class="pdp-left-gallery">
+          <div class="pdp-main-photo-well">
+            <img id="pdp-hero-img" src="${p.primaryImg}" alt="${escapeHtml(p.name)}" />
+          </div>
+          <div class="pdp-photo-grid">
+            ${otherImages.map(img => `
+              <div class="pdp-sub-photo-well" onclick="document.getElementById('pdp-hero-img').src='${img}'" style="cursor:pointer;">
+                <img src="${img}" alt="${escapeHtml(p.name)}" />
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Right: Sticky Info Panel -->
+        <div class="pdp-right-info">
+          <div class="pdp-tag-row">
+            <span class="pdp-kicker-tag">${escapeHtml(p.badge)}</span>
+            <span class="pdp-rating-summary">
+              <svg width="14" height="14" fill="#fa5400" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              ${p.rating} (${p.reviewsCount} Reviews)
+            </span>
+          </div>
+
+          <h1 class="pdp-item-headline">${escapeHtml(p.name)}</h1>
+          <div class="pdp-item-subline">${escapeHtml(p.subtitle)}</div>
+
+          <div class="pdp-price-panel">
+            <span class="pdp-current-price" id="pdp-price-val">${formatINR(activeVariant ? activeVariant.price : p.price)}</span>
+            <span class="pdp-original-mrp">${formatINR(p.mrp)}</span>
+          </div>
+          <div class="pdp-tax-caption">Incl. of all taxes &bull; Free Express Delivery across India</div>
+
+          <!-- Variation Selection -->
+          <div class="pdp-variant-selector-title">
+            <span>Select Edition</span>
+            <span style="font-weight:500; color:var(--text-secondary);">${p.variations.length} Options Available</span>
+          </div>
+
+          <div class="pdp-variant-options">
+            ${p.variations.map((v, i) => `
+              <div class="pdp-variant-option-card ${i === 0 ? 'active' : ''}" onclick="selectPDPVariant('${escapeHtml(v.name)}', ${v.price}, this)">
+                <div>
+                  <span class="variant-radio-dot"></span>
+                  <span>${escapeHtml(v.name)}</span>
+                </div>
+                <div style="font-weight:700;">${formatINR(v.price)}</div>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- CTAs -->
+          <div class="pdp-cta-stack">
+            <button type="button" class="btn-nike-black" style="width:100%; font-size:16px; padding:16px;" onclick="addCurrentProductToBag()">
+              Add to Bag &bull; Free Delivery
+            </button>
+            <button type="button" class="btn-nike-outline" style="width:100%; font-size:15px; padding:15px;" onclick="toggleWishlist(${p.id})">
+              Favourite &bull; Save to Wishlist
+            </button>
+          </div>
+
+          <!-- Guarantee Badge -->
+          <div class="pdp-guarantee-box">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div>
+              <strong>Stark Industries Certified Product</strong><br>
+              Every unit includes an individually serialized authenticity card, sealed armored packaging, and 1-year replacement warranty.
+            </div>
+          </div>
+
+          <!-- Collapsible Accordions -->
+          <div class="pdp-accordion-group">
+            <div class="pdp-accordion-item active">
+              <button type="button" class="pdp-accordion-trigger" onclick="togglePdpAccordion(this)">
+                Product Details & Engineering
+                <span>&minus;</span>
+              </button>
+              <div class="pdp-accordion-content" style="display:block;">
+                <p>${escapeHtml(p.description)}</p>
+                <ul style="margin-top:12px; padding-left:18px; line-height:1.7;">
+                  ${p.specs.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
+                </ul>
+              </div>
+            </div>
+
+            <div class="pdp-accordion-item">
+              <button type="button" class="pdp-accordion-trigger" onclick="togglePdpAccordion(this)">
+                Shipping & Returns
+                <span>&#43;</span>
+              </button>
+              <div class="pdp-accordion-content">
+                Dispatched within 24 hours via BlueDart Air Express. Free 14-day hassle-free returns on all unopened or defective collector items.
+              </div>
+            </div>
+
+            <div class="pdp-accordion-item">
+              <button type="button" class="pdp-accordion-trigger" onclick="togglePdpAccordion(this)">
+                Collector Reviews (${p.reviewsCount})
+                <span>&#43;</span>
+              </button>
+              <div class="pdp-accordion-content">
+                <div style="font-weight:700; margin-bottom:6px;">Rated ${p.rating} / 5.0 by verified collectors.</div>
+                <p>"The motorized opening on this helmet is absolutely mind-blowing. The sound FX and metallic finish feel like it came straight from Tony Stark's lab." &bull; <em>Vikram R., Bangalore</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectPDPVariant(name, price, card) {
+      activeVariant = { name, price };
+      const priceVal = document.getElementById("pdp-price-val");
+      if (priceVal) priceVal.textContent = formatINR(price);
+      document.querySelectorAll(".pdp-variant-option-card").forEach(c => c.classList.remove("active"));
+      if (card) card.classList.add("active");
+    }
+
+    function addCurrentProductToBag() {
+      if (!activeProduct) return;
+      const variantName = activeVariant ? activeVariant.name : activeProduct.variations[0].name;
+      addToCart(activeProduct.id, variantName);
+    }
+
+    function renderRecommendations() {
+      const track = document.getElementById("pdp-rec-track");
+      if (!track || !activeProduct) return;
+
+      const recs = CATALOG_ITEMS.filter(p => p.id !== activeProduct.id).slice(0, 5);
+      track.innerHTML = recs.map(p => `
+        <div class="snap-carousel-item">
+          <div class="product-card" onclick="window.location.href='product.html?id=${p.id}'">
+            <div class="product-image-well">
+              <span class="product-badge-tag">${escapeHtml(p.badge)}</span>
+              <img class="product-image-primary" src="${p.primaryImg}" alt="${escapeHtml(p.name)}" />
+              <img class="product-image-secondary" src="${p.secondaryImg}" alt="${escapeHtml(p.name)}" />
+            </div>
+            <div class="product-meta-details">
+              <div class="product-card-title">${escapeHtml(p.name)}</div>
+              <div class="product-card-subtitle">${escapeHtml(p.subtitle)}</div>
+              <div class="product-card-price-row">
+                <span class="product-card-price">${formatINR(p.price)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", initPDP);
+  </script>
+</body>
+</html>

@@ -1,743 +1,482 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Customer Help &amp; Support &mdash; Marvel Verse</title>
-  <meta name="description" content="Official customer care, order assistance, dispatch inquiries, and contact channels for Marvel Verse collectibles." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0" />
+  <title>Customer Care &bull; Marvel Verse Official</title>
+  <meta name="description" content="Get help with official Marvel Verse 1:1 collectibles orders, shipping times, returns, authenticity, and store contact details." />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e11b23'><rect width='24' height='24' rx='4' fill='%23e11b23'/><text x='12' y='16' font-size='12' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23111111'><rect width='24' height='24' rx='4' fill='%23111111'/><text x='12' y='16' font-size='12' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Shared Core CSS -->
+  <!-- Core Stylesheet -->
   <link rel="stylesheet" href="assets/css/marvel-core.css" />
 
+  <!-- Logic Scripts -->
+  <script src="assets/js/catalog-data.js"></script>
+
   <style>
-/* ==========================================================================
-   HELP & SUPPORT PAGE - CLEAN CONCIERGE E-COMMERCE LAYOUT
-   ========================================================================== */
-.help-wrapper {
-  position: relative;
-  z-index: 10;
-  max-width: 1050px;
-  margin: 0 auto;
-  padding: 0 1.5rem 5rem 1.5rem;
-}
+    .help-page-wrap {
+      padding: 3rem 0 5rem 0;
+      max-width: 960px;
+      margin: 0 auto;
+    }
 
-/* Quick Channels Grid */
-.help-channels-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
-  margin: 1.5rem 0 2.5rem 0;
-}
+    .help-hero-box {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
 
-.channel-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  text-decoration: none;
-  color: var(--text-main);
-  transition: var(--transition);
-}
-.channel-card:hover {
-  border-color: var(--accent-blue);
-  background: var(--bg-card-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-}
+    .help-headline {
+      font-family: var(--font-headline);
+      font-size: 38px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
 
-.channel-icon-wrap {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent-blue);
-  margin-bottom: 4px;
-}
+    .help-search-input-wrap {
+      max-width: 600px;
+      margin: 1.5rem auto 0 auto;
+      position: relative;
+    }
 
-.channel-title {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  color: #fff;
-}
+    .help-search-box {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--border-medium);
+      padding: 14px 20px 14px 48px;
+      border-radius: var(--radius-pill);
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text-primary);
+      outline: none;
+    }
 
-.channel-sub {
-  font-size: 12px;
-  color: var(--text-muted);
-  line-height: 1.4;
-}
+    .help-search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-tertiary);
+    }
 
-.channel-action-text {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent-blue);
-  margin-top: auto;
-}
+    /* Quick Help Cards Grid */
+    .quick-help-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 3.5rem;
+    }
 
-/* Two Columns: FAQ + Message Form */
-.help-main-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
+    @media (max-width: 860px) {
+      .quick-help-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-/* FAQs */
-.faq-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+    @media (max-width: 480px) {
+      .quick-help-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
-.section-head {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
+    .quick-help-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
 
-.faq-item {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  transition: border-color 0.2s;
-}
-.faq-item.active {
-  border-color: rgba(56, 189, 248, 0.4);
-}
+    .quick-help-card:hover {
+      border-color: var(--text-primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
 
-.faq-header {
-  padding: 14px 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 13.5px;
-  font-weight: 700;
-  color: #fff;
-  user-select: none;
-}
+    .quick-help-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px auto;
+      color: var(--text-primary);
+    }
 
-.faq-toggle-icon {
-  font-family: var(--font-mono);
-  font-size: 16px;
-  color: var(--accent-blue);
-  transition: transform 0.2s ease;
-}
-.faq-item.active .faq-toggle-icon {
-  transform: rotate(45deg);
-  color: var(--accent-red);
-}
+    .quick-help-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
 
-.faq-body {
-  padding: 0 16px 16px 16px;
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.6;
-  display: none;
-}
-.faq-item.active .faq-body {
-  display: block;
-}
+    .quick-help-desc {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
 
-/* Contact Message Form */
-.contact-form-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 1.75rem;
-  box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+    /* Contact Channels Section */
+    .contact-channels-section {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      padding: 2.5rem;
+      margin-bottom: 4rem;
+      border: 1px solid var(--border-subtle);
+    }
 
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+    .contact-channels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
 
-.form-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
-}
+    @media (max-width: 768px) {
+      .contact-channels-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
-.form-input, .form-textarea, .form-select {
-  background: var(--bg-input);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  color: #fff;
-  font-size: 13px;
-  outline: none;
-  font-family: inherit;
-  transition: var(--transition);
-}
-.form-input:focus, .form-textarea:focus, .form-select:focus {
-  border-color: var(--accent-blue);
-}
+    .contact-channel-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
 
-.form-textarea {
-  min-height: 90px;
-  resize: vertical;
-}
+    .contact-channel-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
 
-.btn-form-submit {
-  background: var(--accent-red);
-  color: #fff;
-  border: none;
-  padding: 12px 18px;
-  border-radius: var(--radius-sm);
-  font-size: 13.5px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 6px;
-  transition: var(--transition);
-}
-.btn-form-submit:hover {
-  background: var(--accent-red-hover);
-  transform: translateY(-1px);
-}
+    .contact-channel-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
 
-/* Store Location Box */
-.store-spotlight-card {
-  background: rgba(13, 18, 30, 0.85);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 1.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.store-spotlight-details {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  max-width: 650px;
-}
-
-.store-spotlight-title {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.store-spotlight-addr {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.btn-map-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  color: #38bdf8;
-  padding: 10px 16px;
-  border-radius: var(--radius-sm);
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: var(--transition);
-}
-.btn-map-link:hover {
-  background: rgba(56, 189, 248, 0.25);
-  color: #fff;
-}
-
-@media (max-width: 900px) {
-  .help-channels-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  .help-main-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 520px) {
-  .help-channels-grid {
-    grid-template-columns: 1fr;
-  }
-}
+    /* Store Map Link Card */
+    .store-address-highlight {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      margin-bottom: 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Subtle Video Background -->
-  <div class="cinematic-bg-container">
-    <video class="cinematic-bg-video" autoplay muted loop playsinline poster="assets/battle_poster.jpg">
-      <source src="assets/battle.mp4" type="video/mp4">
-    </video>
-    <div class="canvas-overlay-vignette"></div>
+  <!-- 1. Top Subnav -->
+  <div class="top-subnav">
+    <div class="top-subnav-inner">
+      <div class="subnav-brands">
+        <span class="subnav-brand-item">
+          <span class="subnav-brand-badge">MARVEL</span> VERSE
+        </span>
+        <span class="subnav-divider">|</span>
+        <span>STARK LABS</span>
+        <span class="subnav-divider">|</span>
+        <span>1:1 COLLECTIBLES</span>
+      </div>
+      <ul class="subnav-links">
+        <li><a href="categories.html">Find a Product</a></li>
+        <li class="subnav-divider">|</li>
+        <li><a href="tracking.html">Track Order</a></li>
+        <li class="subnav-divider">|</li>
+        <li><a href="help.html">Help</a></li>
+        <li class="subnav-divider">|</li>
+        <li><a href="profile.html">VIP Collector Club</a></li>
+      </ul>
+    </div>
   </div>
 
-  <!-- Main Navbar -->
+  <!-- 2. Sticky Header -->
   <header class="main-header">
-    <div class="header-container">
-      
-      <!-- Mobile Hamburger -->
-      <button class="btn-hamburger" id="navMenuBtn" aria-label="Toggle Navigation" onclick="toggleNavMenu()">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
-
-      <!-- Brand Logo -->
-      <a href="index.html" class="brand-logo" aria-label="Marvel Verse Home">
-        <span class="brand-badge">MARVEL</span>
-        <span class="brand-title">VERSE</span>
-      </a>
-
-      <!-- Category Navigation Tabs -->
-      <nav class="nav-tabs">
-        <a href="categories.html" class="nav-link" data-cat="all">All Products</a>
-        <a href="categories.html?cat=wearable-helmets" class="nav-link" data-cat="wearable-helmets">Helmets</a>
-        <a href="categories.html?cat=bluetooth-speakers" class="nav-link" data-cat="bluetooth-speakers">Speakers</a>
-        <a href="categories.html?cat=charging-stations" class="nav-link" data-cat="charging-stations">Chargers</a>
-        <a href="categories.html?cat=digital-tech" class="nav-link" data-cat="digital-tech">Tech Gear</a>
-      </nav>
-
-      <!-- Right Controls -->
-      <div class="header-right">
-        <!-- Search Input -->
-        <div class="search-box">
-          <input type="text" id="globalSearch" class="search-input" placeholder="Search products..." autocomplete="off" onkeydown="if(event.key==='Enter') window.location.href='categories.html?q=' + encodeURIComponent(this.value)" />
-          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" onclick="window.location.href='categories.html?q=' + encodeURIComponent(document.getElementById('globalSearch').value)">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </div>
-
-        <!-- Mobile Search Button -->
-        <button class="btn-search-mobile" aria-label="Search Products" onclick="toggleMobileSearch()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </button>
-
-        <!-- Cart Button -->
-        <a href="cart.html" class="btn-cart" title="View Cart">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
-          <span>Cart</span>
-          <span class="cart-counter" id="cartCountBadge">0</span>
+    <div class="container">
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a href="index.html" class="brand-logo" aria-label="Marvel Verse Home">
+          <div class="brand-icon-box">M</div>
+          <div class="brand-title-wrap">
+            <span class="brand-title-text">MARVEL VERSE</span>
+            <span class="brand-sub-text">1:1 Official Replicas</span>
+          </div>
         </a>
-      </div>
+
+        <ul class="nav-menu-list">
+          <li class="nav-item-dropdown">
+            <a href="categories.html" class="nav-link-btn">New & Featured</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <a href="categories.html?cat=helmets" class="nav-link-btn">Wearable Helmets</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <a href="categories.html?cat=speakers" class="nav-link-btn">Audio Speakers</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <a href="categories.html?cat=chargers" class="nav-link-btn">Fast Chargers</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <a href="categories.html?cat=tech" class="nav-link-btn">Tech Gear</a>
+          </li>
+        </ul>
+
+        <div class="nav-actions">
+          <button type="button" class="search-pill-btn" onclick="openSearchOverlay()" aria-label="Search">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <span>Search</span>
+          </button>
+
+          <button type="button" class="nav-icon-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+            <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"/></svg>
+          </button>
+
+          <a href="profile.html" class="nav-icon-btn" aria-label="Favourites">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <span class="cart-count-badge wishlist-count-badge" id="nav-wishlist-badge">0</span>
+          </a>
+
+          <button type="button" class="nav-icon-btn" onclick="openBagDrawer()" aria-label="Shopping Bag">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span class="cart-count-badge" id="nav-cart-badge">0</span>
+          </button>
+        </div>
+      </nav>
     </div>
   </header>
 
-  <!-- Mobile Search Bar -->
-  <div class="mobile-search-bar" id="mobileSearchBar">
-    <div class="mobile-search-inner">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2.2">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-      <input type="text" id="mobileGlobalSearch" class="mobile-search-input" placeholder="Search helmets, speakers, tech..." autocomplete="off" onkeydown="if(event.key==='Enter') window.location.href='categories.html?q=' + encodeURIComponent(this.value)" />
-      <button class="mobile-search-close" onclick="toggleMobileSearch(false)" aria-label="Close search">Cancel</button>
-    </div>
-  </div>
-
-  <!-- Mobile Drawer -->
-  <div class="marvel-drawer-backdrop" id="marvelDrawerBackdrop" onclick="toggleNavMenu()"></div>
-  <aside class="marvel-nav-drawer" id="marvelNavDrawer">
-    <div class="marvel-drawer-header">
-      <div style="display:flex; align-items:center; gap:8px;">
-        <span class="brand-badge">MARVEL</span>
-        <span class="brand-title">VERSE</span>
-      </div>
-      <button class="marvel-drawer-close" onclick="toggleNavMenu()" aria-label="Close menu">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-    <nav class="marvel-drawer-links">
-      <a href="index.html" class="marvel-drawer-link">Home Showcase</a>
-      <a href="categories.html" class="marvel-drawer-link">All Categories</a>
-      <a href="categories.html?cat=wearable-helmets" class="marvel-drawer-link">Wearable Helmets (1:1)</a>
-      <a href="categories.html?cat=bluetooth-speakers" class="marvel-drawer-link">Bluetooth Speakers</a>
-      <a href="categories.html?cat=charging-stations" class="marvel-drawer-link">Charging Stations</a>
-      <a href="categories.html?cat=digital-tech" class="marvel-drawer-link">Tech Gear &amp; Audio</a>
-      <a href="tracking.html" class="marvel-drawer-link">Track Shipment</a>
-      <a href="profile.html" class="marvel-drawer-link">VIP Collector Profile</a>
-      <a href="help.html" class="marvel-drawer-link active">Customer Help &amp; Support</a>
-      <a href="cart.html" class="marvel-drawer-link">View Cart</a>
-    </nav>
-  </aside>
-
-  <!-- Breadcrumbs -->
-  <div class="breadcrumbs-bar">
-    <a href="index.html">Home</a>
-    <span class="sep">/</span>
-    <span class="current">Customer Help &amp; Support</span>
-  </div>
-
-  <!-- Page Hero -->
-  <div class="page-hero">
-    <h1 class="page-title">Help &amp; Support</h1>
-    <p class="page-subtitle">Priority customer care, order dispatch assistance, authenticity inquiries, and dedicated assistance.</p>
-  </div>
-
-  <!-- Main Container -->
-  <main class="help-wrapper">
-    
-    <!-- 4 Direct Contact Channels -->
-    <div class="help-channels-grid">
-      
-      <!-- Phone Call -->
-      <a href="tel:+919330648314" class="channel-card">
-        <div class="channel-icon-wrap">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div class="channel-title">Phone Call</div>
-        <div class="channel-sub">+91 93306 48314<br>+91 62893 62476</div>
-        <div class="channel-action-text">Call Priority Line &rarr;</div>
-      </a>
-
-      <!-- WhatsApp Direct -->
-      <a href="https://wa.me/919330648314" target="_blank" rel="noopener noreferrer" class="channel-card">
-        <div class="channel-icon-wrap" style="background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.3); color:#10b981;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-        </div>
-        <div class="channel-title">WhatsApp Chat</div>
-        <div class="channel-sub">Instant messaging &amp; dispatch status coordination.</div>
-        <div class="channel-action-text" style="color:#10b981;">Start Chat &rarr;</div>
-      </a>
-
-      <!-- Email -->
-      <a href="mailto:support@marvelverse.in" class="channel-card">
-        <div class="channel-icon-wrap" style="background:rgba(225,29,72,0.1); border-color:rgba(225,29,72,0.3); color:#e11d48;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div class="channel-title">Email Desk</div>
-        <div class="channel-sub">support@marvelverse.in<br>Response within 2 hours.</div>
-        <div class="channel-action-text" style="color:#e11d48;">Send Email &rarr;</div>
-      </a>
-
-      <!-- Track Shipment Direct -->
-      <a href="tracking.html" class="channel-card">
-        <div class="channel-icon-wrap" style="background:rgba(245,158,11,0.1); border-color:rgba(245,158,11,0.3); color:#f59e0b;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-        </div>
-        <div class="channel-title">Order Status</div>
-        <div class="channel-sub">Track active shipment and air cargo dispatch.</div>
-        <div class="channel-action-text" style="color:#f59e0b;">Track Package &rarr;</div>
-      </a>
-
-    </div>
-
-    <!-- Main Grid: FAQs & Message Form -->
-    <div class="help-main-grid">
-      
-      <!-- FAQs Accordion -->
-      <div class="faq-container">
-        <div class="section-head">Frequently Asked Questions</div>
-
-        <div class="faq-item active" onclick="toggleFaq(this)">
-          <div class="faq-header">
-            <span>How long does express delivery take in India?</span>
-            <span class="faq-toggle-icon">+</span>
-          </div>
-          <div class="faq-body">
-            All orders dispatch within 24 hours directly from our central fulfillment facility via Bluedart Air Express. Metro deliveries arrive within 24-48 hours, while other locations take 2-4 business days. All shipments are fully insured against transit damage.
-          </div>
-        </div>
-
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-header">
-            <span>Are these official movie-accurate 1:1 scale replicas?</span>
-            <span class="faq-toggle-icon">+</span>
-          </div>
-          <div class="faq-body">
-            Yes, every collectible is 100% officially licensed Marvel Verse merchandise. Wearable helmets are engineered with 1:1 life-size proportions, motorized servo opening, voice control microcontrollers, and authentic metallic electroplated finishes.
-          </div>
-        </div>
-
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-header">
-            <span>What is the return and replacement policy?</span>
-            <span class="faq-toggle-icon">+</span>
-          </div>
-          <div class="faq-body">
-            We provide a 7-day replacement guarantee if any item arrives defective, damaged in transit, or missing accessories. Each piece includes a 1-Year Stark Care Warranty covering electronic components, audio speakers, and motor servos.
-          </div>
-        </div>
-
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-header">
-            <span>What payment methods are supported?</span>
-            <span class="faq-toggle-icon">+</span>
-          </div>
-          <div class="faq-body">
-            We support UPI (Google Pay, PhonePe, Paytm, BHIM), all major Credit/Debit Cards (Visa, MasterCard, RuPay), Net Banking, and Cash on Delivery (COD) with verification.
-          </div>
-        </div>
-
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-header">
-            <span>How do wearable helmets fit?</span>
-            <span class="faq-toggle-icon">+</span>
-          </div>
-          <div class="faq-body">
-            Helmets are molded to fit adult head circumferences up to 62 cm comfortably. Inside, they feature high-density memory foam padding and ergonomic adjustable straps for a secure and comfortable fit.
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Quick Inquiry Message Form -->
-      <div class="contact-form-card">
-        <div class="section-head" style="margin-bottom:6px;">Direct Inquiry Form</div>
-        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">Submit your question or order reference and our concierge team will respond promptly.</p>
-
-        <form onsubmit="handleContactSubmit(event)">
-          <div class="form-field">
-            <label class="form-label" for="contactName">Your Name</label>
-            <input type="text" id="contactName" class="form-input" placeholder="e.g. Tony Stark" required />
-          </div>
-
-          <div class="form-field">
-            <label class="form-label" for="contactEmail">Email Address</label>
-            <input type="email" id="contactEmail" class="form-input" placeholder="e.g. tony@stark.com" required />
-          </div>
-
-          <div class="form-field">
-            <label class="form-label" for="contactOrder">Order ID (Optional)</label>
-            <input type="text" id="contactOrder" class="form-input" placeholder="e.g. MCU-700018-KOL" />
-          </div>
-
-          <div class="form-field">
-            <label class="form-label" for="contactTopic">Inquiry Topic</label>
-            <select id="contactTopic" class="form-select">
-              <option value="shipping">Delivery &amp; Tracking Status</option>
-              <option value="product">Product Details &amp; Specifications</option>
-              <option value="warranty">Warranty &amp; Replacement Claim</option>
-              <option value="bulk">Corporate &amp; Collector Box Orders</option>
-            </select>
-          </div>
-
-          <div class="form-field">
-            <label class="form-label" for="contactMsg">Message</label>
-            <textarea id="contactMsg" class="form-textarea" placeholder="How can we assist you with your Marvel collectible?" required></textarea>
-          </div>
-
-          <button type="submit" class="btn-form-submit">Send Message</button>
-        </form>
-      </div>
-
-    </div>
-
-    <!-- Store & Demonstration Center Spotlight -->
-    <div class="store-spotlight-card">
-      <div class="store-spotlight-details">
-        <div class="store-spotlight-title">Visit Our Official Experience Center</div>
-        <div class="store-spotlight-addr">
-          84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018<br>
-          Open 7 Days a Week: 10:00 AM &ndash; 09:00 PM IST &bull; In-Person Unboxing &amp; Demonstrations
+  <!-- Help Page Content -->
+  <main class="container">
+    <div class="help-page-wrap">
+      <div class="help-hero-box">
+        <h1 class="help-headline">Customer Care & Support</h1>
+        <p style="color:var(--text-secondary); font-size:15px;">How can we assist your collector experience today?</p>
+        <div class="help-search-input-wrap">
+          <svg class="help-search-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" class="help-search-box" placeholder="Search delivery, returns, or product warranty..." />
         </div>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=84E,+SA+Farooquie+Rd,+Bartala,+Metiabruz,+Kolkata,+West+Bengal+700018" target="_blank" rel="noopener noreferrer" class="btn-map-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>Open in Google Maps</span>
-      </a>
-    </div>
 
+      <!-- Quick Topic Cards -->
+      <div class="quick-help-grid">
+        <div class="quick-help-card" onclick="window.location.href='tracking.html'">
+          <div class="quick-help-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="16" height="13" x="2" y="5" rx="2"/><polygon points="18 10 22 13 22 18 18 18 18 10"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+          </div>
+          <div class="quick-help-title">Dispatch & Tracking</div>
+          <div class="quick-help-desc">Track real-time BlueDart telemetry & delivery estimates.</div>
+        </div>
+
+        <div class="quick-help-card" onclick="showToast('Returns: 14-day replacement window active for all orders')">
+          <div class="quick-help-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          </div>
+          <div class="quick-help-title">Returns & Refunds</div>
+          <div class="quick-help-desc">Free 14-day hassle-free replacement on collector items.</div>
+        </div>
+
+        <div class="quick-help-card" onclick="showToast('Stark Authenticity: 1:1 Scale certified with serial plaque')">
+          <div class="quick-help-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <div class="quick-help-title">Authenticity & Quality</div>
+          <div class="quick-help-desc">Movie-accurate scales, high-torque servos, and certificates.</div>
+        </div>
+
+        <div class="quick-help-card" onclick="showToast('Payment Options: UPI, NetBanking, All Major Cards, RuPay, and COD')">
+          <div class="quick-help-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+          </div>
+          <div class="quick-help-title">Payment & Invoices</div>
+          <div class="quick-help-desc">Instant GST tax invoices and 256-bit encrypted checkout.</div>
+        </div>
+      </div>
+
+      <!-- Flagship Physical Store Card -->
+      <div class="store-address-highlight">
+        <div>
+          <span style="font-size:11.5px; font-weight:700; text-transform:uppercase; color:var(--accent-orange); letter-spacing:0.06em;">Flagship Experience Center</span>
+          <h2 style="font-family:var(--font-headline); font-size:24px; text-transform:uppercase; color:var(--text-primary); margin:4px 0 6px 0;">Store &amp; Contact</h2>
+          <p style="color:var(--text-secondary); line-height:1.5;">
+            84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018
+          </p>
+        </div>
+        <div>
+          <a href="https://maps.google.com/?q=84E+SA+Farooquie+Rd+Bartala+Metiabruz+Kolkata+West+Bengal+700018" target="_blank" rel="noopener" class="btn-nike-black">
+            Get Directions via Google Maps &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- One-Tap Contact Channels -->
+      <div class="contact-channels-section">
+        <h2 style="font-family:var(--font-headline); font-size:24px; text-transform:uppercase; color:var(--text-primary);">
+          Direct Collector Channels
+        </h2>
+        <div class="contact-channels-grid">
+          <div class="contact-channel-item">
+            <div class="contact-channel-name">WhatsApp Concierge</div>
+            <div class="contact-channel-sub">Live chat with our product specialists for video demos and order inquiries.</div>
+            <a href="https://wa.me/919830000000" target="_blank" class="btn-nike-black" style="font-size:13px; padding:10px 20px;">
+              Chat on WhatsApp &rarr;
+            </a>
+          </div>
+
+          <div class="contact-channel-item">
+            <div class="contact-channel-name">Phone Support</div>
+            <div class="contact-channel-sub">Speak with our Kolkata Flagship Hub team Monday through Saturday (10am – 8pm).</div>
+            <a href="tel:+919830000000" class="btn-nike-outline" style="font-size:13px; padding:10px 20px;">
+              Call +91 98300 00000
+            </a>
+          </div>
+
+          <div class="contact-channel-item">
+            <div class="contact-channel-name">Email Concierge</div>
+            <div class="contact-channel-sub">Send us your order queries or corporate bulk collector requests. Response within 2h.</div>
+            <a href="mailto:support@marvelverse.in" class="btn-nike-outline" style="font-size:13px; padding:10px 20px;">
+              support@marvelverse.in
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Accordions (Nike Style) -->
+      <section>
+        <h2 style="font-family:var(--font-headline); font-size:24px; text-transform:uppercase; margin-bottom:1.5rem; color:var(--text-primary);">
+          Frequently Asked Questions
+        </h2>
+
+        <div class="pdp-accordion-group">
+          <div class="pdp-accordion-item active">
+            <button type="button" class="pdp-accordion-trigger" onclick="togglePdpAccordion(this)">
+              Are the Iron Man helmets wearable for adult heads?
+              <span>&minus;</span>
+            </button>
+            <div class="pdp-accordion-content" style="display:block;">
+              Yes! All wearable helmets are engineered to 1:1 adult scale (head circumference up to 60-62cm). The interior is padded with memory foam cushions and features adjustable ergonomic straps for maximum comfort during cosplay or display.
+            </div>
+          </div>
+
+          <div class="pdp-accordion-item">
+            <button type="button" class="pdp-accordion-trigger" onclick="togglePdpAccordion(this)">
+              How does the bilingual voice control work?
+              <span>&#43;</span>
+            </button>
+            <div class="pdp-accordion-content">
+              Say "JARVIS" to activate the system. Then commands like "Start Combat", "Open Mask", "Close Mask", and "Shutdown System" trigger motorized servo sequences and voice feedback directly through integrated speakers.
+            </div>
+          </div>
+
+          <div class="pdp-accordion-item">
+            <button type="button" class="pdp-accordion-trigger" onclick="togglePdpAccordion(this)">
+              What is your delivery timeframe across India?
+              <span>&#43;</span>
+            </button>
+            <div class="pdp-accordion-content">
+              All orders are packed in armored collector packaging and dispatched via BlueDart Air Express within 24 hours from our Kolkata hub. Metro cities receive delivery in 2-3 business days.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
 
-  <!-- Site Footer (Minimalist & Clean) -->
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-top-grid">
-        <!-- Col 1: Brand -->
-        <div class="footer-col brand-col">
-          <div class="footer-logo">
-            <span class="footer-logo-badge">MARVEL</span>
-            <span class="footer-logo-title">VERSE</span>
-          </div>
-        </div>
-
-        <!-- Col 2: Categories -->
-        <div class="footer-col">
-          <h4 class="footer-heading">Categories</h4>
-          <ul class="footer-links">
-            <li><a href="categories.html">All Collectibles</a></li>
-            <li><a href="categories.html?cat=wearable-helmets">Wearable Helmets (1:1)</a></li>
-            <li><a href="categories.html?cat=bluetooth-speakers">Bluetooth Speakers</a></li>
-            <li><a href="categories.html?cat=charging-stations">Charging Stations</a></li>
-            <li><a href="categories.html?cat=digital-tech">Tech Gear &amp; Audio</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Customer Care -->
-        <div class="footer-col">
-          <h4 class="footer-heading">Customer Care</h4>
-          <ul class="footer-links">
-            <li><a href="tracking.html">Track Shipment</a></li>
-            <li><a href="profile.html">VIP Collector Profile</a></li>
-            <li><a href="help.html">Help &amp; Support</a></li>
-            <li><a href="cart.html">Shopping Cart</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 4: Store & Address -->
-        <div class="footer-col address-col">
-          <h4 class="footer-heading">Store &amp; Contact</h4>
-          <div class="footer-address-card">
-            <div class="address-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div class="address-details">
-              <p class="address-text">84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018</p>
-            </div>
-          </div>
-          <div class="footer-contact-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <a href="tel:+919330648314">+91 93306 48314 / +91 62893 62476</a>
-          </div>
-          <div class="footer-contact-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <a href="mailto:support@marvelverse.in">support@marvelverse.in</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Copyright -->
+  <!-- Nike Footer -->
+  <footer class="nike-footer">
+    <div class="container">
       <div class="footer-bottom-bar">
-        <div class="footer-copy">
-          &copy; 2026 Marvel Verse. Officially Licensed Merchandise. All Rights Reserved.
-        </div>
-        <div class="footer-payment-methods">
-          <span class="pay-pill">UPI</span>
-          <span class="pay-pill">Visa</span>
-          <span class="pay-pill">MasterCard</span>
-          <span class="pay-pill">NetBanking</span>
-          <span class="pay-pill">Cash on Delivery</span>
-        </div>
+        <div>&copy; 2026 Marvel Verse. Official 1:1 Life-Size Replicas. All rights reserved.</div>
+        <ul class="footer-legal-links">
+          <li><a href="help.html">Privacy Policy</a></li>
+          <li><a href="help.html">Terms of Sale</a></li>
+        </ul>
       </div>
     </div>
   </footer>
 
-  <!-- Fixed App Bottom Navigation Bar -->
-  <nav class="mobile-bottom-nav" aria-label="Quick Mobile Navigation">
-    <a href="index.html" class="b-nav-item">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-        <polyline points="9 22 9 12 15 12 15 22"/>
-      </svg>
-      <span class="b-nav-label">Home</span>
-    </a>
+  <!-- Slide-Out Bag Drawer -->
+  <div class="drawer-backdrop" id="drawer-backdrop" onclick="closeBagDrawer()"></div>
+  <aside class="bag-drawer" id="nike-bag-drawer" aria-label="Shopping Bag Drawer">
+    <div class="bag-drawer-header">
+      <div class="bag-drawer-title-wrap">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="bag-drawer-title">Shopping Bag</span>
+      </div>
+      <button type="button" class="bag-drawer-close" onclick="closeBagDrawer()">&times;</button>
+    </div>
+    <div class="free-shipping-meter">
+      <div class="shipping-meter-text" id="shipping-meter-status"></div>
+      <div class="shipping-bar-bg"><div class="shipping-bar-fill" id="shipping-meter-bar"></div></div>
+    </div>
+    <div class="bag-drawer-items" id="bag-drawer-items-list"></div>
+    <div class="bag-drawer-footer" id="bag-drawer-footer-actions">
+      <div class="bag-subtotal-row">
+        <span>Subtotal</span>
+        <span id="bag-drawer-subtotal">₹0</span>
+      </div>
+      <div class="bag-drawer-btns">
+        <a href="cart.html" class="btn-nike-outline" style="width:100%;">View Full Bag</a>
+        <a href="cart.html" class="btn-nike-black" style="width:100%;">Checkout Now</a>
+      </div>
+    </div>
+  </aside>
 
-    <a href="categories.html" class="b-nav-item">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="3" width="7" height="7"/>
-        <rect x="14" y="3" width="7" height="7"/>
-        <rect x="14" y="14" width="7" height="7"/>
-        <rect x="3" y="14" width="7" height="7"/>
-      </svg>
-      <span class="b-nav-label">Categories</span>
-    </a>
+  <!-- Search Overlay -->
+  <div class="nike-search-overlay" id="nike-search-overlay">
+    <div class="nike-search-bar-wrap">
+      <div class="search-bar-inner">
+        <a href="index.html" class="brand-logo" style="margin-right:1rem;">
+          <div class="brand-icon-box" style="width:30px; height:30px; font-size:16px;">M</div>
+        </a>
+        <div class="search-input-box">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="overlay-search-input" placeholder="Search Marvel Verse products..." autocomplete="off" oninput="handleSearchInput(this.value)" />
+        </div>
+        <button type="button" class="search-cancel-btn" onclick="closeSearchOverlay()">Cancel</button>
+      </div>
+    </div>
+    <div class="search-overlay-content">
+      <div class="search-results-grid" id="overlay-search-results"></div>
+    </div>
+  </div>
 
-    <a href="tracking.html" class="b-nav-item">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="1" y="3" width="15" height="13"/>
-        <polygon points="16 8 20 8 23 11 23 16 16 16 8"/>
-        <circle cx="5.5" cy="18.5" r="2.5"/>
-        <circle cx="18.5" cy="18.5" r="2.5"/>
-      </svg>
-      <span class="b-nav-label">Tracking</span>
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-bar" id="mobile-bottom-nav">
+    <a href="index.html" class="mobile-bar-item">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <span>Home</span>
     </a>
-
-    <a href="profile.html" class="b-nav-item">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
-      <span class="b-nav-label">Profile</span>
+    <a href="categories.html" class="mobile-bar-item">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+      <span>Shop</span>
     </a>
-
-    <a href="help.html" class="b-nav-item active">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-        <line x1="12" y1="17" x2="12.01" y2="17"/>
-      </svg>
-      <span class="b-nav-label">Help</span>
+    <button type="button" class="mobile-bar-item" onclick="openSearchOverlay()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <span>Search</span>
+    </button>
+    <button type="button" class="mobile-bar-item" onclick="openBagDrawer()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span>Bag</span>
+    </button>
+    <a href="profile.html" class="mobile-bar-item">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Profile</span>
     </a>
   </nav>
-
-  <!-- Core Catalog Data & Shared JS -->
-  <script src="assets/js/catalog-data.js"></script>
-
-  <script>
-    function toggleFaq(el) {
-      el.classList.toggle("active");
-    }
-
-    function handleContactSubmit(e) {
-      e.preventDefault();
-      showGlobalToast("Thank you! Your inquiry has been dispatched to concierge support.");
-      e.target.reset();
-    }
-
-    function toggleNavMenu() {
-      const drawer = document.getElementById("marvelNavDrawer");
-      const backdrop = document.getElementById("marvelDrawerBackdrop");
-      if (drawer && backdrop) {
-        drawer.classList.toggle("active");
-        backdrop.classList.toggle("active");
-      }
-    }
-
-    function toggleMobileSearch(force) {
-      const bar = document.getElementById("mobileSearchBar");
-      if (!bar) return;
-      if (force !== undefined) {
-        bar.classList.toggle("active", force);
-      } else {
-        bar.classList.toggle("active");
-      }
-      if (bar.classList.contains("active")) {
-        const input = document.getElementById("mobileGlobalSearch");
-        if (input) input.focus();
-      }
-    }
-  </script>
 </body>
 </html>

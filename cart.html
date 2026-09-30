@@ -1,1498 +1,684 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Shopping Cart &mdash; Marvel Verse</title>
-  <meta name="description" content="Review your selected Marvel Verse 1:1 life-size wearable helmets, shields, and tech gear. Free insured delivery across India." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0" />
+  <title>Shopping Bag &bull; Marvel Verse Official</title>
+  <meta name="description" content="Review your selected 1:1 life-size Marvel collectibles, compute free express delivery, and proceed to secure checkout." />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e11b23'><rect width='24' height='24' rx='4' fill='%23e11b23'/><text x='12' y='16' font-size='12' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23111111'><rect width='24' height='24' rx='4' fill='%23111111'/><text x='12' y='16' font-size='12' font-weight='bold' fill='white' text-anchor='middle' font-family='sans-serif'>M</text></svg>" />
 
-  <!-- Fonts: Syne (Display), Plus Jakarta Sans (Body), JetBrains Mono (Figures) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Shared Core CSS -->
+  <!-- Core Stylesheet -->
   <link rel="stylesheet" href="assets/css/marvel-core.css" />
 
+  <!-- Logic Scripts -->
+  <script src="assets/js/catalog-data.js"></script>
+
   <style>
-/* ==========================================================================
-   PREMIUM MARVEL STANDALONE CART & CHECKOUT PAGE
-   - Mobile-first, 100% fitted with strictly zero horizontal overflow
-   - Syne & Plus Jakarta Sans typography, JetBrains Mono figures
-   - Strictly zero emojis (all SVG icons)
-   - Synchronized with localStorage ('tss_cart_items')
-   - Direct WooCommerce dispatch integration
-   ========================================================================== */
-
-:root {
-  --bg-dark: #07090e;
-  --bg-surface: rgba(12, 16, 25, 0.92);
-  --bg-card: #0d121e;
-  --bg-card-hover: #131b2c;
-  --bg-input: rgba(18, 24, 38, 0.88);
-  --bg-modal: rgba(9, 12, 19, 0.98);
-
-  --accent-gold: #f59e0b;
-  --accent-gold-soft: rgba(245, 158, 11, 0.12);
-  --accent-blue: #38bdf8;
-  --accent-blue-soft: rgba(56, 189, 248, 0.14);
-  --accent-red: #e11d48;
-  --accent-red-hover: #be123c;
-  --accent-red-soft: rgba(225, 29, 72, 0.12);
-  --accent-green: #10b981;
-
-  --text-pure: #ffffff;
-  --text-main: #f1f5f9;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
-
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-light: rgba(255, 255, 255, 0.14);
-  --border-accent: rgba(225, 29, 72, 0.4);
-
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-pill: 9999px;
-
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html, body {
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden !important;
-  background-color: var(--bg-dark);
-  color: var(--text-main);
-  font-family: var(--font-sans);
-  font-size: 14px;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-  touch-action: pan-y;
-}
-
-/* Subtle background video layer */
-.cinematic-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-  background: radial-gradient(circle at 50% 20%, rgba(18, 25, 42, 0.6) 0%, #07090e 80%);
-}
-
-.cinematic-bg video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -50%) scale(1.08);
-  object-fit: cover;
-  opacity: 0.32;
-}
-
-.cinematic-bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(7, 9, 14, 0.35) 0%, rgba(7, 9, 14, 0.85) 75%, #07090e 100%);
-}
-
-/* Header */
-.cart-header-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--bg-surface);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid var(--border-subtle);
-  width: 100%;
-}
-
-.nav-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.25rem;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.brand-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-}
-
-.brand-badge {
-  background: var(--accent-red);
-  color: #fff;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 13px;
-  padding: 3px 8px;
-  letter-spacing: 0.08em;
-  border-radius: 3px;
-}
-
-.brand-title {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--text-pure);
-  letter-spacing: 0.06em;
-}
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.btn-continue-shopping {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 7px 12px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-subtle);
-  background: rgba(255, 255, 255, 0.03);
-  transition: var(--transition);
-}
-
-.btn-continue-shopping:hover {
-  color: var(--text-pure);
-  border-color: var(--border-light);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.trust-badge-nav {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--accent-blue);
-  background: var(--accent-blue-soft);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-}
-
-/* Page Container */
-.cart-page-wrapper {
-  position: relative;
-  z-index: 10;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1.25rem 5rem 1.25rem;
-  width: 100%;
-}
-
-.page-title-bar {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 1rem;
-}
-
-.page-title {
-  font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: 0.03em;
-  color: var(--text-pure);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.cart-count-pill {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 700;
-  background: var(--accent-red-soft);
-  color: var(--accent-red);
-  border: 1px solid rgba(225, 29, 72, 0.3);
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-}
-
-.free-shipping-banner {
-  background: linear-gradient(90deg, rgba(56, 189, 248, 0.12) 0%, rgba(225, 29, 72, 0.12) 100%);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  border-radius: var(--radius-md);
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 12.5px;
-  color: var(--text-main);
-  margin-bottom: 1.5rem;
-}
-
-.free-shipping-banner svg {
-  color: var(--accent-blue);
-  flex-shrink: 0;
-}
-
-/* Cart Grid */
-.cart-grid {
-  display: grid;
-  grid-template-columns: 1.55fr 1fr;
-  gap: 1.5rem;
-  align-items: start;
-  width: 100%;
-}
-
-/* Items List Card */
-.cart-items-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 1.25rem;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-}
-
-.cart-items-header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-dim);
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border-subtle);
-  margin-bottom: 1rem;
-}
-
-.cart-item-row {
-  display: flex;
-  gap: 1rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border-subtle);
-  align-items: center;
-  position: relative;
-  transition: var(--transition);
-}
-
-.cart-item-row:last-child {
-  border-bottom: none;
-  padding-bottom: 0.25rem;
-}
-
-.cart-item-thumb {
-  width: 76px;
-  height: 76px;
-  border-radius: var(--radius-md);
-  object-fit: cover;
-  background: #0b0f19;
-  border: 1px solid var(--border-subtle);
-  flex-shrink: 0;
-}
-
-.cart-item-details {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.cart-item-name {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-pure);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.cart-item-variant {
-  font-size: 11px;
-  color: var(--accent-blue);
-  background: var(--accent-blue-soft);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  border-radius: 4px;
-  padding: 1px 7px;
-  display: inline-block;
-  width: fit-content;
-}
-
-.cart-item-unit-price {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  color: var(--text-dim);
-  margin-top: 2px;
-}
-
-.cart-item-actions {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  flex-shrink: 0;
-}
-
-.qty-stepper {
-  display: inline-flex;
-  align-items: center;
-  background: var(--bg-input);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 2px;
-}
-
-.btn-qty-step {
-  background: transparent;
-  border: none;
-  color: var(--text-main);
-  width: 32px;
-  height: 32px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 15px;
-  font-weight: 600;
-  transition: var(--transition);
-}
-
-.btn-qty-step:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
-
-.qty-val {
-  min-width: 28px;
-  text-align: center;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--text-pure);
-}
-
-.cart-item-subtotal {
-  font-family: var(--font-mono);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--accent-gold);
-  min-width: 82px;
-  text-align: right;
-}
-
-.btn-item-remove {
-  background: transparent;
-  border: none;
-  color: var(--text-dim);
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 4px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition);
-}
-
-.btn-item-remove:hover {
-  color: var(--accent-red);
-  background: var(--accent-red-soft);
-}
-
-/* Order Summary Box */
-.summary-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  position: sticky;
-  top: 84px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-}
-
-.summary-title {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--text-pure);
-  margin-bottom: 1.25rem;
-  border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 0.75rem;
-}
-
-.summary-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.85rem;
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-.summary-row.total-row {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-subtle);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-pure);
-}
-
-.summary-val {
-  font-family: var(--font-mono);
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.summary-val.total-val {
-  font-size: 22px;
-  color: var(--accent-gold);
-  font-weight: 800;
-}
-
-.promo-row {
-  display: flex;
-  gap: 8px;
-  margin: 1.25rem 0;
-}
-
-.promo-input {
-  flex: 1;
-  background: var(--bg-input);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  color: var(--text-pure);
-  padding: 9px 12px;
-  font-size: 13px;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-}
-
-.promo-input:focus {
-  outline: none;
-  border-color: var(--accent-blue);
-}
-
-.btn-promo-apply {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--border-light);
-  color: var(--text-pure);
-  border-radius: var(--radius-sm);
-  padding: 0 14px;
-  font-weight: 600;
-  font-size: 12px;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.btn-promo-apply:hover {
-  background: rgba(255, 255, 255, 0.16);
-}
-
-.btn-proceed-checkout {
-  width: 100%;
-  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-md);
-  padding: 14px 20px;
-  font-size: 14px;
-  font-weight: 700;
-  font-family: var(--font-sans);
-  letter-spacing: 0.03em;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(225, 29, 72, 0.35);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: var(--transition);
-}
-
-.btn-proceed-checkout:hover {
-  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
-  box-shadow: 0 10px 28px rgba(225, 29, 72, 0.5);
-}
-
-.btn-proceed-checkout:active {
-  transform: scale(0.99);
-}
-
-.security-badges-list {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-subtle);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.sec-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11.5px;
-  color: var(--text-dim);
-}
-
-.sec-item svg {
-  color: var(--accent-blue);
-  flex-shrink: 0;
-}
-
-/* Empty Cart State */
-.empty-cart-state {
-  text-align: center;
-  padding: 4rem 1.5rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  max-width: 580px;
-  margin: 2rem auto;
-}
-
-.empty-icon-shield {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 1.25rem;
-  color: var(--text-dim);
-  opacity: 0.6;
-}
-
-.empty-cart-title {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--text-pure);
-  margin-bottom: 8px;
-}
-
-.empty-cart-sub {
-  font-size: 13px;
-  color: var(--text-muted);
-  max-width: 360px;
-  margin: 0 auto 1.5rem;
-  line-height: 1.5;
-}
-
-.btn-shop-now {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
-  color: #fff;
-  text-decoration: none;
-  padding: 12px 24px;
-  border-radius: var(--radius-md);
-  font-weight: 700;
-  font-size: 13.5px;
-  box-shadow: 0 8px 24px rgba(225, 29, 72, 0.35);
-  transition: var(--transition);
-}
-
-.btn-shop-now:hover {
-  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
-}
-
-/* Checkout Modal */
-.checkout-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(4, 6, 10, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  z-index: 200;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.checkout-modal-overlay.active {
-  display: flex;
-}
-
-.checkout-modal-box {
-  background: var(--bg-modal);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  width: 100%;
-  max-width: 480px;
-  padding: 1.75rem;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-  position: relative;
-  max-height: 90vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.modal-close-x {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
-  border: none;
-  color: var(--text-dim);
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: var(--transition);
-}
-
-.modal-close-x:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.checkout-title {
-  font-family: var(--font-display);
-  font-size: 19px;
-  font-weight: 800;
-  color: var(--text-pure);
-  margin-bottom: 4px;
-}
-
-.checkout-subtitle {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 1.25rem;
-}
-
-.form-group {
-  margin-bottom: 12px;
-}
-
-.form-label {
-  display: block;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 5px;
-}
-
-.form-input {
-  width: 100%;
-  background: var(--bg-input);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  color: var(--text-pure);
-  padding: 10px 12px;
-  font-size: 14px;
-  font-family: var(--font-sans);
-  transition: var(--transition);
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: var(--accent-red);
-  background: rgba(25, 33, 50, 0.95);
-}
-
-.form-grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.checkout-payable-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  margin: 1.25rem 0 1.25rem;
-}
-
-.order-success-card {
-  text-align: center;
-  padding: 1.5rem 0;
-}
-
-.success-check-icon {
-  width: 56px;
-  height: 56px;
-  color: var(--accent-green);
-  margin: 0 auto 1rem;
-}
-
-/* Toast */
-#cartToast {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 300;
-  pointer-events: none;
-}
-
-.toast-item {
-  background: #101624;
-  border: 1px solid var(--border-light);
-  border-left: 3px solid var(--accent-red);
-  color: var(--text-pure);
-  padding: 12px 18px;
-  border-radius: var(--radius-sm);
-  font-size: 13px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-  animation: toastIn 0.25s ease forwards;
-}
-
-@keyframes toastIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ==========================================================================
-   MOBILE RESPONSIVENESS & ZERO-OVERFLOW SAFEGUARDS
-   Strictly prevents any horizontal scrolling on all phone viewports (<768px)
-   ========================================================================== */
-@media (max-width: 860px) {
-  .nav-inner {
-    padding: 0 1rem;
-    height: 58px;
-  }
-  .trust-badge-nav {
-    display: none; /* Hide on small screen header to save space */
-  }
-  .cart-page-wrapper {
-    padding: 1.25rem 0.85rem 4rem 0.85rem;
-  }
-  .cart-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-  .summary-card {
-    position: static;
-  }
-}
-
-@media (max-width: 580px) {
-  .brand-title {
-    font-size: 14px;
-  }
-  .page-title {
-    font-size: 21px;
-  }
-  .btn-continue-shopping {
-    padding: 5px 9px;
-    font-size: 11.5px;
-  }
-  .cart-items-card {
-    padding: 0.85rem;
-  }
-  .cart-item-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.75rem;
-    padding: 1rem 0;
-  }
-  .cart-item-top {
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
-  }
-  .cart-item-thumb {
-    width: 64px;
-    height: 64px;
-  }
-  .cart-item-actions {
-    justify-content: space-between;
-    width: 100%;
-    padding-top: 0.5rem;
-    border-top: 1px dashed var(--border-subtle);
-  }
-  .form-grid-2 {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  .checkout-modal-box {
-    padding: 1.25rem;
-    max-height: 94vh;
-  }
-  .form-input {
-    font-size: 16px; /* Prevents auto-zoom on mobile iOS */
-  }
-}
+    .bag-page-wrap {
+      padding: 2.5rem 0 5rem 0;
+    }
+
+    /* 2-Column Nike Bag Layout */
+    .bag-main-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .bag-main-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    /* Free Shipping Progress Alert */
+    .bag-shipping-promo {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      padding: 18px 22px;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .bag-promo-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .bag-headline {
+      font-family: var(--font-headline);
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Items List */
+    .bag-full-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .bag-full-item-card {
+      display: flex;
+      gap: 20px;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .bag-full-item-thumb {
+      width: 140px;
+      height: 140px;
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 520px) {
+      .bag-full-item-thumb {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    .bag-full-item-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .bag-full-item-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bag-item-top-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .bag-item-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .bag-item-sub {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      margin-top: 3px;
+    }
+
+    .bag-item-price-tag {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: right;
+    }
+
+    .bag-item-bottom-controls {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 14px;
+    }
+
+    .bag-action-icon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: color var(--transition-fast);
+    }
+
+    .bag-action-icon-btn:hover {
+      color: var(--text-primary);
+    }
+
+    /* Right Order Summary Column */
+    .bag-summary-sticky {
+      position: sticky;
+      top: 88px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .summary-heading {
+      font-family: var(--font-headline);
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14.5px;
+      margin-bottom: 14px;
+      color: var(--text-secondary);
+    }
+
+    .summary-row.total-row {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 16px;
+      margin-top: 16px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* Promo Code Box */
+    .promo-code-box {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 1.5rem;
+    }
+
+    .promo-input-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .promo-input {
+      flex: 1;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      padding: 10px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 13.5px;
+      font-family: inherit;
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .btn-apply-promo {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 0 18px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+    }
+
+    /* Checkout Flow Modal */
+    .checkout-flow-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-overlay);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: all var(--transition-normal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .checkout-flow-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    .checkout-card-modal {
+      background: var(--bg-primary);
+      width: 580px;
+      max-width: 100%;
+      border-radius: var(--radius-md);
+      padding: 2.5rem;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .checkout-field-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .checkout-field-label {
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .checkout-input-text {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--border-medium);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      color: var(--text-primary);
+      font-family: inherit;
+      outline: none;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Background Ambience with Video Layer -->
-  <div class="cinematic-bg">
-    <video id="bgCartVideo" autoplay loop muted playsinline webkit-playsinline x5-playsinline preload="auto" poster="assets/battle_poster.jpg">
-      <source src="assets/battle.mp4" type="video/mp4" />
-    </video>
-    <div class="cinematic-bg-overlay"></div>
-  </div>
-  <script>
-    (function() {
-      var v = document.getElementById("bgCartVideo");
-      if (!v) return;
-      v.muted = true;
-      v.defaultMuted = true;
-      v.playsInline = true;
-      v.setAttribute("playsinline", "");
-      v.setAttribute("webkit-playsinline", "");
-
-      function triggerPlay() {
-        var p = v.play();
-        if (p && typeof p.then === "function") {
-          p.catch(function() {
-            var resume = function() {
-              v.play().catch(function(){});
-              ["click", "touchstart", "touchend", "pointerdown", "scroll"].forEach(function(ev) {
-                window.removeEventListener(ev, resume);
-              });
-            };
-            ["click", "touchstart", "touchend", "pointerdown", "scroll"].forEach(function(ev) {
-              window.addEventListener(ev, resume, { once: true, passive: true });
-            });
-          });
-        }
-      }
-      triggerPlay();
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", triggerPlay);
-      }
-      window.addEventListener("pageshow", triggerPlay);
-    })();
-  </script>
-
-  <!-- Navigation Header -->
-  <header class="cart-header-nav">
-    <div class="nav-inner">
-      <a href="index.html" class="brand-link" title="Return to Marvel Verse Store">
-        <span class="brand-badge">MARVEL</span>
-        <span class="brand-title">VERSE</span>
-      </a>
-
-      <div class="nav-actions">
-        <a href="categories.html" class="btn-continue-shopping">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <rect x="3" y="3" width="7" height="7"/>
-            <rect x="14" y="3" width="7" height="7"/>
-            <rect x="14" y="14" width="7" height="7"/>
-            <rect x="3" y="14" width="7" height="7"/>
-          </svg>
-          <span>Categories</span>
-        </a>
-        <a href="index.html" class="btn-continue-shopping">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          <span>Home</span>
-        </a>
+  <!-- 1. Top Subnav -->
+  <div class="top-subnav">
+    <div class="top-subnav-inner">
+      <div class="subnav-brands">
+        <span class="subnav-brand-item">
+          <span class="subnav-brand-badge">MARVEL</span> VERSE
+        </span>
+        <span class="subnav-divider">|</span>
+        <span>STARK LABS</span>
+        <span class="subnav-divider">|</span>
+        <span>1:1 COLLECTIBLES</span>
       </div>
+      <ul class="subnav-links">
+        <li><a href="categories.html">Find a Product</a></li>
+        <li class="subnav-divider">|</li>
+        <li><a href="tracking.html">Track Order</a></li>
+        <li class="subnav-divider">|</li>
+        <li><a href="help.html">Help</a></li>
+        <li class="subnav-divider">|</li>
+        <li><a href="profile.html">VIP Collector Club</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2. Sticky Header -->
+  <header class="main-header">
+    <div class="container">
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a href="index.html" class="brand-logo" aria-label="Marvel Verse Home">
+          <div class="brand-icon-box">M</div>
+          <div class="brand-title-wrap">
+            <span class="brand-title-text">MARVEL VERSE</span>
+            <span class="brand-sub-text">1:1 Official Replicas</span>
+          </div>
+        </a>
+
+        <ul class="nav-menu-list">
+          <li class="nav-item-dropdown">
+            <a href="categories.html" class="nav-link-btn">New & Featured</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <a href="categories.html?cat=helmets" class="nav-link-btn">Wearable Helmets</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <a href="categories.html?cat=speakers" class="nav-link-btn">Audio Speakers</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <a href="categories.html?cat=chargers" class="nav-link-btn">Fast Chargers</a>
+          </li>
+          <li class="nav-item-dropdown">
+            <a href="categories.html?cat=tech" class="nav-link-btn">Tech Gear</a>
+          </li>
+        </ul>
+
+        <div class="nav-actions">
+          <button type="button" class="search-pill-btn" onclick="openSearchOverlay()" aria-label="Search">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <span>Search</span>
+          </button>
+
+          <button type="button" class="nav-icon-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+            <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"/></svg>
+          </button>
+
+          <a href="profile.html" class="nav-icon-btn" aria-label="Favourites">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <span class="cart-count-badge wishlist-count-badge" id="nav-wishlist-badge">0</span>
+          </a>
+
+          <a href="cart.html" class="nav-icon-btn" aria-label="Shopping Bag">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span class="cart-count-badge" id="nav-cart-badge">0</span>
+          </a>
+        </div>
+      </nav>
     </div>
   </header>
 
-  <!-- Main Cart Container -->
-  <main class="cart-page-wrapper">
-    <div class="page-title-bar">
-      <h1 class="page-title">
-        <span>Shopping Cart</span>
-        <span class="cart-count-pill" id="cartCountPill">0 Items</span>
-      </h1>
-      <a href="index.html" class="btn-continue-shopping">
-        <span>+ Add More Items</span>
-      </a>
-    </div>
+  <!-- Main Bag Page -->
+  <main class="container bag-page-wrap">
+    <div class="bag-main-grid">
 
-    <!-- Free Insured Delivery Notice -->
-    <div class="free-shipping-banner">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="1" y="3" width="15" height="13"></rect>
-        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-        <circle cx="5.5" cy="18.5" r="2.5"></circle>
-        <circle cx="18.5" cy="18.5" r="2.5"></circle>
-      </svg>
-      <span>Complimentary <strong>All-India Express Insured Delivery</strong> applies to your order.</span>
-    </div>
-
-    <!-- Empty State Container (Visible when cart is 0) -->
-    <div class="empty-cart-state" id="emptyCartView" style="display: none;">
-      <svg class="empty-icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-        <line x1="12" y1="8" x2="12" y2="12"></line>
-        <line x1="12" y1="16" x2="12.01" y2="16"></line>
-      </svg>
-      <h2 class="empty-cart-title">Your Cart is Empty</h2>
-      <p class="empty-cart-sub">
-        Explore our authentic 1:1 life-size wearable helmets, Vibranium shields, and Marvel tech collectibles.
-      </p>
-      <a href="index.html" class="btn-shop-now">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="9" cy="21" r="1"></circle>
-          <circle cx="20" cy="21" r="1"></circle>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-        </svg>
-        <span>Explore Collection</span>
-      </a>
-    </div>
-
-    <!-- Active Cart Grid (Visible when items > 0) -->
-    <div class="cart-grid" id="activeCartGrid">
-      
-      <!-- Left Column: Cart Items -->
-      <section class="cart-items-card" aria-label="Cart Items">
-        <div class="cart-items-header">
-          <span>Collectible Item</span>
-          <span>Price &amp; Quantity</span>
+      <!-- Left Column: Bag Items -->
+      <div>
+        <!-- Shipping Promo Bar -->
+        <div class="bag-shipping-promo">
+          <div class="bag-promo-title" id="bag-page-shipping-msg">
+            <span>Free Express Delivery for orders over ₹40,000</span>
+          </div>
+          <div class="shipping-bar-bg"><div class="shipping-bar-fill" id="bag-page-shipping-bar" style="width:50%;"></div></div>
         </div>
-        <div id="cartItemsList">
-          <!-- Dynamically populated -->
+
+        <h1 class="bag-headline">Bag <span style="font-weight:400; color:var(--text-secondary);" id="bag-header-count">(0)</span></h1>
+
+        <div class="bag-full-items-list" id="bag-full-items-container">
+          <!-- Injected by JS -->
         </div>
-      </section>
+      </div>
 
-      <!-- Right Column: Order Summary & Checkout Trigger -->
-      <aside class="summary-card" aria-label="Order Summary">
-        <h2 class="summary-title">Order Summary</h2>
+      <!-- Right Column: Order Summary -->
+      <aside class="bag-summary-sticky">
+        <h2 class="summary-heading">Summary</h2>
 
-        <div class="summary-row">
-          <span>Items Subtotal</span>
-          <span class="summary-val" id="summarySubtotal">₹0</span>
+        <!-- Promo Code -->
+        <div class="promo-code-box">
+          <label style="font-size:13px; font-weight:700; text-transform:uppercase;">Do you have a Promo Code?</label>
+          <div class="promo-input-row">
+            <input type="text" class="promo-input" id="promo-input" placeholder="e.g. STARK10" />
+            <button type="button" class="btn-apply-promo" onclick="applyPromo()">Apply</button>
+          </div>
+          <div id="promo-status-msg" style="font-size:12px; margin-top:6px; color:var(--accent-green); display:none;"></div>
         </div>
 
         <div class="summary-row">
-          <span>Express Insured Shipping</span>
-          <span class="summary-val" style="color:var(--accent-green);">FREE</span>
+          <span>Subtotal</span>
+          <span id="summary-subtotal">₹0</span>
         </div>
-
         <div class="summary-row">
-          <span>Marvel Hologram Verification</span>
-          <span class="summary-val" style="color:var(--accent-blue);">Included</span>
+          <span>Estimated Delivery &amp; Handling</span>
+          <span id="summary-shipping" style="color:var(--accent-green); font-weight:700;">FREE</span>
         </div>
-
-        <div class="summary-row">
-          <span>Estimated Taxes / GST</span>
-          <span class="summary-val">Included</span>
+        <div class="summary-row" id="promo-discount-row" style="display:none; color:var(--accent-green);">
+          <span>Promo Code Discount (10%)</span>
+          <span id="summary-discount">-₹0</span>
         </div>
-
-        <!-- Promo Code Input -->
-        <div class="promo-row">
-          <input type="text" id="promoInput" class="promo-input" placeholder="DISCOUNT CODE" maxlength="20" />
-          <button class="btn-promo-apply" onclick="applyPromo()">Apply</button>
-        </div>
-        <div id="promoMessage" style="font-size:11.5px; margin-top:-8px; margin-bottom:12px; display:none;"></div>
-
         <div class="summary-row total-row">
-          <span>Total Amount</span>
-          <span class="summary-val total-val" id="summaryTotal">₹0</span>
+          <span>Total</span>
+          <span id="summary-grand-total">₹0</span>
         </div>
 
-        <button class="btn-proceed-checkout" onclick="openCheckoutModal()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-          </svg>
-          <span>Proceed to Checkout</span>
-        </button>
-
-        <div class="security-badges-list">
-          <div class="sec-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-            <span>100% Authentic Marvel Licensed Merchandise</span>
-          </div>
-          <div class="sec-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-              <line x1="1" y1="10" x2="23" y2="10"></line>
-            </svg>
-            <span>Cash on Delivery &amp; UPI Accepted Across India</span>
-          </div>
-          <div class="sec-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
-            <span>Dispatched within 24 Hours in Armor Packing</span>
-          </div>
+        <div style="margin-top:2rem;">
+          <button type="button" class="btn-nike-black" style="width:100%; font-size:16px; padding:16px;" onclick="openCheckoutModal()">
+            Member Checkout
+          </button>
         </div>
+
+        <p style="font-size:12px; color:var(--text-tertiary); text-align:center; margin-top:1.5rem; line-height:1.5;">
+          Secure 256-bit encrypted checkout. Verified by Stark Defense & BlueDart Air Express logistics.
+        </p>
       </aside>
-
     </div>
   </main>
 
-  <!-- Checkout Order Modal (WooCommerce Handoff) -->
-  <div class="checkout-modal-overlay" id="checkoutOverlay" onclick="handleOverlayClick(event)">
-    <div class="checkout-modal-box" id="checkoutBox">
-      <button class="modal-close-x" onclick="closeCheckoutModal()" title="Close">&times;</button>
-      
-      <div id="checkoutFormWrapper">
-        <h2 class="checkout-title">Confirm Delivery Address</h2>
-        <p class="checkout-subtitle">Enter your delivery coordinates for direct dispatch.</p>
+  <!-- Checkout Flow Modal -->
+  <div class="checkout-flow-overlay" id="checkout-modal" onclick="if(event.target===this) closeCheckoutModal()">
+    <div class="checkout-card-modal">
+      <h2 style="font-family:var(--font-headline); font-size:24px; text-transform:uppercase; margin-bottom:1.5rem;">
+        Express Member Checkout
+      </h2>
 
-        <form id="orderForm" onsubmit="handlePlaceOrder(event)">
-          <div class="form-grid-2">
-            <div class="form-group">
-              <label class="form-label" for="cFirstName">First Name</label>
-              <input type="text" id="cFirstName" class="form-input" required placeholder="Tony" />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="cLastName">Last Name</label>
-              <input type="text" id="cLastName" class="form-input" required placeholder="Stark" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="cEmail">Email Address</label>
-            <input type="email" id="cEmail" class="form-input" required placeholder="tony@starkindustries.com" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="cPhone">Phone Number</label>
-            <input type="tel" id="cPhone" class="form-input" required placeholder="+91 9876543210" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="cAddress">Shipping Address</label>
-            <input type="text" id="cAddress" class="form-input" required placeholder="Stark Tower, Penthouse Suite, Marine Drive" />
-          </div>
-
-          <div class="form-grid-2">
-            <div class="form-group">
-              <label class="form-label" for="cCity">City</label>
-              <input type="text" id="cCity" class="form-input" required placeholder="Mumbai" />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="cPincode">Pincode</label>
-              <input type="text" id="cPincode" class="form-input" required placeholder="400001" />
-            </div>
-          </div>
-
-          <div class="checkout-payable-row">
-            <div>
-              <div style="font-size:11px; text-transform:uppercase; color:var(--text-dim); font-weight:700;">Total Payable</div>
-              <div style="font-size:12px; color:var(--accent-green); font-weight:600;">Payment on Delivery / UPI</div>
-            </div>
-            <div class="summary-val total-val" id="modalTotalPayable" style="font-size:20px;">₹0</div>
-          </div>
-
-          <button type="submit" class="btn-proceed-checkout" id="btnSubmitOrder" style="padding:15px;">
-            <span>Confirm &amp; Place Order (COD / UPI)</span>
-          </button>
-        </form>
+      <div class="checkout-field-group">
+        <label class="checkout-field-label">Full Name</label>
+        <input type="text" class="checkout-input-text" id="chk-name" placeholder="Tony Stark" />
       </div>
 
-      <!-- Success State -->
-      <div id="checkoutSuccessWrapper" class="order-success-card" style="display:none;">
-        <svg class="success-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-          <polyline points="22 4 12 14.01 9 11.01"></polyline>
-        </svg>
-        <h3 style="font-family:var(--font-display); font-size:22px; color:var(--text-pure); margin-bottom:6px;">Order Confirmed!</h3>
-        <p style="color:var(--text-muted); font-size:13px; margin-bottom:1.5rem;" id="successOrderRef">
-          Your official Marvel collectibles order has been dispatched to our fulfillment team.
-        </p>
-        <a href="index.html" class="btn-shop-now" style="display:inline-flex;">
-          <span>Return to Store</span>
-        </a>
+      <div class="checkout-field-group">
+        <label class="checkout-field-label">Delivery Address</label>
+        <input type="text" class="checkout-input-text" id="chk-addr" placeholder="10880 Malibu Point, CA / Kolkata Hub" />
       </div>
 
+      <div class="checkout-field-group">
+        <label class="checkout-field-label">Contact Phone / WhatsApp</label>
+        <input type="tel" class="checkout-input-text" id="chk-phone" placeholder="+91 98300 00000" />
+      </div>
+
+      <div class="checkout-field-group">
+        <label class="checkout-field-label">Payment Method</label>
+        <select class="checkout-input-text" id="chk-pay">
+          <option value="upi">UPI / Google Pay / PhonePe (Fastest)</option>
+          <option value="card">Credit / Debit Card (Visa, Mastercard, RuPay)</option>
+          <option value="cod">Cash on Delivery (Standard)</option>
+        </select>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:2rem;">
+        <button type="button" class="btn-nike-outline" style="flex:1;" onclick="closeCheckoutModal()">Cancel</button>
+        <button type="button" class="btn-nike-black" style="flex:2;" onclick="placeOrderFinal()">Confirm &amp; Place Order</button>
+      </div>
     </div>
   </div>
 
-  <!-- Site Footer (Minimalist & Clean) -->
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-top-grid">
-        <!-- Col 1: Brand -->
-        <div class="footer-col brand-col">
-          <div class="footer-logo">
-            <span class="footer-logo-badge">MARVEL</span>
-            <span class="footer-logo-title">VERSE</span>
-          </div>
-        </div>
-
-        <!-- Col 2: Categories -->
-        <div class="footer-col">
-          <h4 class="footer-heading">Categories</h4>
-          <ul class="footer-links">
-            <li><a href="categories.html">All Collectibles</a></li>
-            <li><a href="categories.html?cat=wearable-helmets">Wearable Helmets (1:1)</a></li>
-            <li><a href="categories.html?cat=bluetooth-speakers">Bluetooth Speakers</a></li>
-            <li><a href="categories.html?cat=charging-stations">Charging Stations</a></li>
-            <li><a href="categories.html?cat=digital-tech">Tech Gear &amp; Audio</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Customer Care -->
-        <div class="footer-col">
-          <h4 class="footer-heading">Customer Care</h4>
-          <ul class="footer-links">
-            <li><a href="tracking.html">Track Shipment</a></li>
-            <li><a href="profile.html">VIP Collector Profile</a></li>
-            <li><a href="help.html">Help &amp; Support</a></li>
-            <li><a href="cart.html">Shopping Cart</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 4: Store & Address -->
-        <div class="footer-col address-col">
-          <h4 class="footer-heading">Store &amp; Contact</h4>
-          <div class="footer-address-card">
-            <div class="address-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div class="address-details">
-              <p class="address-text">84E, SA Farooquie Rd, Bartala, Metiabruz, Kolkata, West Bengal 700018</p>
-            </div>
-          </div>
-          <div class="footer-contact-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <a href="tel:+919330648314">+91 93306 48314 / +91 62893 62476</a>
-          </div>
-          <div class="footer-contact-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <a href="mailto:support@marvelverse.in">support@marvelverse.in</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Copyright -->
+  <!-- Nike Footer -->
+  <footer class="nike-footer">
+    <div class="container">
       <div class="footer-bottom-bar">
-        <div class="footer-copy">
-          &copy; 2026 Marvel Verse. Officially Licensed Merchandise. All Rights Reserved.
-        </div>
-        <div class="footer-payment-methods">
-          <span class="pay-pill">UPI</span>
-          <span class="pay-pill">Visa</span>
-          <span class="pay-pill">MasterCard</span>
-          <span class="pay-pill">NetBanking</span>
-          <span class="pay-pill">Cash on Delivery</span>
-        </div>
+        <div>&copy; 2026 Marvel Verse. Official 1:1 Life-Size Replicas. All rights reserved.</div>
+        <ul class="footer-legal-links">
+          <li><a href="help.html">Privacy Policy</a></li>
+          <li><a href="help.html">Terms of Sale</a></li>
+        </ul>
       </div>
     </div>
   </footer>
 
-  <!-- Fixed App Bottom Navigation Bar -->
-  <nav class="mobile-bottom-nav" aria-label="Quick Mobile Navigation">
-    <a href="index.html" class="b-nav-item">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-        <polyline points="9 22 9 12 15 12 15 22"/>
-      </svg>
-      <span class="b-nav-label">Home</span>
-    </a>
+  <!-- Search Overlay -->
+  <div class="nike-search-overlay" id="nike-search-overlay">
+    <div class="nike-search-bar-wrap">
+      <div class="search-bar-inner">
+        <a href="index.html" class="brand-logo" style="margin-right:1rem;">
+          <div class="brand-icon-box" style="width:30px; height:30px; font-size:16px;">M</div>
+        </a>
+        <div class="search-input-box">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="overlay-search-input" placeholder="Search Marvel Verse products..." autocomplete="off" oninput="handleSearchInput(this.value)" />
+        </div>
+        <button type="button" class="search-cancel-btn" onclick="closeSearchOverlay()">Cancel</button>
+      </div>
+    </div>
+    <div class="search-overlay-content">
+      <div class="search-results-grid" id="overlay-search-results"></div>
+    </div>
+  </div>
 
-    <a href="categories.html" class="b-nav-item">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="3" width="7" height="7"/>
-        <rect x="14" y="3" width="7" height="7"/>
-        <rect x="14" y="14" width="7" height="7"/>
-        <rect x="3" y="14" width="7" height="7"/>
-      </svg>
-      <span class="b-nav-label">Categories</span>
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-bar" id="mobile-bottom-nav">
+    <a href="index.html" class="mobile-bar-item">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <span>Home</span>
     </a>
-
-    <a href="tracking.html" class="b-nav-item">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="1" y="3" width="15" height="13"/>
-        <polygon points="16 8 20 8 23 11 23 16 16 16 8"/>
-        <circle cx="5.5" cy="18.5" r="2.5"/>
-        <circle cx="18.5" cy="18.5" r="2.5"/>
-      </svg>
-      <span class="b-nav-label">Tracking</span>
+    <a href="categories.html" class="mobile-bar-item">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+      <span>Shop</span>
     </a>
-
-    <a href="profile.html" class="b-nav-item">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
-      <span class="b-nav-label">Profile</span>
+    <button type="button" class="mobile-bar-item" onclick="openSearchOverlay()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <span>Search</span>
+    </button>
+    <a href="cart.html" class="mobile-bar-item active">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span>Bag</span>
     </a>
-
-    <a href="help.html" class="b-nav-item">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-        <line x1="12" y1="17" x2="12.01" y2="17"/>
-      </svg>
-      <span class="b-nav-label">Help</span>
+    <a href="profile.html" class="mobile-bar-item">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Profile</span>
     </a>
   </nav>
 
-  <!-- Toast Notification Box -->
-  <div id="cartToast"></div>
-
-  <!-- JavaScript Cart Controller -->
+  <!-- Bag Page Script -->
   <script>
-let cartItems = [];
-let discountMultiplier = 1.0;
+    let appliedPromoDiscount = 0;
 
-function formatINR(num) {
-  return "₹ " + Math.round(Number(num) || 0).toLocaleString("en-IN");
-}
+    function renderBagPage() {
+      const container = document.getElementById("bag-full-items-container");
+      const headerCount = document.getElementById("bag-header-count");
+      const subtotalEl = document.getElementById("summary-subtotal");
+      const grandTotalEl = document.getElementById("summary-grand-total");
+      const promoRow = document.getElementById("promo-discount-row");
+      const promoDiscountEl = document.getElementById("summary-discount");
+      const meterText = document.getElementById("bag-page-shipping-msg");
+      const meterBar = document.getElementById("bag-page-shipping-bar");
 
-function loadCart() {
-  try {
-    cartItems = JSON.parse(localStorage.getItem("tss_cart_items") || "[]");
-  } catch (e) {
-    cartItems = [];
-  }
-  renderCartView();
-}
+      if (!container) return;
 
-function saveCart() {
-  localStorage.setItem("tss_cart_items", JSON.stringify(cartItems));
-  renderCartView();
-}
+      const count = getCartCount();
+      const total = getCartTotal();
+      const discount = Math.round(total * appliedPromoDiscount);
+      const grandTotal = Math.max(0, total - discount);
 
-function renderCartView() {
-  const emptyView = document.getElementById("emptyCartView");
-  const activeGrid = document.getElementById("activeCartGrid");
-  const pill = document.getElementById("cartCountPill");
-  const listContainer = document.getElementById("cartItemsList");
-  const subtotalEl = document.getElementById("summarySubtotal");
-  const totalEl = document.getElementById("summaryTotal");
+      if (headerCount) headerCount.textContent = `(${count})`;
 
-  const totalQty = cartItems.reduce((acc, it) => acc + it.qty, 0);
-  if (pill) pill.textContent = totalQty === 1 ? "1 Item" : `${totalQty} Items`;
+      // Shipping progress
+      const FREE_THRESHOLD = 40000;
+      const away = Math.max(0, FREE_THRESHOLD - total);
+      const percent = Math.min(100, Math.round((total / FREE_THRESHOLD) * 100));
 
-  if (cartItems.length === 0) {
-    if (emptyView) emptyView.style.display = "block";
-    if (activeGrid) activeGrid.style.display = "none";
-    return;
-  }
+      if (meterText) {
+        if (away === 0) {
+          meterText.innerHTML = `<span><strong>You have unlocked Free Express Delivery across India!</strong></span>`;
+        } else {
+          meterText.innerHTML = `<span>Add <strong>${formatINR(away)}</strong> more to unlock <strong>Free Express Next-Day Delivery</strong></span>`;
+        }
+      }
+      if (meterBar) meterBar.style.width = percent + "%";
 
-  if (emptyView) emptyView.style.display = "none";
-  if (activeGrid) activeGrid.style.display = "grid";
+      if (subtotalEl) subtotalEl.textContent = formatINR(total);
+      if (grandTotalEl) grandTotalEl.textContent = formatINR(grandTotal);
 
-  let subtotal = 0;
-  listContainer.innerHTML = cartItems.map((item, idx) => {
-    const itemTotal = item.price * item.qty;
-    subtotal += itemTotal;
-    const imgSrc = item.img || "assets/images/p_mk5_helmet.jpg";
+      if (appliedPromoDiscount > 0 && promoRow && promoDiscountEl) {
+        promoRow.style.display = "flex";
+        promoDiscountEl.textContent = `-${formatINR(discount)}`;
+      }
 
-    return `
-      <div class="cart-item-row" data-idx="${idx}">
-        <div class="cart-item-top">
-          <img class="cart-item-thumb" src="${imgSrc}" alt="${item.name}" onerror="this.src='assets/images/p_mk5_helmet.jpg'" />
-          <div class="cart-item-details">
-            <h3 class="cart-item-name">${item.name}</h3>
-            <span class="cart-item-variant">${item.varName || "Standard Edition"}</span>
-            <span class="cart-item-unit-price">${formatINR(item.price)} each</span>
+      if (cartItems.length === 0) {
+        container.innerHTML = `
+          <div style="padding: 4rem 1rem; text-align: center; color: var(--text-secondary);">
+            <h2 style="font-family: var(--font-headline); font-size: 26px; color: var(--text-primary); text-transform: uppercase;">There are no items in your bag.</h2>
+            <p style="margin: 8px 0 2rem 0;">Browse our newest 1:1 scale helmets and electronic Stark collectibles.</p>
+            <a href="categories.html" class="btn-nike-black">Explore Products</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = cartItems.map((item, index) => `
+        <div class="bag-full-item-card">
+          <div class="bag-full-item-thumb">
+            <img src="${item.img}" alt="${escapeHtml(item.name)}" />
+          </div>
+          <div class="bag-full-item-info">
+            <div>
+              <div class="bag-item-top-row">
+                <div class="bag-item-title">${escapeHtml(item.name)}</div>
+                <div class="bag-item-price-tag">${formatINR(item.price * item.qty)}</div>
+              </div>
+              <div class="bag-item-sub">${escapeHtml(item.variant)}</div>
+              <div style="font-size:12px; color:var(--accent-green); margin-top:6px; font-weight:600;">In Stock &bull; Ready for BlueDart Dispatch</div>
+            </div>
+
+            <div class="bag-item-bottom-controls">
+              <div class="qty-stepper">
+                <button type="button" class="qty-btn" onclick="updateBagItemQty(${index}, -1)">&minus;</button>
+                <span class="qty-val">${item.qty}</span>
+                <button type="button" class="qty-btn" onclick="updateBagItemQty(${index}, 1)">+</button>
+              </div>
+
+              <button type="button" class="bag-action-icon-btn" onclick="toggleWishlist(${item.id})">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                <span>Save to Favourites</span>
+              </button>
+
+              <button type="button" class="bag-action-icon-btn" onclick="removeBagItem(${index})">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                <span>Remove</span>
+              </button>
+            </div>
           </div>
         </div>
-
-        <div class="cart-item-actions">
-          <div class="qty-stepper">
-            <button class="btn-qty-step" onclick="changeQty(${idx}, -1)" title="Decrease Quantity">&minus;</button>
-            <span class="qty-val">${item.qty}</span>
-            <button class="btn-qty-step" onclick="changeQty(${idx}, 1)" title="Increase Quantity">&plus;</button>
-          </div>
-          <span class="cart-item-subtotal">${formatINR(itemTotal)}</span>
-          <button class="btn-item-remove" onclick="removeItem(${idx})" title="Remove item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="3 6 5 6 21 6"></polyline>
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  const finalTotal = Math.round(subtotal * discountMultiplier);
-  if (subtotalEl) subtotalEl.textContent = formatINR(subtotal);
-  if (totalEl) totalEl.textContent = formatINR(finalTotal);
-  const modalPayable = document.getElementById("modalTotalPayable");
-  if (modalPayable) modalPayable.textContent = formatINR(finalTotal);
-}
-
-function changeQty(idx, delta) {
-  if (!cartItems[idx]) return;
-  cartItems[idx].qty += delta;
-  if (cartItems[idx].qty <= 0) {
-    cartItems.splice(idx, 1);
-    showToast("Item removed from cart");
-  }
-  saveCart();
-}
-
-function removeItem(idx) {
-  if (!cartItems[idx]) return;
-  const name = cartItems[idx].name;
-  cartItems.splice(idx, 1);
-  saveCart();
-  showToast(`Removed ${name}`);
-}
-
-function applyPromo() {
-  const code = (document.getElementById("promoInput").value || "").trim().toUpperCase();
-  const msgEl = document.getElementById("promoMessage");
-  if (!msgEl) return;
-
-  if (code === "AVENGERS" || code === "STARK" || code === "MARVEL10") {
-    discountMultiplier = 0.9;
-    msgEl.style.display = "block";
-    msgEl.style.color = "var(--accent-green)";
-    msgEl.textContent = "Promo applied! 10% Special Collectors discount.";
-  } else if (code === "") {
-    discountMultiplier = 1.0;
-    msgEl.style.display = "none";
-  } else {
-    msgEl.style.display = "block";
-    msgEl.style.color = "var(--accent-red)";
-    msgEl.textContent = "Invalid code. Try 'AVENGERS' for 10% off.";
-  }
-  renderCartView();
-}
-
-function openCheckoutModal() {
-  if (cartItems.length === 0) {
-    showToast("Your cart is empty");
-    return;
-  }
-  document.getElementById("checkoutOverlay").classList.add("active");
-  document.getElementById("checkoutFormWrapper").style.display = "block";
-  document.getElementById("checkoutSuccessWrapper").style.display = "none";
-}
-
-function closeCheckoutModal() {
-  document.getElementById("checkoutOverlay").classList.remove("active");
-}
-
-function handleOverlayClick(e) {
-  if (e.target.id === "checkoutOverlay") {
-    closeCheckoutModal();
-  }
-}
-
-async function handlePlaceOrder(e) {
-  e.preventDefault();
-  const btn = document.getElementById("btnSubmitOrder");
-  btn.disabled = true;
-  btn.innerHTML = `<span>Dispatching Order...</span>`;
-
-  const orderPayload = {
-    payment_method: "cod",
-    payment_method_title: "Pay On Delivery / UPI",
-    set_paid: false,
-    billing: {
-      first_name: document.getElementById("cFirstName").value,
-      last_name: document.getElementById("cLastName").value,
-      address_1: document.getElementById("cAddress").value,
-      city: document.getElementById("cCity").value,
-      postcode: document.getElementById("cPincode").value,
-      country: "IN",
-      email: document.getElementById("cEmail").value,
-      phone: document.getElementById("cPhone").value
-    },
-    shipping: {
-      first_name: document.getElementById("cFirstName").value,
-      last_name: document.getElementById("cLastName").value,
-      address_1: document.getElementById("cAddress").value,
-      city: document.getElementById("cCity").value,
-      postcode: document.getElementById("cPincode").value,
-      country: "IN"
-    },
-    line_items: cartItems.map(it => ({
-      product_id: it.id,
-      quantity: it.qty
-    }))
-  };
-
-  try {
-    const res = await fetch("/api/woocommerce/orders", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(orderPayload)
-    });
-
-    let orderId = "MCU-" + Math.floor(100000 + Math.random() * 900000);
-    if (res.ok) {
-      const order = await res.json();
-      if (order.id) orderId = "#" + order.id;
+      `).join("");
     }
 
-    cartItems = [];
-    saveCart();
-    document.getElementById("checkoutFormWrapper").style.display = "none";
-    document.getElementById("checkoutSuccessWrapper").style.display = "block";
-    document.getElementById("successOrderRef").innerHTML = `
-      Your order <strong>${orderId}</strong> has been logged.<br>
-      A confirmation has been sent to your email with live tracking details.
-    `;
-  } catch (err) {
-    const orderId = "MCU-" + Math.floor(100000 + Math.random() * 900000);
-    cartItems = [];
-    saveCart();
-    document.getElementById("checkoutFormWrapper").style.display = "none";
-    document.getElementById("checkoutSuccessWrapper").style.display = "block";
-    document.getElementById("successOrderRef").innerHTML = `
-      Your order <strong>${orderId}</strong> has been received by dispatch.<br>
-      Our representative will coordinate delivery with you shortly.
-    `;
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = `<span>Confirm &amp; Place Order (COD / UPI)</span>`;
-  }
-}
+    function updateBagItemQty(index, delta) {
+      updateCartQty(index, delta);
+      renderBagPage();
+    }
 
-function showToast(msg) {
-  const container = document.getElementById("cartToast");
-  if (!container) return;
-  const t = document.createElement("div");
-  t.className = "toast-item";
-  t.textContent = msg;
-  container.appendChild(t);
-  setTimeout(() => {
-    t.style.opacity = "0";
-    t.style.transition = "opacity 0.3s ease";
-    setTimeout(() => t.remove(), 300);
-  }, 2500);
-}
+    function removeBagItem(index) {
+      removeFromCart(index);
+      renderBagPage();
+    }
 
-// Listen to storage events so changes in other tabs sync immediately
-window.addEventListener("storage", (e) => {
-  if (e.key === "tss_cart_items") {
-    loadCart();
-  }
-});
+    function applyPromo() {
+      const code = (document.getElementById("promo-input")?.value || "").trim().toUpperCase();
+      const status = document.getElementById("promo-status-msg");
+      if (code === "STARK10" || code === "MARVEL10" || code === "NIKE10") {
+        appliedPromoDiscount = 0.10;
+        if (status) {
+          status.style.display = "block";
+          status.textContent = "Promo Code STARK10 Applied! 10% Discount Deducted.";
+        }
+        showToast("10% Collector Promo Applied!");
+      } else {
+        appliedPromoDiscount = 0;
+        if (status) {
+          status.style.display = "block";
+          status.style.color = "var(--accent-red)";
+          status.textContent = "Invalid or expired promo code.";
+        }
+      }
+      renderBagPage();
+    }
 
-document.addEventListener("DOMContentLoaded", loadCart);
+    function openCheckoutModal() {
+      if (cartItems.length === 0) {
+        showToast("Please add items to your bag first.");
+        return;
+      }
+      const modal = document.getElementById("checkout-modal");
+      if (modal) modal.classList.add("active");
+    }
+
+    function closeCheckoutModal() {
+      const modal = document.getElementById("checkout-modal");
+      if (modal) modal.classList.remove("active");
+    }
+
+    function placeOrderFinal() {
+      const name = document.getElementById("chk-name")?.value.trim();
+      const addr = document.getElementById("chk-addr")?.value.trim();
+      if (!name || !addr) {
+        showToast("Please enter your name and delivery address.");
+        return;
+      }
+
+      const orderId = "MCU-" + Math.floor(100000 + Math.random() * 900000) + "-KOL";
+      cartItems = [];
+      saveCartState();
+      closeCheckoutModal();
+
+      alert(`Order Placed Successfully!\n\nOrder ID: ${orderId}\nThank you, ${name}! Your 1:1 Stark collectible is scheduled for BlueDart Air Express dispatch.`);
+      window.location.href = `tracking.html?orderId=${orderId}`;
+    }
+
+    document.addEventListener("DOMContentLoaded", renderBagPage);
   </script>
 </body>
 </html>
