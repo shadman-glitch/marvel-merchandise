@@ -962,9 +962,40 @@ function showToast(msg) {
   }, 2800);
 }
 
+function updateThemeUI(theme) {
+  const current = theme || document.documentElement.getAttribute("data-theme") || "light";
+  const isDark = current === "dark";
+
+  // Update theme toggle buttons across all pages
+  document.querySelectorAll(".theme-toggle-header-btn, #themeToggleBtn").forEach(btn => {
+    const iconSlot = btn.querySelector(".theme-btn-icon");
+    const textSlot = btn.querySelector(".theme-btn-text");
+    if (iconSlot) {
+      if (isDark) {
+        // Dark mode active: show Sun icon to switch to Light mode
+        iconSlot.innerHTML = `<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`;
+      } else {
+        // Light mode active: show Moon icon to switch to Dark mode
+        iconSlot.innerHTML = `<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"/></svg>`;
+      }
+    }
+    if (textSlot) {
+      textSlot.textContent = isDark ? "Light" : "Dark";
+    }
+    btn.setAttribute("aria-label", `Switch to ${isDark ? 'Light' : 'Dark'} mode`);
+    btn.setAttribute("title", `Switch to ${isDark ? 'Light' : 'Dark'} mode`);
+  });
+
+  const subnavLink = document.getElementById("subnavThemeLink");
+  if (subnavLink) {
+    subnavLink.textContent = isDark ? "Mode: Dark" : "Mode: Light";
+  }
+}
+
 function initTheme() {
   const saved = localStorage.getItem("tss_theme") || "light";
   document.documentElement.setAttribute("data-theme", saved);
+  updateThemeUI(saved);
 }
 
 function toggleTheme() {
@@ -972,6 +1003,7 @@ function toggleTheme() {
   const next = current === "light" ? "dark" : "light";
   document.documentElement.setAttribute("data-theme", next);
   localStorage.setItem("tss_theme", next);
+  updateThemeUI(next);
   showToast(`Switched to ${next === 'dark' ? 'Nike Lab Dark' : 'Studio Light'} mode`);
 }
 
@@ -1004,4 +1036,5 @@ loadWishlistState();
 initTheme();
 document.addEventListener("DOMContentLoaded", () => {
   updateHeaderBadges();
+  updateThemeUI();
 });
